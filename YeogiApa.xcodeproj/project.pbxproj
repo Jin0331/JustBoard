@@ -7,25 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		217C9232DB0C64915C533AF0 /* Pods_YeogiApa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */; };
 		DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */; };
 		DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */; };
-		DBCBA9E42BC7BE34006B40CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9E32BC7BE34006B40CA /* ViewController.swift */; };
-		DBCBA9E72BC7BE34006B40CA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DBCBA9E62BC7BE34006B40CA /* Base */; };
 		DBCBA9E92BC7BE35006B40CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBA9E82BC7BE35006B40CA /* Assets.xcassets */; };
 		DBCBA9EC2BC7BE35006B40CA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DBCBA9EB2BC7BE35006B40CA /* Base */; };
 		DBCBA9F42BC7BE5C006B40CA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = DBCBA9F32BC7BE5C006B40CA /* .gitignore */; };
+		DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA002BC7CCFE006B40CA /* APIKey.swift */; };
+		DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA022BC7CD32006B40CA /* BaseViewController.swift */; };
+		DBCBAA052BC7CD32006B40CA /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA032BC7CD32006B40CA /* BaseView.swift */; };
+		DBCBAA072BC7CE79006B40CA /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA062BC7CE79006B40CA /* DesignSystem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E065FA89B28CFAB4A4CCE5E /* Pods-YeogiApa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeogiApa.debug.xcconfig"; path = "Target Support Files/Pods-YeogiApa/Pods-YeogiApa.debug.xcconfig"; sourceTree = "<group>"; };
+		CE70E4E40DA521BFE3917A88 /* Pods-YeogiApa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeogiApa.release.xcconfig"; path = "Target Support Files/Pods-YeogiApa/Pods-YeogiApa.release.xcconfig"; sourceTree = "<group>"; };
 		DBCBA9DC2BC7BE34006B40CA /* YeogiApa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeogiApa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DBCBA9E32BC7BE34006B40CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DBCBA9E62BC7BE34006B40CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DBCBA9E82BC7BE35006B40CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBCBA9EB2BC7BE35006B40CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBCBA9ED2BC7BE35006B40CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBCBA9F32BC7BE5C006B40CA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		DBCBAA002BC7CCFE006B40CA /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		DBCBAA022BC7CD32006B40CA /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		DBCBAA032BC7CD32006B40CA /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		DBCBAA062BC7CE79006B40CA /* DesignSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeogiApa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,18 +41,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				217C9232DB0C64915C533AF0 /* Pods_YeogiApa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		773B94913F333C63024B119D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DBCBA9D32BC7BE34006B40CA = {
 			isa = PBXGroup;
 			children = (
 				DBCBA9F32BC7BE5C006B40CA /* .gitignore */,
 				DBCBA9DE2BC7BE34006B40CA /* YeogiApa */,
 				DBCBA9DD2BC7BE34006B40CA /* Products */,
+				FE20E17095C8CCE921DF3EF4 /* Pods */,
+				773B94913F333C63024B119D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,15 +78,114 @@
 		DBCBA9DE2BC7BE34006B40CA /* YeogiApa */ = {
 			isa = PBXGroup;
 			children = (
-				DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */,
-				DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */,
-				DBCBA9E32BC7BE34006B40CA /* ViewController.swift */,
-				DBCBA9E52BC7BE34006B40CA /* Main.storyboard */,
-				DBCBA9E82BC7BE35006B40CA /* Assets.xcassets */,
-				DBCBA9EA2BC7BE35006B40CA /* LaunchScreen.storyboard */,
-				DBCBA9ED2BC7BE35006B40CA /* Info.plist */,
+				DBCBA9F62BC7C64D006B40CA /* Presentation */,
+				DBCBA9FB2BC7CB31006B40CA /* Data */,
+				DBCBA9FD2BC7CBA6006B40CA /* Utility */,
+				DBCBA9FC2BC7CB68006B40CA /* Application */,
 			);
 			path = YeogiApa;
+			sourceTree = "<group>";
+		};
+		DBCBA9F52BC7C446006B40CA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBAA002BC7CCFE006B40CA /* APIKey.swift */,
+				DBCBA9FF2BC7CCE2006B40CA /* Router */,
+				DBCBA9FE2BC7CCD8006B40CA /* DataMapping */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		DBCBA9F62BC7C64D006B40CA /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBA9FA2BC7C69B006B40CA /* Base */,
+				DBCBA9F72BC7C677006B40CA /* Login */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		DBCBA9F72BC7C677006B40CA /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBA9F82BC7C686006B40CA /* View */,
+				DBCBA9F92BC7C68A006B40CA /* ViewModel */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		DBCBA9F82BC7C686006B40CA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DBCBA9F92BC7C68A006B40CA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DBCBA9FA2BC7C69B006B40CA /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBAA032BC7CD32006B40CA /* BaseView.swift */,
+				DBCBAA022BC7CD32006B40CA /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		DBCBA9FB2BC7CB31006B40CA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBA9F52BC7C446006B40CA /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		DBCBA9FC2BC7CB68006B40CA /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBA9ED2BC7BE35006B40CA /* Info.plist */,
+				DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */,
+				DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		DBCBA9FD2BC7CBA6006B40CA /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBAA062BC7CE79006B40CA /* DesignSystem.swift */,
+				DBCBA9E82BC7BE35006B40CA /* Assets.xcassets */,
+				DBCBA9EA2BC7BE35006B40CA /* LaunchScreen.storyboard */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		DBCBA9FE2BC7CCD8006B40CA /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataMapping;
+			sourceTree = "<group>";
+		};
+		DBCBA9FF2BC7CCE2006B40CA /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		FE20E17095C8CCE921DF3EF4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6E065FA89B28CFAB4A4CCE5E /* Pods-YeogiApa.debug.xcconfig */,
+				CE70E4E40DA521BFE3917A88 /* Pods-YeogiApa.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +195,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBCBA9F02BC7BE35006B40CA /* Build configuration list for PBXNativeTarget "YeogiApa" */;
 			buildPhases = (
+				B224A294375BDEC81B18F515 /* [CP] Check Pods Manifest.lock */,
 				DBCBA9D82BC7BE34006B40CA /* Sources */,
 				DBCBA9D92BC7BE34006B40CA /* Frameworks */,
 				DBCBA9DA2BC7BE34006B40CA /* Resources */,
+				0EA885B6548AE7898929DF91 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -131,19 +251,63 @@
 				DBCBA9F42BC7BE5C006B40CA /* .gitignore in Resources */,
 				DBCBA9E92BC7BE35006B40CA /* Assets.xcassets in Resources */,
 				DBCBA9EC2BC7BE35006B40CA /* Base in Resources */,
-				DBCBA9E72BC7BE34006B40CA /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0EA885B6548AE7898929DF91 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YeogiApa/Pods-YeogiApa-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YeogiApa/Pods-YeogiApa-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YeogiApa/Pods-YeogiApa-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B224A294375BDEC81B18F515 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YeogiApa-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DBCBA9D82BC7BE34006B40CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBCBA9E42BC7BE34006B40CA /* ViewController.swift in Sources */,
+				DBCBAA072BC7CE79006B40CA /* DesignSystem.swift in Sources */,
 				DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */,
+				DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */,
+				DBCBAA052BC7CD32006B40CA /* BaseView.swift in Sources */,
+				DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */,
 				DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,14 +315,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DBCBA9E52BC7BE34006B40CA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DBCBA9E62BC7BE34006B40CA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DBCBA9EA2BC7BE35006B40CA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -291,6 +447,7 @@
 		};
 		DBCBA9F12BC7BE35006B40CA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E065FA89B28CFAB4A4CCE5E /* Pods-YeogiApa.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -301,7 +458,7 @@
 				INFOPLIST_FILE = YeogiApa/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16;
@@ -324,6 +481,7 @@
 		};
 		DBCBA9F22BC7BE35006B40CA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE70E4E40DA521BFE3917A88 /* Pods-YeogiApa.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -334,7 +492,7 @@
 				INFOPLIST_FILE = YeogiApa/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16;

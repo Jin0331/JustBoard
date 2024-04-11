@@ -14,6 +14,7 @@ final class LoginViewModel : ViewModelType {
     
     var disposeBag: DisposeBag = DisposeBag()
     
+    
     struct Input {
         let email : ControlProperty<String>
         let password : ControlProperty<String>

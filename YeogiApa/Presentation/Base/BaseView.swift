@@ -12,10 +12,9 @@ class BaseView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setHierarchy()
-        setupAttributes()
-        setupLayout()
-        setupData()
+        configureHierarchy()
+        configureLayout()
+        configureView()
     }
     
     @available(*, unavailable)
@@ -23,17 +22,9 @@ class BaseView: UIView {
         fatalError()
     }
     
-    func setHierarchy() { }
-    
-    func setupData() { }
-    
-
-    func setupLayout() {
+    func configureHierarchy() { }
+    func configureLayout() { }
+    func configureView() { 
+        backgroundColor = DesignSystem.colorSet.white
     }
-    
-
-    func setupAttributes() {
-    }
-    
-
 }

@@ -11,6 +11,7 @@ target 'YeogiApa' do
   pod 'Alamofire', '~> 5.8'
   pod 'RxSwift', '6.6.0'
   pod 'RxCocoa', '6.6.0'
+  pod 'TextFieldEffects'
 end
 
 post_install do |installer|

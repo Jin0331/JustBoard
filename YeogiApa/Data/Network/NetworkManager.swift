@@ -60,14 +60,6 @@ final class AuthManager : RequestInterceptor {
         
         // 419 : AccessToken 만료
         //TODO: - 401 이 발생할 가능성이 있을까??? -> 서버가 리셋 즉, 회원가입이 안 된 유저
-        //MARK: - 아래의 코드(do 시작전까지)는 필요하지 않을 듯????/
-        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 419 else {
-            print("Token Refresh Fail : \(error)")
-            
-            completion(.doNotRetryWithError(error))
-            return
-        }
-        
         // adpat -> retry이므로, UserDefault에는 Token값이 무조건 존재
         do {
             let urlRequest = try UserRouter.refresh(query: RefreshRequest(accessToken: UserDefaultManager.shared.accessToken!,

@@ -34,6 +34,7 @@
 		DBCBAA292BC839EB006B40CA /* RefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */; };
 		DBCBAA2B2BC83A54006B40CA /* RefreshRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */; };
 		DBCBAA2D2BC84842006B40CA /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */; };
+		DBCBAA2F2BC86224006B40CA /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA2E2BC86224006B40CA /* AuthManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResponse.swift; sourceTree = "<group>"; };
 		DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshRequest.swift; sourceTree = "<group>"; };
 		DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
+		DBCBAA2E2BC86224006B40CA /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeogiApa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,7 @@
 				DBCBAA0E2BC7D0E1006B40CA /* NetworkManager.swift */,
 				DBCBA9FF2BC7CCE2006B40CA /* Router */,
 				DBCBA9FE2BC7CCD8006B40CA /* DataMapping */,
+				DBCBAA2E2BC86224006B40CA /* AuthManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBCBAA172BC7E02D006B40CA /* LoginViewController.swift in Sources */,
+				DBCBAA2F2BC86224006B40CA /* AuthManager.swift in Sources */,
 				DBCBAA222BC7E804006B40CA /* UIViewController+Extension.swift in Sources */,
 				DBCBAA0D2BC7D0B9006B40CA /* HTTPHeader.swift in Sources */,
 				DBCBAA072BC7CE79006B40CA /* DesignSystem.swift in Sources */,

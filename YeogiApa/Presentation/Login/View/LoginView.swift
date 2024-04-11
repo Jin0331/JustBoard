@@ -54,21 +54,21 @@ final class LoginView : BaseView {
     
     let findEmailButton = UIButton().then {
         $0.setTitle("이메일 찾기", for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+        $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
         $0.setTitleColor(DesignSystem.colorSet.lightBlack, for: .normal)
         $0.backgroundColor = DesignSystem.colorSet.white
     }
     
     let findPasswordButton = UIButton().then {
         $0.setTitle("비밀번호 찾기", for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+        $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
         $0.setTitleColor(DesignSystem.colorSet.lightBlack, for: .normal)
         $0.backgroundColor = DesignSystem.colorSet.white
     }
     
     let signInButton = UIButton().then {
         $0.setTitle("회원가입", for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+        $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
         $0.setTitleColor(DesignSystem.colorSet.lightBlack, for: .normal)
         $0.backgroundColor = DesignSystem.colorSet.white
     }

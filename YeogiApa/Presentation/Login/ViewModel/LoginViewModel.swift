@@ -33,7 +33,8 @@ final class LoginViewModel : ViewModelType {
         
         input.loginButtonTap
             .withLatestFrom(loginObservable)
-            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .throttle(.seconds(2), scheduler: MainScheduler.instance)
+//            .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .flatMap { loginQuery in
                 return NetworkManager.shared.createLogin(query: loginQuery)
             }
@@ -44,7 +45,7 @@ final class LoginViewModel : ViewModelType {
                 UserDefaultManager.shared.accessToken = loginModel.accessToken
                 UserDefaultManager.shared.refreshToken = loginModel.refreshToken
             }, onError: { owner, error in
-                print(error)
+//                print(error)
             })
             .disposed(by: disposeBag)
         

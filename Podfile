@@ -6,6 +6,8 @@ target 'YeogiApa' do
   use_frameworks!
 
   # Pods for YeogiApa
+  pod 'SnapKit', '~> 5.7.0'
+  pod 'Then'
   pod 'Alamofire', '~> 5.8'
   pod 'RxSwift', '6.6.0'
   pod 'RxCocoa', '6.6.0'

@@ -17,6 +17,11 @@
 		DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA022BC7CD32006B40CA /* BaseViewController.swift */; };
 		DBCBAA052BC7CD32006B40CA /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA032BC7CD32006B40CA /* BaseView.swift */; };
 		DBCBAA072BC7CE79006B40CA /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA062BC7CE79006B40CA /* DesignSystem.swift */; };
+		DBCBAA092BC7CEE8006B40CA /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA082BC7CEE8006B40CA /* Router.swift */; };
+		DBCBAA0B2BC7D0A5006B40CA /* LoginQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA0A2BC7D0A5006B40CA /* LoginQuery.swift */; };
+		DBCBAA0D2BC7D0B9006B40CA /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA0C2BC7D0B9006B40CA /* HTTPHeader.swift */; };
+		DBCBAA0F2BC7D0E1006B40CA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA0E2BC7D0E1006B40CA /* NetworkManager.swift */; };
+		DBCBAA112BC7D0F0006B40CA /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA102BC7D0F0006B40CA /* TargetType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +38,11 @@
 		DBCBAA022BC7CD32006B40CA /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DBCBAA032BC7CD32006B40CA /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		DBCBAA062BC7CE79006B40CA /* DesignSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		DBCBAA082BC7CEE8006B40CA /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		DBCBAA0A2BC7D0A5006B40CA /* LoginQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginQuery.swift; sourceTree = "<group>"; };
+		DBCBAA0C2BC7D0B9006B40CA /* HTTPHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
+		DBCBAA0E2BC7D0E1006B40CA /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		DBCBAA102BC7D0F0006B40CA /* TargetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeogiApa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -90,6 +100,9 @@
 			isa = PBXGroup;
 			children = (
 				DBCBAA002BC7CCFE006B40CA /* APIKey.swift */,
+				DBCBAA102BC7D0F0006B40CA /* TargetType.swift */,
+				DBCBAA0C2BC7D0B9006B40CA /* HTTPHeader.swift */,
+				DBCBAA0E2BC7D0E1006B40CA /* NetworkManager.swift */,
 				DBCBA9FF2BC7CCE2006B40CA /* Router */,
 				DBCBA9FE2BC7CCD8006B40CA /* DataMapping */,
 			);
@@ -168,6 +181,7 @@
 		DBCBA9FE2BC7CCD8006B40CA /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
+				DBCBAA0A2BC7D0A5006B40CA /* LoginQuery.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -175,6 +189,7 @@
 		DBCBA9FF2BC7CCE2006B40CA /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				DBCBAA082BC7CEE8006B40CA /* Router.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -303,11 +318,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBCBAA0D2BC7D0B9006B40CA /* HTTPHeader.swift in Sources */,
 				DBCBAA072BC7CE79006B40CA /* DesignSystem.swift in Sources */,
+				DBCBAA0F2BC7D0E1006B40CA /* NetworkManager.swift in Sources */,
 				DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */,
+				DBCBAA0B2BC7D0A5006B40CA /* LoginQuery.swift in Sources */,
 				DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */,
+				DBCBAA092BC7CEE8006B40CA /* Router.swift in Sources */,
 				DBCBAA052BC7CD32006B40CA /* BaseView.swift in Sources */,
 				DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */,
+				DBCBAA112BC7D0F0006B40CA /* TargetType.swift in Sources */,
 				DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,7 +475,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SUZFV58S8B;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = YeogiApa/Info.plist;
+				INFOPLIST_FILE = YeogiApa/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -489,7 +509,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SUZFV58S8B;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = YeogiApa/Info.plist;
+				INFOPLIST_FILE = YeogiApa/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

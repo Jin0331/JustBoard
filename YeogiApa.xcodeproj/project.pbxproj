@@ -33,6 +33,7 @@
 		DBCBAA272BC82D5A006B40CA /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA262BC82D5A006B40CA /* UserDefaultManager.swift */; };
 		DBCBAA292BC839EB006B40CA /* RefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */; };
 		DBCBAA2B2BC83A54006B40CA /* RefreshRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */; };
+		DBCBAA2D2BC84842006B40CA /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		DBCBAA262BC82D5A006B40CA /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResponse.swift; sourceTree = "<group>"; };
 		DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshRequest.swift; sourceTree = "<group>"; };
+		DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeogiApa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -213,6 +215,7 @@
 				DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */,
 				DBCBAA122BC7D900006B40CA /* LoginResponse.swift */,
 				DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */,
+				DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				DBCBAA202BC7E7F2006B40CA /* ViewModelType.swift in Sources */,
 				DBCBAA052BC7CD32006B40CA /* BaseView.swift in Sources */,
 				DBCBAA292BC839EB006B40CA /* RefreshResponse.swift in Sources */,
+				DBCBAA2D2BC84842006B40CA /* ProfileResponse.swift in Sources */,
 				DBCBAA1F2BC7E7F2006B40CA /* ReusableID.swift in Sources */,
 				DBCBAA272BC82D5A006B40CA /* UserDefaultManager.swift in Sources */,
 				DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */,

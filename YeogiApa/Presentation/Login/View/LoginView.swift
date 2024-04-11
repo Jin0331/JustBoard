@@ -32,8 +32,16 @@ final class LoginView : BaseView {
         $0.layer.cornerRadius = DesignSystem.cornerRadius.commonCornerRadius
     }
     
+    //MARK: - 갱신용 버튼. 삭제필요 ❗️❗️❗️❗️❗️❗️❗️❗️❗️
+    lazy var profileButton = UIButton().then {
+        $0.setTitle("프로필 조회", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+    }
+    
+    
+    
     override func configureHierarchy() {
-        [headerTextLabel, userIdTextfield, userPasswordTextfield, userLoginButton].forEach { addSubview($0) }
+        [headerTextLabel, userIdTextfield, userPasswordTextfield, userLoginButton, profileButton].forEach { addSubview($0) }
     }
     
     override func configureLayout() {
@@ -57,6 +65,12 @@ final class LoginView : BaseView {
         
         userLoginButton.snp.makeConstraints { make in
             make.top.equalTo(userPasswordTextfield.snp.bottom).offset(15)
+            make.horizontalEdges.equalTo(userIdTextfield).inset(10)
+            make.height.equalTo(userIdTextfield)
+        }
+        
+        profileButton.snp.makeConstraints { make in
+            make.top.equalTo(userLoginButton.snp.bottom).offset(15)
             make.horizontalEdges.equalTo(userIdTextfield).inset(10)
             make.height.equalTo(userIdTextfield)
         }

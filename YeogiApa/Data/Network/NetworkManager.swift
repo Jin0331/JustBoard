@@ -60,14 +60,19 @@ final class AuthManager : RequestInterceptor {
         
         // 419 : AccessToken 만료
         //TODO: - 401 이 발생할 가능성이 있을까??? -> 서버가 리셋 즉, 회원가입이 안 된 유저
+        //MARK: - 아래의 코드(do 시작전까지)는 필요하지 않을 듯????/
         guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 419 else {
+            print("Token Refresh Fail : \(error)")
+            
             completion(.doNotRetryWithError(error))
             return
         }
         
         // adpat -> retry이므로, UserDefault에는 Token값이 무조건 존재
         do {
-            let urlRequest = try UserRouter.refresh(query: RefreshRequest(accessToken: UserDefaultManager.shared.accessToken!, refreshToken: UserDefaultManager.shared.refreshToken!)).asURLRequest()
+            let urlRequest = try UserRouter.refresh(query: RefreshRequest(accessToken: UserDefaultManager.shared.accessToken!,
+                                                                          refreshToken: UserDefaultManager.shared.refreshToken!))
+                .asURLRequest()
             
             // refresh
             AF.request(urlRequest)
@@ -76,9 +81,10 @@ final class AuthManager : RequestInterceptor {
                     switch response.result {
                     case .success(let refreshResponse): // Token이 Refresh 성공했을 때
                         print("Token Refresh Success")
+                        
                         UserDefaultManager.shared.accessToken = refreshResponse.accessToken
                         completion(.retryWithDelay(10))
-                    case .failure(let error): // Token이 Refresh 실패했을 때,, refreshToken이 만료되었거나(418), 비정상적인 접근(401)
+                    case .failure(let error): // Token이 Refresh 실패했을 때,, refreshToken이 만료되었거나(418), 비정상적인 접근(401, 403)
                         print("Token Refresh Fail : \(error)")
                         
                         UserDefaultManager.shared.accessToken = nil
@@ -86,11 +92,7 @@ final class AuthManager : RequestInterceptor {
                         completion(.doNotRetryWithError(error))
                     }
                 }
-            
-        } catch {
-            // 어떤 에러가 발생할 수 있을까...??????????
-            print(error)
-        }
+        } catch { } // 어떤 에러가 발생할 수 있을까....?
         
     }
 }

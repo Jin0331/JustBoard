@@ -1,6 +1,6 @@
 //
 //  NetworkManager.swift
-//  LSLPBasic
+//  YeogiApa
 //
 //  Created by JinwooLee on 4/9/24.
 //
@@ -19,7 +19,7 @@ struct NetworkManager {
     static func createLogin(query: LoginQuery) -> Single<LoginModel> {
         return Single<LoginModel>.create { single in
             do {
-                let urlRequest = try Router.login(query: query).asURLRequest()
+                let urlRequest = try UserRouter.login(query: query).asURLRequest()
                                 
                 AF.request(urlRequest)
                     .validate(statusCode: 200..<300)

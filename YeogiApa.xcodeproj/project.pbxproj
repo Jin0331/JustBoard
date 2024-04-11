@@ -17,11 +17,13 @@
 		DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA022BC7CD32006B40CA /* BaseViewController.swift */; };
 		DBCBAA052BC7CD32006B40CA /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA032BC7CD32006B40CA /* BaseView.swift */; };
 		DBCBAA072BC7CE79006B40CA /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA062BC7CE79006B40CA /* DesignSystem.swift */; };
-		DBCBAA092BC7CEE8006B40CA /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA082BC7CEE8006B40CA /* Router.swift */; };
+		DBCBAA092BC7CEE8006B40CA /* UserRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA082BC7CEE8006B40CA /* UserRouter.swift */; };
 		DBCBAA0B2BC7D0A5006B40CA /* LoginQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA0A2BC7D0A5006B40CA /* LoginQuery.swift */; };
 		DBCBAA0D2BC7D0B9006B40CA /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA0C2BC7D0B9006B40CA /* HTTPHeader.swift */; };
 		DBCBAA0F2BC7D0E1006B40CA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA0E2BC7D0E1006B40CA /* NetworkManager.swift */; };
 		DBCBAA112BC7D0F0006B40CA /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA102BC7D0F0006B40CA /* TargetType.swift */; };
+		DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA122BC7D900006B40CA /* LoginResponse.swift */; };
+		DBCBAA152BC7DC8C006B40CA /* JoinQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA142BC7DC8C006B40CA /* JoinQuery.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,11 +40,13 @@
 		DBCBAA022BC7CD32006B40CA /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DBCBAA032BC7CD32006B40CA /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		DBCBAA062BC7CE79006B40CA /* DesignSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
-		DBCBAA082BC7CEE8006B40CA /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		DBCBAA082BC7CEE8006B40CA /* UserRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRouter.swift; sourceTree = "<group>"; };
 		DBCBAA0A2BC7D0A5006B40CA /* LoginQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginQuery.swift; sourceTree = "<group>"; };
 		DBCBAA0C2BC7D0B9006B40CA /* HTTPHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
 		DBCBAA0E2BC7D0E1006B40CA /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DBCBAA102BC7D0F0006B40CA /* TargetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
+		DBCBAA122BC7D900006B40CA /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		DBCBAA142BC7DC8C006B40CA /* JoinQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinQuery.swift; sourceTree = "<group>"; };
 		DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeogiApa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -181,7 +185,9 @@
 		DBCBA9FE2BC7CCD8006B40CA /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
+				DBCBAA142BC7DC8C006B40CA /* JoinQuery.swift */,
 				DBCBAA0A2BC7D0A5006B40CA /* LoginQuery.swift */,
+				DBCBAA122BC7D900006B40CA /* LoginResponse.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -189,7 +195,7 @@
 		DBCBA9FF2BC7CCE2006B40CA /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				DBCBAA082BC7CEE8006B40CA /* Router.swift */,
+				DBCBAA082BC7CEE8006B40CA /* UserRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -324,8 +330,10 @@
 				DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */,
 				DBCBAA0B2BC7D0A5006B40CA /* LoginQuery.swift in Sources */,
 				DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */,
-				DBCBAA092BC7CEE8006B40CA /* Router.swift in Sources */,
+				DBCBAA092BC7CEE8006B40CA /* UserRouter.swift in Sources */,
+				DBCBAA152BC7DC8C006B40CA /* JoinQuery.swift in Sources */,
 				DBCBAA052BC7CD32006B40CA /* BaseView.swift in Sources */,
+				DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */,
 				DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */,
 				DBCBAA112BC7D0F0006B40CA /* TargetType.swift in Sources */,
 				DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */,
@@ -383,7 +391,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -446,7 +454,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

@@ -1,5 +1,5 @@
 //
-//  Router.swift
+//  UserRouter.swift
 //  YeogiApa
 //
 //  Created by JinwooLee on 4/9/24.
@@ -8,20 +8,20 @@
 import Foundation
 import Alamofire
 
-enum Router {
+enum UserRouter {
+    case join(query : JoinQuery)
     case login(query : LoginQuery)
-//    case withdraw
-//    case fetchPost
-//    case uploadPost
 }
 
-extension Router : TargetType {
+extension UserRouter : TargetType {
     var baseURL: URL {
         return URL(string:APIKey.baseURL.rawValue)!
     }
     
     var method: HTTPMethod {
         switch self {
+        case .join:
+            return .post
         case .login:
             return .post
         }
@@ -29,13 +29,17 @@ extension Router : TargetType {
     
     var path: String {
         switch self {
+        case .join:
+            return "/users/join"
         case .login:
-            return "/v1/users/login"
+            return "/users/login"
         }
     }
     
     var header: [String:String] {
         switch self {
+        case .join:
+            return [:]
         case .login:
             return [HTTPHeader.contentType.rawValue : HTTPHeader.json.rawValue,
                     HTTPHeader.sesacKey.rawValue : APIKey.sessacKey.rawValue]
@@ -52,6 +56,11 @@ extension Router : TargetType {
     
     var body: Data? {
         switch self {
+        case .join(query: let query):
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            
+            return try? encoder.encode(query)
         case .login(query: let query):
             let encoder = JSONEncoder()
             encoder.keyEncodingStrategy = .convertToSnakeCase

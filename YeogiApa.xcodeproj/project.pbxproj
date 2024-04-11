@@ -18,18 +18,21 @@
 		DBCBAA052BC7CD32006B40CA /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA032BC7CD32006B40CA /* BaseView.swift */; };
 		DBCBAA072BC7CE79006B40CA /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA062BC7CE79006B40CA /* DesignSystem.swift */; };
 		DBCBAA092BC7CEE8006B40CA /* UserRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA082BC7CEE8006B40CA /* UserRouter.swift */; };
-		DBCBAA0B2BC7D0A5006B40CA /* LoginQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA0A2BC7D0A5006B40CA /* LoginQuery.swift */; };
+		DBCBAA0B2BC7D0A5006B40CA /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA0A2BC7D0A5006B40CA /* LoginRequest.swift */; };
 		DBCBAA0D2BC7D0B9006B40CA /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA0C2BC7D0B9006B40CA /* HTTPHeader.swift */; };
 		DBCBAA0F2BC7D0E1006B40CA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA0E2BC7D0E1006B40CA /* NetworkManager.swift */; };
 		DBCBAA112BC7D0F0006B40CA /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA102BC7D0F0006B40CA /* TargetType.swift */; };
 		DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA122BC7D900006B40CA /* LoginResponse.swift */; };
-		DBCBAA152BC7DC8C006B40CA /* JoinQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA142BC7DC8C006B40CA /* JoinQuery.swift */; };
+		DBCBAA152BC7DC8C006B40CA /* JoinRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA142BC7DC8C006B40CA /* JoinRequest.swift */; };
 		DBCBAA172BC7E02D006B40CA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA162BC7E02D006B40CA /* LoginViewController.swift */; };
 		DBCBAA192BC7E106006B40CA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA182BC7E106006B40CA /* LoginView.swift */; };
 		DBCBAA1F2BC7E7F2006B40CA /* ReusableID.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA1D2BC7E7F2006B40CA /* ReusableID.swift */; };
 		DBCBAA202BC7E7F2006B40CA /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA1E2BC7E7F2006B40CA /* ViewModelType.swift */; };
 		DBCBAA222BC7E804006B40CA /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA212BC7E804006B40CA /* UIViewController+Extension.swift */; };
 		DBCBAA242BC7E82A006B40CA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA232BC7E82A006B40CA /* LoginViewModel.swift */; };
+		DBCBAA272BC82D5A006B40CA /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA262BC82D5A006B40CA /* UserDefaultManager.swift */; };
+		DBCBAA292BC839EB006B40CA /* RefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */; };
+		DBCBAA2B2BC83A54006B40CA /* RefreshRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,18 +50,21 @@
 		DBCBAA032BC7CD32006B40CA /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		DBCBAA062BC7CE79006B40CA /* DesignSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		DBCBAA082BC7CEE8006B40CA /* UserRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRouter.swift; sourceTree = "<group>"; };
-		DBCBAA0A2BC7D0A5006B40CA /* LoginQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginQuery.swift; sourceTree = "<group>"; };
+		DBCBAA0A2BC7D0A5006B40CA /* LoginRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		DBCBAA0C2BC7D0B9006B40CA /* HTTPHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
 		DBCBAA0E2BC7D0E1006B40CA /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DBCBAA102BC7D0F0006B40CA /* TargetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		DBCBAA122BC7D900006B40CA /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
-		DBCBAA142BC7DC8C006B40CA /* JoinQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinQuery.swift; sourceTree = "<group>"; };
+		DBCBAA142BC7DC8C006B40CA /* JoinRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRequest.swift; sourceTree = "<group>"; };
 		DBCBAA162BC7E02D006B40CA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DBCBAA182BC7E106006B40CA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		DBCBAA1D2BC7E7F2006B40CA /* ReusableID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableID.swift; sourceTree = "<group>"; };
 		DBCBAA1E2BC7E7F2006B40CA /* ViewModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		DBCBAA212BC7E804006B40CA /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		DBCBAA232BC7E82A006B40CA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		DBCBAA262BC82D5A006B40CA /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResponse.swift; sourceTree = "<group>"; };
+		DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshRequest.swift; sourceTree = "<group>"; };
 		DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeogiApa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -173,6 +179,7 @@
 		DBCBA9FB2BC7CB31006B40CA /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				DBCBAA252BC82D4A006B40CA /* UserDefault */,
 				DBCBA9F52BC7C446006B40CA /* Network */,
 			);
 			path = Data;
@@ -201,9 +208,11 @@
 		DBCBA9FE2BC7CCD8006B40CA /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
-				DBCBAA142BC7DC8C006B40CA /* JoinQuery.swift */,
-				DBCBAA0A2BC7D0A5006B40CA /* LoginQuery.swift */,
+				DBCBAA142BC7DC8C006B40CA /* JoinRequest.swift */,
+				DBCBAA0A2BC7D0A5006B40CA /* LoginRequest.swift */,
+				DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */,
 				DBCBAA122BC7D900006B40CA /* LoginResponse.swift */,
+				DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -240,6 +249,14 @@
 				DBCBAA212BC7E804006B40CA /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		DBCBAA252BC82D4A006B40CA /* UserDefault */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBAA262BC82D5A006B40CA /* UserDefaultManager.swift */,
+			);
+			path = UserDefault;
 			sourceTree = "<group>";
 		};
 		FE20E17095C8CCE921DF3EF4 /* Pods */ = {
@@ -373,13 +390,16 @@
 				DBCBAA192BC7E106006B40CA /* LoginView.swift in Sources */,
 				DBCBAA0F2BC7D0E1006B40CA /* NetworkManager.swift in Sources */,
 				DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */,
-				DBCBAA0B2BC7D0A5006B40CA /* LoginQuery.swift in Sources */,
+				DBCBAA2B2BC83A54006B40CA /* RefreshRequest.swift in Sources */,
+				DBCBAA0B2BC7D0A5006B40CA /* LoginRequest.swift in Sources */,
 				DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */,
 				DBCBAA092BC7CEE8006B40CA /* UserRouter.swift in Sources */,
-				DBCBAA152BC7DC8C006B40CA /* JoinQuery.swift in Sources */,
+				DBCBAA152BC7DC8C006B40CA /* JoinRequest.swift in Sources */,
 				DBCBAA202BC7E7F2006B40CA /* ViewModelType.swift in Sources */,
 				DBCBAA052BC7CD32006B40CA /* BaseView.swift in Sources */,
+				DBCBAA292BC839EB006B40CA /* RefreshResponse.swift in Sources */,
 				DBCBAA1F2BC7E7F2006B40CA /* ReusableID.swift in Sources */,
+				DBCBAA272BC82D5A006B40CA /* UserDefaultManager.swift in Sources */,
 				DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */,
 				DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */,
 				DBCBAA112BC7D0F0006B40CA /* TargetType.swift in Sources */,

@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct RefreshRequest : Encodable {
+    let accessToken : String
+    let refreshToken : String
+}

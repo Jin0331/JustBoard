@@ -21,10 +21,14 @@ final class LoginViewModel : ViewModelType {
     }
     
     struct Output {
-        
+        let loginSuccess : Driver<Bool>
+        let loginFailed : Driver<Bool>
     }
     
     func transform(input: Input) -> Output {
+        
+        let loginSuccess = PublishSubject<Bool>()
+        let loginFailed = PublishSubject<Bool>()
         
         let loginObservable = Observable.combineLatest(input.email.asObservable(), input.password.asObservable())
             .map { email, password in
@@ -34,22 +38,25 @@ final class LoginViewModel : ViewModelType {
         input.loginButtonTap
             .withLatestFrom(loginObservable)
             .throttle(.seconds(2), scheduler: MainScheduler.instance)
-//            .debounce(.seconds(1), scheduler: MainScheduler.instance)
-            .flatMap { loginQuery in
+            .flatMapLatest { loginQuery in
                 return NetworkManager.shared.createLogin(query: loginQuery)
             }
             .debug()
-            .subscribe(with: self, onNext: { owner, loginModel in
-                
-                //TODO: - 필요하다면, KeyChain으로 변경?
-                UserDefaultManager.shared.accessToken = loginModel.accessToken
-                UserDefaultManager.shared.refreshToken = loginModel.refreshToken
-            }, onError: { owner, error in
-//                print(error)
-            })
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let loginModel):
+                    UserDefaultManager.shared.accessToken = loginModel.accessToken
+                    UserDefaultManager.shared.refreshToken = loginModel.refreshToken
+                    
+                    loginSuccess.onNext(true)
+                case .failure(_):
+                    loginFailed.onNext(true)
+                }
+            }
             .disposed(by: disposeBag)
         
-        return Output()
+        return Output(loginSuccess: loginSuccess.asDriver(onErrorJustReturn: false),
+                      loginFailed: loginFailed.asDriver(onErrorJustReturn: false))
     }
 
     

@@ -30,5 +30,18 @@ final class LoginViewController: RxBaseViewController {
                                          loginButtonTap: mainView.userLoginButton.rx.tap)
         
         let output = viewModel.transform(input: input)
+        output.loginSuccess
+            .drive(with: self) { owner, value in
+                print("로그인 성공", value)
+            }
+            .disposed(by: disposeBag)
+        
+        output.loginFailed
+            .drive(with: self) { owner, value in
+                print("로그인 실패", value)
+                owner.showAlert(title: "로그인 실패", text: "이메일 또는 비밀번호가 틀렸어요 🥲", addButtonText: "확인")
+            }
+            .disposed(by: disposeBag)
+        
     }
 }

@@ -128,9 +128,9 @@
 				DBCBAA102BC7D0F0006B40CA /* TargetType.swift */,
 				DBCBAA0C2BC7D0B9006B40CA /* HTTPHeader.swift */,
 				DBCBAA0E2BC7D0E1006B40CA /* NetworkManager.swift */,
+				DBCBAA2E2BC86224006B40CA /* AuthManager.swift */,
 				DBCBA9FF2BC7CCE2006B40CA /* Router */,
 				DBCBA9FE2BC7CCD8006B40CA /* DataMapping */,
-				DBCBAA2E2BC86224006B40CA /* AuthManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";

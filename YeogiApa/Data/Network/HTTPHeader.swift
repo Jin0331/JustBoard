@@ -13,4 +13,5 @@ enum HTTPHeader : String {
     case json = "application/json"
     case authorization = "Authorization"
     case refresh = "Refresh"
+    case multipart = "multipart/form-data"
 }

@@ -17,8 +17,8 @@ final class NetworkManager  {
     
     
     //TODO: - 현재 성공 case만 테스트됨, error 처리 필요함
-    func createLogin(query: LoginRequest) -> Single<LoginResponse> {
-        return Single<LoginResponse>.create { single in
+    func createLogin(query: LoginRequest) -> Single<Result<LoginResponse, AFError>> {
+        return Single<Result<LoginResponse, AFError>>.create { single in
             do {
                 let urlRequest = try UserRouter.login(query: query).asURLRequest()
                                 
@@ -27,9 +27,10 @@ final class NetworkManager  {
                     .responseDecodable(of: LoginResponse.self) { response in
                         switch response.result {
                         case .success(let loginModel):
-                            single(.success(loginModel))
+                            single(.success(.success(loginModel)))
                         case .failure(let error):
-                            single(.failure(error))
+                            print(response.response?.statusCode)
+                            single(.success(.failure(error)))
                         }
                     }
             } catch {

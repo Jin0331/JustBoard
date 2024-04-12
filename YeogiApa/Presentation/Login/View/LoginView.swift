@@ -35,6 +35,7 @@ final class LoginView : BaseView {
         $0.textColor = .white
         $0.font = .systemFont(ofSize: 20, weight: .heavy)
         $0.contentVerticalAlignment = .bottom
+        $0.isSecureTextEntry = true
     }
     
     let userLoginButton = UIButton().then {

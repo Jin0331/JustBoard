@@ -12,6 +12,7 @@ enum UserRouter {
     case join(query : JoinRequest)
     case login(query : LoginRequest)
     case refresh(query : RefreshRequest)
+    case emailValidation(query : EmailValidationRequest)
 }
 
 extension UserRouter : TargetType {
@@ -27,6 +28,8 @@ extension UserRouter : TargetType {
             return .post
         case .refresh:
             return .get
+        case .emailValidation :
+            return .post
         }
     }
     
@@ -38,6 +41,9 @@ extension UserRouter : TargetType {
             return "/users/login"
         case .refresh:
             return "/auth/refresh"
+        case .emailValidation:
+            return "/validation/email"
+
         }
     }
     
@@ -53,6 +59,9 @@ extension UserRouter : TargetType {
                     HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue,
                     HTTPHeader.refresh.rawValue : token.refreshToken
             ]
+        case .emailValidation:
+            return [HTTPHeader.contentType.rawValue : HTTPHeader.json.rawValue,
+                    HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue]
         }
     }
     
@@ -78,6 +87,12 @@ extension UserRouter : TargetType {
             return try? encoder.encode(query)
         case .refresh:
             return nil
+        case .emailValidation(query: let query):
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            
+            return try? encoder.encode(query)
+
         }
     }
     

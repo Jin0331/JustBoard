@@ -15,8 +15,7 @@ final class NetworkManager  {
     
     private init() { }
     
-    
-    //TODO: - 현재 성공 case만 테스트됨, error 처리 필요함
+    //MARK: - Login
     func createLogin(query: LoginRequest) -> Single<Result<LoginResponse, AFError>> {
         return Single<Result<LoginResponse, AFError>>.create { single in
             do {
@@ -37,6 +36,30 @@ final class NetworkManager  {
                 single(.failure(error))
             }
             
+            return Disposables.create()
+        }
+    }
+    
+    //MARK: - Email validation
+    func validationEmail(query : EmailValidationRequest) -> Single<Result<Void, AFError>> {
+        return Single<Result<Void, AFError>>.create { single in
+            do {
+                let urlRequest = try UserRouter.emailValidation(query: query).asURLRequest()
+                
+                AF.request(urlRequest)
+                    .validate(statusCode: 200..<300)
+                    .responseData { response in
+                        switch response.result {
+                        case .success:
+                            single(.success(.success(())))
+                        case .failure(let error):
+                            single(.success(.failure(error)))
+                        }
+                    }
+                
+            } catch {
+                single(.failure(error))
+            }
             return Disposables.create()
         }
     }

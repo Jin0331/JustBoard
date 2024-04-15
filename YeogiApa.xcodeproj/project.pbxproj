@@ -43,6 +43,7 @@
 		DBCBAA5A2BCD5D05006B40CA /* SignUpEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA592BCD5D05006B40CA /* SignUpEmailViewController.swift */; };
 		DBCBAA5F2BCD61E5006B40CA /* SignTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA5E2BCD61E5006B40CA /* SignTextField.swift */; };
 		DBCBAA612BCD6A07006B40CA /* SignUpEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA602BCD6A07006B40CA /* SignUpEmailViewModel.swift */; };
+		DBCBAA632BCD73D9006B40CA /* EmailValidationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		DBCBAA592BCD5D05006B40CA /* SignUpEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewController.swift; sourceTree = "<group>"; };
 		DBCBAA5E2BCD61E5006B40CA /* SignTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignTextField.swift; sourceTree = "<group>"; };
 		DBCBAA602BCD6A07006B40CA /* SignUpEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewModel.swift; sourceTree = "<group>"; };
+		DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationRequest.swift; sourceTree = "<group>"; };
 		DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeogiApa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -239,6 +241,7 @@
 				DBCBAA142BC7DC8C006B40CA /* JoinRequest.swift */,
 				DBCBAA0A2BC7D0A5006B40CA /* LoginRequest.swift */,
 				DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */,
+				DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */,
 				DBCBAA122BC7D900006B40CA /* LoginResponse.swift */,
 				DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */,
 				DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */,
@@ -429,6 +432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBCBAA632BCD73D9006B40CA /* EmailValidationRequest.swift in Sources */,
 				DBCBAA172BC7E02D006B40CA /* EmailLoginViewController.swift in Sources */,
 				DBCBAA2F2BC86224006B40CA /* AuthManager.swift in Sources */,
 				DBCBAA522BCCFA71006B40CA /* AppCoordinator.swift in Sources */,

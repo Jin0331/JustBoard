@@ -21,6 +21,20 @@ struct UserStatus {
         set { UserDefaults.standard.set(newValue, forKey: key) }
     }
 }
+
+@propertyWrapper
+struct UserLogin {
+    private let key: String
+ 
+    init(key: String) {
+        self.key = key
+    }
+    
+    var wrappedValue: Bool {
+        get { UserDefaults.standard.bool(forKey: key) }
+        set { UserDefaults.standard.set(newValue, forKey: key) }
+    }
+}
  
 final class UserDefaultManager {
     
@@ -32,6 +46,7 @@ final class UserDefaultManager {
     // PropertyWrapper 적용
     @UserStatus(key: "accessToken") var accessToken : String?
     @UserStatus(key: "refreshToken") var refreshToken : String?
+    @UserLogin(key: "userLogin") var isLogined : Bool
     
     func removeData(forKey key: String) {
         userDefaults.removeObject(forKey: key)

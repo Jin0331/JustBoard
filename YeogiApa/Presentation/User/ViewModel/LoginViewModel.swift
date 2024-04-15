@@ -43,7 +43,6 @@ final class LoginViewModel : ViewModelType {
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .debug("ButtonUI")
             .bind(with: self) { owner, loginRequest in
-                
                 let valid = owner.isValidEmail(loginRequest.email) && owner.isValidPassword(loginRequest.password)
                 loginButtonUIUpdate.onNext(valid)
             }
@@ -56,15 +55,19 @@ final class LoginViewModel : ViewModelType {
             .flatMapLatest { loginQuery in
                 return NetworkManager.shared.createLogin(query: loginQuery)
             }
-            .debug()
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let loginModel):
                     UserDefaultManager.shared.accessToken = loginModel.accessToken
                     UserDefaultManager.shared.refreshToken = loginModel.refreshToken
+                    UserDefaultManager.shared.isLogined = true
+                    
+                    print(UserDefaultManager.shared.isLogined, "✅✅✅✅✅✅")
                     
                     loginSuccess.onNext(true)
                 case .failure(_):
+                    UserDefaultManager.shared.isLogined = false
+                    print(UserDefaultManager.shared.isLogined, "✅✅✅✅✅✅")
                     loginFailed.onNext(true)
                 }
             }
@@ -103,7 +106,7 @@ extension LoginViewModel {
         return matchesPattern(email, pattern: emailPattern)
     }
     
-    // 최소 8 자 및 최대 15 자, 하나 이상의 대문자/소문자/숫자/특수 문자 정규식
+    // 최소 8 자 및 최대 15 자, 하나 이상의 대문자/소문자/숫자/특수문자(.@$!%*?&) 정규식
     private func isValidPassword(_ password : String) -> Bool {
         let passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\.@$!%*?&])[A-Za-z\\d\\.@$!%*?&]{8,15}$"
         return matchesPattern(password, pattern: passwordPattern)

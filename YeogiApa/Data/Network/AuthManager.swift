@@ -53,6 +53,8 @@ final class AuthManager : RequestInterceptor {
                         
                         UserDefaultManager.shared.accessToken = nil
                         UserDefaultManager.shared.refreshToken = nil
+                        UserDefaultManager.shared.isLogined = false
+                        
                         completion(.doNotRetryWithError(error))
                     }
                 }

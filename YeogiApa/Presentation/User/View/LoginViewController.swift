@@ -10,10 +10,15 @@ import RxSwift
 import RxCocoa
 import Alamofire
 
+protocol LoginViewControllerDelegate {
+    func login()
+}
+
 final class LoginViewController: RxBaseViewController {
     
     private let mainView = LoginView()
     private let viewModel = LoginViewModel()
+    var loginDelegate : LoginViewControllerDelegate?
     
     override func loadView() {
         view = mainView
@@ -33,9 +38,6 @@ final class LoginViewController: RxBaseViewController {
         
         output.loginButtonUIUpdate
             .drive(with: self) { owner, value in
-                
-                print(value)
-                
                 owner.mainView.userLoginButton.isEnabled = value
                 owner.mainView.userLoginButton.alpha = value ? 1.0 : 0.5
             }
@@ -44,7 +46,9 @@ final class LoginViewController: RxBaseViewController {
         output.loginSuccess
             .drive(with: self) { owner, value in
                 print("로그인 성공", value)
+                
                 //TODO: - 화면전환 로직 추가 필요
+                owner.loginDelegate?.login()
             }
             .disposed(by: disposeBag)
         

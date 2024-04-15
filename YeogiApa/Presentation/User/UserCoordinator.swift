@@ -12,10 +12,10 @@ protocol LoginCoordinatorDelegate {
     func didLoggedIn(_ coordinator: UserCoordinator)
 }
 
-final class UserCoordinator : Coordinator, LoginViewControllerDelegate {
+final class UserCoordinator : Coordinator, SignInUpViewControllerDelegate, EmailLoginViewControllerDelegate {
     
     var childCoordinators: [Coordinator] = []
-    var loginDelegate: LoginCoordinatorDelegate?
+    var coordinator : LoginCoordinatorDelegate?
     
     private var navigationController: UINavigationController!
     
@@ -24,11 +24,38 @@ final class UserCoordinator : Coordinator, LoginViewControllerDelegate {
     }
     
     func start() {
-        let viewController = SignInUpViewController()
-        self.navigationController.viewControllers = [viewController]
+        let vc = SignInUpViewController()
+        vc.loginDelegate = self
+        self.navigationController.viewControllers = [vc]
     }
     
+    // User Coordinator -> AppCoordinator -> Main Coordinator로 전환되는 과정
     func login() {
-        self.loginDelegate?.didLoggedIn(self)
+        self.coordinator?.didLoggedIn(self)
+    }
+    
+    // UserCoordinator의 하위 VC
+    func kakaoLogin() {
+        print("화면전환 ✅ - kakao")
+    }
+    
+    func appleLogin() {
+        print("화면전환 ✅ - apple")
+    }
+    
+    func emailLogin() {
+        print("화면전환 ✅ - email")
+        
+        let vc = EmailLoginViewController()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func signUp() {
+        print("회원가입 ✅")
+        
+        let vc = SignUpEmailViewController()
+        
+        navigationController.pushViewController(vc, animated: true)
     }
 }

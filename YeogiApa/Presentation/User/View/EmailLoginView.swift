@@ -8,33 +8,16 @@
 import UIKit
 import SnapKit
 import Then
-import TextFieldEffects
 
-final class LoginView : BaseView {
+final class EmailLoginView : BaseView {
     
     private let headerTextLabel = UILabel().then {
         $0.text = "이메일로 로그인하기 😎"
         $0.font = .systemFont(ofSize: 30, weight: .heavy)
     }
     
-    let userIdTextfield = JiroTextField().then {
-        $0.placeholder = "이메일"
-        $0.placeholderColor = DesignSystem.commonColorSet.lightBlack
-        $0.placeholderFontScale = 1
-        $0.borderColor = DesignSystem.commonColorSet.lightBlack
-        $0.textColor = .white
-        $0.font = .systemFont(ofSize: 20, weight: .heavy)
-        $0.contentVerticalAlignment = .bottom
-    }
-    
-    let userPasswordTextfield = JiroTextField().then {
-        $0.placeholder = "비밀번호"
-        $0.placeholderColor = DesignSystem.commonColorSet.lightBlack
-        $0.placeholderFontScale = 1
-        $0.borderColor = DesignSystem.commonColorSet.lightBlack
-        $0.textColor = .white
-        $0.font = .systemFont(ofSize: 20, weight: .heavy)
-        $0.contentVerticalAlignment = .bottom
+    let userIdTextfield = SignTextField(placeholderText: "이메일")
+    let userPasswordTextfield = SignTextField(placeholderText: "비밀번호").then {
         $0.isSecureTextEntry = true
     }
     
@@ -67,7 +50,7 @@ final class LoginView : BaseView {
         $0.backgroundColor = DesignSystem.commonColorSet.white
     }
     
-    let signInButton = UIButton().then {
+    let signUpButton = UIButton().then {
         $0.setTitle("회원가입", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
         $0.setTitleColor(DesignSystem.commonColorSet.lightBlack, for: .normal)
@@ -76,7 +59,7 @@ final class LoginView : BaseView {
     
     override func configureHierarchy() {
         [headerTextLabel, userIdTextfield, userPasswordTextfield, userLoginButton, buttonStackView].forEach { addSubview($0) }
-        [findEmailButton, findPasswordButton, signInButton].forEach { buttonStackView.addArrangedSubview($0)}
+        [findEmailButton, findPasswordButton, signUpButton].forEach { buttonStackView.addArrangedSubview($0)}
     }
     
     override func configureLayout() {
@@ -105,10 +88,16 @@ final class LoginView : BaseView {
         
         
         userLoginButton.snp.makeConstraints { make in
-            make.top.equalTo(signInButton.snp.bottom).offset(15)
+            make.top.equalTo(buttonStackView.snp.bottom).offset(15)
             make.horizontalEdges.equalTo(userIdTextfield)
             make.height.equalTo(60)
         }
+    }
+    
+    override func configureView() {
+        super.configureView()
+        
+        backgroundColor = DesignSystem.commonColorSet.white
     }
     
     

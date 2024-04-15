@@ -29,7 +29,7 @@ final class AppCoordinator: Coordinator, LoginCoordinatorDelegate {
     
     private func showLoginViewController() {
         let coordinator = UserCoordinator(navigationController: self.navigationController)
-        coordinator.loginDelegate = self
+        coordinator.coordinator = self
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }

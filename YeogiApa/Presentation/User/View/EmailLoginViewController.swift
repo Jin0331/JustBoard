@@ -10,15 +10,16 @@ import RxSwift
 import RxCocoa
 import Alamofire
 
-protocol LoginViewControllerDelegate {
+protocol EmailLoginViewControllerDelegate {
     func login()
+    func signUp()
 }
 
-final class LoginViewController: RxBaseViewController {
+final class EmailLoginViewController: RxBaseViewController {
     
-    private let mainView = LoginView()
-    private let viewModel = LoginViewModel()
-    var loginDelegate : LoginViewControllerDelegate?
+    private let mainView = EmailLoginView()
+    private let viewModel = EmailLoginViewModel()
+    var coordinator : EmailLoginViewControllerDelegate?
     
     override func loadView() {
         view = mainView
@@ -26,13 +27,15 @@ final class LoginViewController: RxBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+    
     }
     
     override func bind() {
-        let input = LoginViewModel.Input(email: mainView.userIdTextfield.rx.text.orEmpty,
+        let input = EmailLoginViewModel.Input(email: mainView.userIdTextfield.rx.text.orEmpty,
                                          password: mainView.userPasswordTextfield.rx.text.orEmpty,
-                                         loginButtonTap: mainView.userLoginButton.rx.tap)
+                                         loginButtonTap: mainView.userLoginButton.rx.tap,
+                                         signUpTap: mainView.signUpButton.rx.tap
+        )
         
         let output = viewModel.transform(input: input)
         
@@ -48,7 +51,7 @@ final class LoginViewController: RxBaseViewController {
                 print("로그인 성공", value)
                 
                 //TODO: - 화면전환 로직 추가 필요
-                owner.loginDelegate?.login()
+                owner.coordinator?.login()
             }
             .disposed(by: disposeBag)
         
@@ -59,5 +62,10 @@ final class LoginViewController: RxBaseViewController {
             }
             .disposed(by: disposeBag)
         
+        output.signUp
+            .drive(with: self) { owner, _ in
+                owner.coordinator?.signUp()
+            }
+            .disposed(by: disposeBag)
     }
 }

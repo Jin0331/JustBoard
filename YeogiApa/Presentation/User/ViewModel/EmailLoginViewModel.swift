@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 
-final class LoginViewModel : ViewModelType {
+final class EmailLoginViewModel : UserViewModelType {
     
     var disposeBag: DisposeBag = DisposeBag()
     
@@ -18,12 +18,14 @@ final class LoginViewModel : ViewModelType {
         let email : ControlProperty<String>
         let password : ControlProperty<String>
         let loginButtonTap : ControlEvent<Void>
+        let signUpTap : ControlEvent<Void>
     }
     
     struct Output {
         let loginSuccess : Driver<Bool>
         let loginFailed : Driver<Bool>
         let loginButtonUIUpdate : Driver<Bool>
+        let signUp : Driver<Void>
     }
     
     func transform(input: Input) -> Output {
@@ -72,10 +74,11 @@ final class LoginViewModel : ViewModelType {
                 }
             }
             .disposed(by: disposeBag)
-        
+            
         return Output(loginSuccess: loginSuccess.asDriver(onErrorJustReturn: false),
                       loginFailed: loginFailed.asDriver(onErrorJustReturn: false),
-                      loginButtonUIUpdate: loginButtonUIUpdate.asDriver(onErrorJustReturn: false)
+                      loginButtonUIUpdate: loginButtonUIUpdate.asDriver(onErrorJustReturn: false),
+                      signUp: input.signUpTap.asDriver()
         )
         
     }
@@ -85,30 +88,4 @@ final class LoginViewModel : ViewModelType {
     }
     
     
-}
-
-//MARK: - 유효성 검증
-extension LoginViewModel {
-    
-    private func matchesPattern(_ string : String, pattern : String) -> Bool {
-        do {
-            let regex = try NSRegularExpression(pattern: pattern)
-            let range = NSRange(location: 0, length: string.utf16.count)
-            return regex.firstMatch(in: string, options: [], range: range) != nil
-        } catch {
-            print("Invalid regex pattern: \(error.localizedDescription)")
-            return false
-        }
-    }
-    
-    private func isValidEmail(_ email : String) -> Bool {
-        let emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        return matchesPattern(email, pattern: emailPattern)
-    }
-    
-    // 최소 8 자 및 최대 15 자, 하나 이상의 대문자/소문자/숫자/특수문자(.@$!%*?&) 정규식
-    private func isValidPassword(_ password : String) -> Bool {
-        let passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\.@$!%*?&])[A-Za-z\\d\\.@$!%*?&]{8,15}$"
-        return matchesPattern(password, pattern: passwordPattern)
-    }
 }

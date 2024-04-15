@@ -25,7 +25,7 @@ class SignInUpView : BaseView {
         $0.textColor = DesignSystem.commonColorSet.white
     }
     
-    private let kakaoLoginButton = UIButton().then {
+    let kakaoLoginButton = UIButton().then {
         $0.setTitle("카카오로 시작하기", for: .normal)
         $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
         $0.backgroundColor = DesignSystem.buttonColorSet.yellow
@@ -34,7 +34,7 @@ class SignInUpView : BaseView {
         $0.setImage(UIImage(named: "kakaotalk_sharing_btn_small_ov"), for: .normal)
     }
     
-    private let appleLoginButton = UIButton().then {
+    let appleLoginButton = UIButton().then {
         $0.setTitle(" Apple로 시작하기", for: .normal)
         $0.setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
         $0.backgroundColor = DesignSystem.buttonColorSet.black
@@ -44,7 +44,7 @@ class SignInUpView : BaseView {
         $0.tintColor = DesignSystem.commonColorSet.white
     }
     
-    private let emailLoginButton = UIButton().then {
+    let emailLoginButton = UIButton().then {
         $0.setTitle("이메일 로그인 ", for: .normal)
         $0.setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
         $0.backgroundColor = DesignSystem.buttonColorSet.clear

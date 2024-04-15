@@ -1,5 +1,5 @@
 //
-//  JoinQuery.swift
+//  JoinRequest.swift
 //  YeogiApa
 //
 //  Created by JinwooLee on 4/11/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct JoinQuery : Encodable {
+struct JoinRequest : Encodable {
     let email : String
     let password : String
     let nick : String

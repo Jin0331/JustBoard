@@ -10,12 +10,11 @@ import RxSwift
 import RxCocoa
 
 class RxBaseViewController : BaseViewController {
-    
+    let disposeBag = DisposeBag()
 }
 
 class BaseViewController: UIViewController {
     
-    let disposeBag = DisposeBag()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -24,12 +23,30 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        configureHierarchy()
+        configureLayout()
+        configureView()
+        configureNavigation()
         bind()
     }
     
-    func bind() {
-        
+    
+    func bind() { }
+    func configureHierarchy() { }
+    func configureLayout() { }
+    func configureView() {
+        view.backgroundColor = DesignSystem.colorSet.white
     }
+    
+    func configureNavigation() {
+                
+        // back button
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil) // title 부분 수정
+        backBarButtonItem.tintColor = .black
+        navigationItem.backBarButtonItem = backBarButtonItem
+    }
+    
     
     @available (*, unavailable)
     required init?(coder: NSCoder) {

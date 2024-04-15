@@ -7,6 +7,7 @@ PODS:
     - RxSwift (= 6.6.0)
   - RxSwift (6.6.0)
   - SnapKit (5.7.1)
+  - TextFieldEffects (1.6.0)
   - Then (3.0.0)
 
 DEPENDENCIES:
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - RxCocoa (= 6.6.0)
   - RxSwift (= 6.6.0)
   - SnapKit (~> 5.7.0)
+  - TextFieldEffects
   - Then
 
 SPEC REPOS:
@@ -23,6 +25,7 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - SnapKit
+    - TextFieldEffects
     - Then
 
 SPEC CHECKSUMS:
@@ -31,8 +34,9 @@ SPEC CHECKSUMS:
   RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
   RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: f42f0d586783240d8c9e0098148fb89f40b4ef85
+PODFILE CHECKSUM: cbcf38eb044651a2946e2ca3b751b23ab2b1cca1
 
 COCOAPODS: 1.15.2

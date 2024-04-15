@@ -1,5 +1,5 @@
 //
-//  LoginQuery.swift
+//  LoginRequest.swift
 //  LSLPBasic
 //
 //  Created by JinwooLee on 4/9/24.
@@ -8,7 +8,7 @@
 import Foundation
 
 // HTTP POST
-struct LoginQuery : Encodable {
+struct LoginRequest : Encodable {
     let email : String
     let password : String
 }

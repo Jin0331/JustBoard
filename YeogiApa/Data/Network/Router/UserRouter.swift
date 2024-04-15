@@ -9,13 +9,14 @@ import Foundation
 import Alamofire
 
 enum UserRouter {
-    case join(query : JoinQuery)
-    case login(query : LoginQuery)
+    case join(query : JoinRequest)
+    case login(query : LoginRequest)
+    case refresh(query : RefreshRequest)
 }
 
 extension UserRouter : TargetType {
     var baseURL: URL {
-        return URL(string:APIKey.baseURL.rawValue)!
+        return URL(string:APIKey.baseURLWithVersion())!
     }
     
     var method: HTTPMethod {
@@ -24,6 +25,8 @@ extension UserRouter : TargetType {
             return .post
         case .login:
             return .post
+        case .refresh:
+            return .get
         }
     }
     
@@ -33,6 +36,8 @@ extension UserRouter : TargetType {
             return "/users/join"
         case .login:
             return "/users/login"
+        case .refresh:
+            return "/auth/refresh"
         }
     }
     
@@ -42,7 +47,12 @@ extension UserRouter : TargetType {
             return [:]
         case .login:
             return [HTTPHeader.contentType.rawValue : HTTPHeader.json.rawValue,
-                    HTTPHeader.sesacKey.rawValue : APIKey.sessacKey.rawValue]
+                    HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue]
+        case .refresh(let token):
+            return [HTTPHeader.authorization.rawValue : token.accessToken,
+                    HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue,
+                    HTTPHeader.refresh.rawValue : token.refreshToken
+            ]
         }
     }
     
@@ -66,6 +76,8 @@ extension UserRouter : TargetType {
             encoder.keyEncodingStrategy = .convertToSnakeCase
             
             return try? encoder.encode(query)
+        case .refresh:
+            return nil
         }
     }
     

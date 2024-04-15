@@ -24,17 +24,29 @@
 		DBCBAA112BC7D0F0006B40CA /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA102BC7D0F0006B40CA /* TargetType.swift */; };
 		DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA122BC7D900006B40CA /* LoginResponse.swift */; };
 		DBCBAA152BC7DC8C006B40CA /* JoinRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA142BC7DC8C006B40CA /* JoinRequest.swift */; };
-		DBCBAA172BC7E02D006B40CA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA162BC7E02D006B40CA /* LoginViewController.swift */; };
-		DBCBAA192BC7E106006B40CA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA182BC7E106006B40CA /* LoginView.swift */; };
+		DBCBAA172BC7E02D006B40CA /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA162BC7E02D006B40CA /* EmailLoginViewController.swift */; };
+		DBCBAA192BC7E106006B40CA /* EmailLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA182BC7E106006B40CA /* EmailLoginView.swift */; };
 		DBCBAA1F2BC7E7F2006B40CA /* ReusableID.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA1D2BC7E7F2006B40CA /* ReusableID.swift */; };
 		DBCBAA202BC7E7F2006B40CA /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA1E2BC7E7F2006B40CA /* ViewModelType.swift */; };
 		DBCBAA222BC7E804006B40CA /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA212BC7E804006B40CA /* UIViewController+Extension.swift */; };
-		DBCBAA242BC7E82A006B40CA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA232BC7E82A006B40CA /* LoginViewModel.swift */; };
+		DBCBAA242BC7E82A006B40CA /* EmailLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA232BC7E82A006B40CA /* EmailLoginViewModel.swift */; };
 		DBCBAA272BC82D5A006B40CA /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA262BC82D5A006B40CA /* UserDefaultManager.swift */; };
 		DBCBAA292BC839EB006B40CA /* RefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */; };
 		DBCBAA2B2BC83A54006B40CA /* RefreshRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */; };
 		DBCBAA2D2BC84842006B40CA /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */; };
 		DBCBAA2F2BC86224006B40CA /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA2E2BC86224006B40CA /* AuthManager.swift */; };
+		DBCBAA502BCCFA0B006B40CA /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA4F2BCCFA0B006B40CA /* Protocol.swift */; };
+		DBCBAA522BCCFA71006B40CA /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA512BCCFA71006B40CA /* AppCoordinator.swift */; };
+		DBCBAA542BCD006E006B40CA /* UserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA532BCD006E006B40CA /* UserCoordinator.swift */; };
+		DBCBAA562BCD0705006B40CA /* SignInUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA552BCD0705006B40CA /* SignInUpViewController.swift */; };
+		DBCBAA582BCD0ACC006B40CA /* SignInUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA572BCD0ACC006B40CA /* SignInUpView.swift */; };
+		DBCBAA5A2BCD5D05006B40CA /* SignUpEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA592BCD5D05006B40CA /* SignUpEmailViewController.swift */; };
+		DBCBAA5F2BCD61E5006B40CA /* SignTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA5E2BCD61E5006B40CA /* SignTextField.swift */; };
+		DBCBAA612BCD6A07006B40CA /* SignUpEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA602BCD6A07006B40CA /* SignUpEmailViewModel.swift */; };
+		DBCBAA632BCD73D9006B40CA /* EmailValidationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */; };
+		DBCBE3B52BCD845F00B6DAC5 /* SignUpPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE3B42BCD845F00B6DAC5 /* SignUpPasswordViewController.swift */; };
+		DBCBE3B72BCD87B700B6DAC5 /* SignUpPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE3B62BCD87B700B6DAC5 /* SignUpPasswordViewModel.swift */; };
+		DBCBE3B92BCD892500B6DAC5 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE3B82BCD892500B6DAC5 /* NextButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,17 +70,29 @@
 		DBCBAA102BC7D0F0006B40CA /* TargetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		DBCBAA122BC7D900006B40CA /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		DBCBAA142BC7DC8C006B40CA /* JoinRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRequest.swift; sourceTree = "<group>"; };
-		DBCBAA162BC7E02D006B40CA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		DBCBAA182BC7E106006B40CA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		DBCBAA162BC7E02D006B40CA /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
+		DBCBAA182BC7E106006B40CA /* EmailLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginView.swift; sourceTree = "<group>"; };
 		DBCBAA1D2BC7E7F2006B40CA /* ReusableID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableID.swift; sourceTree = "<group>"; };
 		DBCBAA1E2BC7E7F2006B40CA /* ViewModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		DBCBAA212BC7E804006B40CA /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
-		DBCBAA232BC7E82A006B40CA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		DBCBAA232BC7E82A006B40CA /* EmailLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewModel.swift; sourceTree = "<group>"; };
 		DBCBAA262BC82D5A006B40CA /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResponse.swift; sourceTree = "<group>"; };
 		DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshRequest.swift; sourceTree = "<group>"; };
 		DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		DBCBAA2E2BC86224006B40CA /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		DBCBAA4F2BCCFA0B006B40CA /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		DBCBAA512BCCFA71006B40CA /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		DBCBAA532BCD006E006B40CA /* UserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoordinator.swift; sourceTree = "<group>"; };
+		DBCBAA552BCD0705006B40CA /* SignInUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUpViewController.swift; sourceTree = "<group>"; };
+		DBCBAA572BCD0ACC006B40CA /* SignInUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUpView.swift; sourceTree = "<group>"; };
+		DBCBAA592BCD5D05006B40CA /* SignUpEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewController.swift; sourceTree = "<group>"; };
+		DBCBAA5E2BCD61E5006B40CA /* SignTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignTextField.swift; sourceTree = "<group>"; };
+		DBCBAA602BCD6A07006B40CA /* SignUpEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewModel.swift; sourceTree = "<group>"; };
+		DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationRequest.swift; sourceTree = "<group>"; };
+		DBCBE3B42BCD845F00B6DAC5 /* SignUpPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPasswordViewController.swift; sourceTree = "<group>"; };
+		DBCBE3B62BCD87B700B6DAC5 /* SignUpPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPasswordViewModel.swift; sourceTree = "<group>"; };
+		DBCBE3B82BCD892500B6DAC5 /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeogiApa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -138,28 +162,34 @@
 		DBCBA9F62BC7C64D006B40CA /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				DBCBA9EA2BC7BE35006B40CA /* LaunchScreen.storyboard */,
+				DBCBAA4E2BCCF9E9006B40CA /* Coordinator */,
 				DBCBA9FD2BC7CBA6006B40CA /* Utility */,
 				DBCBA9FA2BC7C69B006B40CA /* Base */,
-				DBCBA9F72BC7C677006B40CA /* Login */,
+				DBCBA9F72BC7C677006B40CA /* User */,
+				DBCBAA5D2BCD61C6006B40CA /* CustomView */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		DBCBA9F72BC7C677006B40CA /* Login */ = {
+		DBCBA9F72BC7C677006B40CA /* User */ = {
 			isa = PBXGroup;
 			children = (
+				DBCBAA532BCD006E006B40CA /* UserCoordinator.swift */,
 				DBCBA9F82BC7C686006B40CA /* View */,
 				DBCBA9F92BC7C68A006B40CA /* ViewModel */,
 			);
-			path = Login;
+			path = User;
 			sourceTree = "<group>";
 		};
 		DBCBA9F82BC7C686006B40CA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DBCBAA182BC7E106006B40CA /* LoginView.swift */,
-				DBCBAA162BC7E02D006B40CA /* LoginViewController.swift */,
+				DBCBAA572BCD0ACC006B40CA /* SignInUpView.swift */,
+				DBCBAA552BCD0705006B40CA /* SignInUpViewController.swift */,
+				DBCBAA182BC7E106006B40CA /* EmailLoginView.swift */,
+				DBCBAA162BC7E02D006B40CA /* EmailLoginViewController.swift */,
+				DBCBAA592BCD5D05006B40CA /* SignUpEmailViewController.swift */,
+				DBCBE3B42BCD845F00B6DAC5 /* SignUpPasswordViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -167,7 +197,9 @@
 		DBCBA9F92BC7C68A006B40CA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				DBCBAA232BC7E82A006B40CA /* LoginViewModel.swift */,
+				DBCBAA232BC7E82A006B40CA /* EmailLoginViewModel.swift */,
+				DBCBAA602BCD6A07006B40CA /* SignUpEmailViewModel.swift */,
+				DBCBE3B62BCD87B700B6DAC5 /* SignUpPasswordViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -196,6 +228,7 @@
 				DBCBA9ED2BC7BE35006B40CA /* Info.plist */,
 				DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */,
 				DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */,
+				DBCBA9EA2BC7BE35006B40CA /* LaunchScreen.storyboard */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -216,6 +249,7 @@
 				DBCBAA142BC7DC8C006B40CA /* JoinRequest.swift */,
 				DBCBAA0A2BC7D0A5006B40CA /* LoginRequest.swift */,
 				DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */,
+				DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */,
 				DBCBAA122BC7D900006B40CA /* LoginResponse.swift */,
 				DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */,
 				DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */,
@@ -263,6 +297,24 @@
 				DBCBAA262BC82D5A006B40CA /* UserDefaultManager.swift */,
 			);
 			path = UserDefault;
+			sourceTree = "<group>";
+		};
+		DBCBAA4E2BCCF9E9006B40CA /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBAA4F2BCCFA0B006B40CA /* Protocol.swift */,
+				DBCBAA512BCCFA71006B40CA /* AppCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		DBCBAA5D2BCD61C6006B40CA /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBAA5E2BCD61E5006B40CA /* SignTextField.swift */,
+				DBCBE3B82BCD892500B6DAC5 /* NextButton.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 		FE20E17095C8CCE921DF3EF4 /* Pods */ = {
@@ -389,30 +441,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBCBAA172BC7E02D006B40CA /* LoginViewController.swift in Sources */,
+				DBCBAA632BCD73D9006B40CA /* EmailValidationRequest.swift in Sources */,
+				DBCBAA172BC7E02D006B40CA /* EmailLoginViewController.swift in Sources */,
 				DBCBAA2F2BC86224006B40CA /* AuthManager.swift in Sources */,
+				DBCBAA522BCCFA71006B40CA /* AppCoordinator.swift in Sources */,
 				DBCBAA222BC7E804006B40CA /* UIViewController+Extension.swift in Sources */,
 				DBCBAA0D2BC7D0B9006B40CA /* HTTPHeader.swift in Sources */,
 				DBCBAA072BC7CE79006B40CA /* DesignSystem.swift in Sources */,
-				DBCBAA192BC7E106006B40CA /* LoginView.swift in Sources */,
+				DBCBAA542BCD006E006B40CA /* UserCoordinator.swift in Sources */,
+				DBCBAA192BC7E106006B40CA /* EmailLoginView.swift in Sources */,
 				DBCBAA0F2BC7D0E1006B40CA /* NetworkManager.swift in Sources */,
 				DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */,
+				DBCBE3B52BCD845F00B6DAC5 /* SignUpPasswordViewController.swift in Sources */,
 				DBCBAA2B2BC83A54006B40CA /* RefreshRequest.swift in Sources */,
 				DBCBAA0B2BC7D0A5006B40CA /* LoginRequest.swift in Sources */,
+				DBCBE3B72BCD87B700B6DAC5 /* SignUpPasswordViewModel.swift in Sources */,
 				DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */,
 				DBCBAA092BC7CEE8006B40CA /* UserRouter.swift in Sources */,
 				DBCBAA152BC7DC8C006B40CA /* JoinRequest.swift in Sources */,
 				DBCBAA202BC7E7F2006B40CA /* ViewModelType.swift in Sources */,
+				DBCBAA502BCCFA0B006B40CA /* Protocol.swift in Sources */,
 				DBCBAA052BC7CD32006B40CA /* BaseView.swift in Sources */,
 				DBCBAA292BC839EB006B40CA /* RefreshResponse.swift in Sources */,
 				DBCBAA2D2BC84842006B40CA /* ProfileResponse.swift in Sources */,
+				DBCBAA5F2BCD61E5006B40CA /* SignTextField.swift in Sources */,
 				DBCBAA1F2BC7E7F2006B40CA /* ReusableID.swift in Sources */,
 				DBCBAA272BC82D5A006B40CA /* UserDefaultManager.swift in Sources */,
+				DBCBAA582BCD0ACC006B40CA /* SignInUpView.swift in Sources */,
 				DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */,
+				DBCBAA5A2BCD5D05006B40CA /* SignUpEmailViewController.swift in Sources */,
+				DBCBAA562BCD0705006B40CA /* SignInUpViewController.swift in Sources */,
+				DBCBE3B92BCD892500B6DAC5 /* NextButton.swift in Sources */,
 				DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */,
 				DBCBAA112BC7D0F0006B40CA /* TargetType.swift in Sources */,
-				DBCBAA242BC7E82A006B40CA /* LoginViewModel.swift in Sources */,
+				DBCBAA242BC7E82A006B40CA /* EmailLoginViewModel.swift in Sources */,
 				DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */,
+				DBCBAA612BCD6A07006B40CA /* SignUpEmailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

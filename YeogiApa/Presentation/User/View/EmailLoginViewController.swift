@@ -10,10 +10,16 @@ import RxSwift
 import RxCocoa
 import Alamofire
 
-final class LoginViewController: RxBaseViewController {
+protocol EmailLoginViewControllerDelegate {
+    func login()
+    func signUp()
+}
+
+final class EmailLoginViewController: RxBaseViewController {
     
-    private let mainView = LoginView()
-    private let viewModel = LoginViewModel()
+    private let mainView = EmailLoginView()
+    private let viewModel = EmailLoginViewModel()
+    var coordinator : EmailLoginViewControllerDelegate?
     
     override func loadView() {
         view = mainView
@@ -21,21 +27,20 @@ final class LoginViewController: RxBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+    
     }
     
     override func bind() {
-        let input = LoginViewModel.Input(email: mainView.userIdTextfield.rx.text.orEmpty,
+        let input = EmailLoginViewModel.Input(email: mainView.userIdTextfield.rx.text.orEmpty,
                                          password: mainView.userPasswordTextfield.rx.text.orEmpty,
-                                         loginButtonTap: mainView.userLoginButton.rx.tap)
+                                         loginButtonTap: mainView.userLoginButton.rx.tap,
+                                         signUpTap: mainView.signUpButton.rx.tap
+        )
         
         let output = viewModel.transform(input: input)
         
         output.loginButtonUIUpdate
             .drive(with: self) { owner, value in
-                
-                print(value)
-                
                 owner.mainView.userLoginButton.isEnabled = value
                 owner.mainView.userLoginButton.alpha = value ? 1.0 : 0.5
             }
@@ -44,7 +49,9 @@ final class LoginViewController: RxBaseViewController {
         output.loginSuccess
             .drive(with: self) { owner, value in
                 print("로그인 성공", value)
+                
                 //TODO: - 화면전환 로직 추가 필요
+                owner.coordinator?.login()
             }
             .disposed(by: disposeBag)
         
@@ -55,5 +62,10 @@ final class LoginViewController: RxBaseViewController {
             }
             .disposed(by: disposeBag)
         
+        output.signUp
+            .drive(with: self) { owner, _ in
+                owner.coordinator?.signUp()
+            }
+            .disposed(by: disposeBag)
     }
 }

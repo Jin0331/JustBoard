@@ -57,7 +57,8 @@ final class UserCoordinator : Coordinator, SignInUpViewControllerDelegate, Email
     }
     
     func netxSignUpPasswordVC(email: String) {
-        
-        print(email)
+    
+        let vc = SignUpPasswordViewController()
+        navigationController.pushViewController(vc, animated: true)
     }
 }

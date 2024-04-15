@@ -44,6 +44,7 @@
 		DBCBAA5F2BCD61E5006B40CA /* SignTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA5E2BCD61E5006B40CA /* SignTextField.swift */; };
 		DBCBAA612BCD6A07006B40CA /* SignUpEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA602BCD6A07006B40CA /* SignUpEmailViewModel.swift */; };
 		DBCBAA632BCD73D9006B40CA /* EmailValidationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */; };
+		DBCBE3B52BCD845F00B6DAC5 /* SignUpPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE3B42BCD845F00B6DAC5 /* SignUpPasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		DBCBAA5E2BCD61E5006B40CA /* SignTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignTextField.swift; sourceTree = "<group>"; };
 		DBCBAA602BCD6A07006B40CA /* SignUpEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewModel.swift; sourceTree = "<group>"; };
 		DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationRequest.swift; sourceTree = "<group>"; };
+		DBCBE3B42BCD845F00B6DAC5 /* SignUpPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPasswordViewController.swift; sourceTree = "<group>"; };
 		DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeogiApa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -183,6 +185,7 @@
 				DBCBAA182BC7E106006B40CA /* EmailLoginView.swift */,
 				DBCBAA162BC7E02D006B40CA /* EmailLoginViewController.swift */,
 				DBCBAA592BCD5D05006B40CA /* SignUpEmailViewController.swift */,
+				DBCBE3B42BCD845F00B6DAC5 /* SignUpPasswordViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				DBCBAA192BC7E106006B40CA /* EmailLoginView.swift in Sources */,
 				DBCBAA0F2BC7D0E1006B40CA /* NetworkManager.swift in Sources */,
 				DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */,
+				DBCBE3B52BCD845F00B6DAC5 /* SignUpPasswordViewController.swift in Sources */,
 				DBCBAA2B2BC83A54006B40CA /* RefreshRequest.swift in Sources */,
 				DBCBAA0B2BC7D0A5006B40CA /* LoginRequest.swift in Sources */,
 				DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */,

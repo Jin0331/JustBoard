@@ -21,23 +21,13 @@ final class SignUpEmailViewController: RxBaseViewController {
         $0.text = "이메일을 입력해주세요 😎"
         $0.font = .systemFont(ofSize: 30, weight: .heavy)
     }
-    
     private let headerSubTextLabel = UILabel().then {
         $0.text = "로그인 시 사용할 이메일을 입력해주세요"
         $0.font = .systemFont(ofSize: 20, weight: .heavy)
         $0.textColor = DesignSystem.commonColorSet.gray
     }
-    
     private let emailTextfield = SignTextField(placeholderText: "이메일")
-    
-    private let nextButton = UIButton().then {
-        $0.setTitle("다음", for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 20, weight: .heavy)
-        $0.setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
-        $0.backgroundColor = DesignSystem.commonColorSet.lightBlack
-        $0.layer.cornerRadius = DesignSystem.cornerRadius.commonCornerRadius
-        $0.setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
-    }
+    private let nextButton = NextButton(title: "다음")
     
     let viewModel = SignUpEmailViewModel()
     var coordinator : SignUpEmailViewControllerDelegate?

@@ -12,7 +12,7 @@ protocol LoginCoordinatorDelegate {
     func didLoggedIn(_ coordinator: UserCoordinator)
 }
 
-final class UserCoordinator : Coordinator, SignInUpViewControllerDelegate, EmailLoginViewControllerDelegate, SignUpEmailViewControllerDelegate {
+final class UserCoordinator : Coordinator, SignInUpViewControllerDelegate, EmailLoginViewControllerDelegate, SignUpEmailViewControllerDelegate, SignUpPasswordViewControllerDelegate {
     
     var childCoordinators: [Coordinator] = []
     var coordinator : LoginCoordinatorDelegate?
@@ -57,8 +57,13 @@ final class UserCoordinator : Coordinator, SignInUpViewControllerDelegate, Email
     }
     
     func netxSignUpPasswordVC(email: String) {
-    
-        let vc = SignUpPasswordViewController()
+        let vc = SignUpPasswordViewController(email:email)
+        vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func netxSignUpNickName(email: String, password: String) {
+        
+        print(email, password)
     }
 }

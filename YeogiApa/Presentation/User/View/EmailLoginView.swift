@@ -15,22 +15,10 @@ final class EmailLoginView : BaseView {
         $0.text = "이메일로 로그인하기 😎"
         $0.font = .systemFont(ofSize: 30, weight: .heavy)
     }
-    
     let userIdTextfield = SignTextField(placeholderText: "이메일")
-    let userPasswordTextfield = SignTextField(placeholderText: "비밀번호").then {
-        $0.isSecureTextEntry = true
-    }
-    
-    let userLoginButton = UIButton().then {
-        $0.setTitle("로그인", for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 20, weight: .heavy)
-        $0.setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
-        $0.backgroundColor = DesignSystem.commonColorSet.lightBlack
-        $0.layer.cornerRadius = DesignSystem.cornerRadius.commonCornerRadius
-        $0.setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
-    }
-    
-    let buttonStackView = UIStackView().then {
+    let userPasswordTextfield = SignTextField(placeholderText: "비밀번호").then { $0.isSecureTextEntry = true }
+    let userLoginButton = NextButton(title: "로그인")
+    private let buttonStackView = UIStackView().then {
         $0.distribution = .fillEqually
         $0.axis = .horizontal
         $0.spacing = 0

@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 protocol SignUpPasswordViewControllerDelegate {
-    func netxSignUpProfileVC(email : String)
+    func netxSignUpNickName(email : String, password : String)
 }
 
 final class SignUpPasswordViewController: RxBaseViewController {
@@ -21,31 +21,22 @@ final class SignUpPasswordViewController: RxBaseViewController {
         $0.text = "비밀번호를 입력해주세요 😎"
         $0.font = .systemFont(ofSize: 30, weight: .heavy)
     }
-    
     private let headerSubTextLabel = UILabel().then {
         $0.text = "한 개 이상의 대/소문자 영문, 숫자, 특수문자(.@$!%*?&)를\n조합하여 8~15자리로 작성해주세요"
         $0.numberOfLines = 0
         $0.font = .systemFont(ofSize: 15, weight: .heavy)
         $0.textColor = DesignSystem.commonColorSet.gray
     }
+    private let passwordTextfield = SignTextField(placeholderText: "비밀번호").then { $0.isSecureTextEntry = true }
+    private let passwordVerfyTextfield = SignTextField(placeholderText: "비밀번호 확인").then { $0.isSecureTextEntry = true }
+    private let nextButton = NextButton(title: "다음")
     
-    private let passwordTextfield = SignTextField(placeholderText: "비밀번호").then {
-        $0.isSecureTextEntry = true
+    var viewModel : SignUpPasswordViewModel
+    var coordinator : SignUpPasswordViewControllerDelegate?
+    
+    init(email : String) {
+        self.viewModel = SignUpPasswordViewModel(email: email)
     }
-    
-    private let passwordVerfyTextfield = SignTextField(placeholderText: "비밀번호 확인").then {
-        $0.isSecureTextEntry = true
-    }
-    
-    private let nextButton = UIButton().then {
-        $0.setTitle("다음", for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 20, weight: .heavy)
-        $0.setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
-        $0.backgroundColor = DesignSystem.commonColorSet.lightBlack
-        $0.layer.cornerRadius = DesignSystem.cornerRadius.commonCornerRadius
-        $0.setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +44,24 @@ final class SignUpPasswordViewController: RxBaseViewController {
     }
     
     override func bind() {
+        
+        let input = SignUpPasswordViewModel.Input(password: passwordTextfield.rx.text.orEmpty,
+                                                  passwordVerfy: passwordVerfyTextfield.rx.text.orEmpty,
+                                                  nextButtonTap: nextButton.rx.tap)
+        let output = viewModel.transform(input: input)
+        
+        output.nextButtonUIUpdate
+            .drive(with: self) { owner, value in
+                owner.nextButton.isEnabled = value
+                owner.nextButton.alpha = value ? 1.0 : 0.5
+            }
+            .disposed(by: disposeBag)
+        
+        output.validEmailPassword
+            .bind(with: self) { owner, emailPassword in
+                owner.coordinator?.netxSignUpNickName(email: emailPassword.0, password: emailPassword.1)
+            }
+            .disposed(by: disposeBag)
         
         
     }

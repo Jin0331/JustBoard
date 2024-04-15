@@ -43,4 +43,8 @@ extension UserViewModelType {
         let passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\.@$!%*?&])[A-Za-z\\d\\.@$!%*?&]{8,15}$"
         return matchesPattern(password, pattern: passwordPattern)
     }
+    
+    func isEqualPassword(_ text1 : String, _ text2 : String) -> Bool {
+        return text1 == text2 ? true : false
+    }
 }

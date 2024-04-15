@@ -19,14 +19,14 @@ class SignUpEmailViewModel : UserViewModelType {
     }
     
     struct Output {
-        let nextSuccess : Driver<Bool>
+        let validEmail : Driver<String>
         let nextFailed : Driver<Bool>
         let nextButtonUIUpdate : Driver<Bool>
     }
     
     func transform(input: Input) -> Output {
         
-        let nextSuccess = PublishSubject<Bool>() // 유효성 및 중복되지 않은 이메일
+        let validEmail = PublishSubject<String>() // 유효성 및 중복되지 않은 이메일
         let nextFailed = PublishSubject<Bool>() // 중복된 이메일인 경우
         let nextButtonUIUpdate = BehaviorSubject<Bool>(value: false) // 유효성 검증
         
@@ -47,10 +47,10 @@ class SignUpEmailViewModel : UserViewModelType {
             }
             .subscribe(with: self) { owner, result in
                 switch result {
-                case .success():
+                case .success(let email):
                     print("email 중복 없음  ✅")
-                    nextSuccess.onNext(true)
-                case .failure(_):
+                    validEmail.onNext(email)
+                case .failure:
                     print("email 중복 ❗️")
                     nextFailed.onNext(true)
                 }
@@ -59,7 +59,7 @@ class SignUpEmailViewModel : UserViewModelType {
         
         
         return Output(
-            nextSuccess: nextSuccess.asDriver(onErrorJustReturn: false),
+            validEmail : validEmail.asDriver(onErrorJustReturn: ""),
             nextFailed: nextFailed.asDriver(onErrorJustReturn: false),
             nextButtonUIUpdate: nextButtonUIUpdate.asDriver(onErrorJustReturn: false))
     }

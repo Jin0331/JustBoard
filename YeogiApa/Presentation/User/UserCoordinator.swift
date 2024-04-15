@@ -12,7 +12,7 @@ protocol LoginCoordinatorDelegate {
     func didLoggedIn(_ coordinator: UserCoordinator)
 }
 
-final class UserCoordinator : Coordinator, SignInUpViewControllerDelegate, EmailLoginViewControllerDelegate {
+final class UserCoordinator : Coordinator, SignInUpViewControllerDelegate, EmailLoginViewControllerDelegate, SignUpEmailViewControllerDelegate {
     
     var childCoordinators: [Coordinator] = []
     var coordinator : LoginCoordinatorDelegate?
@@ -44,8 +44,6 @@ final class UserCoordinator : Coordinator, SignInUpViewControllerDelegate, Email
     }
     
     func emailLogin() {
-        print("화면전환 ✅ - email")
-        
         let vc = EmailLoginViewController()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
@@ -53,9 +51,13 @@ final class UserCoordinator : Coordinator, SignInUpViewControllerDelegate, Email
     
     func signUp() {
         print("회원가입 ✅")
-        
         let vc = SignUpEmailViewController()
-        
+        vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func netxSignUpPasswordVC(email: String) {
+        
+        print(email)
     }
 }

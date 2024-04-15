@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 protocol SignUpEmailViewControllerDelegate {
-    func netxVC(emial : String)
+    func netxSignUpPasswordVC(email : String)
 }
 
 final class SignUpEmailViewController: RxBaseViewController {
@@ -61,10 +61,9 @@ final class SignUpEmailViewController: RxBaseViewController {
             }
             .disposed(by: disposeBag)
         
-        output.nextSuccess
-            .drive(with: self) { owner, value in
-                //TODO: - 화면전환 로직 추가 필요
-//                owner.coordinator?.login()
+        output.validEmail
+            .drive(with: self) { owner, email in
+                owner.coordinator?.netxSignUpPasswordVC(email:email)
             }
             .disposed(by: disposeBag)
         

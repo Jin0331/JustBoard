@@ -41,8 +41,8 @@ final class NetworkManager  {
     }
     
     //MARK: - Email validation
-    func validationEmail(query : EmailValidationRequest) -> Single<Result<Void, AFError>> {
-        return Single<Result<Void, AFError>>.create { single in
+    func validationEmail(query : EmailValidationRequest) -> Single<Result<String, AFError>> {
+        return Single<Result<String, AFError>>.create { single in
             do {
                 let urlRequest = try UserRouter.emailValidation(query: query).asURLRequest()
                 
@@ -51,7 +51,7 @@ final class NetworkManager  {
                     .responseData { response in
                         switch response.result {
                         case .success:
-                            single(.success(.success(())))
+                            single(.success(.success(query.email)))
                         case .failure(let error):
                             single(.success(.failure(error)))
                         }

@@ -19,9 +19,9 @@ final class LoginView : BaseView {
     
     let userIdTextfield = JiroTextField().then {
         $0.placeholder = "이메일"
-        $0.placeholderColor = DesignSystem.colorSet.lightBlack
+        $0.placeholderColor = DesignSystem.commonColorSet.lightBlack
         $0.placeholderFontScale = 1
-        $0.borderColor = DesignSystem.colorSet.lightBlack
+        $0.borderColor = DesignSystem.commonColorSet.lightBlack
         $0.textColor = .white
         $0.font = .systemFont(ofSize: 20, weight: .heavy)
         $0.contentVerticalAlignment = .bottom
@@ -29,9 +29,9 @@ final class LoginView : BaseView {
     
     let userPasswordTextfield = JiroTextField().then {
         $0.placeholder = "비밀번호"
-        $0.placeholderColor = DesignSystem.colorSet.lightBlack
+        $0.placeholderColor = DesignSystem.commonColorSet.lightBlack
         $0.placeholderFontScale = 1
-        $0.borderColor = DesignSystem.colorSet.lightBlack
+        $0.borderColor = DesignSystem.commonColorSet.lightBlack
         $0.textColor = .white
         $0.font = .systemFont(ofSize: 20, weight: .heavy)
         $0.contentVerticalAlignment = .bottom
@@ -41,10 +41,10 @@ final class LoginView : BaseView {
     let userLoginButton = UIButton().then {
         $0.setTitle("로그인", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 20, weight: .heavy)
-        $0.setTitleColor(DesignSystem.colorSet.white, for: .normal)
-        $0.backgroundColor = DesignSystem.colorSet.lightBlack
+        $0.setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
+        $0.backgroundColor = DesignSystem.commonColorSet.lightBlack
         $0.layer.cornerRadius = DesignSystem.cornerRadius.commonCornerRadius
-        $0.setTitleColor(DesignSystem.colorSet.white, for: .normal)
+        $0.setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
     }
     
     let buttonStackView = UIStackView().then {
@@ -56,22 +56,22 @@ final class LoginView : BaseView {
     let findEmailButton = UIButton().then {
         $0.setTitle("이메일 찾기", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
-        $0.setTitleColor(DesignSystem.colorSet.lightBlack, for: .normal)
-        $0.backgroundColor = DesignSystem.colorSet.white
+        $0.setTitleColor(DesignSystem.commonColorSet.lightBlack, for: .normal)
+        $0.backgroundColor = DesignSystem.commonColorSet.white
     }
     
     let findPasswordButton = UIButton().then {
         $0.setTitle("비밀번호 찾기", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
-        $0.setTitleColor(DesignSystem.colorSet.lightBlack, for: .normal)
-        $0.backgroundColor = DesignSystem.colorSet.white
+        $0.setTitleColor(DesignSystem.commonColorSet.lightBlack, for: .normal)
+        $0.backgroundColor = DesignSystem.commonColorSet.white
     }
     
     let signInButton = UIButton().then {
         $0.setTitle("회원가입", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
-        $0.setTitleColor(DesignSystem.colorSet.lightBlack, for: .normal)
-        $0.backgroundColor = DesignSystem.colorSet.white
+        $0.setTitleColor(DesignSystem.commonColorSet.lightBlack, for: .normal)
+        $0.backgroundColor = DesignSystem.commonColorSet.white
     }
     
     override func configureHierarchy() {

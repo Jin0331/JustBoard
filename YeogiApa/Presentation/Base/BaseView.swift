@@ -24,7 +24,5 @@ class BaseView: UIView {
     
     func configureHierarchy() { }
     func configureLayout() { }
-    func configureView() { 
-        backgroundColor = DesignSystem.colorSet.white
-    }
+    func configureView() { }
 }

@@ -22,7 +22,6 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         
         configureHierarchy()
         configureLayout()
@@ -35,9 +34,7 @@ class BaseViewController: UIViewController {
     func bind() { }
     func configureHierarchy() { }
     func configureLayout() { }
-    func configureView() {
-        view.backgroundColor = DesignSystem.colorSet.white
-    }
+    func configureView() {  }
     
     func configureNavigation() {
                 

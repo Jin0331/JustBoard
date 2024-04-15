@@ -39,6 +39,7 @@
 		DBCBAA522BCCFA71006B40CA /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA512BCCFA71006B40CA /* AppCoordinator.swift */; };
 		DBCBAA542BCD006E006B40CA /* UserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA532BCD006E006B40CA /* UserCoordinator.swift */; };
 		DBCBAA562BCD0705006B40CA /* SignInUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA552BCD0705006B40CA /* SignInUpViewController.swift */; };
+		DBCBAA582BCD0ACC006B40CA /* SignInUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBAA572BCD0ACC006B40CA /* SignInUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		DBCBAA512BCCFA71006B40CA /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		DBCBAA532BCD006E006B40CA /* UserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoordinator.swift; sourceTree = "<group>"; };
 		DBCBAA552BCD0705006B40CA /* SignInUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUpViewController.swift; sourceTree = "<group>"; };
+		DBCBAA572BCD0ACC006B40CA /* SignInUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUpView.swift; sourceTree = "<group>"; };
 		DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeogiApa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -170,6 +172,7 @@
 			children = (
 				DBCBAA182BC7E106006B40CA /* LoginView.swift */,
 				DBCBAA162BC7E02D006B40CA /* LoginViewController.swift */,
+				DBCBAA572BCD0ACC006B40CA /* SignInUpView.swift */,
 				DBCBAA552BCD0705006B40CA /* SignInUpViewController.swift */,
 			);
 			path = View;
@@ -431,6 +434,7 @@
 				DBCBAA2D2BC84842006B40CA /* ProfileResponse.swift in Sources */,
 				DBCBAA1F2BC7E7F2006B40CA /* ReusableID.swift in Sources */,
 				DBCBAA272BC82D5A006B40CA /* UserDefaultManager.swift in Sources */,
+				DBCBAA582BCD0ACC006B40CA /* SignInUpView.swift in Sources */,
 				DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */,
 				DBCBAA562BCD0705006B40CA /* SignInUpViewController.swift in Sources */,
 				DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */,

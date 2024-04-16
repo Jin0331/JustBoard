@@ -11,10 +11,6 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-protocol SignUpPasswordViewControllerDelegate {
-    func netxSignUpNickName(email : String, password : String)
-}
-
 final class SignUpPasswordViewController: RxBaseViewController {
     
     private let headerTextLabel = UILabel().then {
@@ -32,7 +28,7 @@ final class SignUpPasswordViewController: RxBaseViewController {
     private let nextButton = NextButton(title: "다음")
     
     var viewModel : SignUpPasswordViewModel
-    var coordinator : SignUpPasswordViewControllerDelegate?
+    weak var delegate : EmailLoginCoordinator?
     
     init(email : String) {
         self.viewModel = SignUpPasswordViewModel(email: email)
@@ -59,7 +55,7 @@ final class SignUpPasswordViewController: RxBaseViewController {
         
         output.validEmailPassword
             .bind(with: self) { owner, emailPassword in
-                owner.coordinator?.netxSignUpNickName(email: emailPassword.0, password: emailPassword.1)
+                owner.delegate?.signUpCompleted(email: emailPassword.0, password: emailPassword.1)
             }
             .disposed(by: disposeBag)
         

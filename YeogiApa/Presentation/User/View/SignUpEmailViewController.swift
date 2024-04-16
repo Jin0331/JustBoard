@@ -11,9 +11,6 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-protocol SignUpEmailViewControllerDelegate {
-    func netxSignUpPasswordVC(email : String)
-}
 
 final class SignUpEmailViewController: RxBaseViewController {
     
@@ -23,14 +20,14 @@ final class SignUpEmailViewController: RxBaseViewController {
     }
     private let headerSubTextLabel = UILabel().then {
         $0.text = "로그인 시 사용할 이메일을 입력해주세요"
-        $0.font = .systemFont(ofSize: 20, weight: .heavy)
+        $0.font = .systemFont(ofSize: 15, weight: .heavy)
         $0.textColor = DesignSystem.commonColorSet.gray
     }
     private let emailTextfield = SignTextField(placeholderText: "이메일")
     private let nextButton = NextButton(title: "다음")
     
     let viewModel = SignUpEmailViewModel()
-    var coordinator : SignUpEmailViewControllerDelegate?
+    weak var delegate : EmailLoginCoordinator?
     
     
     override func viewDidLoad() {
@@ -53,7 +50,7 @@ final class SignUpEmailViewController: RxBaseViewController {
         
         output.validEmail
             .drive(with: self) { owner, email in
-                owner.coordinator?.netxSignUpPasswordVC(email:email)
+                owner.delegate?.netxSignUpPasswordVC(email:email)
             }
             .disposed(by: disposeBag)
         

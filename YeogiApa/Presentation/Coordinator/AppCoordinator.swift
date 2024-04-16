@@ -8,10 +8,9 @@
 import Foundation
 import UIKit
 
-final class AppCoordinator: Coordinator, LoginCoordinatorDelegate {
-
+final class AppCoordinator: Coordinator {
+    var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
-    private var navigationController: UINavigationController!
     
     var isLoggedIn: Bool = false
     
@@ -21,25 +20,31 @@ final class AppCoordinator: Coordinator, LoginCoordinatorDelegate {
     
     func start() {
         if self.isLoggedIn {
-            self.showMainViewController()
+            showMainViewController()
         } else {
-            self.showLoginViewController()
+            showLoginViewController()
         }
     }
     
     private func showLoginViewController() {
         let coordinator = UserCoordinator(navigationController: self.navigationController)
-        coordinator.coordinator = self
+        coordinator.delegate = self
         coordinator.start()
-        self.childCoordinators.append(coordinator)
+        childCoordinators.append(coordinator)
     }
     
     private func showMainViewController() {
-        //
+        
     }
     
+    // child remove
     func didLoggedIn(_ coordinator: UserCoordinator) {
-        self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
-        self.showMainViewController()
+        childCoordinators = childCoordinators.filter { $0 !== coordinator }
+        showMainViewController()
+    }
+    
+    func joined(_ coordinator: UserCoordinator) {
+        childCoordinators = childCoordinators.filter { $0 !== coordinator }
+        showMainViewController()
     }
 }

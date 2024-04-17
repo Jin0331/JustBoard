@@ -49,8 +49,9 @@ extension UserRouter : TargetType {
     
     var header: [String:String] {
         switch self {
-        case .join:
-            return [:]
+        case .join, .emailValidation :
+            return [HTTPHeader.contentType.rawValue : HTTPHeader.json.rawValue,
+                    HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue]
         case .login:
             return [HTTPHeader.contentType.rawValue : HTTPHeader.json.rawValue,
                     HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue]
@@ -59,9 +60,6 @@ extension UserRouter : TargetType {
                     HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue,
                     HTTPHeader.refresh.rawValue : token.refreshToken
             ]
-        case .emailValidation:
-            return [HTTPHeader.contentType.rawValue : HTTPHeader.json.rawValue,
-                    HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue]
         }
     }
     

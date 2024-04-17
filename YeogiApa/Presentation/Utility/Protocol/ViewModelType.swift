@@ -49,7 +49,7 @@ extension UserViewModelType {
     }
     
     func isValidNickname(_ nickname : String) -> Bool {
-        let nicknamePattern = "^(?:\\S{1,8})$"
+        let nicknamePattern = "^(?:\\S{4,8})$"
         return matchesPattern(nickname, pattern: nicknamePattern)
     }
 }

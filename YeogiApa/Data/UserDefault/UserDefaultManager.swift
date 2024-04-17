@@ -46,6 +46,9 @@ final class UserDefaultManager {
     // PropertyWrapper 적용
     @UserStatus(key: "accessToken") var accessToken : String?
     @UserStatus(key: "refreshToken") var refreshToken : String?
+    @UserStatus(key: "user_id") var userId : String?
+    @UserStatus(key: "email") var email : String?
+    @UserStatus(key: "nick") var nick : String?
     @UserLogin(key: "userLogin") var isLogined : Bool
     
     func removeData(forKey key: String) {

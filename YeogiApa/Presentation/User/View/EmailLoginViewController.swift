@@ -10,16 +10,11 @@ import RxSwift
 import RxCocoa
 import Alamofire
 
-protocol EmailLoginViewControllerDelegate {
-    func login()
-    func signUp()
-}
-
 final class EmailLoginViewController: RxBaseViewController {
     
     private let mainView = EmailLoginView()
     private let viewModel = EmailLoginViewModel()
-    var coordinator : EmailLoginViewControllerDelegate?
+    weak var delegate : EmailLoginCoordinator?
     
     override func loadView() {
         view = mainView
@@ -51,7 +46,7 @@ final class EmailLoginViewController: RxBaseViewController {
                 print("로그인 성공", value)
                 
                 //TODO: - 화면전환 로직 추가 필요
-                owner.coordinator?.login()
+                owner.delegate?.didLogined()
             }
             .disposed(by: disposeBag)
         
@@ -64,7 +59,7 @@ final class EmailLoginViewController: RxBaseViewController {
         
         output.signUp
             .drive(with: self) { owner, _ in
-                owner.coordinator?.signUp()
+                owner.delegate?.signUp()
             }
             .disposed(by: disposeBag)
     }

@@ -8,30 +8,30 @@
 import Foundation
 import UIKit
 
-protocol LoginCoordinatorDelegate {
-    func didLoggedIn(_ coordinator: UserCoordinator)
-}
-
-final class UserCoordinator : Coordinator, SignInUpViewControllerDelegate, EmailLoginViewControllerDelegate, SignUpEmailViewControllerDelegate, SignUpPasswordViewControllerDelegate {
-    
+final class UserCoordinator : Coordinator {
+    var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
-    var coordinator : LoginCoordinatorDelegate?
-    
-    private var navigationController: UINavigationController!
+    var delegate : AppCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
     func start() {
-        let vc = SignInUpViewController()
-        vc.loginDelegate = self
+        let vc = SignInUpViewController() // child root view controller
+        vc.delegate = self
         self.navigationController.viewControllers = [vc]
     }
     
     // User Coordinator -> AppCoordinator -> Main Coordinator로 전환되는 과정
-    func login() {
-        self.coordinator?.didLoggedIn(self)
+    func didLoggedIn() {
+        print(#function, "✅ UserCoordinator")
+        delegate?.didLoggedIn(self)
+    }
+    
+    func didJoined(_ coordinator : EmailLoginCoordinator) {
+        childCoordinators = childCoordinators.filter { $0 !== coordinator }
+        delegate?.didJoined(self)
     }
     
     // UserCoordinator의 하위 VC
@@ -41,29 +41,17 @@ final class UserCoordinator : Coordinator, SignInUpViewControllerDelegate, Email
     
     func appleLogin() {
         print("화면전환 ✅ - apple")
-    }
+    } 
     
     func emailLogin() {
-        let vc = EmailLoginViewController()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
+        let child = EmailLoginCoordinator(navigationController: navigationController)
+        child.delegate = self
+        childCoordinators.append(child)
+        child.start()
     }
     
-    func signUp() {
-        print("회원가입 ✅")
-        let vc = SignUpEmailViewController()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
+    deinit {
+        print(#function, "- UserCoordinator ✅")
     }
-    
-    func netxSignUpPasswordVC(email: String) {
-        let vc = SignUpPasswordViewController(email:email)
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
-    }
-    
-    func netxSignUpNickName(email: String, password: String) {
-        
-        print(email, password)
-    }
+
 }

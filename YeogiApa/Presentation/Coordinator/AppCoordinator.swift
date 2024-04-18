@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-final class AppCoordinator: Coordinator, LoginCoordinatorDelegate {
-
+final class AppCoordinator: Coordinator {
+    var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
-    private var navigationController: UINavigationController!
     
-    var isLoggedIn: Bool = false
+    var isLoggedIn : Bool = UserDefaultManager.shared.isLogined
+//    var isLoggedIn : Bool = false
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -21,25 +21,36 @@ final class AppCoordinator: Coordinator, LoginCoordinatorDelegate {
     
     func start() {
         if self.isLoggedIn {
-            self.showMainViewController()
+            showMainViewController()
         } else {
-            self.showLoginViewController()
+            showLoginViewController()
         }
     }
     
     private func showLoginViewController() {
         let coordinator = UserCoordinator(navigationController: self.navigationController)
-        coordinator.coordinator = self
+        coordinator.delegate = self
         coordinator.start()
-        self.childCoordinators.append(coordinator)
+        childCoordinators.append(coordinator)
     }
     
     private func showMainViewController() {
-        //
+        let coordinator = MainCoordinator(navigationController: self.navigationController)
+        coordinator.delegate = self
+        coordinator.start()
+        childCoordinators.append(coordinator)
     }
     
+    // child remove
     func didLoggedIn(_ coordinator: UserCoordinator) {
-        self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
-        self.showMainViewController()
+        print(#function, "✅ AppCoordinator")
+        childCoordinators = childCoordinators.filter { $0 !== coordinator }
+        showMainViewController()
+    }
+    
+    func didJoined(_ coordinator: UserCoordinator) {
+        print(#function, "✅ AppCoordinator")
+        childCoordinators = childCoordinators.filter { $0 !== coordinator }
+        showMainViewController()
     }
 }

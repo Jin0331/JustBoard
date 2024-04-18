@@ -9,17 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-protocol SignInUpViewControllerDelegate {
-    func kakaoLogin()
-    func appleLogin()
-    func emailLogin()
-}
-
 final class SignInUpViewController : RxBaseViewController{
     
     private let mainView = SignInUpView()
-    var loginDelegate : SignInUpViewControllerDelegate?
-    
+    var delegate : UserCoordinator?
     
     override func loadView() {
         view = mainView
@@ -36,7 +29,7 @@ final class SignInUpViewController : RxBaseViewController{
             .tap
             .bind(with: self) { owner, _ in
                 //TODO: - 소셜로그인 적용시 화면전환
-                owner.loginDelegate?.kakaoLogin()
+                owner.delegate?.kakaoLogin()
             }
             .disposed(by: disposeBag)
         
@@ -44,16 +37,15 @@ final class SignInUpViewController : RxBaseViewController{
             .tap
             .bind(with: self) { owner, _ in
                 //TODO: - 소셜로그인 적용시 화면전환
-                owner.loginDelegate?.appleLogin()
+                owner.delegate?.appleLogin()
             }
             .disposed(by: disposeBag)
         
         mainView.emailLoginButton.rx
             .tap
             .bind(with: self) { owner, _ in
-                //TODO: - 소셜로그인 적용시 화면전환
-                
-                owner.loginDelegate?.emailLogin()
+                print("hi")
+                owner.delegate?.emailLogin()
             }
             .disposed(by: disposeBag)
     }

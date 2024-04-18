@@ -5,9 +5,11 @@
 //  Created by JinwooLee on 4/15/24.
 //
 
-import Foundation
+import UIKit
 
 protocol Coordinator : AnyObject {
-    var childCoordinators : [Coordinator] { get set }
+    var childCoordinators: [Coordinator] { get set }
+    var navigationController: UINavigationController { get set }
+    
     func start()
 }

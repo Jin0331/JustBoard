@@ -47,4 +47,9 @@ extension UserViewModelType {
     func isEqualPassword(_ text1 : String, _ text2 : String) -> Bool {
         return text1 == text2 ? true : false
     }
+    
+    func isValidNickname(_ nickname : String) -> Bool {
+        let nicknamePattern = "^(?:\\S{4,8})$"
+        return matchesPattern(nickname, pattern: nicknamePattern)
+    }
 }

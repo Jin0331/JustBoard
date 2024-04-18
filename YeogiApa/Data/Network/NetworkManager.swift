@@ -15,6 +15,29 @@ final class NetworkManager  {
     
     private init() { }
     
+    //MARK: - Join
+    func createJoin(query : JoinRequest) -> Single<Result<JoinResponse, AFError>>  {
+        return Single<Result<JoinResponse, AFError>>.create  { single in
+            do {
+                let urlRequest = try UserRouter.join(query: query).asURLRequest()
+                
+                AF.request(urlRequest)
+                    .validate(statusCode: 200..<300)
+                    .responseDecodable(of: JoinResponse.self) { response in
+                        switch response.result {
+                        case .success(let joinModel):
+                            single(.success(.success(joinModel)))
+                        case .failure(let error):
+                            single(.success(.failure(error)))
+                        }
+                    }
+            } catch {
+                single(.failure(error))
+            }
+            return Disposables.create()
+        }
+    }
+    
     //MARK: - Login
     func createLogin(query: LoginRequest) -> Single<Result<LoginResponse, AFError>> {
         return Single<Result<LoginResponse, AFError>>.create { single in

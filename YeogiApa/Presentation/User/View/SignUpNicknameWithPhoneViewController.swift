@@ -1,8 +1,8 @@
 //
-//  SignUpViewController.swift
+//  SignUpNicknameWithPhoneViewController.swift
 //  YeogiApa
 //
-//  Created by JinwooLee on 4/15/24.
+//  Created by JinwooLee on 4/16/24.
 //
 
 import UIKit
@@ -11,60 +11,55 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
+class SignUpNicknameWithPhoneViewController: RxBaseViewController {
 
-final class SignUpEmailViewController: RxBaseViewController {
-    
+    //TODO: - 전화번호는 나중에 인증 기능추가되면 구현?
     private let headerTextLabel = UILabel().then {
-        $0.text = "이메일을 입력해주세요 😎"
+        $0.text = "닉네임을 입력해주세요 😎"
         $0.font = .systemFont(ofSize: 30, weight: .heavy)
     }
     private let headerSubTextLabel = UILabel().then {
-        $0.text = "로그인 시 사용할 이메일을 입력해주세요"
+        $0.text = "사용할 닉네임을 띄어쓰기 없이 4~8자 이내로 입력해주세요"
         $0.font = .systemFont(ofSize: 15, weight: .heavy)
         $0.textColor = DesignSystem.commonColorSet.gray
     }
-    private let emailTextfield = SignTextField(placeholderText: "이메일")
-    private let nextButton = NextButton(title: "다음")
+    private let nicknameTextfield = SignTextField(placeholderText: "닉네임")
+    private let completeButton = NextButton(title: "회원가입 완료")
     
-    let viewModel = SignUpEmailViewModel()
+    var viewModel : SignUpNicknameWithPhoneViewModel
     weak var delegate : EmailLoginCoordinator?
     
+    init(email : String, password : String) {
+        self.viewModel = SignUpNicknameWithPhoneViewModel(email: email, password: password)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func bind() {
-        
-        let input = SignUpEmailViewModel.Input(email: emailTextfield.rx.text.orEmpty,
-                                               nextButtonTap: nextButton.rx.tap)
+        let input = SignUpNicknameWithPhoneViewModel.Input(nickname: nicknameTextfield.rx.text.orEmpty,
+                                                           completeButtonTap: completeButton.rx.tap)
         
         let output = viewModel.transform(input: input)
-        output.nextButtonUIUpdate
+        output.completeButtonUIUpdate
             .drive(with: self) { owner, value in
-                owner.nextButton.isEnabled = value
-                owner.nextButton.alpha = value ? 1.0 : 0.5
+                owner.completeButton.isEnabled = value
+                owner.completeButton.alpha = value ? 1.0 : 0.5
             }
             .disposed(by: disposeBag)
         
-        output.validEmail
-            .drive(with: self) { owner, email in
-                owner.delegate?.netxSignUpPasswordVC(email:email)
-            }
-            .disposed(by: disposeBag)
-        
-        output.nextFailed
+        output.signUpComplete
             .drive(with: self) { owner, value in
-                print("로그인 실패", value)
-                owner.showAlert(title: "이메일 중복", text: "이미 등록된 이메일입니다 🥲", addButtonText: "확인")
+                if value {
+                    owner.delegate?.didLogined()
+                }
             }
             .disposed(by: disposeBag)
-        
     }
-
+    
     override func configureHierarchy() {
-        [headerTextLabel, headerSubTextLabel, emailTextfield, nextButton].forEach { view.addSubview($0) }
+        [headerTextLabel, headerSubTextLabel, nicknameTextfield, completeButton].forEach { view.addSubview($0) }
     }
     
     override func configureLayout() {
@@ -79,15 +74,15 @@ final class SignUpEmailViewController: RxBaseViewController {
             make.height.equalTo(50)
         }
         
-        emailTextfield.snp.makeConstraints { make in
+        nicknameTextfield.snp.makeConstraints { make in
             make.top.equalTo(headerSubTextLabel.snp.bottom).offset(30)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(15)
             make.height.equalTo(50)
         }
         
-        nextButton.snp.makeConstraints { make in
-            make.top.equalTo(emailTextfield.snp.bottom).offset(80)
-            make.horizontalEdges.equalTo(emailTextfield)
+        completeButton.snp.makeConstraints { make in
+            make.top.equalTo(nicknameTextfield.snp.bottom).offset(80)
+            make.horizontalEdges.equalTo(nicknameTextfield)
             make.height.equalTo(60)
         }
     }

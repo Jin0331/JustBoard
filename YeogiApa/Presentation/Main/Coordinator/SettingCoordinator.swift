@@ -21,5 +21,8 @@ final class SettingCoordinator : Coordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
+    deinit {
+        print(#function, "-SettingCoordinator ✅")
+    }
     
 }

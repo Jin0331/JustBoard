@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import Alamofire
 
 class BoardMainViewController: RxBaseViewController {
-
+    
     private let mainView = BoardMainView()
     var delegate : BoardCoordinator?
     
@@ -18,7 +19,18 @@ class BoardMainViewController: RxBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let urlRequest = MainRouter.write(query: WriteRequest(title: "postTest", content: "테스트임니다!", product_id: "yeogiApa_test"))
+        
+        AF.request(urlRequest, interceptor: AuthManager())
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: WriteResponse.self) { response in
+                switch response.result {
+                case .success(let writeModel):
+                    print(writeModel)
+                case .failure(let error):
+                    print(error)
+                }
+            }
     }
 }

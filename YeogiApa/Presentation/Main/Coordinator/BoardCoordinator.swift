@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NotificationCenter
 
 final class BoardCoordinator : Coordinator {
     var childCoordinators: [Coordinator] = []
@@ -14,6 +15,7 @@ final class BoardCoordinator : Coordinator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        NotificationCenter.default.addObserver(self, selector: #selector(resetLogined), name: .resetLogin, object: nil)
     }
     
     func start() {
@@ -21,5 +23,12 @@ final class BoardCoordinator : Coordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
+    @objc func resetLogined(_ notification: Notification) {
+        print("토큰초기화됨 ✅")
+        delegate?.resetLogined(self)
+    }
     
+    deinit {
+        print(#function, "-BoardCoordinator ✅")
+    }
 }

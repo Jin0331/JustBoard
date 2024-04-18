@@ -14,6 +14,10 @@
 		DB4110072BD15B3B0088679F /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110062BD15B3B0088679F /* SettingCoordinator.swift */; };
 		DB4110092BD160B00088679F /* BoardMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110082BD160B00088679F /* BoardMainViewController.swift */; };
 		DB41100B2BD160F80088679F /* BoardMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB41100A2BD160F80088679F /* BoardMainView.swift */; };
+		DB4110102BD173860088679F /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB41100F2BD173860088679F /* MainRouter.swift */; };
+		DB4110122BD173D60088679F /* WriteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110112BD173D60088679F /* WriteRequest.swift */; };
+		DB4110142BD19E0A0088679F /* WriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110132BD19E0A0088679F /* WriteResponse.swift */; };
+		DB4110162BD1AC720088679F /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */; };
 		DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */; };
 		DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */; };
 		DBCBA9E92BC7BE35006B40CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBA9E82BC7BE35006B40CA /* Assets.xcassets */; };
@@ -68,6 +72,10 @@
 		DB4110062BD15B3B0088679F /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		DB4110082BD160B00088679F /* BoardMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMainViewController.swift; sourceTree = "<group>"; };
 		DB41100A2BD160F80088679F /* BoardMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMainView.swift; sourceTree = "<group>"; };
+		DB41100F2BD173860088679F /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
+		DB4110112BD173D60088679F /* WriteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRequest.swift; sourceTree = "<group>"; };
+		DB4110132BD19E0A0088679F /* WriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteResponse.swift; sourceTree = "<group>"; };
+		DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
 		DBCBA9DC2BC7BE34006B40CA /* YeogiApa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeogiApa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -319,10 +327,12 @@
 				DBCBAA0A2BC7D0A5006B40CA /* LoginRequest.swift */,
 				DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */,
 				DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */,
+				DB4110112BD173D60088679F /* WriteRequest.swift */,
 				DBCBE3D52BCE8A0700B6DAC5 /* JoinResponse.swift */,
 				DBCBAA122BC7D900006B40CA /* LoginResponse.swift */,
 				DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */,
 				DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */,
+				DB4110132BD19E0A0088679F /* WriteResponse.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -331,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				DBCBAA082BC7CEE8006B40CA /* UserRouter.swift */,
+				DB41100F2BD173860088679F /* MainRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -357,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				DBCBAA212BC7E804006B40CA /* UIViewController+Extension.swift */,
+				DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -528,13 +540,16 @@
 				DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */,
 				DBCBE3B52BCD845F00B6DAC5 /* SignUpPasswordViewController.swift in Sources */,
 				DBCBAA2B2BC83A54006B40CA /* RefreshRequest.swift in Sources */,
+				DB4110122BD173D60088679F /* WriteRequest.swift in Sources */,
 				DBCBAA0B2BC7D0A5006B40CA /* LoginRequest.swift in Sources */,
 				DBCBE3B72BCD87B700B6DAC5 /* SignUpPasswordViewModel.swift in Sources */,
 				DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */,
 				DBCBAA092BC7CEE8006B40CA /* UserRouter.swift in Sources */,
 				DBCBAA152BC7DC8C006B40CA /* JoinRequest.swift in Sources */,
+				DB4110102BD173860088679F /* MainRouter.swift in Sources */,
 				DBCBAA202BC7E7F2006B40CA /* ViewModelType.swift in Sources */,
 				DBCBE3D62BCE8A0700B6DAC5 /* JoinResponse.swift in Sources */,
+				DB4110142BD19E0A0088679F /* WriteResponse.swift in Sources */,
 				DBCBAA502BCCFA0B006B40CA /* Protocol.swift in Sources */,
 				DBCBAA052BC7CD32006B40CA /* BaseView.swift in Sources */,
 				DB41100B2BD160F80088679F /* BoardMainView.swift in Sources */,
@@ -550,6 +565,7 @@
 				DBCBAA5A2BCD5D05006B40CA /* SignUpEmailViewController.swift in Sources */,
 				DBCBAA562BCD0705006B40CA /* SignInUpViewController.swift in Sources */,
 				DB410FF52BD0CFA10088679F /* MainViewController.swift in Sources */,
+				DB4110162BD1AC720088679F /* Notification.Name+Extension.swift in Sources */,
 				DBCBE3B92BCD892500B6DAC5 /* NextButton.swift in Sources */,
 				DB4110092BD160B00088679F /* BoardMainViewController.swift in Sources */,
 				DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */,

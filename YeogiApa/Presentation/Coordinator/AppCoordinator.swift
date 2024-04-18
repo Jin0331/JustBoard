@@ -52,4 +52,10 @@ final class AppCoordinator: Coordinator {
         childCoordinators = childCoordinators.filter { $0 !== coordinator }
         showMainViewController()
     }
+    
+    func resetLoggedIn(_ coordinator: MainTabbarCoordinator) {
+        print(#function, "✅ AppCoordinator")
+        childCoordinators = childCoordinators.filter { $0 !== coordinator }
+        showLoginViewController()
+    }
 }

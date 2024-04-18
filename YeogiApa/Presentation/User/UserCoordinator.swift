@@ -11,7 +11,7 @@ import UIKit
 final class UserCoordinator : Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
-    weak var delegate : AppCoordinator?
+    var delegate : AppCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -25,7 +25,13 @@ final class UserCoordinator : Coordinator {
     
     // User Coordinator -> AppCoordinator -> Main Coordinator로 전환되는 과정
     func didLoggedIn() {
+        print(#function, "✅ UserCoordinator")
         delegate?.didLoggedIn(self)
+    }
+    
+    func didJoined(_ coordinator : EmailLoginCoordinator) {
+        childCoordinators = childCoordinators.filter { $0 !== coordinator }
+        delegate?.didJoined(self)
     }
     
     // UserCoordinator의 하위 VC
@@ -42,6 +48,10 @@ final class UserCoordinator : Coordinator {
         child.delegate = self
         childCoordinators.append(child)
         child.start()
+    }
+    
+    deinit {
+        print(#function, "- UserCoordinator ✅")
     }
 
 }

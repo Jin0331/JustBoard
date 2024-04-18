@@ -48,6 +48,14 @@ class SignUpNicknameWithPhoneViewController: RxBaseViewController {
                 owner.completeButton.alpha = value ? 1.0 : 0.5
             }
             .disposed(by: disposeBag)
+        
+        output.signUpComplete
+            .drive(with: self) { owner, value in
+                if value {
+                    owner.delegate?.didLogined()
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     override func configureHierarchy() {
@@ -82,6 +90,4 @@ class SignUpNicknameWithPhoneViewController: RxBaseViewController {
     override func configureView() {
         view.backgroundColor = DesignSystem.commonColorSet.white
     }
-    
-    
 }

@@ -59,13 +59,8 @@ final class EmailLoginViewModel : UserViewModelType {
             }
             .subscribe(with: self) { owner, result in
                 switch result {
-                case .success(let loginModel):
-                    UserDefaultManager.shared.accessToken = loginModel.accessToken
-                    UserDefaultManager.shared.refreshToken = loginModel.refreshToken
-                    UserDefaultManager.shared.isLogined = true
-                    
-                    print(UserDefaultManager.shared.isLogined, "✅✅✅✅✅✅")
-                    
+                case .success(let loginModel):                    
+                    UserDefaultManager.shared.saveAllData(loginResponse: loginModel)
                     loginSuccess.onNext(true)
                 case .failure(_):
                     UserDefaultManager.shared.isLogined = false

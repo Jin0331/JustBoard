@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum UserInfo : String {
+    case user_id, email, nick
+    case userLogin, accessToken, refreshToken
+}
+
 //MARK: - Token 관리를 위한 UserDefaultManager
 @propertyWrapper
 struct UserStatus {
@@ -49,6 +54,7 @@ final class UserDefaultManager {
     @UserStatus(key: "user_id") var userId : String?
     @UserStatus(key: "email") var email : String?
     @UserStatus(key: "nick") var nick : String?
+    @UserStatus(key: "profile") var profile : String?
     @UserLogin(key: "userLogin") var isLogined : Bool
     
     func removeData(forKey key: String) {
@@ -59,5 +65,15 @@ final class UserDefaultManager {
         if let bundleID = Bundle.main.bundleIdentifier {
             userDefaults.removePersistentDomain(forName: bundleID)
         }
+    }
+    
+    func saveAllData(loginResponse : LoginResponse) {
+        userId = loginResponse.user_id
+        email = loginResponse.email
+        nick = loginResponse.nick
+        profile = loginResponse.profileImage
+        accessToken = loginResponse.accessToken
+        refreshToken = loginResponse.refreshToken
+        isLogined = true
     }
 }

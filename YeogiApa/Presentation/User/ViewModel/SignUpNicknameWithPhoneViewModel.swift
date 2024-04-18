@@ -27,7 +27,7 @@ class SignUpNicknameWithPhoneViewModel : UserViewModelType {
     
     struct Output {
         let completeButtonUIUpdate : Driver<Bool>
-        let signUpComplete : Observable<Bool>
+        let signUpComplete : Driver<Bool>
     }
     
     func transform(input: Input) -> Output {
@@ -36,6 +36,8 @@ class SignUpNicknameWithPhoneViewModel : UserViewModelType {
         let validPassword = BehaviorSubject<String>(value: password)
         let validNickname = PublishSubject<String>()
         let completeButtonUIUpdate = BehaviorSubject<Bool>(value: false)
+        let completeJoined = PublishSubject<Void>()
+        let completeUser = BehaviorSubject<Bool>(value: false)
         
         input.nickname
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
@@ -50,29 +52,52 @@ class SignUpNicknameWithPhoneViewModel : UserViewModelType {
 
         
         let userInfo = Observable.combineLatest(validEmail, validPassword, validNickname)
+            .share()
+
+        
+        //MARK: - Join
+        input.completeButtonTap
+            .withLatestFrom(userInfo)
             .map { email, password, nickname in
                 return JoinRequest(email: email, password: password, nick: nickname)
             }
-        
-        input.completeButtonTap
-            .withLatestFrom(userInfo)
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .flatMapLatest { joinQuery in
                 return NetworkManager.shared.createJoin(query: joinQuery)
             }
             .subscribe(with: self) { owner, result in
                 switch result {
-                case .success(let joinModel):
-                    print(joinModel)
+                case .success(let joinResponse):
+                    completeJoined.onNext(())
                 case .failure(let error):
                     print(error)
                 }
             }
             .disposed(by: disposeBag)
         
+        //MARK: - 해당 코드는 반드시 Join이 수행된 이후에 실행된다.
+        //MARK: - UserDefault에 저장
+        completeJoined
+            .withLatestFrom(userInfo)
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .flatMap { email, password, _ in
+                return NetworkManager.shared.createLogin(query: LoginRequest(email: email, password: password))
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let loginModel):
+                    UserDefaultManager.shared.saveAllData(loginResponse: loginModel)
+                    completeUser.onNext(true)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        
         return Output(
             completeButtonUIUpdate: completeButtonUIUpdate.asDriver(onErrorJustReturn: false),
-            signUpComplete: Observable.just(false)
+            signUpComplete: completeUser.asDriver(onErrorJustReturn: false)
         )
     }
 }

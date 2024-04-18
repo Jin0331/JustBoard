@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		217C9232DB0C64915C533AF0 /* Pods_YeogiApa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */; };
+		DB410FF52BD0CFA10088679F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF42BD0CFA10088679F /* MainViewController.swift */; };
+		DB410FF92BD0D00E0088679F /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF82BD0D00E0088679F /* MainCoordinator.swift */; };
 		DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */; };
 		DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */; };
 		DBCBA9E92BC7BE35006B40CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBA9E82BC7BE35006B40CA /* Assets.xcassets */; };
@@ -56,6 +58,8 @@
 /* Begin PBXFileReference section */
 		6E065FA89B28CFAB4A4CCE5E /* Pods-YeogiApa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeogiApa.debug.xcconfig"; path = "Target Support Files/Pods-YeogiApa/Pods-YeogiApa.debug.xcconfig"; sourceTree = "<group>"; };
 		CE70E4E40DA521BFE3917A88 /* Pods-YeogiApa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeogiApa.release.xcconfig"; path = "Target Support Files/Pods-YeogiApa/Pods-YeogiApa.release.xcconfig"; sourceTree = "<group>"; };
+		DB410FF42BD0CFA10088679F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		DB410FF82BD0D00E0088679F /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		DBCBA9DC2BC7BE34006B40CA /* YeogiApa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeogiApa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +128,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DB410FF32BD0CF830088679F /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DB410FF82BD0D00E0088679F /* MainCoordinator.swift */,
+				DB410FF62BD0CFF20088679F /* View */,
+				DB410FF72BD0CFF60088679F /* ViewModel */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		DB410FF62BD0CFF20088679F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB410FF42BD0CFA10088679F /* MainViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DB410FF72BD0CFF60088679F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		DBCBA9D32BC7BE34006B40CA = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +203,7 @@
 				DBCBA9FD2BC7CBA6006B40CA /* Utility */,
 				DBCBA9FA2BC7C69B006B40CA /* Base */,
 				DBCBA9F72BC7C677006B40CA /* User */,
+				DB410FF32BD0CF830088679F /* Main */,
 				DBCBAA5D2BCD61C6006B40CA /* CustomView */,
 			);
 			path = Presentation;
@@ -454,6 +484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBCBAA632BCD73D9006B40CA /* EmailValidationRequest.swift in Sources */,
+				DB410FF92BD0D00E0088679F /* MainCoordinator.swift in Sources */,
 				DBCBE3D22BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift in Sources */,
 				DBCBAA172BC7E02D006B40CA /* EmailLoginViewController.swift in Sources */,
 				DBCBAA2F2BC86224006B40CA /* AuthManager.swift in Sources */,
@@ -487,6 +518,7 @@
 				DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */,
 				DBCBAA5A2BCD5D05006B40CA /* SignUpEmailViewController.swift in Sources */,
 				DBCBAA562BCD0705006B40CA /* SignInUpViewController.swift in Sources */,
+				DB410FF52BD0CFA10088679F /* MainViewController.swift in Sources */,
 				DBCBE3B92BCD892500B6DAC5 /* NextButton.swift in Sources */,
 				DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */,
 				DBCBAA112BC7D0F0006B40CA /* TargetType.swift in Sources */,

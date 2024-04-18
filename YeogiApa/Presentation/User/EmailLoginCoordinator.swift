@@ -23,7 +23,12 @@ final class EmailLoginCoordinator : Coordinator {
     }
     
     func didLogined() {
+        print(#function, "✅ EmailLCoordinator")
         delegate?.didLoggedIn()
+    }
+    
+    func didJoined() {
+        delegate?.didJoined(self)
     }
     
     func emailLogin() {

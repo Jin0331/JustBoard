@@ -13,7 +13,6 @@ final class AppCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     
     var isLoggedIn : Bool = UserDefaultManager.shared.isLogined
-//    var isLoggedIn : Bool = false
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -28,20 +27,20 @@ final class AppCoordinator: Coordinator {
     }
     
     private func showLoginViewController() {
-        let coordinator = UserCoordinator(navigationController: self.navigationController)
+        let coordinator = UserCoordinator(navigationController: navigationController)
         coordinator.delegate = self
         coordinator.start()
         childCoordinators.append(coordinator)
     }
     
     private func showMainViewController() {
-        let coordinator = MainCoordinator(navigationController: self.navigationController)
+        let coordinator = MainTabbarCoordinator(navigationController: navigationController)
         coordinator.delegate = self
         coordinator.start()
         childCoordinators.append(coordinator)
     }
     
-    // child remove
+    //MARK: - child remove 및 UserCoordinator -> MainTabbarCoordinator
     func didLoggedIn(_ coordinator: UserCoordinator) {
         print(#function, "✅ AppCoordinator")
         childCoordinators = childCoordinators.filter { $0 !== coordinator }

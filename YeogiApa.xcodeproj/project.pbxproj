@@ -139,9 +139,7 @@
 		DB410FF32BD0CF830088679F /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */,
-				DB4110042BD15B300088679F /* BoardCoordinator.swift */,
-				DB4110062BD15B3B0088679F /* SettingCoordinator.swift */,
+				DB41100E2BD165670088679F /* Coordinator */,
 				DB410FF62BD0CFF20088679F /* View */,
 				DB410FF72BD0CFF60088679F /* ViewModel */,
 			);
@@ -163,6 +161,25 @@
 			children = (
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DB41100C2BD165460088679F /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBAA532BCD006E006B40CA /* UserCoordinator.swift */,
+				DBCBE3CF2BCE28E800B6DAC5 /* EmailLoginCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		DB41100E2BD165670088679F /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */,
+				DB4110042BD15B300088679F /* BoardCoordinator.swift */,
+				DB4110062BD15B3B0088679F /* SettingCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		DBCBA9D32BC7BE34006B40CA = {
@@ -224,8 +241,7 @@
 		DBCBA9F72BC7C677006B40CA /* User */ = {
 			isa = PBXGroup;
 			children = (
-				DBCBAA532BCD006E006B40CA /* UserCoordinator.swift */,
-				DBCBE3CF2BCE28E800B6DAC5 /* EmailLoginCoordinator.swift */,
+				DB41100C2BD165460088679F /* Coordinator */,
 				DBCBA9F82BC7C686006B40CA /* View */,
 				DBCBA9F92BC7C68A006B40CA /* ViewModel */,
 			);

@@ -28,5 +28,6 @@ enum DesignSystem {
     enum sfSymbol {
         static let sfSymbolLargeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .bold, scale: .large)
         static let appleLogo = UIImage(systemName: "apple.logo", withConfiguration:sfSymbolLargeConfig)
+        static let question = UIImage(systemName: "questionmark.bubble", withConfiguration:sfSymbolLargeConfig)
     }
 }

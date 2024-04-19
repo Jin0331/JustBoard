@@ -17,27 +17,14 @@ final class MainTabbarCoordinator : Coordinator {
     }
     
     func start() {
-        let tabbarController = UITabBarController()
-        
-        // First Tab - Board
-        let boardItem = UITabBarItem()
-        boardItem.title = "홈"
-        boardItem.image = UIImage.init(systemName: "house")
+        let tabbarController = MainTabBarController()
         
         let boardNavigationController = UINavigationController()
-        boardNavigationController.tabBarItem = boardItem
-        
         let boardCoordinator = BoardCoordinator(navigationController: boardNavigationController)
         boardCoordinator.delegate = self
         
-        // Second Tab - Setting
-        let settingItem = UITabBarItem()
-        settingItem.title = "더 보기"
-        settingItem.image = UIImage.init(systemName: "person.fill")
         
         let settingNavigationController = UINavigationController()
-        settingNavigationController.tabBarItem = settingItem
-        
         let settingCoordinator = SettingCoordinator(navigationController: settingNavigationController)
         settingCoordinator.delegate = self
         

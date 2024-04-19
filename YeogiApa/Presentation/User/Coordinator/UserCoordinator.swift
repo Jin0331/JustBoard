@@ -11,14 +11,16 @@ import UIKit
 final class UserCoordinator : Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
+    var isReset : Bool?
     var delegate : AppCoordinator?
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, isReset: Bool? = nil) {
         self.navigationController = navigationController
+        self.isReset = isReset
     }
     
     func start() {
-        let vc = SignInUpViewController() // child root view controller
+        let vc = SignInUpViewController(isReset: isReset) // child root view controller
         vc.delegate = self
         self.navigationController.viewControllers = [vc]
     }

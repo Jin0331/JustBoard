@@ -8,9 +8,10 @@
 import UIKit
 import Alamofire
 
-class BoardMainViewController: RxBaseViewController {
+final class BoardMainViewController: RxBaseViewController {
     
     private let mainView = BoardMainView()
+    private let viewModel = BoardMainViewModel()
     var delegate : BoardCoordinator?
     
     override func loadView() {
@@ -32,5 +33,9 @@ class BoardMainViewController: RxBaseViewController {
                     print(error)
                 }
             }
+    }
+    
+    override func bind() {
+        
     }
 }

@@ -26,8 +26,8 @@ final class AppCoordinator: Coordinator {
         }
     }
     
-    private func showLoginViewController() {
-        let coordinator = UserCoordinator(navigationController: navigationController)
+    private func showLoginViewController(isReset : Bool? = nil) {
+        let coordinator = UserCoordinator(navigationController: navigationController, isReset: isReset)
         coordinator.delegate = self
         coordinator.start()
         childCoordinators.append(coordinator)
@@ -56,6 +56,6 @@ final class AppCoordinator: Coordinator {
     func resetLoggedIn(_ coordinator: MainTabbarCoordinator) {
         print(#function, "✅ AppCoordinator")
         childCoordinators = childCoordinators.filter { $0 !== coordinator }
-        showLoginViewController()
+        showLoginViewController(isReset: true)
     }
 }

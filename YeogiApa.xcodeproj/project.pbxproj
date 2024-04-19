@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		217C9232DB0C64915C533AF0 /* Pods_YeogiApa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */; };
+		DB204D942BD29E5D006340BE /* UITabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D932BD29E5D006340BE /* UITabBarController+Extension.swift */; };
+		DB204D962BD29F0A006340BE /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D952BD29F0A006340BE /* MainTabBarController.swift */; };
+		DB204D982BD2A669006340BE /* QuestionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D972BD2A669006340BE /* QuestionCoordinator.swift */; };
+		DB204D9A2BD2A6C7006340BE /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D992BD2A6C7006340BE /* QuestionViewController.swift */; };
+		DB204D9C2BD2A8C9006340BE /* BoardMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D9B2BD2A8C9006340BE /* BoardMainViewModel.swift */; };
 		DB410FF52BD0CFA10088679F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF42BD0CFA10088679F /* MainViewController.swift */; };
 		DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */; };
 		DB4110052BD15B300088679F /* BoardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110042BD15B300088679F /* BoardCoordinator.swift */; };
@@ -66,6 +71,11 @@
 /* Begin PBXFileReference section */
 		6E065FA89B28CFAB4A4CCE5E /* Pods-YeogiApa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeogiApa.debug.xcconfig"; path = "Target Support Files/Pods-YeogiApa/Pods-YeogiApa.debug.xcconfig"; sourceTree = "<group>"; };
 		CE70E4E40DA521BFE3917A88 /* Pods-YeogiApa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeogiApa.release.xcconfig"; path = "Target Support Files/Pods-YeogiApa/Pods-YeogiApa.release.xcconfig"; sourceTree = "<group>"; };
+		DB204D932BD29E5D006340BE /* UITabBarController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extension.swift"; sourceTree = "<group>"; };
+		DB204D952BD29F0A006340BE /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		DB204D972BD2A669006340BE /* QuestionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCoordinator.swift; sourceTree = "<group>"; };
+		DB204D992BD2A6C7006340BE /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		DB204D9B2BD2A8C9006340BE /* BoardMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMainViewModel.swift; sourceTree = "<group>"; };
 		DB410FF42BD0CFA10088679F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarCoordinator.swift; sourceTree = "<group>"; };
 		DB4110042BD15B300088679F /* BoardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCoordinator.swift; sourceTree = "<group>"; };
@@ -157,9 +167,11 @@
 		DB410FF62BD0CFF20088679F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DB204D952BD29F0A006340BE /* MainTabBarController.swift */,
 				DB410FF42BD0CFA10088679F /* MainViewController.swift */,
 				DB41100A2BD160F80088679F /* BoardMainView.swift */,
 				DB4110082BD160B00088679F /* BoardMainViewController.swift */,
+				DB204D992BD2A6C7006340BE /* QuestionViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -167,6 +179,7 @@
 		DB410FF72BD0CFF60088679F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				DB204D9B2BD2A8C9006340BE /* BoardMainViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -185,6 +198,7 @@
 			children = (
 				DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */,
 				DB4110042BD15B300088679F /* BoardCoordinator.swift */,
+				DB204D972BD2A669006340BE /* QuestionCoordinator.swift */,
 				DB4110062BD15B3B0088679F /* SettingCoordinator.swift */,
 			);
 			path = Coordinator;
@@ -369,6 +383,7 @@
 			children = (
 				DBCBAA212BC7E804006B40CA /* UIViewController+Extension.swift */,
 				DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */,
+				DB204D932BD29E5D006340BE /* UITabBarController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -528,6 +543,7 @@
 				DBCBE3D22BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift in Sources */,
 				DBCBAA172BC7E02D006B40CA /* EmailLoginViewController.swift in Sources */,
 				DBCBAA2F2BC86224006B40CA /* AuthManager.swift in Sources */,
+				DB204D942BD29E5D006340BE /* UITabBarController+Extension.swift in Sources */,
 				DB4110072BD15B3B0088679F /* SettingCoordinator.swift in Sources */,
 				DBCBAA522BCCFA71006B40CA /* AppCoordinator.swift in Sources */,
 				DBCBAA222BC7E804006B40CA /* UIViewController+Extension.swift in Sources */,
@@ -548,6 +564,7 @@
 				DBCBAA152BC7DC8C006B40CA /* JoinRequest.swift in Sources */,
 				DB4110102BD173860088679F /* MainRouter.swift in Sources */,
 				DBCBAA202BC7E7F2006B40CA /* ViewModelType.swift in Sources */,
+				DB204D982BD2A669006340BE /* QuestionCoordinator.swift in Sources */,
 				DBCBE3D62BCE8A0700B6DAC5 /* JoinResponse.swift in Sources */,
 				DB4110142BD19E0A0088679F /* WriteResponse.swift in Sources */,
 				DBCBAA502BCCFA0B006B40CA /* Protocol.swift in Sources */,
@@ -565,9 +582,12 @@
 				DBCBAA5A2BCD5D05006B40CA /* SignUpEmailViewController.swift in Sources */,
 				DBCBAA562BCD0705006B40CA /* SignInUpViewController.swift in Sources */,
 				DB410FF52BD0CFA10088679F /* MainViewController.swift in Sources */,
+				DB204D9A2BD2A6C7006340BE /* QuestionViewController.swift in Sources */,
 				DB4110162BD1AC720088679F /* Notification.Name+Extension.swift in Sources */,
 				DBCBE3B92BCD892500B6DAC5 /* NextButton.swift in Sources */,
+				DB204D9C2BD2A8C9006340BE /* BoardMainViewModel.swift in Sources */,
 				DB4110092BD160B00088679F /* BoardMainViewController.swift in Sources */,
+				DB204D962BD29F0A006340BE /* MainTabBarController.swift in Sources */,
 				DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */,
 				DBCBAA112BC7D0F0006B40CA /* TargetType.swift in Sources */,
 				DBCBAA242BC7E82A006B40CA /* EmailLoginViewModel.swift in Sources */,

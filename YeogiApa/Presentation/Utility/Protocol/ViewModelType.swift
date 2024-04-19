@@ -21,6 +21,11 @@ protocol UserViewModelType : ViewModelType {
 
 }
 
+protocol MainViewModelType : ViewModelType {
+    
+}
+
+//MARK: - UserViewmModelType Extension
 extension UserViewModelType {
     func matchesPattern(_ string : String, pattern : String) -> Bool {
         do {

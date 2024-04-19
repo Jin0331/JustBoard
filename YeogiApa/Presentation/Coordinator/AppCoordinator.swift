@@ -35,7 +35,7 @@ final class AppCoordinator: Coordinator {
     
     private func showMainViewController() {
         let coordinator = MainTabbarCoordinator(navigationController: navigationController)
-        coordinator.delegate = self
+        coordinator.parentCoordinator = self
         coordinator.start()
         childCoordinators.append(coordinator)
     }

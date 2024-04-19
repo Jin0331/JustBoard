@@ -12,6 +12,7 @@ target 'YeogiApa' do
   pod 'RxSwift', '6.6.0'
   pod 'RxCocoa', '6.6.0'
   pod 'TextFieldEffects'
+  pod 'STTextView'
 end
 
 post_install do |installer|

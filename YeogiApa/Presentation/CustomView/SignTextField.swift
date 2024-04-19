@@ -8,7 +8,7 @@
 import UIKit
 import TextFieldEffects
 
-class SignTextField : JiroTextField {
+final class SignTextField : JiroTextField {
     
     init(placeholderText : String) {
         super.init(frame: .zero)

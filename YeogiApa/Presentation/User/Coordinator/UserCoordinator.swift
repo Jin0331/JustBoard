@@ -49,7 +49,7 @@ final class UserCoordinator : Coordinator {
     
     func emailLogin() {
         let child = EmailLoginCoordinator(navigationController: navigationController)
-        child.delegate = self
+        child.parentCoordinator = self
         childCoordinators.append(child)
         child.start()
     }

@@ -10,7 +10,7 @@ import UIKit
 final class QuestionCoordinator : Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-    var delegate : BoardCoordinator?
+    var parentCoordinator : BoardCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -18,6 +18,7 @@ final class QuestionCoordinator : Coordinator {
     
     func start() {
         let vc = QuestionViewController()
+        vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }
     

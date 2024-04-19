@@ -10,7 +10,7 @@ import UIKit
 final class SettingCoordinator : Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-    var delegate : MainTabbarCoordinator?
+    var parentCoordinator : MainTabbarCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

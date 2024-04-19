@@ -10,7 +10,7 @@ import UIKit
 final class EmailLoginCoordinator : Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
-    weak var delegate : UserCoordinator?
+    weak var parentCoordinator : UserCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -24,11 +24,11 @@ final class EmailLoginCoordinator : Coordinator {
     
     func didLogined() {
         print(#function, "✅ EmailLCoordinator")
-        delegate?.didLoggedIn(self)
+        parentCoordinator?.didLoggedIn(self)
     }
     
     func didJoined() {
-        delegate?.didJoined(self)
+        parentCoordinator?.didJoined(self)
     }
     
     deinit {

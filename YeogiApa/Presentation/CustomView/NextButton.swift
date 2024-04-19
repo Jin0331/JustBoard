@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NextButton : UIButton {
+final class NextButton : UIButton {
     
     init(title : String) {
         super.init(frame: .zero)

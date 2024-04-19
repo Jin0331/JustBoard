@@ -10,7 +10,7 @@ import UIKit
 final class MainTabbarCoordinator : Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
-    var delegate : AppCoordinator?
+    var parentCoordinator : AppCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -21,12 +21,12 @@ final class MainTabbarCoordinator : Coordinator {
         
         let boardNavigationController = UINavigationController()
         let boardCoordinator = BoardCoordinator(navigationController: boardNavigationController)
-        boardCoordinator.delegate = self
+        boardCoordinator.parentCoordinator = self
         
         
         let settingNavigationController = UINavigationController()
         let settingCoordinator = SettingCoordinator(navigationController: settingNavigationController)
-        settingCoordinator.delegate = self
+        settingCoordinator.parentCoordinator = self
         
         // tabbar 설정 및 child 추가
         tabbarController.viewControllers = [boardNavigationController, settingNavigationController]
@@ -42,7 +42,7 @@ final class MainTabbarCoordinator : Coordinator {
     
     func resetLogined(_ coordinator : BoardCoordinator) {
         childCoordinators = childCoordinators.filter { $0 !== coordinator }
-        delegate?.resetLoggedIn(self)
+        parentCoordinator?.resetLoggedIn(self)
     }
     
     deinit {

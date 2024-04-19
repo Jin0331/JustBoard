@@ -13,6 +13,9 @@
 		DB204D982BD2A669006340BE /* QuestionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D972BD2A669006340BE /* QuestionCoordinator.swift */; };
 		DB204D9A2BD2A6C7006340BE /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D992BD2A6C7006340BE /* QuestionViewController.swift */; };
 		DB204D9C2BD2A8C9006340BE /* BoardMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D9B2BD2A8C9006340BE /* BoardMainViewModel.swift */; };
+		DB204D9E2BD2DDBB006340BE /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D9D2BD2DDBB006340BE /* QuestionView.swift */; };
+		DB204DA02BD2E58D006340BE /* DelimiterLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D9F2BD2E58D006340BE /* DelimiterLine.swift */; };
+		DB204DA22BD2E926006340BE /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204DA12BD2E926006340BE /* UITextView+Extension.swift */; };
 		DB410FF52BD0CFA10088679F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF42BD0CFA10088679F /* MainViewController.swift */; };
 		DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */; };
 		DB4110052BD15B300088679F /* BoardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110042BD15B300088679F /* BoardCoordinator.swift */; };
@@ -76,6 +79,9 @@
 		DB204D972BD2A669006340BE /* QuestionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCoordinator.swift; sourceTree = "<group>"; };
 		DB204D992BD2A6C7006340BE /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		DB204D9B2BD2A8C9006340BE /* BoardMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMainViewModel.swift; sourceTree = "<group>"; };
+		DB204D9D2BD2DDBB006340BE /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		DB204D9F2BD2E58D006340BE /* DelimiterLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelimiterLine.swift; sourceTree = "<group>"; };
+		DB204DA12BD2E926006340BE /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		DB410FF42BD0CFA10088679F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarCoordinator.swift; sourceTree = "<group>"; };
 		DB4110042BD15B300088679F /* BoardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCoordinator.swift; sourceTree = "<group>"; };
@@ -171,6 +177,7 @@
 				DB410FF42BD0CFA10088679F /* MainViewController.swift */,
 				DB41100A2BD160F80088679F /* BoardMainView.swift */,
 				DB4110082BD160B00088679F /* BoardMainViewController.swift */,
+				DB204D9D2BD2DDBB006340BE /* QuestionView.swift */,
 				DB204D992BD2A6C7006340BE /* QuestionViewController.swift */,
 			);
 			path = View;
@@ -384,6 +391,7 @@
 				DBCBAA212BC7E804006B40CA /* UIViewController+Extension.swift */,
 				DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */,
 				DB204D932BD29E5D006340BE /* UITabBarController+Extension.swift */,
+				DB204DA12BD2E926006340BE /* UITextView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -410,6 +418,7 @@
 			children = (
 				DBCBAA5E2BCD61E5006B40CA /* SignTextField.swift */,
 				DBCBE3B82BCD892500B6DAC5 /* NextButton.swift */,
+				DB204D9F2BD2E58D006340BE /* DelimiterLine.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -549,6 +558,7 @@
 				DBCBAA222BC7E804006B40CA /* UIViewController+Extension.swift in Sources */,
 				DBCBAA0D2BC7D0B9006B40CA /* HTTPHeader.swift in Sources */,
 				DBCBAA072BC7CE79006B40CA /* DesignSystem.swift in Sources */,
+				DB204DA22BD2E926006340BE /* UITextView+Extension.swift in Sources */,
 				DB4110052BD15B300088679F /* BoardCoordinator.swift in Sources */,
 				DBCBAA542BCD006E006B40CA /* UserCoordinator.swift in Sources */,
 				DBCBAA192BC7E106006B40CA /* EmailLoginView.swift in Sources */,
@@ -562,6 +572,7 @@
 				DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */,
 				DBCBAA092BC7CEE8006B40CA /* UserRouter.swift in Sources */,
 				DBCBAA152BC7DC8C006B40CA /* JoinRequest.swift in Sources */,
+				DB204D9E2BD2DDBB006340BE /* QuestionView.swift in Sources */,
 				DB4110102BD173860088679F /* MainRouter.swift in Sources */,
 				DBCBAA202BC7E7F2006B40CA /* ViewModelType.swift in Sources */,
 				DB204D982BD2A669006340BE /* QuestionCoordinator.swift in Sources */,
@@ -574,6 +585,7 @@
 				DBCBAA2D2BC84842006B40CA /* ProfileResponse.swift in Sources */,
 				DBCBE3D02BCE28E800B6DAC5 /* EmailLoginCoordinator.swift in Sources */,
 				DBCBAA5F2BCD61E5006B40CA /* SignTextField.swift in Sources */,
+				DB204DA02BD2E58D006340BE /* DelimiterLine.swift in Sources */,
 				DBCBAA1F2BC7E7F2006B40CA /* ReusableID.swift in Sources */,
 				DBCBAA272BC82D5A006B40CA /* UserDefaultManager.swift in Sources */,
 				DBCBAA582BCD0ACC006B40CA /* SignInUpView.swift in Sources */,

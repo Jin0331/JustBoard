@@ -1,17 +1,16 @@
 //
-//  MainCoordinator.swift
+//  SettingCoordinator.swift
 //  YeogiApa
 //
 //  Created by JinwooLee on 4/18/24.
 //
 
-import Foundation
 import UIKit
 
-final class MainCoordinator : Coordinator {
-    var navigationController: UINavigationController
+final class SettingCoordinator : Coordinator {
     var childCoordinators: [Coordinator] = []
-    var delegate : AppCoordinator?
+    var navigationController: UINavigationController
+    var parentCoordinator : MainTabbarCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -19,8 +18,11 @@ final class MainCoordinator : Coordinator {
     
     func start() {
         let vc = MainViewController()
-        self.navigationController.viewControllers = [vc]
+        self.navigationController.pushViewController(vc, animated: true)
     }
     
+    deinit {
+        print(#function, "-SettingCoordinator ✅")
+    }
     
 }

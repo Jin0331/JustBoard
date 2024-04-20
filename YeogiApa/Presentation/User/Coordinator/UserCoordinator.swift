@@ -11,25 +11,29 @@ import UIKit
 final class UserCoordinator : Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
+    var isReset : Bool?
     var delegate : AppCoordinator?
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, isReset: Bool? = nil) {
         self.navigationController = navigationController
+        self.isReset = isReset
     }
     
     func start() {
-        let vc = SignInUpViewController() // child root view controller
+        let vc = SignInUpViewController(isReset: isReset) // child root view controller
         vc.delegate = self
         self.navigationController.viewControllers = [vc]
     }
     
     // User Coordinator -> AppCoordinator -> Main Coordinator로 전환되는 과정
-    func didLoggedIn() {
+    func didLoggedIn(_ coordinator : EmailLoginCoordinator) {
         print(#function, "✅ UserCoordinator")
+        childCoordinators = childCoordinators.filter { $0 !== coordinator }
         delegate?.didLoggedIn(self)
     }
     
     func didJoined(_ coordinator : EmailLoginCoordinator) {
+        print(#function, "✅ UserCoordinator")
         childCoordinators = childCoordinators.filter { $0 !== coordinator }
         delegate?.didJoined(self)
     }
@@ -45,7 +49,7 @@ final class UserCoordinator : Coordinator {
     
     func emailLogin() {
         let child = EmailLoginCoordinator(navigationController: navigationController)
-        child.delegate = self
+        child.parentCoordinator = self
         childCoordinators.append(child)
         child.start()
     }

@@ -10,7 +10,7 @@ import UIKit
 final class EmailLoginCoordinator : Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
-    weak var delegate : UserCoordinator?
+    weak var parentCoordinator : UserCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -24,12 +24,20 @@ final class EmailLoginCoordinator : Coordinator {
     
     func didLogined() {
         print(#function, "✅ EmailLCoordinator")
-        delegate?.didLoggedIn()
+        parentCoordinator?.didLoggedIn(self)
     }
     
     func didJoined() {
-        delegate?.didJoined(self)
+        parentCoordinator?.didJoined(self)
     }
+    
+    deinit {
+        print(#function, "- EmailLoginCoordinator ✅")
+    }
+}
+
+//MARK: - 소속된 VC간 화면전환.. VC당 child Coordinator를 만들면 좋겠지만,,,
+extension EmailLoginCoordinator {
     
     func emailLogin() {
         let vc = EmailLoginViewController()
@@ -50,13 +58,10 @@ final class EmailLoginCoordinator : Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func signUpCompleted(email: String, password: String) {        
+    func signUpCompleted(email: String, password: String) {
         let vc = SignUpNicknameWithPhoneViewController(email: email, password: password)
         vc.delegate = self
         navigationController.pushViewController(vc, animated: true)
     }
     
-    deinit {
-        print(#function, "- EmailLoginCoordinator ✅")
-    }
 }

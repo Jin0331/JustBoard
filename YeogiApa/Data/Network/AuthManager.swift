@@ -12,8 +12,10 @@ final class AuthManager : RequestInterceptor {
  
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, any Error>) -> Void) {
         // Token이 없는 상황, 즉 로그인을 새롭게 시도하는 상황
-        guard let accessToken = UserDefaultManager.shared.accessToken, let refreshToken = UserDefaultManager.shared.refreshToken else {
+        guard let accessToken = UserDefaultManager.shared.accessToken, let _ = UserDefaultManager.shared.refreshToken else {
             completion(.success(urlRequest))
+            
+            print("adpat Error 🥲🥲🥲🥲🥲🥲🥲🥲")
             return
         }
         
@@ -27,15 +29,19 @@ final class AuthManager : RequestInterceptor {
         //TODO: - 401 이 발생할 가능성이 있을까??? -> 서버가 리셋 즉, 회원가입이 안 된 유저
         let request = request.task?.response as? HTTPURLResponse
         guard let response = request, response.statusCode == 419 else {
-            print("Refresh Tokken expired or Forbidden or Unknown: \(request?.statusCode)")
+            print("Forbidden or Unknown: \(request?.statusCode)")
             completion(.doNotRetryWithError(error))
             return
         }
         
-        // adpat -> retry이므로, UserDefault에는 Token값이 무조건 존재
+        guard let accessToken = UserDefaultManager.shared.accessToken, let refreshToken = UserDefaultManager.shared.refreshToken else {
+            print("오잉???????")
+            print( UserDefaultManager.shared.accessToken, UserDefaultManager.shared.refreshToken)
+            return
+        }
+        
         do {
-            let urlRequest = try UserRouter.refresh(query: RefreshRequest(accessToken: UserDefaultManager.shared.accessToken!,
-                                                                          refreshToken: UserDefaultManager.shared.refreshToken!))
+            let urlRequest = try UserRouter.refresh(query: RefreshRequest(accessToken: accessToken, refreshToken: refreshToken))
                 .asURLRequest()
             
             // refresh
@@ -44,8 +50,7 @@ final class AuthManager : RequestInterceptor {
                 .responseDecodable(of: RefreshResponse.self) { response in
                     switch response.result {
                     case .success(let refreshResponse): // Token이 Refresh 성공했을 때
-                        print("Token Refresh Success")
-                        
+                        print("Access Token Refresh Success ✅")
                         UserDefaultManager.shared.accessToken = refreshResponse.accessToken
                         completion(.retryWithDelay(10))
                     case .failure(let error): // Token이 Refresh 실패했을 때,, refreshToken이 만료되었거나(418), 비정상적인 접근(401, 403)
@@ -55,10 +60,17 @@ final class AuthManager : RequestInterceptor {
                         UserDefaultManager.shared.refreshToken = nil
                         UserDefaultManager.shared.isLogined = false
                         
-                        completion(.doNotRetryWithError(error))
+                        completion(.doNotRetry)
+                        
+                        //TODO: - Notification Center를 이용해서 AppCoordinator
+                        NotificationCenter.default.post(name: .resetLogin, object: nil)
                     }
                 }
-        } catch { } // 어떤 에러가 발생할 수 있을까....?
+        } catch { 
+            
+            print("알수없는 에러")
+            
+        } // 어떤 에러가 발생할 수 있을까....?
         
     }
 }

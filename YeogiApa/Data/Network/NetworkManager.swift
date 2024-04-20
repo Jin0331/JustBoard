@@ -16,6 +16,7 @@ final class NetworkManager  {
     private init() { }
     
     //MARK: - Join
+    
     func createJoin(query : JoinRequest) -> Single<Result<JoinResponse, AFError>>  {
         return Single<Result<JoinResponse, AFError>>.create  { single in
             do {
@@ -86,4 +87,28 @@ final class NetworkManager  {
             return Disposables.create()
         }
     }
+    
+    //MARK: - Post
+//    func post(query : WriteRequest) -> Single<Result<String, AFError>> {
+//        return Single<Result<String, AFError>>.create { single in
+//            do {
+//                let urlRequest = try UserRouter.emailValidation(query: query).asURLRequest()
+//                
+//                AF.request(urlRequest)
+//                    .validate(statusCode: 200..<300)
+//                    .responseData { response in
+//                        switch response.result {
+//                        case .success:
+//                            single(.success(.success(query.email)))
+//                        case .failure(let error):
+//                            single(.success(.failure(error)))
+//                        }
+//                    }
+//                
+//            } catch {
+//                single(.failure(error))
+//            }
+//            return Disposables.create()
+//        }
+//    }
 }

@@ -16,6 +16,7 @@ enum DesignSystem {
         static let black = UIColor.pillBlack
         static let lightBlack = UIColor.pillLightBlack
         static let gray = UIColor.pillGray
+        static let lightGray = UIColor.systemGray6
         static let white = UIColor.pillWhite
     }
     
@@ -28,5 +29,12 @@ enum DesignSystem {
     enum sfSymbol {
         static let sfSymbolLargeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .bold, scale: .large)
         static let appleLogo = UIImage(systemName: "apple.logo", withConfiguration:sfSymbolLargeConfig)
+        static let question = UIImage(systemName: "questionmark.bubble", withConfiguration:sfSymbolLargeConfig)
+    }
+    
+    enum tabbarImage {
+        static let sfSymbolConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .heavy, scale: .large)
+        static let first = UIImage(systemName: "house", withConfiguration: sfSymbolConfig)
+        static let second = UIImage(systemName: "person.fill", withConfiguration: sfSymbolConfig)
     }
 }

@@ -8,11 +8,17 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import NotificationCenter
 
 final class SignInUpViewController : RxBaseViewController{
     
     private let mainView = SignInUpView()
+    private var isReset : Bool?
     var delegate : UserCoordinator?
+    
+    init(isReset: Bool? = nil) {
+        self.isReset = isReset
+    }
     
     override func loadView() {
         view = mainView
@@ -21,8 +27,13 @@ final class SignInUpViewController : RxBaseViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    }
+        print(#function, "SignInUpViewController✅")
 
+        if let isReset {
+            showAlert(title: "로그인 세션 만료", text: "다시 로그인 해주세요 🥲", addButtonText: "확인")
+        }
+    }
+    
     override func bind() {
 
         mainView.kakaoLoginButton.rx
@@ -48,6 +59,10 @@ final class SignInUpViewController : RxBaseViewController{
                 owner.delegate?.emailLogin()
             }
             .disposed(by: disposeBag)
+    }
+    
+    deinit {
+        print(#function, "SignInUpViewController✅")
     }
     
 }

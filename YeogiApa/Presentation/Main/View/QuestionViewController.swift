@@ -12,6 +12,7 @@ import RxCocoa
 final class QuestionViewController: RxBaseViewController {
     
     private let mainView = QuestionView()
+    private lazy var viewModel = QuestionViewModel(textView: mainView.contentsTextView)
     weak var parentCoordinator : QuestionCoordinator?
     
     override func loadView() {
@@ -23,11 +24,18 @@ final class QuestionViewController: RxBaseViewController {
     }
     
     override func bind() {
-        navigationItem.rightBarButtonItem?.rx
-            .tap
-            .bind(with: self, onNext: { owner, _ in
+        // 게시글 입력이 완료되었을 때
+        
+                
+        let input = QuestionViewModel.Input(completeButtonTap: mainView.searchButtonItem.rx.tap,
+                                            contentsText: mainView.contentsTextView.rx.text.orEmpty
+        )
+        let output = viewModel.transform(input: input)
+        
+        output.writeComplete
+            .drive(with: self) { owner, _ in
                 print("hi")
-            })
+            }
             .disposed(by: disposeBag)
     }
     

@@ -69,7 +69,11 @@ final class QuestionView: BaseView {
         ]
         $0.attributedPlaceholder = NSAttributedString(string: " 게시글의 본문을작성해주세요.", attributes: attributes)
         $0.placeholderVerticalAlignment = .center
-        $0.textContainerInset = .init(top: 50, left: 10, bottom: 10, right: 10)
+        $0.textContainerInset = .init(top: 10, left: 10, bottom: 10, right: 10)
+    }
+    
+    private let stackBackgroundView = UIView().then {
+        $0.backgroundColor = DesignSystem.commonColorSet.white
     }
     
     private let buttonStackView = UIStackView().then {
@@ -98,9 +102,9 @@ final class QuestionView: BaseView {
         
         scrollView.addSubview(contentsView)
         
-        [categoryTitleLabel, categorySelectButton, brView1, titleTextField, brView2, contentsTextView].forEach { contentsView.addSubview($0) }
+        [categoryTitleLabel, categorySelectButton, brView1, titleTextField, brView2, stackBackgroundView, contentsTextView].forEach { contentsView.addSubview($0) }
         
-        contentsView.addSubview(buttonStackView)
+        stackBackgroundView.addSubview(buttonStackView)
         
         [imageAddButton,linkAddButton].forEach{buttonStackView.addArrangedSubview($0)}
     }
@@ -147,19 +151,25 @@ final class QuestionView: BaseView {
             make.height.equalTo(10)
         }
         
-        contentsTextView.snp.makeConstraints { make in
+        stackBackgroundView.snp.makeConstraints { make in
             make.top.equalTo(brView2.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(40)
+        }
+        
+        buttonStackView.snp.makeConstraints { make in
+            make.top.verticalEdges.equalToSuperview()
+            make.width.equalTo(80)
+        }
+        
+        contentsTextView.snp.makeConstraints { make in
+            make.top.equalTo(stackBackgroundView.snp.bottom)
             make.horizontalEdges.equalToSuperview()
             make.height.equalTo(UIScreen.main.bounds.height / 2)
             make.bottom.equalToSuperview()
         }
         
-        buttonStackView.snp.makeConstraints { make in
-            make.top.equalTo(brView2.snp.bottom).offset(5)
-            make.leading.equalTo(brView2.snp.leading).offset(10)
-            make.width.equalTo(80)
-            make.height.equalTo(40)
-        }
+
     }
     
 }

@@ -14,6 +14,7 @@ target 'YeogiApa' do
   pod 'TextFieldEffects'
   pod 'STTextView'
   pod 'IQKeyboardManagerSwift'
+  pod 'YPImagePicker'
 end
 
 post_install do |installer|

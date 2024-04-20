@@ -6,14 +6,16 @@
 //
 
 import UIKit
+import YPImagePicker
 import RxSwift
 import RxCocoa
 
 final class QuestionViewController: RxBaseViewController {
     
     private let mainView = QuestionView()
-    private lazy var viewModel = QuestionViewModel(textView: mainView.contentsTextView)
+    lazy var viewModel = QuestionViewModel(textView: mainView.contentsTextView)
     weak var parentCoordinator : QuestionCoordinator?
+    let seletecedImage = PublishSubject<UIImage>()
     
     override func loadView() {
         view = mainView
@@ -24,19 +26,22 @@ final class QuestionViewController: RxBaseViewController {
     }
     
     override func bind() {
-        // 게시글 입력이 완료되었을 때
         
-                
-        let input = QuestionViewModel.Input(completeButtonTap: mainView.searchButtonItem.rx.tap,
-                                            contentsText: mainView.contentsTextView.rx.text.orEmpty
-        )
-        let output = viewModel.transform(input: input)
-        
-        output.writeComplete
-            .drive(with: self) { owner, _ in
-                print("hi")
+        // image Picker
+        mainView.imageAddButton.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.addImage()
             }
             .disposed(by: disposeBag)
+        
+        
+        let input = QuestionViewModel.Input(contentsText: mainView.contentsTextView.rx.text.orEmpty,
+                                            addedImage: seletecedImage
+                                            
+        )
+        
+        let output = viewModel.transform(input: input)
+
     }
     
     
@@ -60,4 +65,25 @@ final class QuestionViewController: RxBaseViewController {
     deinit {
         print(#function, "QuestionViewController 🔆")
     }
+}
+
+
+// image Picker
+extension QuestionViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func addImage() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = false
+        imagePicker.delegate = self
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[.originalImage] as? UIImage {
+            print(pickedImage)
+            seletecedImage.onNext(pickedImage)
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
 }

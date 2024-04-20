@@ -50,8 +50,6 @@ final class QuestionView: BaseView {
         $0.layer.borderColor = DesignSystem.commonColorSet.gray.cgColor
     }
     
-    private let brView1 = DelimiterLine()
-    
     let titleTextField = STTextView().then {
                 
         $0.font = .systemFont(ofSize: 25, weight: .heavy)
@@ -63,8 +61,6 @@ final class QuestionView: BaseView {
         $0.attributedPlaceholder = NSAttributedString(string: " 게시글의 제목을 입력해보세요", attributes: attributes)
     }
     
-    private let brView2 = DelimiterLine()
-    
     let contentsTextView = STTextView().then {
         $0.font = .systemFont(ofSize: 21, weight: .semibold)
         let attributes: [NSAttributedString.Key: Any] = [
@@ -73,8 +69,27 @@ final class QuestionView: BaseView {
         ]
         $0.attributedPlaceholder = NSAttributedString(string: " 게시글의 본문을작성해주세요.", attributes: attributes)
         $0.placeholderVerticalAlignment = .center
-        $0.textContainerInset = .init(top: 10, left: 10, bottom: 10, right: 10)
+        $0.textContainerInset = .init(top: 50, left: 10, bottom: 10, right: 10)
     }
+    
+    private let buttonStackView = UIStackView().then {
+        $0.distribution = .fillEqually
+        $0.axis = .horizontal
+        $0.spacing = 3
+    }
+    
+    let imageAddButton = UIButton().then {
+        $0.setImage(DesignSystem.sfSymbol.photo, for: .normal)
+        $0.tintColor = DesignSystem.commonColorSet.black
+    }
+    
+    let linkAddButton = UIButton().then {
+        $0.setImage(DesignSystem.sfSymbol.link, for: .normal)
+        $0.tintColor = DesignSystem.commonColorSet.black
+    }
+    
+    private let brView1 = DelimiterLine()
+    private let brView2 = DelimiterLine()
     
     override func configureHierarchy() {
         [scrollView].forEach {
@@ -84,6 +99,10 @@ final class QuestionView: BaseView {
         scrollView.addSubview(contentsView)
         
         [categoryTitleLabel, categorySelectButton, brView1, titleTextField, brView2, contentsTextView].forEach { contentsView.addSubview($0) }
+        
+        contentsView.addSubview(buttonStackView)
+        
+        [imageAddButton,linkAddButton].forEach{buttonStackView.addArrangedSubview($0)}
     }
     
     override func configureLayout() {
@@ -113,7 +132,7 @@ final class QuestionView: BaseView {
         brView1.snp.makeConstraints { make in
             make.top.equalTo(categorySelectButton.snp.bottom).offset(15)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(15)
+            make.height.equalTo(10)
         }
         
         titleTextField.snp.makeConstraints { make in
@@ -125,14 +144,21 @@ final class QuestionView: BaseView {
         brView2.snp.makeConstraints { make in
             make.top.equalTo(titleTextField.snp.bottom).offset(15)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(15)
+            make.height.equalTo(10)
         }
         
         contentsTextView.snp.makeConstraints { make in
             make.top.equalTo(brView2.snp.bottom)
             make.horizontalEdges.equalToSuperview()
-            make.height.greaterThanOrEqualTo(600)
-            make.bottom.equalToSuperview().inset(20)
+            make.height.equalTo(UIScreen.main.bounds.height / 2)
+            make.bottom.equalToSuperview()
+        }
+        
+        buttonStackView.snp.makeConstraints { make in
+            make.top.equalTo(brView2.snp.bottom).offset(5)
+            make.leading.equalTo(brView2.snp.leading).offset(10)
+            make.width.equalTo(80)
+            make.height.equalTo(40)
         }
     }
     

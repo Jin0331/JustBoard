@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.9.0)
+  - IQKeyboardManagerSwift (7.0.1)
   - RxCocoa (6.6.0):
     - RxRelay (= 6.6.0)
     - RxSwift (= 6.6.0)
@@ -13,6 +14,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.8)
+  - IQKeyboardManagerSwift
   - RxCocoa (= 6.6.0)
   - RxSwift (= 6.6.0)
   - SnapKit (~> 5.7.0)
@@ -23,6 +25,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - IQKeyboardManagerSwift
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -33,6 +36,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 02b772c9910e8eba1a079227c32fbd9e46c90a24
+  IQKeyboardManagerSwift: 7f6b1b1d1497855d2beea7f2f10ffcc6978525b1
   RxCocoa: 44a80de90e25b739b5aeaae3c8c371a32e3343cc
   RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
   RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
@@ -41,6 +45,6 @@ SPEC CHECKSUMS:
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 0a3e4f064f02a57859315ac650b0e1a4563f8ec7
+PODFILE CHECKSUM: c1b2550d35be9806e8f0642c5d296f48ef800855
 
 COCOAPODS: 1.15.2

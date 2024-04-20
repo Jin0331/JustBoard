@@ -47,7 +47,6 @@ final class QuestionViewController: RxBaseViewController {
         super.viewDidLayoutSubviews()
         
         mainView.titleTextField.alignTextVerticallyInContainer()
-        mainView.contentsTextView.alignTextVerticallyInContainer()
     }
     
     deinit {

@@ -28,7 +28,7 @@ final class QuestionViewController: RxBaseViewController {
     override func bind() {
         
         let category = PublishSubject<Category>()
-        let link = PublishSubject<URL>()
+        let link = PublishSubject<String>()
         
         // image Picker
         mainView.imageAddButton.rx.tap
@@ -42,6 +42,15 @@ final class QuestionViewController: RxBaseViewController {
             .bind(with: self) { owner, _ in
                 owner.addCategory() { value in
                     category.onNext(value)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.linkAddButton.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.addLink() { value in
+                    print(value)
+                    link.onNext(value)
                 }
             }
             .disposed(by: disposeBag)
@@ -88,8 +97,7 @@ final class QuestionViewController: RxBaseViewController {
 extension QuestionViewController {
     private func addCategory(completion : @escaping ((Category) -> Void)) {
         let vc = CategorySelectViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.setupSheetPresentationFlexible()
+        vc.setupSheetPresentationFlexible()
         
         vc.sendData = { [weak self] value in
             guard let self = self else { return }
@@ -97,7 +105,18 @@ extension QuestionViewController {
             completion(value)
         }
 
-        present(nav, animated: true)
+        present(vc, animated: true)
+    }
+    
+    private func addLink(completion : @escaping ((String) -> Void)) {
+        let vc = LinkViewController()
+        vc.setupSheetPresentationFlexible(height: 200)
+        
+        vc.sendData = { value in
+            completion(value)
+        }
+
+        present(vc, animated: true)
     }
 }
 
@@ -108,7 +127,7 @@ extension QuestionViewController : UIImagePickerControllerDelegate, UINavigation
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
         
-        present(imagePicker, animated: true, completion: nil)
+        present(imagePicker, animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

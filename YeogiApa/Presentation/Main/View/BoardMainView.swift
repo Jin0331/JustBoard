@@ -11,16 +11,7 @@ import SnapKit
 
 class BoardMainView: BaseView {
 
-    let questionButton = UIButton().then {
-        $0.setTitle(" 작성하기", for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
-        $0.setImage(DesignSystem.sfSymbol.question, for: .normal)
-        $0.tintColor = DesignSystem.commonColorSet.white
-        $0.setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
-        $0.backgroundColor = DesignSystem.commonColorSet.black
-        $0.layer.cornerRadius = DesignSystem.cornerRadius.commonCornerRadius
-    }
-    
+    let questionButton = CompleteButton(title: "작성하기", image: DesignSystem.sfSymbol.question, fontSize: 15)
     
     override func configureHierarchy() {
         addSubview(questionButton)

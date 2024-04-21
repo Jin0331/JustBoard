@@ -11,17 +11,32 @@ import SnapKit
 
 final class CategorySelectView: BaseView {
 
+    private let titleLabel = UILabel().then {
+        $0.text = "🔆 분야 선택하기"
+        $0.font = .systemFont(ofSize: 28, weight: .heavy)
+    }
+    
     lazy var mainCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {
         $0.backgroundColor = DesignSystem.commonColorSet.white
     }
     
     override func configureHierarchy() {
+        addSubview(titleLabel)
         addSubview(mainCollectionView)
     }
     
     override func configureLayout() {
+        
+        titleLabel.snp.makeConstraints { make in
+            titleLabel.snp.makeConstraints { make in
+                make.top.equalTo(safeAreaLayoutGuide).offset(30)
+                make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(10)
+            }
+        }
+        
         mainCollectionView.snp.makeConstraints { make in
-            make.edges.equalTo(safeAreaLayoutGuide)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.bottom.horizontalEdges.equalTo(safeAreaLayoutGuide)
         }
     }
     

@@ -45,6 +45,15 @@ extension UIViewController {
         }
     }
     
+    func setupSheetPresentationFlexible(height:Double) {
+        if let sheet = self.sheetPresentationController {
+            sheet.detents = [.custom(resolver: { context in
+                return height // your custom height
+            })]
+            sheet.prefersGrabberVisible = true
+        }
+    }
+    
     func setupSheetPresentationLarge() {
         if let sheet = self.sheetPresentationController {
             sheet.detents = [.large()]
@@ -58,4 +67,6 @@ extension UIViewController {
             sheet.prefersGrabberVisible = true
         }
     }
+    
+
 }

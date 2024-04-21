@@ -41,15 +41,6 @@ final class CategorySelectViewController: BaseViewController {
         snapshot.appendItems(data, toSection: .main)
         
         dataSource.apply(snapshot) // reloadData
-        
-        print(#function, "PeriodSelectViewController UpdateSnapShot ❗️❗️❗️❗️❗️❗️❗️")
-    }
-    
-    override func configureNavigation() {
-        super.configureNavigation()
-        
-        navigationItem.title = "🔆 분야 선택하기"
-        navigationItem.largeTitleDisplayMode = .always
     }
     
     deinit {

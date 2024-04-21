@@ -34,6 +34,8 @@ final class QuestionViewModel : MainViewModelType {
         
         let validTitle = PublishSubject<String>()
         
+        //TODO: - image 개수 추적
+        
         input.addedImage
             .bind(with: self) { owner, image in
                 owner.insertImageIntoTextView(image: image)

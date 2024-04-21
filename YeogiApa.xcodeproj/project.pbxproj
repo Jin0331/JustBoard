@@ -31,6 +31,8 @@
 		DB4110122BD173D60088679F /* WriteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110112BD173D60088679F /* WriteRequest.swift */; };
 		DB4110142BD19E0A0088679F /* WriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110132BD19E0A0088679F /* WriteResponse.swift */; };
 		DB4110162BD1AC720088679F /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */; };
+		DB901C5F2BD5835F003EEDC6 /* LinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C5E2BD5835F003EEDC6 /* LinkViewController.swift */; };
+		DB901C612BD58C7C003EEDC6 /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C602BD58C7C003EEDC6 /* CompleteButton.swift */; };
 		DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */; };
 		DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */; };
 		DBCBA9E92BC7BE35006B40CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBA9E82BC7BE35006B40CA /* Assets.xcassets */; };
@@ -102,6 +104,8 @@
 		DB4110112BD173D60088679F /* WriteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRequest.swift; sourceTree = "<group>"; };
 		DB4110132BD19E0A0088679F /* WriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteResponse.swift; sourceTree = "<group>"; };
 		DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
+		DB901C5E2BD5835F003EEDC6 /* LinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkViewController.swift; sourceTree = "<group>"; };
+		DB901C602BD58C7C003EEDC6 /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
 		DBCBA9DC2BC7BE34006B40CA /* YeogiApa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeogiApa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -197,8 +201,7 @@
 				DB4110082BD160B00088679F /* BoardMainViewController.swift */,
 				DB204D9D2BD2DDBB006340BE /* QuestionView.swift */,
 				DB204D992BD2A6C7006340BE /* QuestionViewController.swift */,
-				DB204DE72BD57525006340BE /* CategorySelectView.swift */,
-				DB204DEE2BD57774006340BE /* CategorySelectViewController.swift */,
+				DB901C5D2BD58312003EEDC6 /* QuestionSubView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -230,6 +233,16 @@
 				DB4110062BD15B3B0088679F /* SettingCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		DB901C5D2BD58312003EEDC6 /* QuestionSubView */ = {
+			isa = PBXGroup;
+			children = (
+				DB204DE72BD57525006340BE /* CategorySelectView.swift */,
+				DB204DEE2BD57774006340BE /* CategorySelectViewController.swift */,
+				DB901C5E2BD5835F003EEDC6 /* LinkViewController.swift */,
+			);
+			path = QuestionSubView;
 			sourceTree = "<group>";
 		};
 		DBCBA9D32BC7BE34006B40CA = {
@@ -442,6 +455,7 @@
 				DBCBAA5E2BCD61E5006B40CA /* SignTextField.swift */,
 				DBCBE3B82BCD892500B6DAC5 /* NextButton.swift */,
 				DB204D9F2BD2E58D006340BE /* DelimiterLine.swift */,
+				DB901C602BD58C7C003EEDC6 /* CompleteButton.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -570,6 +584,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB901C5F2BD5835F003EEDC6 /* LinkViewController.swift in Sources */,
 				DB204DED2BD575AD006340BE /* Category.swift in Sources */,
 				DB204DEF2BD57774006340BE /* CategorySelectViewController.swift in Sources */,
 				DBCBAA632BCD73D9006B40CA /* EmailValidationRequest.swift in Sources */,
@@ -617,6 +632,7 @@
 				DBCBAA1F2BC7E7F2006B40CA /* ReusableID.swift in Sources */,
 				DBCBAA272BC82D5A006B40CA /* UserDefaultManager.swift in Sources */,
 				DBCBAA582BCD0ACC006B40CA /* SignInUpView.swift in Sources */,
+				DB901C612BD58C7C003EEDC6 /* CompleteButton.swift in Sources */,
 				DBCBE3D42BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift in Sources */,
 				DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */,
 				DBCBAA5A2BCD5D05006B40CA /* SignUpEmailViewController.swift in Sources */,

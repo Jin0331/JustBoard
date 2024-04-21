@@ -17,6 +17,7 @@
 		DB204DA02BD2E58D006340BE /* DelimiterLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D9F2BD2E58D006340BE /* DelimiterLine.swift */; };
 		DB204DA22BD2E926006340BE /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204DA12BD2E926006340BE /* UITextView+Extension.swift */; };
 		DB204DA42BD422A7006340BE /* QuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204DA32BD422A7006340BE /* QuestionViewModel.swift */; };
+		DB204DE62BD56158006340BE /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204DE52BD56158006340BE /* UIImage+Extension.swift */; };
 		DB410FF52BD0CFA10088679F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF42BD0CFA10088679F /* MainViewController.swift */; };
 		DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */; };
 		DB4110052BD15B300088679F /* BoardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110042BD15B300088679F /* BoardCoordinator.swift */; };
@@ -84,6 +85,7 @@
 		DB204D9F2BD2E58D006340BE /* DelimiterLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelimiterLine.swift; sourceTree = "<group>"; };
 		DB204DA12BD2E926006340BE /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		DB204DA32BD422A7006340BE /* QuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewModel.swift; sourceTree = "<group>"; };
+		DB204DE52BD56158006340BE /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		DB410FF42BD0CFA10088679F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarCoordinator.swift; sourceTree = "<group>"; };
 		DB4110042BD15B300088679F /* BoardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCoordinator.swift; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 				DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */,
 				DB204D932BD29E5D006340BE /* UITabBarController+Extension.swift */,
 				DB204DA12BD2E926006340BE /* UITextView+Extension.swift */,
+				DB204DE52BD56158006340BE /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				DBCBAA152BC7DC8C006B40CA /* JoinRequest.swift in Sources */,
 				DB204D9E2BD2DDBB006340BE /* QuestionView.swift in Sources */,
 				DB4110102BD173860088679F /* MainRouter.swift in Sources */,
+				DB204DE62BD56158006340BE /* UIImage+Extension.swift in Sources */,
 				DBCBAA202BC7E7F2006B40CA /* ViewModelType.swift in Sources */,
 				DB204D982BD2A669006340BE /* QuestionCoordinator.swift in Sources */,
 				DBCBE3D62BCE8A0700B6DAC5 /* JoinResponse.swift in Sources */,

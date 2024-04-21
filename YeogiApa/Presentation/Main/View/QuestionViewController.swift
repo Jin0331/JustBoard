@@ -82,6 +82,7 @@ extension QuestionViewController : UIImagePickerControllerDelegate, UINavigation
         if let pickedImage = info[.originalImage] as? UIImage {
             print(pickedImage)
             seletecedImage.onNext(pickedImage)
+            mainView.contentsTextViewUIUpdate()
         }
         dismiss(animated: true, completion: nil)
     }

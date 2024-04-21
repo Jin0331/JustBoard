@@ -168,8 +168,10 @@ final class QuestionView: BaseView {
             make.height.equalTo(UIScreen.main.bounds.height / 2)
             make.bottom.equalToSuperview()
         }
-        
-
+    }
+    
+    func contentsTextViewUIUpdate() {
+        contentsTextView.font = .systemFont(ofSize: 21, weight: .heavy)
     }
     
 }

@@ -51,18 +51,24 @@ final class QuestionViewModel : MainViewModelType {
     
     
     private func insertImageIntoTextView(image: UIImage) {
+        // TextView의 size
+        let newWidth = textView.bounds.width - 30
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        let resizedImage = image.resizeImage(targetSize: CGSize(width: newWidth, height: newHeight))
+        
+        // 기존 속성값
+        let currentAttributes = textView.typingAttributes
+        
         // 이미지를 삽입할 위치 설정 (기존 텍스트 끝에 삽입)
         let endPosition = textView.endOfDocument
         let insertionPoint = textView.offset(from: textView.beginningOfDocument, to: endPosition)
         
         // NSAttributedString을 사용하여 이미지를 NSTextAttachment로 감싸기
-        let attachment = NSTextAttachment()
-        attachment.image = image
-        let imageAttributedString = NSAttributedString(attachment: attachment)
         
-        // 이미지를 삽입할 위치에 NSAttributedString 삽입
-        let mutableAttributedString = NSMutableAttributedString(attributedString: textView.attributedText)
-        mutableAttributedString.insert(imageAttributedString, at: insertionPoint)
-        textView.attributedText = mutableAttributedString
+        let attachment = NSTextAttachment()
+        attachment.image = resizedImage
+        let imageAttributedString = NSAttributedString(attachment: attachment)
+        textView.textStorage.insert(imageAttributedString, at: insertionPoint)
     }
 }

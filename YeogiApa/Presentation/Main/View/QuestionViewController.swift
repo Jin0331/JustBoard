@@ -6,13 +6,16 @@
 //
 
 import UIKit
+import YPImagePicker
 import RxSwift
 import RxCocoa
 
 final class QuestionViewController: RxBaseViewController {
     
     private let mainView = QuestionView()
+    lazy var viewModel = QuestionViewModel(textView: mainView.contentsTextView)
     weak var parentCoordinator : QuestionCoordinator?
+    let seletecedImage = PublishSubject<UIImage>()
     
     override func loadView() {
         view = mainView
@@ -23,12 +26,22 @@ final class QuestionViewController: RxBaseViewController {
     }
     
     override func bind() {
-        navigationItem.rightBarButtonItem?.rx
-            .tap
-            .bind(with: self, onNext: { owner, _ in
-                print("hi")
-            })
+        
+        // image Picker
+        mainView.imageAddButton.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.addImage()
+            }
             .disposed(by: disposeBag)
+        
+        
+        let input = QuestionViewModel.Input(contentsText: mainView.contentsTextView.rx.text.orEmpty,
+                                            addedImage: seletecedImage
+                                            
+        )
+        
+        let output = viewModel.transform(input: input)
+
     }
     
     
@@ -47,10 +60,31 @@ final class QuestionViewController: RxBaseViewController {
         super.viewDidLayoutSubviews()
         
         mainView.titleTextField.alignTextVerticallyInContainer()
-        mainView.contentsTextView.alignTextVerticallyInContainer()
     }
     
     deinit {
         print(#function, "QuestionViewController 🔆")
     }
+}
+
+
+// image Picker
+extension QuestionViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func addImage() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = false
+        imagePicker.delegate = self
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[.originalImage] as? UIImage {
+            print(pickedImage)
+            seletecedImage.onNext(pickedImage)
+            mainView.contentsTextViewUIUpdate()
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
 }

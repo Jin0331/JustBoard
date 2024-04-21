@@ -13,6 +13,8 @@ target 'YeogiApa' do
   pod 'RxCocoa', '6.6.0'
   pod 'TextFieldEffects'
   pod 'STTextView'
+  pod 'IQKeyboardManagerSwift'
+  pod 'YPImagePicker'
 end
 
 post_install do |installer|

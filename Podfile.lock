@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (5.9.0)
+  - IQKeyboardManagerSwift (7.0.1)
+  - PryntTrimmerView (4.0.2)
   - RxCocoa (6.6.0):
     - RxRelay (= 6.6.0)
     - RxSwift (= 6.6.0)
@@ -7,40 +9,54 @@ PODS:
     - RxSwift (= 6.6.0)
   - RxSwift (6.6.0)
   - SnapKit (5.7.1)
+  - SteviaLayout (5.1.2)
   - STTextView (1.1.3)
   - TextFieldEffects (1.6.0)
   - Then (3.0.0)
+  - YPImagePicker (5.2.2):
+    - PryntTrimmerView (= 4.0.2)
+    - SteviaLayout (= 5.1.2)
 
 DEPENDENCIES:
   - Alamofire (~> 5.8)
+  - IQKeyboardManagerSwift
   - RxCocoa (= 6.6.0)
   - RxSwift (= 6.6.0)
   - SnapKit (~> 5.7.0)
   - STTextView
   - TextFieldEffects
   - Then
+  - YPImagePicker
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - IQKeyboardManagerSwift
+    - PryntTrimmerView
     - RxCocoa
     - RxRelay
     - RxSwift
     - SnapKit
+    - SteviaLayout
     - STTextView
     - TextFieldEffects
     - Then
+    - YPImagePicker
 
 SPEC CHECKSUMS:
   Alamofire: 02b772c9910e8eba1a079227c32fbd9e46c90a24
+  IQKeyboardManagerSwift: 7f6b1b1d1497855d2beea7f2f10ffcc6978525b1
+  PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
   RxCocoa: 44a80de90e25b739b5aeaae3c8c371a32e3343cc
   RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
   RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  SteviaLayout: 05424e528d643657d39ce72c786e4adf13cfc5f2
   STTextView: cb4d43949845294bd7d203f870bb50a426b65e36
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
+  YPImagePicker: afc81b3cffab05a6e7261c5daf80dc31b4e917b4
 
-PODFILE CHECKSUM: 0a3e4f064f02a57859315ac650b0e1a4563f8ec7
+PODFILE CHECKSUM: e7bc0f4165388cdbbb90971dec505fc5922b49ba
 
 COCOAPODS: 1.15.2

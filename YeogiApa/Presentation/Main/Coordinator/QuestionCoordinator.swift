@@ -21,5 +21,4 @@ final class QuestionCoordinator : Coordinator {
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }
-    
 }

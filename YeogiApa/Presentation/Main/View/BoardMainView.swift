@@ -12,7 +12,7 @@ import SnapKit
 class BoardMainView: BaseView {
 
     let questionButton = UIButton().then {
-        $0.setTitle(" 질문하기", for: .normal)
+        $0.setTitle(" 작성하기", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
         $0.setImage(DesignSystem.sfSymbol.question, for: .normal)
         $0.tintColor = DesignSystem.commonColorSet.white

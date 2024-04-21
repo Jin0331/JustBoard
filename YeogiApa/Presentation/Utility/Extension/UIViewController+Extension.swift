@@ -35,3 +35,27 @@ extension UIViewController {
         present(alert, animated: true)
     }
 }
+
+//MARK: - Present
+extension UIViewController {
+    func setupSheetPresentationFlexible() {
+        if let sheet = self.sheetPresentationController {
+            sheet.detents = [.medium(),.large()]
+            sheet.prefersGrabberVisible = true
+        }
+    }
+    
+    func setupSheetPresentationLarge() {
+        if let sheet = self.sheetPresentationController {
+            sheet.detents = [.large()]
+            sheet.prefersGrabberVisible = true
+        }
+    }
+    
+    func setupSheetPresentationMedium() {
+        if let sheet = self.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.prefersGrabberVisible = true
+        }
+    }
+}

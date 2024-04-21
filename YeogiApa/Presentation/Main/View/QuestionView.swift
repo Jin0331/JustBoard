@@ -152,8 +152,8 @@ final class QuestionView: BaseView {
         }
         
         stackBackgroundView.snp.makeConstraints { make in
-            make.top.equalTo(brView2.snp.bottom)
-            make.horizontalEdges.equalToSuperview()
+            make.top.equalTo(brView2.snp.bottom).offset(5)
+            make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(40)
         }
         

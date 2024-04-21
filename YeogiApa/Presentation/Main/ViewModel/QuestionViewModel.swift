@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import STTextView // anti pattern... 어쩔수 없다 흑흑;;;
+import STTextView // anti pattern... 어쩔 수 없다 흑흑;;;
 
 final class QuestionViewModel : MainViewModelType {
     var disposeBag: DisposeBag = DisposeBag()
@@ -19,8 +19,10 @@ final class QuestionViewModel : MainViewModelType {
     }
     
     struct Input {
+        let titleText : ControlProperty<String>
         let contentsText : ControlProperty<String>
         let addedImage : Observable<UIImage>
+        let addCategory : Observable<Category>
 //        let completeButtonTap : ControlEvent<Void>
     }
     
@@ -57,14 +59,9 @@ final class QuestionViewModel : MainViewModelType {
         let newHeight = image.size.height * scale
         let resizedImage = image.resizeImage(targetSize: CGSize(width: newWidth, height: newHeight))
         
-        // 기존 속성값
-        let currentAttributes = textView.typingAttributes
-        
         // 이미지를 삽입할 위치 설정 (기존 텍스트 끝에 삽입)
         let endPosition = textView.endOfDocument
         let insertionPoint = textView.offset(from: textView.beginningOfDocument, to: endPosition)
-        
-        // NSAttributedString을 사용하여 이미지를 NSTextAttachment로 감싸기
         
         let attachment = NSTextAttachment()
         attachment.image = resizedImage

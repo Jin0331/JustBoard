@@ -18,6 +18,9 @@
 		DB204DA22BD2E926006340BE /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204DA12BD2E926006340BE /* UITextView+Extension.swift */; };
 		DB204DA42BD422A7006340BE /* QuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204DA32BD422A7006340BE /* QuestionViewModel.swift */; };
 		DB204DE62BD56158006340BE /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204DE52BD56158006340BE /* UIImage+Extension.swift */; };
+		DB204DE82BD57525006340BE /* CategorySelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204DE72BD57525006340BE /* CategorySelectView.swift */; };
+		DB204DED2BD575AD006340BE /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204DEC2BD575AD006340BE /* Category.swift */; };
+		DB204DEF2BD57774006340BE /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204DEE2BD57774006340BE /* CategorySelectViewController.swift */; };
 		DB410FF52BD0CFA10088679F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF42BD0CFA10088679F /* MainViewController.swift */; };
 		DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */; };
 		DB4110052BD15B300088679F /* BoardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110042BD15B300088679F /* BoardCoordinator.swift */; };
@@ -86,6 +89,9 @@
 		DB204DA12BD2E926006340BE /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		DB204DA32BD422A7006340BE /* QuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewModel.swift; sourceTree = "<group>"; };
 		DB204DE52BD56158006340BE /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		DB204DE72BD57525006340BE /* CategorySelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectView.swift; sourceTree = "<group>"; };
+		DB204DEC2BD575AD006340BE /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		DB204DEE2BD57774006340BE /* CategorySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.swift; sourceTree = "<group>"; };
 		DB410FF42BD0CFA10088679F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarCoordinator.swift; sourceTree = "<group>"; };
 		DB4110042BD15B300088679F /* BoardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCoordinator.swift; sourceTree = "<group>"; };
@@ -164,6 +170,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DB204DEB2BD5759F006340BE /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				DB204DEC2BD575AD006340BE /* Category.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		DB410FF32BD0CF830088679F /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +197,8 @@
 				DB4110082BD160B00088679F /* BoardMainViewController.swift */,
 				DB204D9D2BD2DDBB006340BE /* QuestionView.swift */,
 				DB204D992BD2A6C7006340BE /* QuestionViewController.swift */,
+				DB204DE72BD57525006340BE /* CategorySelectView.swift */,
+				DB204DEE2BD57774006340BE /* CategorySelectViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -340,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				DBCBAA1C2BC7E7D9006B40CA /* Extension */,
+				DB204DEB2BD5759F006340BE /* Enum */,
 				DBCBAA1B2BC7E7D3006B40CA /* Protocol */,
 				DBCBAA1A2BC7E7BE006B40CA /* Design */,
 			);
@@ -553,6 +570,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB204DED2BD575AD006340BE /* Category.swift in Sources */,
+				DB204DEF2BD57774006340BE /* CategorySelectViewController.swift in Sources */,
 				DBCBAA632BCD73D9006B40CA /* EmailValidationRequest.swift in Sources */,
 				DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */,
 				DBCBE3D22BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift in Sources */,
@@ -568,6 +587,7 @@
 				DB4110052BD15B300088679F /* BoardCoordinator.swift in Sources */,
 				DBCBAA542BCD006E006B40CA /* UserCoordinator.swift in Sources */,
 				DBCBAA192BC7E106006B40CA /* EmailLoginView.swift in Sources */,
+				DB204DE82BD57525006340BE /* CategorySelectView.swift in Sources */,
 				DBCBAA0F2BC7D0E1006B40CA /* NetworkManager.swift in Sources */,
 				DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */,
 				DBCBE3B52BCD845F00B6DAC5 /* SignUpPasswordViewController.swift in Sources */,

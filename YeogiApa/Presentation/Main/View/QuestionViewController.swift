@@ -15,7 +15,7 @@ final class QuestionViewController: RxBaseViewController {
     private let mainView = QuestionView()
     lazy var viewModel = QuestionViewModel(textView: mainView.contentsTextView)
     weak var parentCoordinator : QuestionCoordinator?
-    let seletecedImage = PublishSubject<UIImage>()
+    private let seletecedImage = PublishSubject<UIImage>()
     
     override func loadView() {
         view = mainView
@@ -27,6 +27,9 @@ final class QuestionViewController: RxBaseViewController {
     
     override func bind() {
         
+        let category = PublishSubject<Category>()
+        let link = PublishSubject<URL>()
+        
         // image Picker
         mainView.imageAddButton.rx.tap
             .bind(with: self) { owner, _ in
@@ -34,10 +37,23 @@ final class QuestionViewController: RxBaseViewController {
             }
             .disposed(by: disposeBag)
         
+        // category Picker
+        mainView.categorySelectButton.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.addCategory() { value in
+                    category.onNext(value)
+                }
+            }
+            .disposed(by: disposeBag)
         
-        let input = QuestionViewModel.Input(contentsText: mainView.contentsTextView.rx.text.orEmpty,
-                                            addedImage: seletecedImage
-                                            
+        
+        
+        
+        let input = QuestionViewModel.Input(
+            titleText: mainView.titleTextField.rx.text.orEmpty,
+            contentsText: mainView.contentsTextView.rx.text.orEmpty,
+            addedImage: seletecedImage,
+            addCategory: category
         )
         
         let output = viewModel.transform(input: input)
@@ -68,9 +84,26 @@ final class QuestionViewController: RxBaseViewController {
 }
 
 
-// image Picker
+//MARK: - Present (PopUpview) -> Coordinator로 하는 건 좀 힘든듯?
+extension QuestionViewController {
+    private func addCategory(completion : @escaping ((Category) -> Void)) {
+        let vc = CategorySelectViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        nav.setupSheetPresentationFlexible()
+        
+        vc.sendData = { [weak self] value in
+            guard let self = self else { return }
+            mainView.categorySelectButton.setTitle(value.rawValue, for: .normal)
+            completion(value)
+        }
+
+        present(nav, animated: true)
+    }
+}
+
+//MARK: - ImagePicker
 extension QuestionViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func addImage() {
+    private func addImage() {
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
@@ -86,5 +119,4 @@ extension QuestionViewController : UIImagePickerControllerDelegate, UINavigation
         }
         dismiss(animated: true, completion: nil)
     }
-    
 }

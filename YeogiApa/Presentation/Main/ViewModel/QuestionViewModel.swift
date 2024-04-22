@@ -28,18 +28,27 @@ final class QuestionViewModel : MainViewModelType {
     }
     
     struct Output {
+        let overAddedImageCount : Driver<Bool>
 //        let writeComplete : Driver<Void>
     }
     
     func transform(input: Input) -> Output {
         
         let validTitle = PublishSubject<String>()
-        
-        //TODO: - image 개수 추적
+        let overAddedImageCount = PublishSubject<Bool>()
+        let uploadedFiles = PublishSubject<[String]>()
+        let uploadedFilesLocation = PublishSubject<[Int]>()
         
         input.addedImage
             .bind(with: self) { owner, image in
-                owner.insertImageIntoTextView(image: image)
+                                if owner.textView.getNumberOfImages() < 5 { // image max count
+                    owner.insertImageIntoTextView(image: image)
+                    overAddedImageCount.onNext(false)
+                } else {
+                    print("?????")
+                    overAddedImageCount.onNext(true)
+                }
+
             }
             .disposed(by: disposeBag)
         
@@ -58,20 +67,33 @@ final class QuestionViewModel : MainViewModelType {
                 return FilesRequest(files: textView.getImageURLs())
             }
             .flatMap { filesRquest in
-                NetworkManager.shared.post(query: filesRquest)
+                NetworkManager.shared.post(query: filesRquest, category: "test")
             }
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let filesResponse):
                     print(filesResponse.files, "✅ 이미지 업로드 성공")
-                case .failure(let error):
-                    print(error)
+                    uploadedFiles.onNext(filesResponse.files)
+                    uploadedFilesLocation.onNext(owner.textView.getImageLocations()) // 이미지 위치
+                case .failure(let error): // 이미지 없음
+//                    print(error, "❗️ 이미지 없음")
+                    uploadedFiles.onNext([])
                 }
             }
             .disposed(by: disposeBag)
         
+        // Post 작성
         
-        return Output()
+        
+        
+//        uploadedFiles
+//            .bind(with: self) { owner, files in
+//                print(files)
+//            }
+//            .disposed(by: disposeBag)
+        
+        
+        return Output(overAddedImageCount:overAddedImageCount.asDriver(onErrorJustReturn: false))
     }
     
     

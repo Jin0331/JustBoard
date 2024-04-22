@@ -13,6 +13,7 @@ PODS:
   - STTextView (1.1.3)
   - TextFieldEffects (1.6.0)
   - Then (3.0.0)
+  - Toast-Swift (5.1.0)
   - YPImagePicker (5.2.2):
     - PryntTrimmerView (= 4.0.2)
     - SteviaLayout (= 5.1.2)
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - STTextView
   - TextFieldEffects
   - Then
+  - Toast-Swift (~> 5.1.0)
   - YPImagePicker
 
 SPEC REPOS:
@@ -41,6 +43,7 @@ SPEC REPOS:
     - STTextView
     - TextFieldEffects
     - Then
+    - Toast-Swift
     - YPImagePicker
 
 SPEC CHECKSUMS:
@@ -55,8 +58,9 @@ SPEC CHECKSUMS:
   STTextView: cb4d43949845294bd7d203f870bb50a426b65e36
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
+  Toast-Swift: dd369e68ee529f542c65bd0d0c6c50cd743cf6f2
   YPImagePicker: afc81b3cffab05a6e7261c5daf80dc31b4e917b4
 
-PODFILE CHECKSUM: e7bc0f4165388cdbbb90971dec505fc5922b49ba
+PODFILE CHECKSUM: 01465063addebd3462db75b234d95b555a3c40b2
 
 COCOAPODS: 1.15.2

@@ -10,7 +10,7 @@ import Alamofire
 
 enum MainRouter {
     case write(query : WriteRequest)
-    case files(query : FilesRequest)
+    case files(query : FilesRequest, category : String)
 }
 
 
@@ -76,20 +76,22 @@ extension MainRouter : TargetType {
     
     var multipart: MultipartFormData {
           switch self {
-          case .files(let filesRequest):
+          case .files(let filesRequest, let category):
               let multiPart = MultipartFormData()
 
-//              files.files.forEach { file in
-//                  multiPart.append(file, withName: "files", fileName: "ImageTest.png", mimeType: "image/png")
-//              }
-              
-              print(filesRequest.files[0], "✅ fielsRequest files [0]")
-              
-              multiPart.append(filesRequest.files[0], withName: "files", fileName: "ImageTest1.png", mimeType: "image/png")
-              
-              
-              return multiPart
-              
+              // 빈 배열일 경우
+              if filesRequest.files.isEmpty {
+                  print("빈배열")
+//                  multiPart.append(Data(), withName: "files", fileName: category + ".png", mimeType: "image/png")
+                  return multiPart
+              } else {
+                  filesRequest.files.forEach { file in
+                      multiPart.append(file, withName: "files", fileName: category + ".png", mimeType: "image/png")
+                      print("✅ fielsRequest \(file)")
+                  }
+                  return multiPart
+              }
+
           default: return MultipartFormData()
           }
      }

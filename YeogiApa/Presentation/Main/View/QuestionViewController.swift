@@ -55,18 +55,6 @@ final class QuestionViewController: RxBaseViewController {
             }
             .disposed(by: disposeBag)
         
-        
-//        mainView.contentsTextView.rx.attributedText
-//            .bind(with: self) { owner, atr in
-//                var imageCount = 0
-//                atr?.enumerateAttribute(.attachment, in: NSRange(location: 0, length: atr?.attributedText.length), options: []) { (value, range, stop) in
-//                    if let attachment = value as? NSTextAttachment, attachment.image != nil {
-//                        imageCount += 1
-//                    }
-//                }
-//            }
-            
-        
         let input = QuestionViewModel.Input(
             titleText: mainView.titleTextField.rx.text.orEmpty,
             contentsText: mainView.contentsTextView.rx.text.orEmpty,
@@ -77,6 +65,17 @@ final class QuestionViewController: RxBaseViewController {
         )
         
         let output = viewModel.transform(input: input)
+        output.overAddedImageCount
+            .debug("valid")
+            .drive(with: self) { owner, validImageAdd in
+                
+                if validImageAdd {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // in half a second...
+                        owner.showAlert(title: "이미지 추가 초과", text: "이미지는 5개 이하로 추가해주세요 🥲", addButtonText: "확인")
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
 
     }
     

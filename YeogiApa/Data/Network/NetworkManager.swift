@@ -89,20 +89,20 @@ final class NetworkManager  {
     }
     
     //MARK: - Post FileUpload
-    func post(query : FilesRequest) -> Single<Result<FilesResponse, AFError>> {
+    func post(query : FilesRequest, category : String) -> Single<Result<FilesResponse, AFError>> {
         return Single<Result<FilesResponse, AFError>>.create { single in
                 
-            let router =  MainRouter.files(query: query)
+            let router =  MainRouter.files(query: query, category: category)
             let url = router.baseURL.appendingPathComponent(router.path).absoluteString.removingPercentEncoding!
             let header = HTTPHeaders(router.header)
             
             print(url, header, router.multipart, "🤔")
-            
-            
+
             AF.upload(multipartFormData: router.multipart, to: url, headers: header, interceptor: AuthManager())
                 .responseDecodable(of: FilesResponse.self) { response in
                     switch response.result {
                     case .success(let filesResponse):
+                        print(filesResponse)
                         single(.success(.success(filesResponse)))
                     case .failure(let error):
                         print(response.response?.statusCode)

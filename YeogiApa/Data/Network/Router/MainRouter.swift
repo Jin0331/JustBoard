@@ -10,6 +10,7 @@ import Alamofire
 
 enum MainRouter {
     case write(query : WriteRequest)
+    case files(query : FilesRequest)
 }
 
 
@@ -20,7 +21,7 @@ extension MainRouter : TargetType {
         
     var method: HTTPMethod {
         switch self {
-        case .write :
+        case .write, .files :
             return .post
         }
     }
@@ -29,16 +30,25 @@ extension MainRouter : TargetType {
         switch self {
         case .write:
             return "/posts"
+        case .files:
+            return "/posts/files"
         }
     }
     
     var header: [String:String] {
+        guard let token = UserDefaultManager.shared.accessToken else { return [:] }
+        
         switch self {
         case .write :
-            guard let token = UserDefaultManager.shared.accessToken else { return [:] }
             return [
                 HTTPHeader.authorization.rawValue : token,
                 HTTPHeader.contentType.rawValue : HTTPHeader.json.rawValue,
+                HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue
+            ]
+        case .files :
+            return [
+                HTTPHeader.authorization.rawValue : token,
+                HTTPHeader.contentType.rawValue : HTTPHeader.multipart.rawValue,
                 HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue
             ]
         }
@@ -59,7 +69,29 @@ extension MainRouter : TargetType {
             encoder.keyEncodingStrategy = .convertToSnakeCase
             
             return try? encoder.encode(query)
+        default:
+            return nil
         }
     }
+    
+    var multipart: MultipartFormData {
+          switch self {
+          case .files(let filesRequest):
+              let multiPart = MultipartFormData()
+
+//              files.files.forEach { file in
+//                  multiPart.append(file, withName: "files", fileName: "ImageTest.png", mimeType: "image/png")
+//              }
+              
+              print(filesRequest.files[0], "✅ fielsRequest files [0]")
+              
+              multiPart.append(filesRequest.files[0], withName: "files", fileName: "ImageTest1.png", mimeType: "image/png")
+              
+              
+              return multiPart
+              
+          default: return MultipartFormData()
+          }
+     }
         
 }

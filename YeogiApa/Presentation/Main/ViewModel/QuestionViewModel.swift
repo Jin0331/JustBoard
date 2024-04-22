@@ -23,7 +23,8 @@ final class QuestionViewModel : MainViewModelType {
         let contentsText : ControlProperty<String>
         let addedImage : Observable<UIImage>
         let addCategory : Observable<Category>
-//        let completeButtonTap : ControlEvent<Void>
+        let addLink : Observable<String>
+        let completeButtonTap : ControlEvent<Void>
     }
     
     struct Output {
@@ -44,8 +45,28 @@ final class QuestionViewModel : MainViewModelType {
         
         
         input.contentsText
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .bind(with: self) { owner, text in
-                print(text)
+                print(text, "이미지 개수 :",owner.textView.getNumberOfImages(), "이미지 위치:", owner.textView.getImageLocations(), "이미지 주소 : ", owner.textView.getImageURLs())
+            }
+            .disposed(by: disposeBag)
+        
+        input.completeButtonTap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .map { [weak self] _ in
+                guard let self = self else { print("여기는 아니겠지?");return FilesRequest(files: []) }
+                return FilesRequest(files: textView.getImageURLs())
+            }
+            .flatMap { filesRquest in
+                NetworkManager.shared.post(query: filesRquest)
+            }
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let filesResponse):
+                    print(filesResponse.files, "✅ 이미지 업로드 성공")
+                case .failure(let error):
+                    print(error)
+                }
             }
             .disposed(by: disposeBag)
         

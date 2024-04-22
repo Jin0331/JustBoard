@@ -26,8 +26,8 @@ final class NetworkManager  {
                     .validate(statusCode: 200..<300)
                     .responseDecodable(of: JoinResponse.self) { response in
                         switch response.result {
-                        case .success(let joinModel):
-                            single(.success(.success(joinModel)))
+                        case .success(let joinResponse):
+                            single(.success(.success(joinResponse)))
                         case .failure(let error):
                             single(.success(.failure(error)))
                         }
@@ -49,8 +49,8 @@ final class NetworkManager  {
                     .validate(statusCode: 200..<300)
                     .responseDecodable(of: LoginResponse.self) { response in
                         switch response.result {
-                        case .success(let loginModel):
-                            single(.success(.success(loginModel)))
+                        case .success(let loginResponse):
+                            single(.success(.success(loginResponse)))
                         case .failure(let error):
                             print(response.response?.statusCode)
                             single(.success(.failure(error)))
@@ -84,6 +84,31 @@ final class NetworkManager  {
             } catch {
                 single(.failure(error))
             }
+            return Disposables.create()
+        }
+    }
+    
+    //MARK: - Post FileUpload
+    func post(query : FilesRequest) -> Single<Result<FilesResponse, AFError>> {
+        return Single<Result<FilesResponse, AFError>>.create { single in
+                
+            let router =  MainRouter.files(query: query)
+            let url = router.baseURL.appendingPathComponent(router.path).absoluteString.removingPercentEncoding!
+            let header = HTTPHeaders(router.header)
+            
+            print(url, header, router.multipart, "🤔")
+            
+            
+            AF.upload(multipartFormData: router.multipart, to: url, headers: header, interceptor: AuthManager())
+                .responseDecodable(of: FilesResponse.self) { response in
+                    switch response.result {
+                    case .success(let filesResponse):
+                        single(.success(.success(filesResponse)))
+                    case .failure(let error):
+                        print(response.response?.statusCode)
+                        single(.success(.failure(error)))
+                    }
+                }
             return Disposables.create()
         }
     }

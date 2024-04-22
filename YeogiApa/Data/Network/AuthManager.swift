@@ -26,6 +26,8 @@ final class AuthManager : RequestInterceptor {
     
     func retry(_ request: Request, for session: Session, dueTo error: any Error, completion: @escaping (RetryResult) -> Void) {
         
+        print("✅ retry")
+        
         //TODO: - 401 이 발생할 가능성이 있을까??? -> 서버가 리셋 즉, 회원가입이 안 된 유저
         let request = request.task?.response as? HTTPURLResponse
         guard let response = request, response.statusCode == 419 else {

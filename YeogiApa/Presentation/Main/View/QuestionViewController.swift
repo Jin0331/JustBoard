@@ -56,13 +56,24 @@ final class QuestionViewController: RxBaseViewController {
             .disposed(by: disposeBag)
         
         
-        
+//        mainView.contentsTextView.rx.attributedText
+//            .bind(with: self) { owner, atr in
+//                var imageCount = 0
+//                atr?.enumerateAttribute(.attachment, in: NSRange(location: 0, length: atr?.attributedText.length), options: []) { (value, range, stop) in
+//                    if let attachment = value as? NSTextAttachment, attachment.image != nil {
+//                        imageCount += 1
+//                    }
+//                }
+//            }
+            
         
         let input = QuestionViewModel.Input(
             titleText: mainView.titleTextField.rx.text.orEmpty,
             contentsText: mainView.contentsTextView.rx.text.orEmpty,
             addedImage: seletecedImage,
-            addCategory: category
+            addCategory: category,
+            addLink: link,
+            completeButtonTap: mainView.completeButtonItem.rx.tap
         )
         
         let output = viewModel.transform(input: input)
@@ -72,7 +83,7 @@ final class QuestionViewController: RxBaseViewController {
     
     override func configureNavigation() {
         super.configureNavigation()
-        navigationItem.rightBarButtonItem = mainView.searchButtonItem
+        navigationItem.rightBarButtonItem = mainView.completeButtonItem
     }
     
     override func configureView() {

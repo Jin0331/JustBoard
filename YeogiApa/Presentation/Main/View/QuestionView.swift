@@ -12,7 +12,7 @@ import STTextView
 
 final class QuestionView: BaseView {
     
-    let searchButtonItem = UIBarButtonItem().then {
+    let completeButtonItem = UIBarButtonItem().then {
         $0.title = "작성하기"
         $0.tintColor = DesignSystem.commonColorSet.gray
         

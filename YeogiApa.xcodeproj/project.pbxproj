@@ -33,6 +33,8 @@
 		DB4110162BD1AC720088679F /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */; };
 		DB901C5F2BD5835F003EEDC6 /* LinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C5E2BD5835F003EEDC6 /* LinkViewController.swift */; };
 		DB901C612BD58C7C003EEDC6 /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C602BD58C7C003EEDC6 /* CompleteButton.swift */; };
+		DB901C702BD694DC003EEDC6 /* FilesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */; };
+		DB901C742BD69531003EEDC6 /* FilesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C732BD69531003EEDC6 /* FilesResponse.swift */; };
 		DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */; };
 		DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */; };
 		DBCBA9E92BC7BE35006B40CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBA9E82BC7BE35006B40CA /* Assets.xcassets */; };
@@ -106,6 +108,8 @@
 		DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
 		DB901C5E2BD5835F003EEDC6 /* LinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkViewController.swift; sourceTree = "<group>"; };
 		DB901C602BD58C7C003EEDC6 /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
+		DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesRequest.swift; sourceTree = "<group>"; };
+		DB901C732BD69531003EEDC6 /* FilesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesResponse.swift; sourceTree = "<group>"; };
 		DBCBA9DC2BC7BE34006B40CA /* YeogiApa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeogiApa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -245,6 +249,32 @@
 			path = QuestionSubView;
 			sourceTree = "<group>";
 		};
+		DB901C712BD694E4003EEDC6 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBAA142BC7DC8C006B40CA /* JoinRequest.swift */,
+				DBCBAA0A2BC7D0A5006B40CA /* LoginRequest.swift */,
+				DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */,
+				DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */,
+				DB4110112BD173D60088679F /* WriteRequest.swift */,
+				DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		DB901C722BD694E9003EEDC6 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBE3D52BCE8A0700B6DAC5 /* JoinResponse.swift */,
+				DBCBAA122BC7D900006B40CA /* LoginResponse.swift */,
+				DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */,
+				DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */,
+				DB4110132BD19E0A0088679F /* WriteResponse.swift */,
+				DB901C732BD69531003EEDC6 /* FilesResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 		DBCBA9D32BC7BE34006B40CA = {
 			isa = PBXGroup;
 			children = (
@@ -379,16 +409,8 @@
 		DBCBA9FE2BC7CCD8006B40CA /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
-				DBCBAA142BC7DC8C006B40CA /* JoinRequest.swift */,
-				DBCBAA0A2BC7D0A5006B40CA /* LoginRequest.swift */,
-				DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */,
-				DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */,
-				DB4110112BD173D60088679F /* WriteRequest.swift */,
-				DBCBE3D52BCE8A0700B6DAC5 /* JoinResponse.swift */,
-				DBCBAA122BC7D900006B40CA /* LoginResponse.swift */,
-				DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */,
-				DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */,
-				DB4110132BD19E0A0088679F /* WriteResponse.swift */,
+				DB901C712BD694E4003EEDC6 /* Request */,
+				DB901C722BD694E9003EEDC6 /* Response */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -585,12 +607,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB901C5F2BD5835F003EEDC6 /* LinkViewController.swift in Sources */,
+				DB901C702BD694DC003EEDC6 /* FilesRequest.swift in Sources */,
 				DB204DED2BD575AD006340BE /* Category.swift in Sources */,
 				DB204DEF2BD57774006340BE /* CategorySelectViewController.swift in Sources */,
 				DBCBAA632BCD73D9006B40CA /* EmailValidationRequest.swift in Sources */,
 				DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */,
 				DBCBE3D22BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift in Sources */,
 				DBCBAA172BC7E02D006B40CA /* EmailLoginViewController.swift in Sources */,
+				DB901C742BD69531003EEDC6 /* FilesResponse.swift in Sources */,
 				DBCBAA2F2BC86224006B40CA /* AuthManager.swift in Sources */,
 				DB204D942BD29E5D006340BE /* UITabBarController+Extension.swift in Sources */,
 				DB4110072BD15B3B0088679F /* SettingCoordinator.swift in Sources */,

@@ -65,13 +65,25 @@ final class QuestionViewController: RxBaseViewController {
         )
         
         let output = viewModel.transform(input: input)
+//        output.overAddedImageSize
+//            .debug("valid")
+//            .drive(with: self) { owner, validImageSize in
+//                
+//                if validImageSize {
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // in half a second...
+//                        owner.showAlert(title: "이미지 크기 초과", text: "5 MB 이하의 이미지를 추가해주세요 🥲", addButtonText: "확인")
+//                    }
+//                }
+//            }
+//            .disposed(by: disposeBag)
+//        
         output.overAddedImageCount
             .debug("valid")
             .drive(with: self) { owner, validImageAdd in
                 
                 if validImageAdd {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // in half a second...
-                        owner.showAlert(title: "이미지 추가 초과", text: "이미지는 5개 이하로 추가해주세요 🥲", addButtonText: "확인")
+                        owner.showAlert(title: "이미지 개수 초과", text: "이미지는 5개 이하로 추가해주세요 🥲", addButtonText: "확인")
                     }
                 }
             }

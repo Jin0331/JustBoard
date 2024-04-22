@@ -29,7 +29,7 @@ extension UITextView {
         var imageURLs: [Data] = []
         self.attributedText.enumerateAttribute(.attachment, in: NSRange(location: 0, length: self.attributedText.length), options: []) { (value, range, stop) in
             if let attachment = value as? NSTextAttachment, let image = attachment.image {
-                if let imageData = image.pngData() {
+                if let imageData = image.jpegData(compressionQuality: 1) {
                     imageURLs.append(imageData)
                 }
             }

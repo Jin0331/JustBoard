@@ -82,11 +82,10 @@ extension MainRouter : TargetType {
               // 빈 배열일 경우
               if filesRequest.files.isEmpty {
                   print("빈배열")
-//                  multiPart.append(Data(), withName: "files", fileName: category + ".png", mimeType: "image/png")
                   return multiPart
               } else {
                   filesRequest.files.forEach { file in
-                      multiPart.append(file, withName: "files", fileName: category + ".png", mimeType: "image/png")
+                      multiPart.append(file, withName: "files", fileName: category + ".jpeg", mimeType: "image/jpeg")
                       print("✅ fielsRequest \(file)")
                   }
                   return multiPart

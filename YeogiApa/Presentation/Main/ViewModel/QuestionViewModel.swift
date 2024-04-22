@@ -13,7 +13,7 @@ import STTextView // anti pattern... 어쩔 수 없다 흑흑;;;
 final class QuestionViewModel : MainViewModelType {
     var disposeBag: DisposeBag = DisposeBag()
     var textView : STTextView
-
+    
     init(textView: STTextView) {
         self.textView = textView
     }
@@ -29,7 +29,7 @@ final class QuestionViewModel : MainViewModelType {
     
     struct Output {
         let overAddedImageCount : Driver<Bool>
-//        let writeComplete : Driver<Void>
+        //        let writeComplete : Driver<Void>
     }
     
     func transform(input: Input) -> Output {
@@ -41,20 +41,22 @@ final class QuestionViewModel : MainViewModelType {
         
         input.addedImage
             .bind(with: self) { owner, image in
-                                if owner.textView.getNumberOfImages() < 5 { // image max count
-                    owner.insertImageIntoTextView(image: image)
-                    overAddedImageCount.onNext(false)
-                } else {
-                    print("?????")
+                
+                // 이미지 압축
+                let resizedImage = image.pngData()!.count > 5242880 ? image.compressImage(to: 4.7)! : image
+                
+                // 이미지 개수 검사
+                if owner.textView.getNumberOfImages() > 5 { // image max count
                     overAddedImageCount.onNext(true)
+                } else {
+                    owner.insertImageIntoTextView(image: resizedImage)
+                    overAddedImageCount.onNext(false)
                 }
-
             }
             .disposed(by: disposeBag)
         
-        
         input.contentsText
-            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .throttle(.seconds(2), scheduler: MainScheduler.instance)
             .bind(with: self) { owner, text in
                 print(text, "이미지 개수 :",owner.textView.getNumberOfImages(), "이미지 위치:", owner.textView.getImageLocations(), "이미지 주소 : ", owner.textView.getImageURLs())
             }
@@ -76,7 +78,7 @@ final class QuestionViewModel : MainViewModelType {
                     uploadedFiles.onNext(filesResponse.files)
                     uploadedFilesLocation.onNext(owner.textView.getImageLocations()) // 이미지 위치
                 case .failure(let error): // 이미지 없음
-//                    print(error, "❗️ 이미지 없음")
+                    //                    print(error, "❗️ 이미지 없음")
                     uploadedFiles.onNext([])
                 }
             }
@@ -86,14 +88,16 @@ final class QuestionViewModel : MainViewModelType {
         
         
         
-//        uploadedFiles
-//            .bind(with: self) { owner, files in
-//                print(files)
-//            }
-//            .disposed(by: disposeBag)
+        //        uploadedFiles
+        //            .bind(with: self) { owner, files in
+        //                print(files)
+        //            }
+        //            .disposed(by: disposeBag)
         
         
-        return Output(overAddedImageCount:overAddedImageCount.asDriver(onErrorJustReturn: false))
+        return Output(
+            overAddedImageCount:overAddedImageCount.asDriver(onErrorJustReturn: false)
+            )
     }
     
     

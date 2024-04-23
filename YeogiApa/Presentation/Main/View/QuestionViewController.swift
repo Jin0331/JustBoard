@@ -28,7 +28,7 @@ final class QuestionViewController: RxBaseViewController {
     override func bind() {
         
         let category = PublishSubject<Category>()
-        let link = PublishSubject<String>()
+        let link = BehaviorSubject<String>(value: "")
         
         // image Picker
         mainView.imageAddButton.rx.tap
@@ -49,7 +49,6 @@ final class QuestionViewController: RxBaseViewController {
         mainView.linkAddButton.rx.tap
             .bind(with: self) { owner, _ in
                 owner.addLink() { value in
-                    print(value)
                     link.onNext(value)
                 }
             }

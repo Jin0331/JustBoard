@@ -52,6 +52,7 @@ class LinkViewController: RxBaseViewController {
             .withLatestFrom(urlLinkTextField.rx.text.orEmpty)
             .bind(with: self) { owner, link in
                 owner.sendData?(link)
+                owner.dismiss(animated: true)
             }
             .disposed(by: disposeBag)
 

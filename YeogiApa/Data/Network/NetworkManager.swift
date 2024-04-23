@@ -114,26 +114,26 @@ final class NetworkManager  {
     }
     
     //MARK: - Post
-//    func post(query : WriteRequest) -> Single<Result<String, AFError>> {
-//        return Single<Result<String, AFError>>.create { single in
-//            do {
-//                let urlRequest = try UserRouter.emailValidation(query: query).asURLRequest()
-//                
-//                AF.request(urlRequest)
-//                    .validate(statusCode: 200..<300)
-//                    .responseData { response in
-//                        switch response.result {
-//                        case .success:
-//                            single(.success(.success(query.email)))
-//                        case .failure(let error):
-//                            single(.success(.failure(error)))
-//                        }
-//                    }
-//                
-//            } catch {
-//                single(.failure(error))
-//            }
-//            return Disposables.create()
-//        }
-//    }
+    func post(query : WriteRequest) -> Single<Result<WriteResponse, AFError>> {
+        return Single<Result<WriteResponse, AFError>>.create { single in
+            do {
+                let urlRequest = try MainRouter.write(query: query).asURLRequest()
+                
+                AF.request(urlRequest)
+                    .validate(statusCode: 200..<300)
+                    .responseDecodable(of: WriteResponse.self) { response in
+                        switch response.result {
+                        case .success(let writeResponse):
+                            single(.success(.success(writeResponse)))
+                        case .failure(let error):
+                            print(response.response?.statusCode)
+                            single(.success(.failure(error)))
+                        }
+                    }
+            } catch {
+                single(.failure(error))
+            }
+            return Disposables.create()
+        }
+    }
 }

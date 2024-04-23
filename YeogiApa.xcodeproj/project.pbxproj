@@ -35,6 +35,7 @@
 		DB901C612BD58C7C003EEDC6 /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C602BD58C7C003EEDC6 /* CompleteButton.swift */; };
 		DB901C702BD694DC003EEDC6 /* FilesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */; };
 		DB901C742BD69531003EEDC6 /* FilesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C732BD69531003EEDC6 /* FilesResponse.swift */; };
+		DB901C762BD6D9A7003EEDC6 /* ImageResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C752BD6D9A7003EEDC6 /* ImageResize.swift */; };
 		DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */; };
 		DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */; };
 		DBCBA9E92BC7BE35006B40CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBA9E82BC7BE35006B40CA /* Assets.xcassets */; };
@@ -110,6 +111,7 @@
 		DB901C602BD58C7C003EEDC6 /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
 		DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesRequest.swift; sourceTree = "<group>"; };
 		DB901C732BD69531003EEDC6 /* FilesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesResponse.swift; sourceTree = "<group>"; };
+		DB901C752BD6D9A7003EEDC6 /* ImageResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResize.swift; sourceTree = "<group>"; };
 		DBCBA9DC2BC7BE34006B40CA /* YeogiApa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeogiApa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				DB204DEC2BD575AD006340BE /* Category.swift */,
+				DB901C752BD6D9A7003EEDC6 /* ImageResize.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */,
 				DBCBAA112BC7D0F0006B40CA /* TargetType.swift in Sources */,
 				DBCBAA242BC7E82A006B40CA /* EmailLoginViewModel.swift in Sources */,
+				DB901C762BD6D9A7003EEDC6 /* ImageResize.swift in Sources */,
 				DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */,
 				DBCBAA612BCD6A07006B40CA /* SignUpEmailViewModel.swift in Sources */,
 			);

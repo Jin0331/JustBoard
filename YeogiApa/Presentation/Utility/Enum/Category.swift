@@ -12,6 +12,7 @@ enum CategorySection : CaseIterable {
 }
 
 enum Category : String, CaseIterable {
+    
     case all = "전체"
     case life = "생활꿀팁"
     case concerns = "고민상담"
@@ -22,10 +23,33 @@ enum Category : String, CaseIterable {
     case law = "법률"
     case pet = "반려동물"
     
+    var name : String {
+        switch self {
+        case .all:
+            return "all"
+        case .life:
+            return "life"
+        case .concerns:
+            return "concerns"
+        case .develop:
+            return "develop"
+        case .premises:
+            return "premises"
+        case .medical:
+            return "medical"
+        case .pill:
+            return "pill"
+        case .law:
+            return "law"
+        case .pet:
+            return "pet"
+        }
+    }
+    
     var productId : String {
         switch self {
         default :
-            return "gyjw_" + self.rawValue
+            return "gyjw_" + self.name
         }
     }
 }

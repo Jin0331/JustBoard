@@ -65,32 +65,6 @@ final class QuestionViewController: RxBaseViewController {
         
         let output = viewModel.transform(input: input)
         
-        output.writeButtonUI
-            .debug("button UI")
-            .drive(with: self) { owner, valid in
-                                
-                if valid {
-                    owner.navigationItem.rightBarButtonItem =
-                    UIBarButtonItem(customView: owner.mainView.completeButtonItem)
-                } else {
-                    owner.navigationItem.rightBarButtonItem = nil
-                }
-
-            }
-            .disposed(by: disposeBag)
-        
-//        output.overAddedImageSize
-//            .debug("valid")
-//            .drive(with: self) { owner, validImageSize in
-//                
-//                if validImageSize {
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // in half a second...
-//                        owner.showAlert(title: "이미지 크기 초과", text: "5 MB 이하의 이미지를 추가해주세요 🥲", addButtonText: "확인")
-//                    }
-//                }
-//            }
-//            .disposed(by: disposeBag)
-//        
         output.overAddedImageCount
             .debug("overAddedImageCount")
             .drive(with: self) { owner, validImageAdd in
@@ -103,6 +77,21 @@ final class QuestionViewController: RxBaseViewController {
             }
             .disposed(by: disposeBag)
 
+        
+        output.writeButtonUI
+            .debug("button UI")
+            .drive(with: self) { owner, valid in
+                owner.navigationItem.rightBarButtonItem = valid ? UIBarButtonItem(customView: owner.mainView.completeButtonItem) : nil
+            }
+            .disposed(by: disposeBag)
+        
+        output.writeComplete
+            .drive(with: self) { owner, complete in
+                //TODO: - Coordinator 종료 및 Board로 이동
+                owner.parentCoordinator?.toBaord()
+                owner.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
     }
     
     

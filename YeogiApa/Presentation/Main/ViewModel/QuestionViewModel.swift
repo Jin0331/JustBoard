@@ -30,7 +30,7 @@ final class QuestionViewModel : MainViewModelType {
     struct Output {
         let overAddedImageCount : Driver<Bool>
         let writeButtonUI : Driver<Bool>
-        //        let writeComplete : Driver<Void>
+        let writeComplete : Driver<Bool>
     }
     
     func transform(input: Input) -> Output {
@@ -43,6 +43,7 @@ final class QuestionViewModel : MainViewModelType {
         let completeButtonTap = PublishSubject<Bool>()
         let uploadedFiles = PublishSubject<[String]>()
         let uploadedFilesLocation = PublishSubject<String>()
+        let writeComplete = PublishSubject<Bool>()
         
         // title
         input.titleText
@@ -103,6 +104,7 @@ final class QuestionViewModel : MainViewModelType {
                         .map { String($0) }.joined(separator: " ")) // 이미지 위치
                 case .failure: // 이미지 없음
                     uploadedFiles.onNext([])
+                    uploadedFilesLocation.onNext("")
                 }
             }
             .disposed(by: disposeBag)
@@ -136,6 +138,7 @@ final class QuestionViewModel : MainViewModelType {
                 case .success(let writeResponse):
                     
                     print(writeResponse)
+                    writeComplete.onNext(true)
                     
                 case .failure(let error):
                     print(error)
@@ -145,7 +148,8 @@ final class QuestionViewModel : MainViewModelType {
         
         return Output(
             overAddedImageCount:overAddedImageCount.asDriver(onErrorJustReturn: false),
-            writeButtonUI:completeButtonTap.asDriver(onErrorJustReturn: false)
+            writeButtonUI:completeButtonTap.asDriver(onErrorJustReturn: false),
+            writeComplete:writeComplete.asDriver(onErrorJustReturn: false)
             )
     }
     

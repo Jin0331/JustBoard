@@ -22,3 +22,9 @@ final class QuestionCoordinator : Coordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
 }
+
+extension QuestionCoordinator {
+    func toBaord() {
+        parentCoordinator?.toBoard(self)
+    }
+}

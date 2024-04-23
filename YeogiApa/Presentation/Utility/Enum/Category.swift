@@ -21,4 +21,11 @@ enum Category : String, CaseIterable {
     case pill = "약료"
     case law = "법률"
     case pet = "반려동물"
+    
+    var productId : String {
+        switch self {
+        default :
+            return "gyjw_" + self.rawValue
+        }
+    }
 }

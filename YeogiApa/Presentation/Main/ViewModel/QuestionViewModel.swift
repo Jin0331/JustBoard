@@ -29,14 +29,18 @@ final class QuestionViewModel : MainViewModelType {
     
     struct Output {
         let overAddedImageCount : Driver<Bool>
+        let writeButtonUI : Driver<Bool>
         //        let writeComplete : Driver<Void>
     }
     
     func transform(input: Input) -> Output {
         
-        let validTitle = PublishSubject<Bool>()
-        let validContents = PublishSubject<Bool>()
-        let overAddedImageCount = PublishSubject<Bool>()
+        let validTitle = BehaviorSubject<Bool>(value: false)
+        let validContents = BehaviorSubject<Bool>(value: false)
+        let validCategory = BehaviorSubject<Bool>(value: false)
+        let overAddedImageCount = BehaviorSubject<Bool>(value: false)
+        
+        let completeButtonTap = PublishSubject<Bool>()
         let uploadedFiles = PublishSubject<[String]>()
         let uploadedFilesLocation = PublishSubject<String>()
         
@@ -47,6 +51,12 @@ final class QuestionViewModel : MainViewModelType {
             }
             .disposed(by: disposeBag)
         
+        input.addCategory
+            .map { !$0.productId.isEmpty}
+            .bind(with: self) { owner, valid in
+                validCategory.onNext(valid)
+            }
+            .disposed(by: disposeBag)
         
         // 이미지 추가
         input.addedImage
@@ -70,10 +80,11 @@ final class QuestionViewModel : MainViewModelType {
         input.contentsText
             .bind(with: self) { owner, text in
                 
-                !text.isEmpty ? validContents.onNext(false) : validContents.onNext(true)
+                !text.isEmpty ? validContents.onNext(true) : validContents.onNext(false)
             }
             .disposed(by: disposeBag)
         
+        // 이미지 업로드
         input.completeButtonTap
             .throttle(.seconds(2), scheduler: MainScheduler.instance)
             .map { [weak self] _ in
@@ -90,17 +101,29 @@ final class QuestionViewModel : MainViewModelType {
                     uploadedFiles.onNext(filesResponse.files)
                     uploadedFilesLocation.onNext(owner.textView.getImageLocations()
                         .map { String($0) }.joined(separator: " ")) // 이미지 위치
-//                    print("이미지 개수 :",owner.textView.getNumberOfImages(), "이미지 위치:", owner.textView.getImageLocations(), "이미지 주소 : ", owner.textView.getImageURLs())
-                case .failure(let error): // 이미지 없음
+                case .failure: // 이미지 없음
                     uploadedFiles.onNext([])
                 }
+            }
+            .disposed(by: disposeBag)
+        
+        // complete Button 활성
+        Observable.combineLatest(validTitle, validContents, overAddedImageCount, validCategory)
+            .map { validTitle, validContents, validImageCount, validCategory in
+                return validTitle && validContents && !validImageCount && validCategory
+            }
+            .debug("Complete Button UI")
+            .bind(with: self) { owner, valid in
+                completeButtonTap.onNext(valid)
             }
             .disposed(by: disposeBag)
         
         // Post 작성
         let writeRequest = Observable.combineLatest(input.addCategory, input.titleText, input.contentsText, input.addLink, uploadedFilesLocation, uploadedFiles)
             .map { category, title, contents, link, position, files in
-                return WriteRequest(product_id: category.rawValue, title: title, content1: contents, content2: link, content3: position, files: files)
+                return WriteRequest(product_id: category.productId, title: title,
+                                    content1: contents, content2: link, content3: position,
+                                    files: files)
             }
             .flatMap { writeRequest in
                 NetworkManager.shared.post(query: writeRequest)
@@ -121,7 +144,8 @@ final class QuestionViewModel : MainViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            overAddedImageCount:overAddedImageCount.asDriver(onErrorJustReturn: false)
+            overAddedImageCount:overAddedImageCount.asDriver(onErrorJustReturn: false),
+            writeButtonUI:completeButtonTap.asDriver(onErrorJustReturn: false)
             )
     }
     

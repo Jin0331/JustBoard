@@ -64,6 +64,21 @@ final class QuestionViewController: RxBaseViewController {
         )
         
         let output = viewModel.transform(input: input)
+        
+        output.writeButtonUI
+            .debug("button UI")
+            .drive(with: self) { owner, valid in
+                                
+                if valid {
+                    owner.navigationItem.rightBarButtonItem =
+                    UIBarButtonItem(customView: owner.mainView.completeButtonItem)
+                } else {
+                    owner.navigationItem.rightBarButtonItem = nil
+                }
+
+            }
+            .disposed(by: disposeBag)
+        
 //        output.overAddedImageSize
 //            .debug("valid")
 //            .drive(with: self) { owner, validImageSize in
@@ -77,7 +92,7 @@ final class QuestionViewController: RxBaseViewController {
 //            .disposed(by: disposeBag)
 //        
         output.overAddedImageCount
-            .debug("valid")
+            .debug("overAddedImageCount")
             .drive(with: self) { owner, validImageAdd in
                 
                 if validImageAdd {
@@ -93,7 +108,7 @@ final class QuestionViewController: RxBaseViewController {
     
     override func configureNavigation() {
         super.configureNavigation()
-        navigationItem.rightBarButtonItem = mainView.completeButtonItem
+//        navigationItem.rightBarButtonItem = mainView.completeButtonItem
     }
     
     override func configureView() {

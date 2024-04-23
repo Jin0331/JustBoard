@@ -12,15 +12,10 @@ import STTextView
 
 final class QuestionView: BaseView {
     
-    let completeButtonItem = UIBarButtonItem().then {
-        $0.title = "작성하기"
-        $0.tintColor = DesignSystem.commonColorSet.gray
-        
-        let attributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .heavy)
-        ]
-        $0.setTitleTextAttributes(attributes, for: .normal)
+    let completeButtonItem = CompleteButton(title: "완료하기", image: nil, fontSize: 18, disable: false).then {
+        $0.frame = CGRect(x: 0, y: 0, width: 100, height: 35)
     }
+    
     
     private let scrollView = UIScrollView().then {
         $0.backgroundColor = DesignSystem.commonColorSet.white

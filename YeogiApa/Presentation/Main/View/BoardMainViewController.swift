@@ -23,18 +23,19 @@ final class BoardMainViewController: RxBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let urlRequest = MainRouter.write(query: WriteRequest(title: "postTest", content: "테스트임니다!", product_id: "yeogiApa_test"))
-//        
-//        AF.request(urlRequest, interceptor: AuthManager())
-//            .validate(statusCode: 200..<300)
-//            .responseDecodable(of: WriteResponse.self) { response in
-//                switch response.result {
-//                case .success(let writeModel):
-//                    print(writeModel)
-//                case .failure(let error):
-//                    print(error)
-//                }
-//            }
+        let temp = NetworkManager.shared.post(query: InquiryRequest(next: "0", limit: "30", product_id: "gyjw_all"))
+        
+        temp.asObservable()
+            .subscribe(with: self) { owner, value in
+                switch value {
+                case .success(let value):
+                    print(value)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .disposed(by: disposeBag)
+        
     }
     
     override func bind() {

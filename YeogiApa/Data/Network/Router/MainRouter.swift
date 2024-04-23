@@ -11,6 +11,7 @@ import Alamofire
 enum MainRouter {
     case write(query : WriteRequest)
     case files(query : FilesRequest, category : String)
+    case inquiry(query : InquiryRequest)
 }
 
 
@@ -23,12 +24,14 @@ extension MainRouter : TargetType {
         switch self {
         case .write, .files :
             return .post
+        case .inquiry:
+            return .get
         }
     }
     
     var path: String {
         switch self {
-        case .write:
+        case .write, .inquiry:
             return "/posts"
         case .files:
             return "/posts/files"
@@ -51,11 +54,23 @@ extension MainRouter : TargetType {
                 HTTPHeader.contentType.rawValue : HTTPHeader.multipart.rawValue,
                 HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue
             ]
+        case .inquiry :
+            return [
+                HTTPHeader.authorization.rawValue : token,
+                HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue
+            ]
         }
     }
     
     var parameter: Parameters? {
-        return nil
+        switch self {
+        case .inquiry(query: let query):
+            return [QueryString.next.rawValue : query.next,
+                    QueryString.limit.rawValue : query.limit,
+                    QueryString.product_id.rawValue : query.product_id]
+        default :
+            return nil
+        }
     }
     
     var queryItems: [URLQueryItem]? {

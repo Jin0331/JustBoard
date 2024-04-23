@@ -16,7 +16,7 @@ final class NetworkManager  {
     private init() { }
     
     //MARK: - Join
-    
+    //TODO: - 제네릭 구조로 변경 필요
     func createJoin(query : JoinRequest) -> Single<Result<JoinResponse, AFError>>  {
         return Single<Result<JoinResponse, AFError>>.create  { single in
             do {
@@ -119,12 +119,35 @@ final class NetworkManager  {
             do {
                 let urlRequest = try MainRouter.write(query: query).asURLRequest()
                 
-                AF.request(urlRequest)
+                AF.request(urlRequest, interceptor: AuthManager())
                     .validate(statusCode: 200..<300)
                     .responseDecodable(of: WriteResponse.self) { response in
                         switch response.result {
                         case .success(let writeResponse):
                             single(.success(.success(writeResponse)))
+                        case .failure(let error):
+                            print(response.response?.statusCode)
+                            single(.success(.failure(error)))
+                        }
+                    }
+            } catch {
+                single(.failure(error))
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func post(query : InquiryRequest) -> Single<Result<InquiryResponse, AFError>> {
+        return Single<Result<InquiryResponse, AFError>>.create { single in
+            do {
+                let urlRequest = try MainRouter.inquiry(query: query).asURLRequest()
+                
+                AF.request(urlRequest, interceptor: AuthManager())
+                    .validate(statusCode: 200..<300)
+                    .responseDecodable(of: InquiryResponse.self) { response in
+                        switch response.result {
+                        case .success(let inquiryResponse):
+                            single(.success(.success(inquiryResponse)))
                         case .failure(let error):
                             print(response.response?.statusCode)
                             single(.success(.failure(error)))

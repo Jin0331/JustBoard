@@ -36,6 +36,9 @@
 		DB901C702BD694DC003EEDC6 /* FilesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */; };
 		DB901C742BD69531003EEDC6 /* FilesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C732BD69531003EEDC6 /* FilesResponse.swift */; };
 		DB901C762BD6D9A7003EEDC6 /* ImageResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C752BD6D9A7003EEDC6 /* ImageResize.swift */; };
+		DBB7C6622BD7B77800D3081A /* InquiryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6612BD7B77800D3081A /* InquiryRequest.swift */; };
+		DBB7C6642BD7B89F00D3081A /* QueryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6632BD7B89F00D3081A /* QueryString.swift */; };
+		DBB7C6662BD7B9C200D3081A /* InquiryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6652BD7B9C200D3081A /* InquiryResponse.swift */; };
 		DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */; };
 		DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */; };
 		DBCBA9E92BC7BE35006B40CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBA9E82BC7BE35006B40CA /* Assets.xcassets */; };
@@ -112,6 +115,9 @@
 		DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesRequest.swift; sourceTree = "<group>"; };
 		DB901C732BD69531003EEDC6 /* FilesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesResponse.swift; sourceTree = "<group>"; };
 		DB901C752BD6D9A7003EEDC6 /* ImageResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResize.swift; sourceTree = "<group>"; };
+		DBB7C6612BD7B77800D3081A /* InquiryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryRequest.swift; sourceTree = "<group>"; };
+		DBB7C6632BD7B89F00D3081A /* QueryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryString.swift; sourceTree = "<group>"; };
+		DBB7C6652BD7B9C200D3081A /* InquiryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryResponse.swift; sourceTree = "<group>"; };
 		DBCBA9DC2BC7BE34006B40CA /* YeogiApa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeogiApa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -261,6 +267,7 @@
 				DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */,
 				DB4110112BD173D60088679F /* WriteRequest.swift */,
 				DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */,
+				DBB7C6612BD7B77800D3081A /* InquiryRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -274,8 +281,16 @@
 				DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */,
 				DB4110132BD19E0A0088679F /* WriteResponse.swift */,
 				DB901C732BD69531003EEDC6 /* FilesResponse.swift */,
+				DBB7C6652BD7B9C200D3081A /* InquiryResponse.swift */,
 			);
 			path = Response;
+			sourceTree = "<group>";
+		};
+		DBB7C6602BD7B70600D3081A /* BindingModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BindingModel;
 			sourceTree = "<group>";
 		};
 		DBCBA9D32BC7BE34006B40CA = {
@@ -316,7 +331,8 @@
 				DBCBAA0E2BC7D0E1006B40CA /* NetworkManager.swift */,
 				DBCBAA2E2BC86224006B40CA /* AuthManager.swift */,
 				DBCBA9FF2BC7CCE2006B40CA /* Router */,
-				DBCBA9FE2BC7CCD8006B40CA /* DataMapping */,
+				DBCBA9FE2BC7CCD8006B40CA /* QueryModel */,
+				DBB7C6632BD7B89F00D3081A /* QueryString.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -383,6 +399,7 @@
 			children = (
 				DBCBAA252BC82D4A006B40CA /* UserDefault */,
 				DBCBA9F52BC7C446006B40CA /* Network */,
+				DBB7C6602BD7B70600D3081A /* BindingModel */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -409,13 +426,13 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
-		DBCBA9FE2BC7CCD8006B40CA /* DataMapping */ = {
+		DBCBA9FE2BC7CCD8006B40CA /* QueryModel */ = {
 			isa = PBXGroup;
 			children = (
 				DB901C712BD694E4003EEDC6 /* Request */,
 				DB901C722BD694E9003EEDC6 /* Response */,
 			);
-			path = DataMapping;
+			path = QueryModel;
 			sourceTree = "<group>";
 		};
 		DBCBA9FF2BC7CCE2006B40CA /* Router */ = {
@@ -637,6 +654,7 @@
 				DB4110122BD173D60088679F /* WriteRequest.swift in Sources */,
 				DBCBAA0B2BC7D0A5006B40CA /* LoginRequest.swift in Sources */,
 				DBCBE3B72BCD87B700B6DAC5 /* SignUpPasswordViewModel.swift in Sources */,
+				DBB7C6662BD7B9C200D3081A /* InquiryResponse.swift in Sources */,
 				DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */,
 				DBCBAA092BC7CEE8006B40CA /* UserRouter.swift in Sources */,
 				DBCBAA152BC7DC8C006B40CA /* JoinRequest.swift in Sources */,
@@ -661,6 +679,7 @@
 				DBCBAA582BCD0ACC006B40CA /* SignInUpView.swift in Sources */,
 				DB901C612BD58C7C003EEDC6 /* CompleteButton.swift in Sources */,
 				DBCBE3D42BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift in Sources */,
+				DBB7C6622BD7B77800D3081A /* InquiryRequest.swift in Sources */,
 				DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */,
 				DBCBAA5A2BCD5D05006B40CA /* SignUpEmailViewController.swift in Sources */,
 				DBCBAA562BCD0705006B40CA /* SignInUpViewController.swift in Sources */,
@@ -669,6 +688,7 @@
 				DB4110162BD1AC720088679F /* Notification.Name+Extension.swift in Sources */,
 				DBCBE3B92BCD892500B6DAC5 /* NextButton.swift in Sources */,
 				DB204D9C2BD2A8C9006340BE /* BoardMainViewModel.swift in Sources */,
+				DBB7C6642BD7B89F00D3081A /* QueryString.swift in Sources */,
 				DB4110092BD160B00088679F /* BoardMainViewController.swift in Sources */,
 				DB204D962BD29F0A006340BE /* MainTabBarController.swift in Sources */,
 				DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */,

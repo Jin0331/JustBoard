@@ -28,8 +28,8 @@
 		DB4110092BD160B00088679F /* BoardMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110082BD160B00088679F /* BoardMainViewController.swift */; };
 		DB41100B2BD160F80088679F /* BoardMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB41100A2BD160F80088679F /* BoardMainView.swift */; };
 		DB4110102BD173860088679F /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB41100F2BD173860088679F /* MainRouter.swift */; };
-		DB4110122BD173D60088679F /* WriteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110112BD173D60088679F /* WriteRequest.swift */; };
-		DB4110142BD19E0A0088679F /* WriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110132BD19E0A0088679F /* WriteResponse.swift */; };
+		DB4110122BD173D60088679F /* PostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110112BD173D60088679F /* PostRequest.swift */; };
+		DB4110142BD19E0A0088679F /* PostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110132BD19E0A0088679F /* PostResponse.swift */; };
 		DB4110162BD1AC720088679F /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */; };
 		DB901C5F2BD5835F003EEDC6 /* LinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C5E2BD5835F003EEDC6 /* LinkViewController.swift */; };
 		DB901C612BD58C7C003EEDC6 /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C602BD58C7C003EEDC6 /* CompleteButton.swift */; };
@@ -38,7 +38,10 @@
 		DB901C762BD6D9A7003EEDC6 /* ImageResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C752BD6D9A7003EEDC6 /* ImageResize.swift */; };
 		DBB7C6622BD7B77800D3081A /* InquiryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6612BD7B77800D3081A /* InquiryRequest.swift */; };
 		DBB7C6642BD7B89F00D3081A /* QueryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6632BD7B89F00D3081A /* QueryString.swift */; };
-		DBB7C6662BD7B9C200D3081A /* InquiryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6652BD7B9C200D3081A /* InquiryResponse.swift */; };
+		DBB7C66B2BD8AF9B00D3081A /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C66A2BD8AF9B00D3081A /* BoardCollectionViewCell.swift */; };
+		DBB7C66D2BD8AFAA00D3081A /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C66C2BD8AFA900D3081A /* BaseCollectionViewCell.swift */; };
+		DBB7C66F2BD9251A00D3081A /* DiffableDataSource+Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C66E2BD9251A00D3081A /* DiffableDataSource+Typealias.swift */; };
+		DBB7C6712BD92A0F00D3081A /* DiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6702BD92A0F00D3081A /* DiffableDataSource.swift */; };
 		DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */; };
 		DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */; };
 		DBCBA9E92BC7BE35006B40CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBA9E82BC7BE35006B40CA /* Assets.xcassets */; };
@@ -107,8 +110,8 @@
 		DB4110082BD160B00088679F /* BoardMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMainViewController.swift; sourceTree = "<group>"; };
 		DB41100A2BD160F80088679F /* BoardMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMainView.swift; sourceTree = "<group>"; };
 		DB41100F2BD173860088679F /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
-		DB4110112BD173D60088679F /* WriteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRequest.swift; sourceTree = "<group>"; };
-		DB4110132BD19E0A0088679F /* WriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteResponse.swift; sourceTree = "<group>"; };
+		DB4110112BD173D60088679F /* PostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequest.swift; sourceTree = "<group>"; };
+		DB4110132BD19E0A0088679F /* PostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResponse.swift; sourceTree = "<group>"; };
 		DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
 		DB901C5E2BD5835F003EEDC6 /* LinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkViewController.swift; sourceTree = "<group>"; };
 		DB901C602BD58C7C003EEDC6 /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
@@ -117,7 +120,10 @@
 		DB901C752BD6D9A7003EEDC6 /* ImageResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResize.swift; sourceTree = "<group>"; };
 		DBB7C6612BD7B77800D3081A /* InquiryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryRequest.swift; sourceTree = "<group>"; };
 		DBB7C6632BD7B89F00D3081A /* QueryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryString.swift; sourceTree = "<group>"; };
-		DBB7C6652BD7B9C200D3081A /* InquiryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryResponse.swift; sourceTree = "<group>"; };
+		DBB7C66A2BD8AF9B00D3081A /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCell.swift; sourceTree = "<group>"; };
+		DBB7C66C2BD8AFA900D3081A /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		DBB7C66E2BD9251A00D3081A /* DiffableDataSource+Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiffableDataSource+Typealias.swift"; sourceTree = "<group>"; };
+		DBB7C6702BD92A0F00D3081A /* DiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableDataSource.swift; sourceTree = "<group>"; };
 		DBCBA9DC2BC7BE34006B40CA /* YeogiApa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeogiApa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -191,6 +197,7 @@
 			children = (
 				DB204DEC2BD575AD006340BE /* Category.swift */,
 				DB901C752BD6D9A7003EEDC6 /* ImageResize.swift */,
+				DBB7C66E2BD9251A00D3081A /* DiffableDataSource+Typealias.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -208,6 +215,7 @@
 		DB410FF62BD0CFF20088679F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DBB7C6672BD8AF1F00D3081A /* Cell */,
 				DB204D952BD29F0A006340BE /* MainTabBarController.swift */,
 				DB410FF42BD0CFA10088679F /* MainViewController.swift */,
 				DB41100A2BD160F80088679F /* BoardMainView.swift */,
@@ -265,7 +273,7 @@
 				DBCBAA0A2BC7D0A5006B40CA /* LoginRequest.swift */,
 				DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */,
 				DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */,
-				DB4110112BD173D60088679F /* WriteRequest.swift */,
+				DB4110112BD173D60088679F /* PostRequest.swift */,
 				DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */,
 				DBB7C6612BD7B77800D3081A /* InquiryRequest.swift */,
 			);
@@ -279,18 +287,18 @@
 				DBCBAA122BC7D900006B40CA /* LoginResponse.swift */,
 				DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */,
 				DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */,
-				DB4110132BD19E0A0088679F /* WriteResponse.swift */,
+				DB4110132BD19E0A0088679F /* PostResponse.swift */,
 				DB901C732BD69531003EEDC6 /* FilesResponse.swift */,
-				DBB7C6652BD7B9C200D3081A /* InquiryResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
 		};
-		DBB7C6602BD7B70600D3081A /* BindingModel */ = {
+		DBB7C6672BD8AF1F00D3081A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				DBB7C66A2BD8AF9B00D3081A /* BoardCollectionViewCell.swift */,
 			);
-			path = BindingModel;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		DBCBA9D32BC7BE34006B40CA = {
@@ -390,6 +398,7 @@
 			children = (
 				DBCBAA032BC7CD32006B40CA /* BaseView.swift */,
 				DBCBAA022BC7CD32006B40CA /* BaseViewController.swift */,
+				DBB7C66C2BD8AFA900D3081A /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -399,7 +408,6 @@
 			children = (
 				DBCBAA252BC82D4A006B40CA /* UserDefault */,
 				DBCBA9F52BC7C446006B40CA /* Network */,
-				DBB7C6602BD7B70600D3081A /* BindingModel */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -458,6 +466,7 @@
 			children = (
 				DBCBAA1D2BC7E7F2006B40CA /* ReusableID.swift */,
 				DBCBAA1E2BC7E7F2006B40CA /* ViewModelType.swift */,
+				DBB7C6702BD92A0F00D3081A /* DiffableDataSource.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -644,6 +653,7 @@
 				DBCBAA072BC7CE79006B40CA /* DesignSystem.swift in Sources */,
 				DB204DA22BD2E926006340BE /* UITextView+Extension.swift in Sources */,
 				DB4110052BD15B300088679F /* BoardCoordinator.swift in Sources */,
+				DBB7C66F2BD9251A00D3081A /* DiffableDataSource+Typealias.swift in Sources */,
 				DBCBAA542BCD006E006B40CA /* UserCoordinator.swift in Sources */,
 				DBCBAA192BC7E106006B40CA /* EmailLoginView.swift in Sources */,
 				DB204DE82BD57525006340BE /* CategorySelectView.swift in Sources */,
@@ -651,10 +661,10 @@
 				DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */,
 				DBCBE3B52BCD845F00B6DAC5 /* SignUpPasswordViewController.swift in Sources */,
 				DBCBAA2B2BC83A54006B40CA /* RefreshRequest.swift in Sources */,
-				DB4110122BD173D60088679F /* WriteRequest.swift in Sources */,
+				DB4110122BD173D60088679F /* PostRequest.swift in Sources */,
 				DBCBAA0B2BC7D0A5006B40CA /* LoginRequest.swift in Sources */,
 				DBCBE3B72BCD87B700B6DAC5 /* SignUpPasswordViewModel.swift in Sources */,
-				DBB7C6662BD7B9C200D3081A /* InquiryResponse.swift in Sources */,
+				DBB7C66B2BD8AF9B00D3081A /* BoardCollectionViewCell.swift in Sources */,
 				DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */,
 				DBCBAA092BC7CEE8006B40CA /* UserRouter.swift in Sources */,
 				DBCBAA152BC7DC8C006B40CA /* JoinRequest.swift in Sources */,
@@ -665,7 +675,7 @@
 				DB204D982BD2A669006340BE /* QuestionCoordinator.swift in Sources */,
 				DBCBE3D62BCE8A0700B6DAC5 /* JoinResponse.swift in Sources */,
 				DB204DA42BD422A7006340BE /* QuestionViewModel.swift in Sources */,
-				DB4110142BD19E0A0088679F /* WriteResponse.swift in Sources */,
+				DB4110142BD19E0A0088679F /* PostResponse.swift in Sources */,
 				DBCBAA502BCCFA0B006B40CA /* Protocol.swift in Sources */,
 				DBCBAA052BC7CD32006B40CA /* BaseView.swift in Sources */,
 				DB41100B2BD160F80088679F /* BoardMainView.swift in Sources */,
@@ -682,6 +692,7 @@
 				DBB7C6622BD7B77800D3081A /* InquiryRequest.swift in Sources */,
 				DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */,
 				DBCBAA5A2BCD5D05006B40CA /* SignUpEmailViewController.swift in Sources */,
+				DBB7C66D2BD8AFAA00D3081A /* BaseCollectionViewCell.swift in Sources */,
 				DBCBAA562BCD0705006B40CA /* SignInUpViewController.swift in Sources */,
 				DB410FF52BD0CFA10088679F /* MainViewController.swift in Sources */,
 				DB204D9A2BD2A6C7006340BE /* QuestionViewController.swift in Sources */,
@@ -697,6 +708,7 @@
 				DB901C762BD6D9A7003EEDC6 /* ImageResize.swift in Sources */,
 				DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */,
 				DBCBAA612BCD6A07006B40CA /* SignUpEmailViewModel.swift in Sources */,
+				DBB7C6712BD92A0F00D3081A /* DiffableDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

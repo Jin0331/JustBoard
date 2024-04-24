@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 enum MainRouter {
-    case write(query : WriteRequest)
+    case write(query : PostRequest)
     case files(query : FilesRequest, category : String)
     case inquiry(query : InquiryRequest)
 }

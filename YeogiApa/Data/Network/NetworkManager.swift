@@ -114,14 +114,14 @@ final class NetworkManager  {
     }
     
     //MARK: - Post
-    func post(query : WriteRequest) -> Single<Result<WriteResponse, AFError>> {
-        return Single<Result<WriteResponse, AFError>>.create { single in
+    func post(query : PostRequest) -> Single<Result<PostResponse, AFError>> {
+        return Single<Result<PostResponse, AFError>>.create { single in
             do {
                 let urlRequest = try MainRouter.write(query: query).asURLRequest()
                 
                 AF.request(urlRequest, interceptor: AuthManager())
                     .validate(statusCode: 200..<300)
-                    .responseDecodable(of: WriteResponse.self) { response in
+                    .responseDecodable(of: PostResponse.self) { response in
                         switch response.result {
                         case .success(let writeResponse):
                             single(.success(.success(writeResponse)))

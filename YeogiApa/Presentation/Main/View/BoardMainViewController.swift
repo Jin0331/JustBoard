@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxViewController
 import Alamofire
 
 final class BoardMainViewController: RxBaseViewController {
@@ -15,31 +16,18 @@ final class BoardMainViewController: RxBaseViewController {
     private let mainView = BoardMainView()
     private let viewModel = BoardMainViewModel()
     var parentCoordinator : BoardCoordinator?
+    private var datasource : BoardDataSource!
     
     override func loadView() {
         view = mainView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let temp = NetworkManager.shared.post(query: InquiryRequest(next: "0", limit: "30", product_id: "gyjw_all"))
-        
-        temp.asObservable()
-            .subscribe(with: self) { owner, value in
-                switch value {
-                case .success(let value):
-                    print(value)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-            .disposed(by: disposeBag)
-        
-    }
-    
     override func bind() {
-        let input = BoardMainViewModel.Input(questionButtonTap: mainView.questionButton.rx.tap)
+        
+        let input = BoardMainViewModel.Input(
+            viewWillAppear: rx.viewWillAppear,
+            questionButtonTap:  mainView.questionButton.rx.tap
+        )
         
         let output = viewModel.transform(input: input)
         
@@ -49,5 +37,26 @@ final class BoardMainViewController: RxBaseViewController {
                 owner.parentCoordinator?.toQuestion()
             }
             .disposed(by: disposeBag)
+    }
+}
+
+extension BoardMainViewController : DiffableDataSource {
+    func configureDataSource() {
+        let cellRegistration = mainView.boardCellRegistration()
+        datasource = UICollectionViewDiffableDataSource(collectionView: mainView.mainCollectionView, cellProvider: {collectionView, indexPath, itemIdentifier in
+            
+            let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+            cell.updateUI(itemIdentifier)
+            
+            return cell
+        })
+    }
+    
+    func updateSnapshot(_ data : [PostResponse]) {
+        var snapshot = BoardDataSourceSnapshot()
+        snapshot.appendSections(BoardViewSection.allCases)
+        snapshot.appendItems(data, toSection: .main)
+        
+        datasource.apply(snapshot)
     }
 }

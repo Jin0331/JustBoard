@@ -16,6 +16,7 @@ target 'YeogiApa' do
   pod 'IQKeyboardManagerSwift'
   pod 'YPImagePicker'
   pod 'Toast-Swift', '~> 5.1.0'
+  pod 'RxViewController'
 end
 
 post_install do |installer|

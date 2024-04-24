@@ -123,7 +123,7 @@ final class QuestionViewModel : MainViewModelType {
         // Post 작성
         let writeRequest = Observable.combineLatest(input.addCategory, input.titleText, input.contentsText, input.addLink, uploadedFilesLocation, uploadedFiles)
             .map { category, title, contents, link, position, files in
-                return WriteRequest(product_id: category.productId, title: title,
+                return PostRequest(product_id: category.productId, title: title,
                                     content1: contents, content2: link, content3: position,
                                     files: files)
             }

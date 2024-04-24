@@ -1,5 +1,5 @@
 //
-//  WriteRequest.swift
+//  PostRequest.swift
 //  YeogiApa
 //
 //  Created by JinwooLee on 4/19/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WriteRequest : Encodable {
+struct PostRequest : Encodable {
     let product_id : String
     let title : String
     let content1 : String // 본문

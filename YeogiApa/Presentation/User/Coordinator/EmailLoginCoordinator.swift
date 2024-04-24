@@ -18,7 +18,7 @@ final class EmailLoginCoordinator : Coordinator {
     
     func start() {
         let vc = EmailLoginViewController()
-        vc.delegate = self
+        vc.parentCoordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
     
@@ -41,26 +41,26 @@ extension EmailLoginCoordinator {
     
     func emailLogin() {
         let vc = EmailLoginViewController()
-        vc.delegate = self
+        vc.parentCoordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
     
     func signUp() {
         print("회원가입 ✅")
         let vc = SignUpEmailViewController()
-        vc.delegate = self
+        vc.parentCoordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
     
     func netxSignUpPasswordVC(email: String) {
         let vc = SignUpPasswordViewController(email:email)
-        vc.delegate = self
+        vc.parentCoordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
     
     func signUpCompleted(email: String, password: String) {
         let vc = SignUpNicknameWithPhoneViewController(email: email, password: password)
-        vc.delegate = self
+        vc.parentCoordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
     

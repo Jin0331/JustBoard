@@ -8,7 +8,7 @@
 import UIKit
 import Then
 import SnapKit
-import
+import Kingfisher
 
 final class BoardDetailView: BaseView {
     
@@ -112,25 +112,40 @@ final class BoardDetailView: BaseView {
         createdAt.text = data.createdAt
         commentCountButton.setTitle(String(data.comments.count), for: .normal)
         
-        
-        data.content3
-        data.files
-        
         mainTextView.text = data.content1
         
-        KingfisherManager.shared.retrieveImage(with: url) { result in
-            switch result {
-            case .success(let value):
-                print(value.image) // image object
-                print(value.cacheType) // cache source or nil
-                print(value.data)
-                print(value.source)
-                print(value.originalSource)
-            case .failure(let error):
-                print(error)
-            }
+        let urlList = data.filesToUrl
+        let imageLocation = data.content3ToImageLocation
+        
+        if !urlList.isEmpty {
+            addTextViewImage(url: urlList[0], location: imageLocation[0])
         }
-        출처: https://jkim68888.tistory.com/4 [Jihyun Kim:티스토리]
     }
     
+    
+
+    
+    private func addTextViewImage(url : URL, location: Int) {
+        
+        KingfisherManager.shared.downloader.downloadImage(with: url, options: [.requestModifier(AuthManager.kingfisherAuth())] ) { [weak self] result in
+            
+            guard let self = self else { return }
+            switch result {
+            case .success(let imageResult):
+                // 이미지 다운로드 성공 시 NSAttributedString을 만들어서 UITextView에 삽입
+                let attachment = NSTextAttachment()
+                attachment.image = imageResult.image
+                let imageAttributedString = NSAttributedString(attachment: attachment)
+                
+                // 원하는 위치에 이미지 삽입
+                let mutableAttributedString = NSMutableAttributedString(attributedString: mainTextView.attributedText)
+                let range = NSRange(location: location, length: 0) // 특정 위치 (예: 10번째 문자 뒤)
+                mutableAttributedString.insert(imageAttributedString, at: range.location)
+                mainTextView.attributedText = mutableAttributedString
+                
+            case .failure(let error):
+                print("Image download failed: \(error)")
+            }
+        }
+    }
 }

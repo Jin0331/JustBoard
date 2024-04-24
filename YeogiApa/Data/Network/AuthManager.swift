@@ -6,6 +6,7 @@
 //
 
 import Alamofire
+import Kingfisher
 
 //MARK: - Access Token 갱신을 위한 Alamorefire RequestInterceptor protocol
 final class AuthManager : RequestInterceptor {
@@ -73,5 +74,20 @@ final class AuthManager : RequestInterceptor {
             
         } // 어떤 에러가 발생할 수 있을까....?
         
+    }
+}
+
+extension AuthManager {
+    static func kingfisherAuth() -> AnyModifier {
+        guard let accessToken = UserDefaultManager.shared.accessToken else { return AnyModifier { $0 } }
+        
+        let modifier = AnyModifier { request in
+            var req = request
+            req.addValue(APIKey.secretKey.rawValue, forHTTPHeaderField: HTTPHeader.sesacKey.rawValue)
+            req.addValue(accessToken, forHTTPHeaderField: HTTPHeader.authorization.rawValue)
+            return req
+        }
+        
+        return modifier
     }
 }

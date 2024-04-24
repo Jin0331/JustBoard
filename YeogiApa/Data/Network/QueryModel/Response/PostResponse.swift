@@ -69,6 +69,21 @@ struct PostResponse: Decodable, Hashable {
         hasher.combine(postID)
     }
     
+    var content3ToImageLocation : [Int] {
+        
+        if content3.isEmpty {
+            return []
+        } else {
+            let convert = content3.split(separator: " ").map { Int($0)! }
+            return convert
+        }
+    }
+    
+    var filesToUrl : [URL] {
+        return files.map { 
+            URL(string: APIKey.baseURLWithVersion() + "/" + $0)!
+        }
+    }
 }
 
 struct Comment: Decodable, Hashable {

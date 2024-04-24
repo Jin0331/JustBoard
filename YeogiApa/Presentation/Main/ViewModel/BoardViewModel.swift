@@ -19,6 +19,7 @@ final class BoardViewModel : MainViewModelType {
     }
     
     struct Output {
+        let viewWillAppear : Driver<Bool>
         let questionButtonTap : Driver<Void>
         let postData : PublishSubject<[PostResponse]>
     }
@@ -43,6 +44,7 @@ final class BoardViewModel : MainViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
+            viewWillAppear:input.viewWillAppear.asDriver(onErrorJustReturn: false),
             questionButtonTap: input.questionButtonTap.asDriver(),
             postData: postData
         )

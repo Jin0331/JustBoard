@@ -8,6 +8,7 @@
 import UIKit
 import Then
 import SnapKit
+import Alamofire
 
 final class BoardDetailView: BaseView {
     
@@ -24,7 +25,7 @@ final class BoardDetailView: BaseView {
     
     let title = UILabel().then {
         $0.font = .systemFont(ofSize: 20, weight: .heavy)
-        $0.text = "[일반] 노엘 : 작년에 30만정도에 이어폰 샀는데 소리가 좋더라 시파파파파파ㅏ파파파파파파파파파파"
+        $0.text = "[일반] 노엘 : 작년에 30만정도에 이어폰 샀는데 소리가"
         $0.numberOfLines = 2
     }
     
@@ -35,6 +36,7 @@ final class BoardDetailView: BaseView {
     }
     
     private let createdAt = UILabel().then {
+        $0.text = "2024.04.25 (목)"
         $0.font = .systemFont(ofSize: 16, weight: .regular)
         $0.textColor = DesignSystem.commonColorSet.gray
         $0.textAlignment = .left
@@ -86,7 +88,7 @@ final class BoardDetailView: BaseView {
         createdAt.snp.makeConstraints { make in
             make.centerY.equalTo(author)
             make.height.equalTo(author)
-            make.width.equalTo(100)
+            make.width.equalTo(130)
             make.leading.equalTo(author.snp.trailing).offset(10)
         }
         
@@ -104,4 +106,15 @@ final class BoardDetailView: BaseView {
         }
     }
 
+    func updateUI(_ data : PostResponse) {
+        title.text = data.title
+        author.setTitle(data.creator.nick, for: .normal)
+        createdAt.text = data.createdAt
+        commentCountButton.setTitle(String(data.comments.count), for: .normal)
+        
+        data.files
+        
+        mainTextView.text = data.content1
+    }
+    
 }

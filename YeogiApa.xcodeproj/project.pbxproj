@@ -44,6 +44,7 @@
 		DBB7C6752BD93F2400D3081A /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6742BD93F2400D3081A /* BoardViewController.swift */; };
 		DBB7C6772BD93F9000D3081A /* BoardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6762BD93F9000D3081A /* BoardDetailViewController.swift */; };
 		DBB7C6792BD944FC00D3081A /* BoardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6782BD944FC00D3081A /* BoardDetailView.swift */; };
+		DBB7C67B2BD95D0A00D3081A /* BoardDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C67A2BD95D0A00D3081A /* BoardDetailViewModel.swift */; };
 		DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */; };
 		DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */; };
 		DBCBA9E92BC7BE35006B40CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBA9E82BC7BE35006B40CA /* Assets.xcassets */; };
@@ -128,6 +129,7 @@
 		DBB7C6742BD93F2400D3081A /* BoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
 		DBB7C6762BD93F9000D3081A /* BoardDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailViewController.swift; sourceTree = "<group>"; };
 		DBB7C6782BD944FC00D3081A /* BoardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailView.swift; sourceTree = "<group>"; };
+		DBB7C67A2BD95D0A00D3081A /* BoardDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailViewModel.swift; sourceTree = "<group>"; };
 		DBCBA9DC2BC7BE34006B40CA /* YeogiApa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeogiApa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				DB204D9B2BD2A8C9006340BE /* BoardViewModel.swift */,
+				DBB7C67A2BD95D0A00D3081A /* BoardDetailViewModel.swift */,
 				DB204DA32BD422A7006340BE /* QuestionViewModel.swift */,
 			);
 			path = ViewModel;
@@ -696,6 +699,7 @@
 				DBCBAA582BCD0ACC006B40CA /* SignInUpView.swift in Sources */,
 				DB901C612BD58C7C003EEDC6 /* CompleteButton.swift in Sources */,
 				DBCBE3D42BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift in Sources */,
+				DBB7C67B2BD95D0A00D3081A /* BoardDetailViewModel.swift in Sources */,
 				DBB7C6622BD7B77800D3081A /* InquiryRequest.swift in Sources */,
 				DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */,
 				DBCBAA5A2BCD5D05006B40CA /* SignUpEmailViewController.swift in Sources */,

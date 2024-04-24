@@ -48,8 +48,8 @@ extension BoardCoordinator {
         print(#function, childCoordinators, "✅ BoardCoordinator")
     }
     
-    func toDetail() {
-        let vc = BoardDetailViewController()
+    func toDetail(_ item : PostResponse) {
+        let vc = BoardDetailViewController(postResponse: item)
         vc.parentCoordinator = self
         navigationController.pushViewController(vc, animated: true)
     }

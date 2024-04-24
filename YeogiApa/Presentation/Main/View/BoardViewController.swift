@@ -37,6 +37,12 @@ final class BoardViewController: RxBaseViewController {
         
         let output = viewModel.transform(input: input)
         
+        output.viewWillAppear
+            .drive(with: self) { owner, value in
+                owner.tabBarController?.tabBar.isHidden = false
+            }
+            .disposed(by: disposeBag)
+        
         output.postData
             .bind(with: self) { owner, post in
                 
@@ -80,6 +86,8 @@ extension BoardViewController : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        parentCoordinator?.toDetail()
+        guard let item = datasource.itemIdentifier(for: indexPath) else { return }
+        
+        parentCoordinator?.toDetail(item)
     }
 }

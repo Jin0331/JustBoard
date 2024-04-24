@@ -12,6 +12,8 @@ import Kingfisher
 
 final class BoardDetailView: BaseView {
     
+    private let textViewDefaultHeight : Double = 300
+    
     private let scrollView = UIScrollView().then {
         $0.backgroundColor = DesignSystem.commonColorSet.white
         $0.isScrollEnabled = true
@@ -46,18 +48,20 @@ final class BoardDetailView: BaseView {
         $0.frame = CGRect(x: 0, y: 0, width: 80, height: 20)
     }
     
-    let mainTextView = UITextView().then {
+    lazy var textView = UITextView().then {
         $0.text = "아아아아"
         $0.font = .systemFont(ofSize: 18.5, weight: .bold)
         $0.isEditable = false
         $0.backgroundColor = .red
+        $0.delegate = self
+        $0.isScrollEnabled = false // 스크롤 비활성화
     }
     
     override func configureHierarchy() {
         
         addSubview(scrollView)
         scrollView.addSubview(contentsView)
-        [title, author, createdAt, commentCountButton, mainTextView].forEach { contentsView.addSubview($0) }
+        [title, author, createdAt, commentCountButton, textView].forEach { contentsView.addSubview($0) }
     }
     
     override func configureLayout() {
@@ -98,10 +102,10 @@ final class BoardDetailView: BaseView {
             make.size.equalTo(author)
         }
         
-        mainTextView.snp.makeConstraints { make in
+        textView.snp.makeConstraints { make in
             make.top.equalTo(commentCountButton.snp.bottom).offset(10)
             make.horizontalEdges.equalToSuperview().inset(5)
-            make.height.greaterThanOrEqualTo(1000)
+            make.height.equalTo(300)
             make.bottom.equalToSuperview()
         }
     }
@@ -112,20 +116,28 @@ final class BoardDetailView: BaseView {
         createdAt.text = data.createdAt
         commentCountButton.setTitle(String(data.comments.count), for: .normal)
         
-        mainTextView.text = data.content1
-        
+        textView.text = data.content1
+        addTextViewImage(data)
+    }
+    
+    private func addTextViewImage(_ data : PostResponse) {
+        //MARK: - 특정 위치에 이미지 넣기
         let urlList = data.filesToUrl
         let imageLocation = data.content3ToImageLocation
         
-        if !urlList.isEmpty {
-            addTextViewImage(url: urlList[0], location: imageLocation[0])
+        if !urlList.isEmpty && !imageLocation.isEmpty {
+            (0..<urlList.count).forEach { _addTextViewImage(url: urlList[$0], location: imageLocation[$0])}
+        } else if !urlList.isEmpty && imageLocation.isEmpty {
+            var testLastLocation = data.content1.count
+            
+            (0..<urlList.count).forEach {
+                _addTextViewImage(url: urlList[$0], location: imageLocation[testLastLocation])
+                testLastLocation += 1
+            }
         }
     }
     
-    
-
-    
-    private func addTextViewImage(url : URL, location: Int) {
+    private func _addTextViewImage(url : URL, location: Int) {
         
         KingfisherManager.shared.downloader.downloadImage(with: url, options: [.requestModifier(AuthManager.kingfisherAuth())] ) { [weak self] result in
             
@@ -138,13 +150,28 @@ final class BoardDetailView: BaseView {
                 let imageAttributedString = NSAttributedString(attachment: attachment)
                 
                 // 원하는 위치에 이미지 삽입
-                let mutableAttributedString = NSMutableAttributedString(attributedString: mainTextView.attributedText)
+                let mutableAttributedString = NSMutableAttributedString(attributedString: textView.attributedText)
                 let range = NSRange(location: location, length: 0) // 특정 위치 (예: 10번째 문자 뒤)
                 mutableAttributedString.insert(imageAttributedString, at: range.location)
-                mainTextView.attributedText = mutableAttributedString
+                textView.attributedText = mutableAttributedString
+                textViewDidChange(textView)
                 
             case .failure(let error):
                 print("Image download failed: \(error)")
+                
+            }
+        }
+    }
+
+}
+
+extension BoardDetailView : UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        let sizeToFit = textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+        
+        if sizeToFit.height > textViewDefaultHeight {
+            textView.snp.updateConstraints { make in
+                make.height.equalTo(sizeToFit)
             }
         }
     }

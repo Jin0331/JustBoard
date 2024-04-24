@@ -64,8 +64,7 @@ final class BoardCollectionViewCell: BaseCollectionViewCell {
         
         titleLabel.text = itemIdentifier.title
         
-//        commentCount.text = itemIdentifier.comments.count > 0 ? "[" + String(itemIdentifier.comments.count) + "]" : ""
-        commentCount.text = "[" + String(itemIdentifier.comments.count) + "]"
+        commentCount.text = itemIdentifier.comments.count > 0 ? "[" + String(itemIdentifier.comments.count) + "]" : ""
         author.text = itemIdentifier.creator.nick
         createdAt.text = itemIdentifier.createdAt
     }

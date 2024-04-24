@@ -19,7 +19,7 @@ final class BoardCoordinator : Coordinator {
     }
     
     func start() {
-        let vc = BoardMainViewController()
+        let vc = BoardViewController()
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }
@@ -46,5 +46,11 @@ extension BoardCoordinator {
     func toBoard(_ coordinator: QuestionCoordinator) {
         childCoordinators = childCoordinators.filter { $0 !== coordinator }
         print(#function, childCoordinators, "✅ BoardCoordinator")
+    }
+    
+    func toDetail() {
+        let vc = BoardDetailViewController()
+        vc.parentCoordinator = self
+        navigationController.pushViewController(vc, animated: true)
     }
 }

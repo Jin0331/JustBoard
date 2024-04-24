@@ -11,10 +11,10 @@ import RxCocoa
 import RxViewController
 import Alamofire
 
-final class BoardMainViewController: RxBaseViewController {
+final class BoardViewController: RxBaseViewController {
     
-    private let mainView = BoardMainView()
-    private let viewModel = BoardMainViewModel()
+    private let mainView = BoardView()
+    private let viewModel = BoardViewModel()
     var parentCoordinator : BoardCoordinator?
     private var datasource : BoardDataSource!
     
@@ -30,7 +30,7 @@ final class BoardMainViewController: RxBaseViewController {
     
     override func bind() {
         
-        let input = BoardMainViewModel.Input(
+        let input = BoardViewModel.Input(
             viewWillAppear: rx.viewWillAppear,
             questionButtonTap:  mainView.questionButton.rx.tap
         )
@@ -55,7 +55,7 @@ final class BoardMainViewController: RxBaseViewController {
 }
 
 //MARK: - Collection View 관련
-extension BoardMainViewController : DiffableDataSource {
+extension BoardViewController : DiffableDataSource {
     func configureDataSource() {
         let cellRegistration = mainView.boardCellRegistration()
         datasource = UICollectionViewDiffableDataSource(collectionView: mainView.mainCollectionView, cellProvider: {collectionView, indexPath, itemIdentifier in
@@ -76,10 +76,10 @@ extension BoardMainViewController : DiffableDataSource {
     }
 }
 
-extension BoardMainViewController : UICollectionViewDelegate {
+extension BoardViewController : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        print(indexPath.item)
+        parentCoordinator?.toDetail()
     }
 }

@@ -1,5 +1,5 @@
 //
-//  BoardMainViewModel.swift
+//  BoardViewModel.swift
 //  YeogiApa
 //
 //  Created by JinwooLee on 4/19/24.
@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class BoardMainViewModel : MainViewModelType {
+final class BoardViewModel : MainViewModelType {
     
     var disposeBag: DisposeBag = DisposeBag()
     
@@ -30,11 +30,11 @@ final class BoardMainViewModel : MainViewModelType {
         input.viewWillAppear
             .flatMap { _ in
                 return NetworkManager.shared.post(query: InquiryRequest(next: "0", limit: "30", product_id: "gyjw_all"))
+                // nhj_test gyjw_all
             }
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let value):
-                    print(value.data)
                     postData.onNext(value.data)
                 case .failure(let error):
                     print(error)

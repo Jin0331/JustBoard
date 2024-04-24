@@ -1,5 +1,5 @@
 //
-//  BoardMainView.swift
+//  BoardView.swift
 //  YeogiApa
 //
 //  Created by JinwooLee on 4/18/24.
@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-final class BoardMainView: BaseView {
+final class BoardView: BaseView {
 
     let questionButton = CompleteButton(title: "작성하기", image: DesignSystem.sfSymbol.question, fontSize: 15)
     

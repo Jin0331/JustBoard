@@ -8,7 +8,7 @@
 import UIKit
 import Then
 import SnapKit
-import Alamofire
+import
 
 final class BoardDetailView: BaseView {
     
@@ -112,9 +112,25 @@ final class BoardDetailView: BaseView {
         createdAt.text = data.createdAt
         commentCountButton.setTitle(String(data.comments.count), for: .normal)
         
+        
+        data.content3
         data.files
         
         mainTextView.text = data.content1
+        
+        KingfisherManager.shared.retrieveImage(with: url) { result in
+            switch result {
+            case .success(let value):
+                print(value.image) // image object
+                print(value.cacheType) // cache source or nil
+                print(value.data)
+                print(value.source)
+                print(value.originalSource)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        출처: https://jkim68888.tistory.com/4 [Jihyun Kim:티스토리]
     }
     
 }

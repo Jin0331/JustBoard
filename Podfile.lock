@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (5.9.0)
   - IQKeyboardManagerSwift (7.0.1)
-  - PryntTrimmerView (4.0.2)
+  - Kingfisher (7.11.0)
   - RxCocoa (6.6.0):
     - RxRelay (= 6.6.0)
     - RxSwift (= 6.6.0)
@@ -12,18 +12,15 @@ PODS:
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
   - SnapKit (5.7.1)
-  - SteviaLayout (5.1.2)
   - STTextView (1.1.3)
   - TextFieldEffects (1.6.0)
   - Then (3.0.0)
   - Toast-Swift (5.1.0)
-  - YPImagePicker (5.2.2):
-    - PryntTrimmerView (= 4.0.2)
-    - SteviaLayout (= 5.1.2)
 
 DEPENDENCIES:
   - Alamofire (~> 5.8)
   - IQKeyboardManagerSwift
+  - Kingfisher (~> 7.0)
   - RxCocoa (= 6.6.0)
   - RxSwift (= 6.6.0)
   - RxViewController
@@ -32,41 +29,36 @@ DEPENDENCIES:
   - TextFieldEffects
   - Then
   - Toast-Swift (~> 5.1.0)
-  - YPImagePicker
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - IQKeyboardManagerSwift
-    - PryntTrimmerView
+    - Kingfisher
     - RxCocoa
     - RxRelay
     - RxSwift
     - RxViewController
     - SnapKit
-    - SteviaLayout
     - STTextView
     - TextFieldEffects
     - Then
     - Toast-Swift
-    - YPImagePicker
 
 SPEC CHECKSUMS:
   Alamofire: 02b772c9910e8eba1a079227c32fbd9e46c90a24
   IQKeyboardManagerSwift: 7f6b1b1d1497855d2beea7f2f10ffcc6978525b1
-  PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
+  Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
   RxCocoa: 44a80de90e25b739b5aeaae3c8c371a32e3343cc
   RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
   RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
   RxViewController: 56486fa0afd629a1d6b5ba077f3b8cd9dc31b5d2
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
-  SteviaLayout: 05424e528d643657d39ce72c786e4adf13cfc5f2
   STTextView: cb4d43949845294bd7d203f870bb50a426b65e36
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   Toast-Swift: dd369e68ee529f542c65bd0d0c6c50cd743cf6f2
-  YPImagePicker: afc81b3cffab05a6e7261c5daf80dc31b4e917b4
 
-PODFILE CHECKSUM: 29232a2f46d9fd98c9b7674029cf5c6939feded9
+PODFILE CHECKSUM: 480492b9bcb49142aa761ce03f7d6bd97252ab37
 
 COCOAPODS: 1.15.2

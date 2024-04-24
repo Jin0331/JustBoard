@@ -46,15 +46,6 @@ final class BoardDetailViewController: RxBaseViewController {
             .disposed(by: disposeBag)
     }
     
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//    }
-//    
-//    override func configureView() {
-//        tabBarController?.tabBar.isHidden = true
-//    }
-    
     deinit {
         print(#function, "- BoardDetailViewController ✅")
     }

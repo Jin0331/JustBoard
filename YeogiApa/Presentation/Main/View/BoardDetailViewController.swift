@@ -20,6 +20,9 @@ class BoardDetailViewController: RxBaseViewController {
         super.viewDidLoad()
     }
     
+    override func configureView() {
+        tabBarController?.tabBar.isHidden = true
+    }
     
     deinit {
         print(#function, "- BoardDetailViewController ✅")

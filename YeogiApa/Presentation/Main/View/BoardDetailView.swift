@@ -30,20 +30,25 @@ final class BoardDetailView: BaseView {
     
     let author = UIButton().then {
         $0.setTitle("가영짱짱", for: .normal)
+        $0.setTitleColor(DesignSystem.commonColorSet.gray, for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
     }
     
     private let createdAt = UILabel().then {
         $0.font = .systemFont(ofSize: 16, weight: .regular)
         $0.textColor = DesignSystem.commonColorSet.gray
+        $0.textAlignment = .left
     }
     
-    let commentCountButton = CompleteButton(title: "0", image: nil, fontSize: 16, disable: false).then {
+    let commentCountButton = CompleteButton(title: "0", image: UIImage(systemName: "note.text"), fontSize: 16, disable: false).then {
         $0.frame = CGRect(x: 0, y: 0, width: 80, height: 20)
     }
     
     let mainTextView = UITextView().then {
+        $0.text = "아아아아"
+        $0.font = .systemFont(ofSize: 18.5, weight: .bold)
         $0.isEditable = false
+        $0.backgroundColor = .red
     }
     
     override func configureHierarchy() {
@@ -55,7 +60,7 @@ final class BoardDetailView: BaseView {
     
     override func configureLayout() {
         scrollView.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide).offset(40)
+            $0.top.equalTo(safeAreaLayoutGuide).offset(10)
             $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
@@ -66,27 +71,36 @@ final class BoardDetailView: BaseView {
         }
         
         title.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalToSuperview()
-            make.width.equalTo(contentsView)
-            make.height.greaterThanOrEqualTo(70)
+            make.top.equalToSuperview()
+            make.horizontalEdges.equalToSuperview().inset(10)
+            make.height.lessThanOrEqualTo(120)
         }
         
         author.snp.makeConstraints { make in
-            make.top.equalTo(title.snp.bottom).offset(5)
+            make.top.equalTo(title.snp.bottom).offset(10)
+            make.height.equalTo(30)
+            make.width.equalTo(60)
             make.leading.equalTo(title)
+        }
+        
+        createdAt.snp.makeConstraints { make in
+            make.centerY.equalTo(author)
+            make.height.equalTo(author)
+            make.width.equalTo(100)
+            make.leading.equalTo(author.snp.trailing).offset(10)
         }
         
         commentCountButton.snp.makeConstraints { make in
             make.centerY.equalTo(author)
-            make.height.equalTo(author)
-            make.width.equalTo(80)
+            make.trailing.equalToSuperview().inset(10)
+            make.size.equalTo(author)
         }
         
         mainTextView.snp.makeConstraints { make in
             make.top.equalTo(commentCountButton.snp.bottom).offset(10)
-            make.width.equalTo(contentsView)
-            make.height.greaterThanOrEqualTo(50)
-            make.bottom.equalToSuperview().inset(20)
+            make.horizontalEdges.equalToSuperview().inset(5)
+            make.height.greaterThanOrEqualTo(1000)
+            make.bottom.equalToSuperview()
         }
     }
 

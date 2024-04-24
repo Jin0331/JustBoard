@@ -22,6 +22,12 @@ final class BoardMainViewController: RxBaseViewController {
         view = mainView
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        mainView.mainCollectionView.delegate = self
+        configureDataSource()
+    }
+    
     override func bind() {
         
         let input = BoardMainViewModel.Input(
@@ -30,6 +36,14 @@ final class BoardMainViewController: RxBaseViewController {
         )
         
         let output = viewModel.transform(input: input)
+        
+        output.postData
+            .bind(with: self) { owner, post in
+                
+                dump(post)
+                owner.updateSnapshot(post)
+            }
+            .disposed(by: disposeBag)
         
         output.questionButtonTap
             .drive(with: self) { owner, _ in
@@ -40,6 +54,7 @@ final class BoardMainViewController: RxBaseViewController {
     }
 }
 
+//MARK: - Collection View 관련
 extension BoardMainViewController : DiffableDataSource {
     func configureDataSource() {
         let cellRegistration = mainView.boardCellRegistration()
@@ -58,5 +73,13 @@ extension BoardMainViewController : DiffableDataSource {
         snapshot.appendItems(data, toSection: .main)
         
         datasource.apply(snapshot)
+    }
+}
+
+extension BoardMainViewController : UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        print(indexPath.item)
     }
 }

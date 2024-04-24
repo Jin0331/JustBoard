@@ -20,9 +20,12 @@ final class BoardMainViewModel : MainViewModelType {
     
     struct Output {
         let questionButtonTap : Driver<Void>
+        let postData : PublishSubject<[PostResponse]>
     }
     
     func transform(input: Input) -> Output {
+        
+        let postData = PublishSubject<[PostResponse]>()
         
         input.viewWillAppear
             .flatMap { _ in
@@ -31,13 +34,17 @@ final class BoardMainViewModel : MainViewModelType {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let value):
-                    print(value)
+                    print(value.data)
+                    postData.onNext(value.data)
                 case .failure(let error):
                     print(error)
                 }
             }
             .disposed(by: disposeBag)
         
-        return Output(questionButtonTap: input.questionButtonTap.asDriver())
+        return Output(
+            questionButtonTap: input.questionButtonTap.asDriver(),
+            postData: postData
+        )
     }
 }

@@ -22,12 +22,12 @@ final class BoardCollectionViewCell: BaseCollectionViewCell {
     }
     
     private let author = UILabel().then {
-        $0.font = .systemFont(ofSize: 15, weight: .bold)
+        $0.font = .systemFont(ofSize: 15, weight: .regular)
         $0.textColor = DesignSystem.commonColorSet.gray
     }
     
     private let createdAt = UILabel().then {
-        $0.font = .systemFont(ofSize: 15, weight: .bold)
+        $0.font = .systemFont(ofSize: 15, weight: .regular)
         $0.textColor = DesignSystem.commonColorSet.gray
     }
     
@@ -50,8 +50,8 @@ final class BoardCollectionViewCell: BaseCollectionViewCell {
         author.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.leading.equalTo(titleLabel)
-            make.trailing.equalTo(createdAt)
-            make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.top).offset(10)
+            make.trailing.equalTo(createdAt.snp.leading).offset(-10)
+            make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom)
         }
         
         createdAt.snp.makeConstraints { make in
@@ -63,8 +63,10 @@ final class BoardCollectionViewCell: BaseCollectionViewCell {
     func updateUI(_ itemIdentifier : PostResponse) {
         
         titleLabel.text = itemIdentifier.title
-        commentCount.text = String(itemIdentifier.comments.count)
-        author.text = itemIdentifier.creator.nick
         
+//        commentCount.text = itemIdentifier.comments.count > 0 ? "[" + String(itemIdentifier.comments.count) + "]" : ""
+        commentCount.text = "[" + String(itemIdentifier.comments.count) + "]"
+        author.text = itemIdentifier.creator.nick
+        createdAt.text = itemIdentifier.createdAt
     }
 }

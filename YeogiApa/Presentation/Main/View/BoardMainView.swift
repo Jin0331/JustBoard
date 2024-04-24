@@ -35,6 +35,11 @@ final class BoardMainView: BaseView {
             make.height.equalTo(50)
             make.width.equalTo(110)
         }
+        
+        mainCollectionView.snp.makeConstraints { make in
+            make.edges.equalTo(safeAreaLayoutGuide)
+        }
+        
     }
     
     private func createLayout() -> UICollectionViewLayout {

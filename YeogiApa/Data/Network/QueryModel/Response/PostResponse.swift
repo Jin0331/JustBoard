@@ -22,7 +22,7 @@ struct InquiryResponse : Decodable, Hashable {
 
 struct PostResponse: Decodable, Hashable {
     let postID, productID, title: String
-    let content, content1, content2, content3 : String
+    let content, content1, content2, content3, createdAt : String
     let creator: Creator
     let files : [String]
     let comments: [Comment]
@@ -31,7 +31,7 @@ struct PostResponse: Decodable, Hashable {
     enum CodingKeys: String, CodingKey {
         case postID = "post_id"
         case productID = "product_id"
-        case title, content1, content2, content3, content, creator, files, comments, hashTags
+        case title, content1, content2, content3, content, createdAt, creator, files, comments, hashTags
     }
 
     init(from decoder: any Decoder) throws {
@@ -40,13 +40,14 @@ struct PostResponse: Decodable, Hashable {
         self.productID = try container.decode(String.self, forKey: .productID)
         self.title = try container.decode(String.self, forKey: .title)
         self.content = (try? container.decode(String.self, forKey: .content)) ?? ""
-        self.content1 = try container.decode(String.self, forKey: .content1)
-        self.content2 = try container.decode(String.self, forKey: .content2)
-        self.content3 = try container.decode(String.self, forKey: .content3)
+        self.content1 = (try? container.decode(String.self, forKey: .content1)) ?? ""
+        self.content2 = (try? container.decode(String.self, forKey: .content2)) ?? ""
+        self.content3 = (try? container.decode(String.self, forKey: .content3)) ?? ""
+        self.createdAt = try container.decode(String.self, forKey: .createdAt)
         self.creator = try container.decode(Creator.self, forKey: .creator)
         self.files = try container.decode([String].self, forKey: .files)
-        self.comments = try container.decode([Comment].self, forKey: .hashTags)
-        self.hashTags = try container.decode([String].self, forKey: .hashTags)
+        self.comments = try container.decode([Comment].self, forKey: .comments)
+        self.hashTags = (try? container.decode([String].self, forKey: .hashTags)) ?? []
     }
     
     static func == (lhs: PostResponse, rhs: PostResponse) -> Bool {
@@ -57,6 +58,7 @@ struct PostResponse: Decodable, Hashable {
                lhs.content1 == rhs.content1 &&
                lhs.content2 == rhs.content2 &&
                lhs.content3 == rhs.content3 &&
+               lhs.createdAt == rhs.createdAt &&
                lhs.creator == rhs.creator &&
                lhs.files == rhs.files &&
                lhs.comments == rhs.comments &&

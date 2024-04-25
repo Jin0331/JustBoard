@@ -28,19 +28,16 @@ final class BoardDetailView: BaseView {
     }
     
     let title = UILabel().then {
-        $0.font = .systemFont(ofSize: 20, weight: .heavy)
-        $0.text = "[일반] 노엘 : 작년에 30만정도에 이어폰 샀는데 소리가"
+        $0.font = .systemFont(ofSize: 22, weight: .heavy)
         $0.numberOfLines = 2
     }
     
     let author = UIButton().then {
-        $0.setTitle("가영짱짱", for: .normal)
         $0.setTitleColor(DesignSystem.commonColorSet.gray, for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
     }
     
     private let createdAt = UILabel().then {
-        $0.text = "2024.04.25 (목)"
         $0.font = .systemFont(ofSize: 16, weight: .regular)
         $0.textColor = DesignSystem.commonColorSet.gray
         $0.textAlignment = .left
@@ -51,7 +48,6 @@ final class BoardDetailView: BaseView {
     }
     
     lazy var textView = UITextView().then {
-        $0.text = "아아아아"
         $0.font = .systemFont(ofSize: 18.5, weight: .bold)
         $0.isEditable = false
         $0.delegate = self
@@ -62,6 +58,7 @@ final class BoardDetailView: BaseView {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         view.backgroundColor = DesignSystem.commonColorSet.white
         view.allowsMultipleSelection = false
+        view.isScrollEnabled = false
         
        return view
     }()
@@ -243,11 +240,11 @@ extension BoardDetailView {
     private func createLayout() -> UICollectionViewLayout {
         
         // Cell
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         // Group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
@@ -271,11 +268,13 @@ extension BoardDetailView {
     func collectionViewchangeLayout(itemCount: Int) {
         
         print("🥲 CollectionView Resize")
-        let oneItemSize = 100
+        let oneItemSize = 110
         let size = itemCount < 1 ? 0 : oneItemSize * itemCount
-    
+        
         commentCollectionView.snp.updateConstraints { make in
+            make.horizontalEdges.equalToSuperview()
             make.height.equalTo(size)
+            make.bottom.equalToSuperview().inset(10)
         }
     }
 }

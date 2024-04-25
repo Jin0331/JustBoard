@@ -71,10 +71,7 @@ final class BoardDetailViewController: RxBaseViewController {
         
         output.postData
             .bind(with: self) { owner, postData in
-                owner.navigationItem.title = postData.title
                 owner.mainView.updateUI(postData)
-                
-                print(postData.comments)
                 owner.updateSnapshot(postData.comments)
             }
             .disposed(by: disposeBag)

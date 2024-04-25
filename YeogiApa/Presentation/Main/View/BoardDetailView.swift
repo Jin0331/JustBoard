@@ -14,7 +14,7 @@ final class BoardDetailView: BaseView {
     
     private let textViewDefaultHeight : Double = 300
     
-    private let scrollView = UIScrollView().then {
+    let scrollView = UIScrollView().then {
         $0.backgroundColor = DesignSystem.commonColorSet.gray
         
         $0.isScrollEnabled = true
@@ -112,11 +112,12 @@ final class BoardDetailView: BaseView {
             make.top.equalTo(commentCountButton.snp.bottom).offset(10)
             make.horizontalEdges.equalToSuperview().inset(5)
             make.height.equalTo(300)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(10)
         }
         
         commentTextField.snp.makeConstraints { make in
-            make.bottom.horizontalEdges.equalTo(safeAreaLayoutGuide)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalTo(keyboardLayoutGuide.snp.top)
             make.height.equalTo(60)
         }
     }
@@ -173,31 +174,6 @@ final class BoardDetailView: BaseView {
             }
         }
     }
-    
-    override func configureView() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    @objc func keyboardUp(notification:NSNotification) {
-        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            
-            UIView.animate(
-                withDuration: 0.3
-                , animations: { [weak self] in
-                    guard let self = self else { return }
-                    transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
-                }
-            )
-        }
-    }
-    
-    @objc func keyboardDown() {
-        transform = .identity
-    }
-
 }
 
 extension BoardDetailView : UITextViewDelegate {
@@ -213,4 +189,3 @@ extension BoardDetailView : UITextViewDelegate {
         }
     }
 }
-

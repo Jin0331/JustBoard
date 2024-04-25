@@ -27,6 +27,21 @@ final class BoardDetailViewController: RxBaseViewController {
 
     override func bind() {
         
+        NotificationCenter.default.rx
+            .notification(UIResponder.keyboardWillHideNotification)
+            .bind(with: self) { owner, _ in
+                owner.mainView.scrollView.isScrollEnabled = true
+            }
+            .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx
+            .notification(UIResponder.keyboardWillShowNotification)
+            .bind(with: self) { owner, _ in
+                owner.mainView.scrollView.isScrollEnabled = false
+            }
+            .disposed(by: disposeBag)
+
+        
         let input = BoardDetailViewModel.Input(
             viewWillAppear: rx.viewDidAppear
         )

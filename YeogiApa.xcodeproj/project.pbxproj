@@ -48,6 +48,7 @@
 		DBB7C67F2BDA15D000D3081A /* CommentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C67E2BDA15D000D3081A /* CommentCollectionViewCell.swift */; };
 		DBB7C6812BDA1B8E00D3081A /* CommentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6802BDA1B8E00D3081A /* CommentRequest.swift */; };
 		DBB7C6852BDA3A6B00D3081A /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6842BDA3A6B00D3081A /* CALayer+Extension.swift */; };
+		DBB7C6892BDAD82A00D3081A /* Formatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6882BDAD82A00D3081A /* Formatter+Extension.swift */; };
 		DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */; };
 		DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */; };
 		DBCBA9E92BC7BE35006B40CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBA9E82BC7BE35006B40CA /* Assets.xcassets */; };
@@ -136,6 +137,7 @@
 		DBB7C67E2BDA15D000D3081A /* CommentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCollectionViewCell.swift; sourceTree = "<group>"; };
 		DBB7C6802BDA1B8E00D3081A /* CommentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRequest.swift; sourceTree = "<group>"; };
 		DBB7C6842BDA3A6B00D3081A /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
+		DBB7C6882BDAD82A00D3081A /* Formatter+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Formatter+Extension.swift"; sourceTree = "<group>"; };
 		DBCBA9DC2BC7BE34006B40CA /* YeogiApa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeogiApa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 				DB204DA12BD2E926006340BE /* UITextView+Extension.swift */,
 				DB204DE52BD56158006340BE /* UIImage+Extension.swift */,
 				DBB7C6842BDA3A6B00D3081A /* CALayer+Extension.swift */,
+				DBB7C6882BDAD82A00D3081A /* Formatter+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				DBCBAA152BC7DC8C006B40CA /* JoinRequest.swift in Sources */,
 				DB204D9E2BD2DDBB006340BE /* QuestionView.swift in Sources */,
 				DB4110102BD173860088679F /* MainRouter.swift in Sources */,
+				DBB7C6892BDAD82A00D3081A /* Formatter+Extension.swift in Sources */,
 				DB204DE62BD56158006340BE /* UIImage+Extension.swift in Sources */,
 				DBCBAA202BC7E7F2006B40CA /* ViewModelType.swift in Sources */,
 				DB204D982BD2A669006340BE /* QuestionCoordinator.swift in Sources */,

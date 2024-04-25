@@ -168,7 +168,7 @@ final class BoardDetailView: BaseView {
     func updateUI(_ data : PostResponse) {
         title.text = data.title
         author.setTitle(data.creator.nick, for: .normal)
-        createdAt.text = data.createdAt
+        createdAt.text = data.createdAtToTime
         commentCountButton.setTitle(String(data.comments.count), for: .normal)
         
         textView.text = data.content1

@@ -66,6 +66,6 @@ final class BoardCollectionViewCell: BaseCollectionViewCell {
         
         commentCount.text = itemIdentifier.comments.count > 0 ? "[" + String(itemIdentifier.comments.count) + "]" : ""
         author.text = itemIdentifier.creator.nick
-        createdAt.text = itemIdentifier.createdAt
+        createdAt.text = itemIdentifier.createdAt.formatDateString()
     }
 }

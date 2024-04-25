@@ -52,7 +52,7 @@ final class CommentCollectionViewCell: BaseCollectionViewCell {
         contentView.layer.addBorder([.top], color: DesignSystem.commonColorSet.lightGray, width: 1)
         author.text = itemIdentifier.creator.nick
         main.text = itemIdentifier.content
-        createdAt.text = itemIdentifier.createdAt
+        createdAt.text = itemIdentifier.createdAt.formatDateString()
     }
     
     override func prepareForReuse() {

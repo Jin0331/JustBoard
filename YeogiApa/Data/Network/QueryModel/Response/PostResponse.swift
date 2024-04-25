@@ -84,6 +84,10 @@ struct PostResponse: Decodable, Hashable {
             URL(string: APIKey.baseURLWithVersion() + "/" + $0)!
         }
     }
+    
+    var createdAtToTime : String {
+        return createdAt.formatDateString()
+    }
 }
 
 struct Comment: Decodable, Hashable {

@@ -46,4 +46,11 @@ final class CommentCollectionViewCell: BaseCollectionViewCell {
             make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).inset(10)
         }
     }
+    
+    func updateUI(_ itemIdentifier : Comment) {
+                
+        author.text = itemIdentifier.creator.nick
+        main.text = itemIdentifier.content
+        createdAt.text = itemIdentifier.createdAt
+    }
 }

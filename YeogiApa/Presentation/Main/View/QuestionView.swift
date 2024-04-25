@@ -59,7 +59,7 @@ final class QuestionView: BaseView {
     let contentsTextView = STTextView().then {
         $0.font = .systemFont(ofSize: 21, weight: .semibold)
         let attributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold), // Set the desired font size
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .semibold), // Set the desired font size
             NSAttributedString.Key.foregroundColor: DesignSystem.commonColorSet.gray
         ]
         $0.attributedPlaceholder = NSAttributedString(string: " 게시글의 본문을작성해주세요.", attributes: attributes)

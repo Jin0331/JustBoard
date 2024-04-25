@@ -21,8 +21,6 @@ final class BoardView: BaseView {
        return view
     }()
     
-    typealias BoardCellRegistration = UICollectionView.CellRegistration<BoardCollectionViewCell, PostResponse>
-    
     override func configureHierarchy() {
         addSubview(mainCollectionView)
         addSubview(questionButton)
@@ -41,6 +39,10 @@ final class BoardView: BaseView {
         }
         
     }
+}
+
+//MARK: - Collection View 관련
+extension BoardView {
     
     private func createLayout() -> UICollectionViewLayout {
         

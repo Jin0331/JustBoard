@@ -136,7 +136,7 @@ final class BoardDetailView: BaseView {
             make.top.equalTo(commentCountButton.snp.bottom).offset(10)
             make.leading.equalToSuperview().inset(10)
             make.trailing.equalToSuperview().inset(5)
-            make.height.equalTo(300)
+            make.height.equalTo(200)
             make.bottom.equalTo(commentCollectionView.snp.top).offset(-20)
         }
         

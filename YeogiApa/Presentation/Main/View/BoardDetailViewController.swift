@@ -27,9 +27,9 @@ final class BoardDetailViewController: RxBaseViewController {
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
         mainView.commentCollectionView.delegate = self
         configureDataSource()
+        super.viewDidLoad()
     }
     
     override func bind() {
@@ -73,12 +73,17 @@ final class BoardDetailViewController: RxBaseViewController {
             .bind(with: self) { owner, postData in
                 owner.navigationItem.title = postData.title
                 owner.mainView.updateUI(postData)
+                
+                print(postData.comments)
+                owner.updateSnapshot(postData.comments)
             }
             .disposed(by: disposeBag)
         
-        output.postCommentData
-            .bind(with: self) { owner, postCommentData in
-                owner.updateSnapshot(postCommentData.comments)
+        output.updatedPost
+            .debug("updatedPost")
+            .bind(with: self) { owner, postData in
+                owner.mainView.updateUI(postData)
+                owner.updateSnapshot(postData.comments)
             }
             .disposed(by: disposeBag)
     }
@@ -102,6 +107,7 @@ extension BoardDetailViewController : DiffableDataSource, UICollectionViewDelega
     }
     
     func updateSnapshot(_ data : [Comment]) {
+        
         var snapshot = BoardDetailDataSourceSnapshot()
         snapshot.appendSections(BoardDetailViewSection.allCases)
         snapshot.appendItems(data, toSection: .main)

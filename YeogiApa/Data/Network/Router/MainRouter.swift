@@ -12,6 +12,7 @@ enum MainRouter {
     case write(query : PostRequest)
     case files(query : FilesRequest, category : String)
     case inquiry(query : InquiryRequest)
+    case specificInquiry(postId : String)
     case comment(query : CommentRequest, postId : String)
 }
 
@@ -25,7 +26,7 @@ extension MainRouter : TargetType {
         switch self {
         case .write, .files, .comment:
             return .post
-        case .inquiry:
+        case .inquiry, .specificInquiry:
             return .get
         }
     }
@@ -36,6 +37,8 @@ extension MainRouter : TargetType {
             return "/posts"
         case .files:
             return "/posts/files"
+        case .specificInquiry(postId: let postId):
+            return "/posts/" + postId
         case .comment(query: _ , postId: let postId):
             return "/posts/" + postId + "/comments"
         }
@@ -57,7 +60,7 @@ extension MainRouter : TargetType {
                 HTTPHeader.contentType.rawValue : HTTPHeader.multipart.rawValue,
                 HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue
             ]
-        case .inquiry :
+        case .inquiry, .specificInquiry:
             return [
                 HTTPHeader.authorization.rawValue : token,
                 HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue

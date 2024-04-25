@@ -11,7 +11,7 @@ import Kingfisher
 //MARK: - Access Token 갱신을 위한 Alamorefire RequestInterceptor protocol
 final class AuthManager : RequestInterceptor {
  
-    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, any Error>) -> Void) {
+    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         // Token이 없는 상황, 즉 로그인을 새롭게 시도하는 상황
         guard let accessToken = UserDefaultManager.shared.accessToken, let _ = UserDefaultManager.shared.refreshToken else {
             completion(.success(urlRequest))
@@ -19,13 +19,13 @@ final class AuthManager : RequestInterceptor {
             print("adpat Error 🥲🥲🥲🥲🥲🥲🥲🥲")
             return
         }
-        
+        print("adpat ✅")
         var urlRequest = urlRequest
         urlRequest.headers.add(name: HTTPHeader.authorization.rawValue, value: accessToken)
         completion(.success(urlRequest))
     }
     
-    func retry(_ request: Request, for session: Session, dueTo error: any Error, completion: @escaping (RetryResult) -> Void) {
+    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
         
         print("✅ retry")
         

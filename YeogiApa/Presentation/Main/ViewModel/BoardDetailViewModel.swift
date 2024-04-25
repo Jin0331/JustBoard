@@ -40,29 +40,45 @@ final class BoardDetailViewModel : MainViewModelType {
         let updatedPostData = PublishSubject<PostResponse>()
         
         input.commentText
-            .throttle(.seconds(1), scheduler: MainScheduler.asyncInstance)
             .bind { text in
                 commentButtonEnable.onNext(!text.isEmpty)
                 commentRequestModel.onNext(CommentRequest(content: text))
             }
             .disposed(by: disposeBag)
         
-        let commentRequest = Observable.combineLatest(commentRequestModel, postData).share()
-        
-        input.commentComplete
+        let commentRequest = Observable.combineLatest(commentRequestModel, postData)
+        let commentResponse = input.commentComplete
             .withLatestFrom(commentRequest)
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .flatMap {
-                let comment = NetworkManager.shared.comment(query: $0, postId: $1.postID)
-                let commentUpdatedPost = NetworkManager.shared.post(postId: $1.postID)
-                return Observable.combineLatest(comment.asObservable(), commentUpdatedPost.asObservable())
+                NetworkManager.shared.comment(query: $0, postId: $1.postID)
+            }.share()
+        
+        // Comment에서 에러 발생시 추적을 위함
+        commentResponse
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let commentResponse):
+                    postCommentData.onNext(commentResponse)
+                    print(commentResponse, "✅ Comment Response")
+                case .failure(let error):
+                    print(error, "✅ CommentResponse Error")
+                }
             }
-            .subscribe { (commentResult, updatedPostResult) in
-                switch updatedPostResult {
+            .disposed(by: disposeBag)
+        
+        
+        Observable.combineLatest(commentResponse, postData)
+            .map { $0.1.postID }
+            .flatMap {
+                NetworkManager.shared.post(postId: $0)
+            }
+            .bind(with: self) { owner, result in
+                switch result {
                 case .success(let postResponse):
                     updatedPostData.onNext(postResponse)
                 case .failure(let error):
-                    print(error)
+                    print(error, "✅ PostResponse Error ")
                 }
             }
             .disposed(by: disposeBag)

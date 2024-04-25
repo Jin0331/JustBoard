@@ -15,7 +15,8 @@ final class BoardDetailView: BaseView {
     private let textViewDefaultHeight : Double = 300
     
     private let scrollView = UIScrollView().then {
-        $0.backgroundColor = DesignSystem.commonColorSet.white
+        $0.backgroundColor = DesignSystem.commonColorSet.gray
+        
         $0.isScrollEnabled = true
         $0.showsVerticalScrollIndicator = true
         $0.bounces = false
@@ -52,28 +53,33 @@ final class BoardDetailView: BaseView {
         $0.text = "아아아아"
         $0.font = .systemFont(ofSize: 18.5, weight: .bold)
         $0.isEditable = false
-        $0.backgroundColor = .red
         $0.delegate = self
         $0.isScrollEnabled = false // 스크롤 비활성화
+    }
+    
+    let commentTextField = UITextField().then {
+        $0.placeholder = "댓글 입력"
+        $0.backgroundColor = .red
     }
     
     override func configureHierarchy() {
         
         addSubview(scrollView)
+        addSubview(commentTextField)
         scrollView.addSubview(contentsView)
         [title, author, createdAt, commentCountButton, textView].forEach { contentsView.addSubview($0) }
     }
     
     override func configureLayout() {
-        scrollView.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide).offset(10)
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalToSuperview()
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(10)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(commentTextField.snp.top).offset(10)
         }
         
-        contentsView.snp.makeConstraints {
-            $0.width.equalToSuperview()
-            $0.verticalEdges.equalToSuperview()
+        contentsView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.verticalEdges.equalToSuperview()
         }
         
         title.snp.makeConstraints { make in
@@ -107,6 +113,11 @@ final class BoardDetailView: BaseView {
             make.horizontalEdges.equalToSuperview().inset(5)
             make.height.equalTo(300)
             make.bottom.equalToSuperview()
+        }
+        
+        commentTextField.snp.makeConstraints { make in
+            make.bottom.horizontalEdges.equalTo(safeAreaLayoutGuide)
+            make.height.equalTo(60)
         }
     }
 
@@ -162,12 +173,38 @@ final class BoardDetailView: BaseView {
             }
         }
     }
+    
+    override func configureView() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardUp(notification:NSNotification) {
+        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            
+            UIView.animate(
+                withDuration: 0.3
+                , animations: { [weak self] in
+                    guard let self = self else { return }
+                    transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
+                }
+            )
+        }
+    }
+    
+    @objc func keyboardDown() {
+        transform = .identity
+    }
 
 }
 
 extension BoardDetailView : UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         let sizeToFit = textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+        
+        print(sizeToFit)
         
         if sizeToFit.height > textViewDefaultHeight {
             textView.snp.updateConstraints { make in
@@ -176,3 +213,4 @@ extension BoardDetailView : UITextViewDelegate {
         }
     }
 }
+

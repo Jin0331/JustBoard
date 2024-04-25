@@ -24,7 +24,7 @@ final class BoardDetailViewController: RxBaseViewController {
     init(postResponse : PostResponse) {
         self.viewModel = BoardDetailViewModel(postResponse)
     }
-  
+
     override func bind() {
         
         let input = BoardDetailViewModel.Input(
@@ -41,6 +41,7 @@ final class BoardDetailViewController: RxBaseViewController {
         
         output.postData
             .bind(with: self) { owner, postData in
+                owner.navigationItem.title = postData.title
                 owner.mainView.updateUI(postData)
             }
             .disposed(by: disposeBag)

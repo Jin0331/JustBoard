@@ -14,7 +14,9 @@ target 'YeogiApa' do
   pod 'TextFieldEffects'
   pod 'STTextView'
   pod 'IQKeyboardManagerSwift'
-  pod 'YPImagePicker'
+  pod 'Toast-Swift', '~> 5.1.0'
+  pod 'RxViewController'
+  pod 'Kingfisher', '~> 7.0'
 end
 
 post_install do |installer|

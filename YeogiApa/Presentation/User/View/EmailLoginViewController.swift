@@ -14,7 +14,7 @@ final class EmailLoginViewController: RxBaseViewController {
     
     private let mainView = EmailLoginView()
     private let viewModel = EmailLoginViewModel()
-    weak var delegate : EmailLoginCoordinator?
+    weak var parentCoordinator : EmailLoginCoordinator?
     
     override func loadView() {
         view = mainView
@@ -46,7 +46,7 @@ final class EmailLoginViewController: RxBaseViewController {
                 print("로그인 성공", value)
                 
                 //TODO: - 화면전환 로직 추가 필요
-                owner.delegate?.didLogined()
+                owner.parentCoordinator?.didLogined()
             }
             .disposed(by: disposeBag)
         
@@ -59,7 +59,7 @@ final class EmailLoginViewController: RxBaseViewController {
         
         output.signUp
             .drive(with: self) { owner, _ in
-                owner.delegate?.signUp()
+                owner.parentCoordinator?.signUp()
             }
             .disposed(by: disposeBag)
     }

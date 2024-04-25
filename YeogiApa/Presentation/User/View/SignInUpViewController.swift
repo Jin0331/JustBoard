@@ -14,7 +14,7 @@ final class SignInUpViewController : RxBaseViewController{
     
     private let mainView = SignInUpView()
     private var isReset : Bool?
-    var delegate : UserCoordinator?
+    var parentCoordinator : UserCoordinator?
     
     init(isReset: Bool? = nil) {
         self.isReset = isReset
@@ -40,7 +40,7 @@ final class SignInUpViewController : RxBaseViewController{
             .tap
             .bind(with: self) { owner, _ in
                 //TODO: - 소셜로그인 적용시 화면전환
-                owner.delegate?.kakaoLogin()
+                owner.parentCoordinator?.kakaoLogin()
             }
             .disposed(by: disposeBag)
         
@@ -48,7 +48,7 @@ final class SignInUpViewController : RxBaseViewController{
             .tap
             .bind(with: self) { owner, _ in
                 //TODO: - 소셜로그인 적용시 화면전환
-                owner.delegate?.appleLogin()
+                owner.parentCoordinator?.appleLogin()
             }
             .disposed(by: disposeBag)
         
@@ -56,7 +56,7 @@ final class SignInUpViewController : RxBaseViewController{
             .tap
             .bind(with: self) { owner, _ in
                 print("hi")
-                owner.delegate?.emailLogin()
+                owner.parentCoordinator?.emailLogin()
             }
             .disposed(by: disposeBag)
     }

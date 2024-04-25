@@ -21,7 +21,7 @@ final class UserCoordinator : Coordinator {
     
     func start() {
         let vc = SignInUpViewController(isReset: isReset) // child root view controller
-        vc.delegate = self
+        vc.parentCoordinator = self
         self.navigationController.viewControllers = [vc]
     }
     

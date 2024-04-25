@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxViewController
 
 class RxBaseViewController : BaseViewController {
     let disposeBag = DisposeBag()
@@ -37,7 +38,6 @@ class BaseViewController: UIViewController {
     func configureView() {  }
     
     func configureNavigation() {
-                
         // back button
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil) // title 부분 수정
         backBarButtonItem.tintColor = .black

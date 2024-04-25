@@ -9,9 +9,9 @@ import UIKit
 
 final class DelimiterLine: UIView {
 
-    init() {
+    init(lightGray: Bool = true) {
         super.init(frame: .zero)
-        backgroundColor = DesignSystem.commonColorSet.lightGray
+        backgroundColor = lightGray ? DesignSystem.commonColorSet.lightGray : DesignSystem.commonColorSet.gray
     }
     
     @available(*, unavailable)

@@ -12,15 +12,10 @@ import STTextView
 
 final class QuestionView: BaseView {
     
-    let searchButtonItem = UIBarButtonItem().then {
-        $0.title = "작성하기"
-        $0.tintColor = DesignSystem.commonColorSet.gray
-        
-        let attributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .heavy)
-        ]
-        $0.setTitleTextAttributes(attributes, for: .normal)
+    let completeButtonItem = CompleteButton(title: "완료하기", image: nil, fontSize: 18, disable: false).then {
+        $0.frame = CGRect(x: 0, y: 0, width: 100, height: 35)
     }
+    
     
     private let scrollView = UIScrollView().then {
         $0.backgroundColor = DesignSystem.commonColorSet.white
@@ -64,7 +59,7 @@ final class QuestionView: BaseView {
     let contentsTextView = STTextView().then {
         $0.font = .systemFont(ofSize: 21, weight: .semibold)
         let attributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold), // Set the desired font size
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .semibold), // Set the desired font size
             NSAttributedString.Key.foregroundColor: DesignSystem.commonColorSet.gray
         ]
         $0.attributedPlaceholder = NSAttributedString(string: " 게시글의 본문을작성해주세요.", attributes: attributes)
@@ -152,8 +147,8 @@ final class QuestionView: BaseView {
         }
         
         stackBackgroundView.snp.makeConstraints { make in
-            make.top.equalTo(brView2.snp.bottom)
-            make.horizontalEdges.equalToSuperview()
+            make.top.equalTo(brView2.snp.bottom).offset(5)
+            make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(40)
         }
         

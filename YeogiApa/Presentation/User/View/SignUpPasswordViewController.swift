@@ -28,7 +28,7 @@ final class SignUpPasswordViewController: RxBaseViewController {
     private let nextButton = NextButton(title: "다음")
     
     var viewModel : SignUpPasswordViewModel
-    weak var delegate : EmailLoginCoordinator?
+    weak var parentCoordinator : EmailLoginCoordinator?
     
     init(email : String) {
         self.viewModel = SignUpPasswordViewModel(email: email)
@@ -55,7 +55,7 @@ final class SignUpPasswordViewController: RxBaseViewController {
         
         output.validEmailPassword
             .bind(with: self) { owner, emailPassword in
-                owner.delegate?.signUpCompleted(email: emailPassword.0, password: emailPassword.1)
+                owner.parentCoordinator?.signUpCompleted(email: emailPassword.0, password: emailPassword.1)
             }
             .disposed(by: disposeBag)
         

@@ -27,7 +27,7 @@ class SignUpNicknameWithPhoneViewController: RxBaseViewController {
     private let completeButton = NextButton(title: "회원가입 완료")
     
     var viewModel : SignUpNicknameWithPhoneViewModel
-    weak var delegate : EmailLoginCoordinator?
+    weak var parentCoordinator : EmailLoginCoordinator?
     
     init(email : String, password : String) {
         self.viewModel = SignUpNicknameWithPhoneViewModel(email: email, password: password)
@@ -52,7 +52,7 @@ class SignUpNicknameWithPhoneViewController: RxBaseViewController {
         output.signUpComplete
             .drive(with: self) { owner, value in
                 if value {
-                    owner.delegate?.didLogined()
+                    owner.parentCoordinator?.didLogined()
                 }
             }
             .disposed(by: disposeBag)

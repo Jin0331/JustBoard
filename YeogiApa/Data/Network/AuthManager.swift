@@ -6,11 +6,12 @@
 //
 
 import Alamofire
+import Kingfisher
 
 //MARK: - Access Token 갱신을 위한 Alamorefire RequestInterceptor protocol
 final class AuthManager : RequestInterceptor {
  
-    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, any Error>) -> Void) {
+    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         // Token이 없는 상황, 즉 로그인을 새롭게 시도하는 상황
         guard let accessToken = UserDefaultManager.shared.accessToken, let _ = UserDefaultManager.shared.refreshToken else {
             completion(.success(urlRequest))
@@ -18,24 +19,25 @@ final class AuthManager : RequestInterceptor {
             print("adpat Error 🥲🥲🥲🥲🥲🥲🥲🥲")
             return
         }
-        
+        print("adpat ✅")
         var urlRequest = urlRequest
         urlRequest.headers.add(name: HTTPHeader.authorization.rawValue, value: accessToken)
         completion(.success(urlRequest))
     }
     
-    func retry(_ request: Request, for session: Session, dueTo error: any Error, completion: @escaping (RetryResult) -> Void) {
+    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+        
+        print("✅ retry")
         
         //TODO: - 401 이 발생할 가능성이 있을까??? -> 서버가 리셋 즉, 회원가입이 안 된 유저
         let request = request.task?.response as? HTTPURLResponse
         guard let response = request, response.statusCode == 419 else {
-            print("Forbidden or Unknown: \(request?.statusCode)")
+            print("Forbidden or Unknown or Success: \(request?.statusCode)")
             completion(.doNotRetryWithError(error))
             return
         }
         
         guard let accessToken = UserDefaultManager.shared.accessToken, let refreshToken = UserDefaultManager.shared.refreshToken else {
-            print("오잉???????")
             print( UserDefaultManager.shared.accessToken, UserDefaultManager.shared.refreshToken)
             return
         }
@@ -72,5 +74,20 @@ final class AuthManager : RequestInterceptor {
             
         } // 어떤 에러가 발생할 수 있을까....?
         
+    }
+}
+
+extension AuthManager {
+    static func kingfisherAuth() -> AnyModifier {
+        guard let accessToken = UserDefaultManager.shared.accessToken else { return AnyModifier { $0 } }
+        
+        let modifier = AnyModifier { request in
+            var req = request
+            req.addValue(APIKey.secretKey.rawValue, forHTTPHeaderField: HTTPHeader.sesacKey.rawValue)
+            req.addValue(accessToken, forHTTPHeaderField: HTTPHeader.authorization.rawValue)
+            return req
+        }
+        
+        return modifier
     }
 }

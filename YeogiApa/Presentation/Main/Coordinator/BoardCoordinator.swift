@@ -19,7 +19,7 @@ final class BoardCoordinator : Coordinator {
     }
     
     func start() {
-        let vc = BoardMainViewController()
+        let vc = BoardViewController()
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }
@@ -28,17 +28,29 @@ final class BoardCoordinator : Coordinator {
         print("토큰초기화됨 ✅")
         parentCoordinator?.resetLogined(self)
     }
+        
+    deinit {
+        print(#function, "-BoardCoordinator ✅")
+    }
+}
+
+extension BoardCoordinator {
     
     func toQuestion() {
-        print(#function)
-        
         let questionCoordinator = QuestionCoordinator(navigationController: navigationController)
         questionCoordinator.parentCoordinator = self
         questionCoordinator.start()
         childCoordinators.append(questionCoordinator)
     }
     
-    deinit {
-        print(#function, "-BoardCoordinator ✅")
+    func toBoard(_ coordinator: QuestionCoordinator) {
+        childCoordinators = childCoordinators.filter { $0 !== coordinator }
+        print(#function, childCoordinators, "✅ BoardCoordinator")
+    }
+    
+    func toDetail(_ item : PostResponse) {
+        let vc = BoardDetailViewController(postResponse: item)
+        vc.parentCoordinator = self
+        navigationController.pushViewController(vc, animated: true)
     }
 }

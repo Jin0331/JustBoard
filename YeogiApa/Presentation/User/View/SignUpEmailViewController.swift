@@ -27,7 +27,7 @@ final class SignUpEmailViewController: RxBaseViewController {
     private let nextButton = NextButton(title: "다음")
     
     let viewModel = SignUpEmailViewModel()
-    weak var delegate : EmailLoginCoordinator?
+    weak var parentCoordinator : EmailLoginCoordinator?
     
     
     override func viewDidLoad() {
@@ -50,7 +50,7 @@ final class SignUpEmailViewController: RxBaseViewController {
         
         output.validEmail
             .drive(with: self) { owner, email in
-                owner.delegate?.netxSignUpPasswordVC(email:email)
+                owner.parentCoordinator?.netxSignUpPasswordVC(email:email)
             }
             .disposed(by: disposeBag)
         

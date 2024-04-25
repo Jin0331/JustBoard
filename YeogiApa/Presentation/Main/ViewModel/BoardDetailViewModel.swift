@@ -20,17 +20,35 @@ final class BoardDetailViewModel : MainViewModelType {
     
     struct Input {
         let viewWillAppear : ControlEvent<Bool>
+        let commentText : ControlProperty<String>
+        let commentComplete : ControlEvent<Void>
     }
     
     struct Output {
         let viewWillAppear : Driver<Bool>
+        let commentButtonUI : Driver<Bool>
         let postData : BehaviorSubject<PostResponse>
     }
     
     func transform(input: Input) -> Output {
         
+        let commentButtonEnable = BehaviorSubject<Bool>(value: false)
+        
+        input.commentText
+            .bind(with: self) { owner, text in
+                commentButtonEnable.onNext(!text.isEmpty)
+            }
+            .disposed(by: disposeBag)
+        
+        input.commentComplete
+            .bind(with: self) { owner, _ in
+                print("HI")
+            }
+            .disposed(by: disposeBag)
+        
         return Output(
             viewWillAppear:input.viewWillAppear.asDriver(onErrorJustReturn: false),
+            commentButtonUI: commentButtonEnable.asDriver(onErrorJustReturn: false),
             postData:postData
         )
     }

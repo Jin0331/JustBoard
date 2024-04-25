@@ -43,7 +43,9 @@ final class BoardDetailViewController: RxBaseViewController {
 
         
         let input = BoardDetailViewModel.Input(
-            viewWillAppear: rx.viewDidAppear
+            viewWillAppear: rx.viewDidAppear,
+            commentText: mainView.commentTextField.rx.text.orEmpty,
+            commentComplete: mainView.commentCompleteButton.rx.tap
         )
         
         let output = viewModel.transform(input: input)
@@ -51,6 +53,12 @@ final class BoardDetailViewController: RxBaseViewController {
         output.viewWillAppear
             .drive(with: self) { owner, value in
                 
+            }
+            .disposed(by: disposeBag)
+        
+        output.commentButtonUI
+            .drive(with: self) { owner, valid in
+                owner.mainView.commentCompleteButton.isHidden = !valid
             }
             .disposed(by: disposeBag)
         

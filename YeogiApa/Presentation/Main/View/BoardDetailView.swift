@@ -75,10 +75,12 @@ final class BoardDetailView: BaseView {
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .semibold),
             NSAttributedString.Key.foregroundColor: DesignSystem.commonColorSet.gray
         ]
-        $0.attributedPlaceholder = NSAttributedString(string: " 댓글 입력", attributes: attributes)
+        $0.attributedPlaceholder = NSAttributedString(string: " 댓글을 남겨주세요.", attributes: attributes)
         $0.placeholderVerticalAlignment = .center
         $0.textContainerInset = .init(top: 10, left: 10, bottom: 10, right: 10)
         $0.backgroundColor = DesignSystem.commonColorSet.white
+        
+        $0.addBorder([.top], color: .red, width: 1.0)
     }
     
     override func configureHierarchy() {
@@ -173,6 +175,12 @@ final class BoardDetailView: BaseView {
         addTextViewImage(data)
         collectionViewchangeLayout(itemCount: data.comments.count)
     }
+    
+    func commentUpdateUI(_ data : PostResponse) {
+        commentCountButton.setTitle(String(data.comments.count), for: .normal)
+        collectionViewchangeLayout(itemCount: data.comments.count)
+    }
+    
 }
 
 //MARK: - TextView 관련
@@ -268,7 +276,7 @@ extension BoardDetailView {
     func collectionViewchangeLayout(itemCount: Int) {
         
         print("🥲 CollectionView Resize")
-        let oneItemSize = 110
+        let oneItemSize = 115
         let size = itemCount < 1 ? 0 : oneItemSize * itemCount
         
         commentCollectionView.snp.updateConstraints { make in

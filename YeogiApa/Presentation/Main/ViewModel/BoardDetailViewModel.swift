@@ -30,6 +30,7 @@ final class BoardDetailViewModel : MainViewModelType {
         let postData : BehaviorSubject<PostResponse>
         let commentPost : PublishSubject<Comment>
         let updatedPost : PublishSubject<PostResponse>
+        let commentComplete : Driver<Bool>
     }
     
     func transform(input: Input) -> Output {
@@ -38,6 +39,7 @@ final class BoardDetailViewModel : MainViewModelType {
         let commentRequestModel = PublishSubject<CommentRequest>()
         let postCommentData = PublishSubject<Comment>()
         let updatedPostData = PublishSubject<PostResponse>()
+        let commentComplete = PublishSubject<Bool>()
         
         input.commentText
             .bind { text in
@@ -77,8 +79,10 @@ final class BoardDetailViewModel : MainViewModelType {
                 switch result {
                 case .success(let postResponse):
                     updatedPostData.onNext(postResponse)
+                    commentComplete.onNext(true)
                 case .failure(let error):
                     print(error, "✅ PostResponse Error ")
+                    commentComplete.onNext(false)
                 }
             }
             .disposed(by: disposeBag)
@@ -89,7 +93,8 @@ final class BoardDetailViewModel : MainViewModelType {
             commentButtonUI: commentButtonEnable.asDriver(onErrorJustReturn: false),
             postData:postData,
             commentPost: postCommentData,
-            updatedPost: updatedPostData
+            updatedPost: updatedPostData,
+            commentComplete: commentComplete.asDriver(onErrorJustReturn: false)
         )
     }
 }

@@ -79,8 +79,15 @@ final class BoardDetailViewController: RxBaseViewController {
         output.updatedPost
             .debug("updatedPost")
             .bind(with: self) { owner, postData in
-                owner.mainView.updateUI(postData)
+                owner.mainView.commentUpdateUI(postData)
                 owner.updateSnapshot(postData.comments)
+            }
+            .disposed(by: disposeBag)
+        
+        output.commentComplete
+            .drive(with: self) { owner, valid in
+                owner.view.endEditing(true)
+                owner.mainView.commentTextField.text = ""
             }
             .disposed(by: disposeBag)
     }

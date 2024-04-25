@@ -47,6 +47,18 @@ final class BoardDetailViewController: RxBaseViewController {
                 owner.mainView.scrollView.isScrollEnabled = false
             }
             .disposed(by: disposeBag)
+        
+        mainView.commentCountButton.rx.tap
+            .bind(with: self) { owner, _ in
+                let desiredYPosition = owner.mainView.commentCollectionView.frame.origin.y
+                
+                // 스크롤 이동 애니메이션
+                UIView.animate(withDuration: 0.3) {
+                    owner.mainView.scrollView.contentOffset = CGPoint(x: 0, y: desiredYPosition)
+                }
+            }
+            .disposed(by: disposeBag)
+        
 
         
         let input = BoardDetailViewModel.Input(

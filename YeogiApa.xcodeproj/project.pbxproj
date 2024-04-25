@@ -45,6 +45,8 @@
 		DBB7C6772BD93F9000D3081A /* BoardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6762BD93F9000D3081A /* BoardDetailViewController.swift */; };
 		DBB7C6792BD944FC00D3081A /* BoardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6782BD944FC00D3081A /* BoardDetailView.swift */; };
 		DBB7C67B2BD95D0A00D3081A /* BoardDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C67A2BD95D0A00D3081A /* BoardDetailViewModel.swift */; };
+		DBB7C67F2BDA15D000D3081A /* CommentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C67E2BDA15D000D3081A /* CommentCollectionViewCell.swift */; };
+		DBB7C6812BDA1B8E00D3081A /* CommentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7C6802BDA1B8E00D3081A /* CommentRequest.swift */; };
 		DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */; };
 		DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */; };
 		DBCBA9E92BC7BE35006B40CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBA9E82BC7BE35006B40CA /* Assets.xcassets */; };
@@ -130,6 +132,8 @@
 		DBB7C6762BD93F9000D3081A /* BoardDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailViewController.swift; sourceTree = "<group>"; };
 		DBB7C6782BD944FC00D3081A /* BoardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailView.swift; sourceTree = "<group>"; };
 		DBB7C67A2BD95D0A00D3081A /* BoardDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailViewModel.swift; sourceTree = "<group>"; };
+		DBB7C67E2BDA15D000D3081A /* CommentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCollectionViewCell.swift; sourceTree = "<group>"; };
+		DBB7C6802BDA1B8E00D3081A /* CommentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRequest.swift; sourceTree = "<group>"; };
 		DBCBA9DC2BC7BE34006B40CA /* YeogiApa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeogiApa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBA9DF2BC7BE34006B40CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBCBA9E12BC7BE34006B40CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 				DB4110112BD173D60088679F /* PostRequest.swift */,
 				DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */,
 				DBB7C6612BD7B77800D3081A /* InquiryRequest.swift */,
+				DBB7C6802BDA1B8E00D3081A /* CommentRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -306,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				DBB7C66A2BD8AF9B00D3081A /* BoardCollectionViewCell.swift */,
+				DBB7C67E2BDA15D000D3081A /* CommentCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -662,6 +668,7 @@
 				DBCBAA072BC7CE79006B40CA /* DesignSystem.swift in Sources */,
 				DB204DA22BD2E926006340BE /* UITextView+Extension.swift in Sources */,
 				DB4110052BD15B300088679F /* BoardCoordinator.swift in Sources */,
+				DBB7C6812BDA1B8E00D3081A /* CommentRequest.swift in Sources */,
 				DBB7C66F2BD9251A00D3081A /* DiffableDataSource+Typealias.swift in Sources */,
 				DBCBAA542BCD006E006B40CA /* UserCoordinator.swift in Sources */,
 				DBCBAA192BC7E106006B40CA /* EmailLoginView.swift in Sources */,
@@ -696,6 +703,7 @@
 				DB204DA02BD2E58D006340BE /* DelimiterLine.swift in Sources */,
 				DBCBAA1F2BC7E7F2006B40CA /* ReusableID.swift in Sources */,
 				DBCBAA272BC82D5A006B40CA /* UserDefaultManager.swift in Sources */,
+				DBB7C67F2BDA15D000D3081A /* CommentCollectionViewCell.swift in Sources */,
 				DBCBAA582BCD0ACC006B40CA /* SignInUpView.swift in Sources */,
 				DB901C612BD58C7C003EEDC6 /* CompleteButton.swift in Sources */,
 				DBCBE3D42BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift in Sources */,

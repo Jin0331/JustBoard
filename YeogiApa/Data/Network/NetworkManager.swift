@@ -159,4 +159,29 @@ final class NetworkManager  {
             return Disposables.create()
         }
     }
+    
+    //MARK: - Comment
+    func comment(query : CommentRequest, postId : String) -> Single<Result<PostResponse, AFError>> {
+        
+        return Single<Result<PostResponse, AFError>>.create { single in
+            do {
+                let urlRequest = try MainRouter.comment(query: query, postId: postId).asURLRequest()
+                
+                AF.request(urlRequest, interceptor: AuthManager())
+                    .validate(statusCode: 200..<300)
+                    .responseDecodable(of: PostResponse.self) { response in
+                        switch response.result {
+                        case .success(let writeResponse):
+                            single(.success(.success(writeResponse)))
+                        case .failure(let error):
+                            print(response.response?.statusCode)
+                            single(.success(.failure(error)))
+                        }
+                    }
+            } catch {
+                single(.failure(error))
+            }
+            return Disposables.create()
+        }
+    }
 }

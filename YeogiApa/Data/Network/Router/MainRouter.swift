@@ -12,6 +12,7 @@ enum MainRouter {
     case write(query : PostRequest)
     case files(query : FilesRequest, category : String)
     case inquiry(query : InquiryRequest)
+    case comment(query : CommentRequest, postId : String)
 }
 
 
@@ -22,7 +23,7 @@ extension MainRouter : TargetType {
         
     var method: HTTPMethod {
         switch self {
-        case .write, .files :
+        case .write, .files, .comment:
             return .post
         case .inquiry:
             return .get
@@ -35,6 +36,8 @@ extension MainRouter : TargetType {
             return "/posts"
         case .files:
             return "/posts/files"
+        case .comment(query: _ , postId: let postId):
+            return "/posts/" + postId + "/comments"
         }
     }
     
@@ -42,7 +45,7 @@ extension MainRouter : TargetType {
         guard let token = UserDefaultManager.shared.accessToken else { return [:] }
         
         switch self {
-        case .write :
+        case .write, .comment :
             return [
                 HTTPHeader.authorization.rawValue : token,
                 HTTPHeader.contentType.rawValue : HTTPHeader.json.rawValue,
@@ -84,6 +87,13 @@ extension MainRouter : TargetType {
             encoder.keyEncodingStrategy = .convertToSnakeCase
             
             return try? encoder.encode(query)
+            
+        case .comment(query: let query, postId: _):
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            
+            return try? encoder.encode(query)
+            
         default:
             return nil
         }

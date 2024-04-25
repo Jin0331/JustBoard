@@ -28,36 +28,39 @@ final class BoardDetailViewModel : MainViewModelType {
         let viewWillAppear : Driver<Bool>
         let commentButtonUI : Driver<Bool>
         let postData : BehaviorSubject<PostResponse>
-        let postCommentData : PublishSubject<PostResponse>
+        let commentPost : PublishSubject<Comment>
+        let updatedPost : PublishSubject<PostResponse>
     }
     
     func transform(input: Input) -> Output {
         
         let commentButtonEnable = BehaviorSubject<Bool>(value: false)
         let commentRequestModel = PublishSubject<CommentRequest>()
-        let postCommentData = PublishSubject<PostResponse>()
+        let postCommentData = PublishSubject<Comment>()
+        let updatedPostData = PublishSubject<PostResponse>()
         
         input.commentText
             .throttle(.seconds(1), scheduler: MainScheduler.asyncInstance)
-            .bind(with: self) { owner, text in
+            .bind { text in
                 commentButtonEnable.onNext(!text.isEmpty)
                 commentRequestModel.onNext(CommentRequest(content: text))
             }
             .disposed(by: disposeBag)
         
-        let commentRequest = Observable.combineLatest(commentRequestModel, postData)
+        let commentRequest = Observable.combineLatest(commentRequestModel, postData).share()
         
         input.commentComplete
             .withLatestFrom(commentRequest)
-            .throttle(.seconds(1), scheduler: MainScheduler.asyncInstance)
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .flatMap {
-                return NetworkManager.shared.comment(query: $0, postId: $1.postID)
+                let comment = NetworkManager.shared.comment(query: $0, postId: $1.postID)
+                let commentUpdatedPost = NetworkManager.shared.post(postId: $1.postID)
+                return Observable.combineLatest(comment.asObservable(), commentUpdatedPost.asObservable())
             }
-            .subscribe(with: self) { owner, result in
-                switch result {
+            .subscribe { (commentResult, updatedPostResult) in
+                switch updatedPostResult {
                 case .success(let postResponse):
-                    postCommentData.onNext(postResponse)
-                    print(postResponse)
+                    updatedPostData.onNext(postResponse)
                 case .failure(let error):
                     print(error)
                 }
@@ -69,7 +72,8 @@ final class BoardDetailViewModel : MainViewModelType {
             viewWillAppear:input.viewWillAppear.asDriver(onErrorJustReturn: false),
             commentButtonUI: commentButtonEnable.asDriver(onErrorJustReturn: false),
             postData:postData,
-            postCommentData: postCommentData
+            commentPost: postCommentData,
+            updatedPost: updatedPostData
         )
     }
 }

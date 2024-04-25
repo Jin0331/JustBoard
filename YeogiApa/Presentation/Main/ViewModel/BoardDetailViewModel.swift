@@ -28,28 +28,48 @@ final class BoardDetailViewModel : MainViewModelType {
         let viewWillAppear : Driver<Bool>
         let commentButtonUI : Driver<Bool>
         let postData : BehaviorSubject<PostResponse>
+        let postCommentData : PublishSubject<PostResponse>
     }
     
     func transform(input: Input) -> Output {
         
         let commentButtonEnable = BehaviorSubject<Bool>(value: false)
+        let commentRequestModel = PublishSubject<CommentRequest>()
+        let postCommentData = PublishSubject<PostResponse>()
         
         input.commentText
+            .throttle(.seconds(1), scheduler: MainScheduler.asyncInstance)
             .bind(with: self) { owner, text in
                 commentButtonEnable.onNext(!text.isEmpty)
+                commentRequestModel.onNext(CommentRequest(content: text))
             }
             .disposed(by: disposeBag)
         
+        let commentRequest = Observable.combineLatest(commentRequestModel, postData)
+        
         input.commentComplete
-            .bind(with: self) { owner, _ in
-                print("HI")
+            .withLatestFrom(commentRequest)
+            .throttle(.seconds(1), scheduler: MainScheduler.asyncInstance)
+            .flatMap {
+                return NetworkManager.shared.comment(query: $0, postId: $1.postID)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let postResponse):
+                    postCommentData.onNext(postResponse)
+                    print(postResponse)
+                case .failure(let error):
+                    print(error)
+                }
             }
             .disposed(by: disposeBag)
+        
         
         return Output(
             viewWillAppear:input.viewWillAppear.asDriver(onErrorJustReturn: false),
             commentButtonUI: commentButtonEnable.asDriver(onErrorJustReturn: false),
-            postData:postData
+            postData:postData,
+            postCommentData: postCommentData
         )
     }
 }

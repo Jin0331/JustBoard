@@ -15,6 +15,7 @@ final class BoardDetailViewController: RxBaseViewController {
     private let mainView = BoardDetailView()
     private let viewModel : BoardDetailViewModel
     var parentCoordinator : BoardCoordinator?
+    private var datasource : BoardDetailDataSource!
     
     override func loadView() {
         view = mainView
@@ -25,6 +26,12 @@ final class BoardDetailViewController: RxBaseViewController {
         self.viewModel = BoardDetailViewModel(postResponse)
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        mainView.commentCollectionView.delegate = self
+        configureDataSource()
+    }
+    
     override func bind() {
         
         NotificationCenter.default.rx
@@ -68,9 +75,37 @@ final class BoardDetailViewController: RxBaseViewController {
                 owner.mainView.updateUI(postData)
             }
             .disposed(by: disposeBag)
+        
+        output.postCommentData
+            .bind(with: self) { owner, postCommentData in
+                owner.updateSnapshot(postCommentData.comments)
+            }
+            .disposed(by: disposeBag)
     }
     
     deinit {
         print(#function, "- BoardDetailViewController ✅")
+    }
+}
+
+//MARK: - Collection View 관련
+extension BoardDetailViewController : DiffableDataSource, UICollectionViewDelegate {
+    func configureDataSource() {
+        let cellRegistration = mainView.boardDetailCellRegistration()
+        datasource = UICollectionViewDiffableDataSource(collectionView: mainView.commentCollectionView, cellProvider: {collectionView, indexPath, itemIdentifier in
+            
+            let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+            cell.updateUI(itemIdentifier)
+            
+            return cell
+        })
+    }
+    
+    func updateSnapshot(_ data : [Comment]) {
+        var snapshot = BoardDetailDataSourceSnapshot()
+        snapshot.appendSections(BoardDetailViewSection.allCases)
+        snapshot.appendItems(data, toSection: .main)
+        
+        datasource.apply(snapshot)
     }
 }

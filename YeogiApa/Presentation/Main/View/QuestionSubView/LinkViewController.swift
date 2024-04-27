@@ -37,7 +37,7 @@ class LinkViewController: RxBaseViewController {
         
         urlLinkTextField.rx.text.orEmpty
             .bind(with: self) { owner, text in
-                addSuccess.onNext(owner.isValidURL(text))
+                addSuccess.onNext(owner.isYouTubeLink(text))
             }
             .disposed(by: disposeBag)
         
@@ -103,6 +103,17 @@ class LinkViewController: RxBaseViewController {
         // 정규표현식과 매치되는지 확인
         let urlTest = NSPredicate(format:"SELF MATCHES %@", urlRegex)
         return urlTest.evaluate(with: urlString)
+    }
+    
+    func isYouTubeLink(_ urlString: String) -> Bool {
+        if let url = URL(string: urlString) {
+            if let host = url.host {
+                if host.contains("youtube.com") || host.contains("youtu.be") {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
 }

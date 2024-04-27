@@ -194,12 +194,12 @@ extension BoardDetailView : UITextViewDelegate {
         if !urlList.isEmpty && !imageLocation.isEmpty {
             (0..<urlList.count).forEach { _addTextViewImage(url: urlList[$0], location: imageLocation[$0])}
         } else if !urlList.isEmpty && imageLocation.isEmpty {
-            var testLastLocation = data.content1.count
-            
-            (0..<urlList.count).forEach {
-                _addTextViewImage(url: urlList[$0], location: imageLocation[testLastLocation])
-                testLastLocation += 1
-            }
+//            var testLastLocation = data.content1.count
+//            
+//            (0..<urlList.count).forEach {
+//                _addTextViewImage(url: urlList[$0], location: imageLocation[testLastLocation])
+//                testLastLocation += 1
+//            }
         }
     }
     

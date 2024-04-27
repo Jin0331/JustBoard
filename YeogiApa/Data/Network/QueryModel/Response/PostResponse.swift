@@ -38,7 +38,7 @@ struct PostResponse: Decodable, Hashable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.postID = try container.decode(String.self, forKey: .postID)
         self.productID = try container.decode(String.self, forKey: .productID)
-        self.title = try container.decode(String.self, forKey: .title)
+        self.title = (try? container.decode(String.self, forKey: .title)) ?? ""
         self.content = (try? container.decode(String.self, forKey: .content)) ?? ""
         self.content1 = (try? container.decode(String.self, forKey: .content1)) ?? ""
         self.content2 = (try? container.decode(String.self, forKey: .content2)) ?? ""
@@ -74,7 +74,8 @@ struct PostResponse: Decodable, Hashable {
         if content3.isEmpty {
             return []
         } else {
-            let convert = content3.split(separator: " ").map { Int($0)! }
+            let convert = content3.split(separator: " ").compactMap{ Int($0) }
+            
             return convert
         }
     }

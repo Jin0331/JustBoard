@@ -30,7 +30,7 @@ final class BoardViewModel : MainViewModelType {
         
         input.viewWillAppear
             .flatMap { _ in
-                return NetworkManager.shared.post(query: InquiryRequest(next: "0", limit: "30", product_id: "gyjw_all"))
+                return NetworkManager.shared.post(query: InquiryRequest(next: "0", limit: "100", product_id: "nhj_test"))
                 // nhj_test gyjw_all
             }
             .bind(with: self) { owner, result in

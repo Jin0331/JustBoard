@@ -35,6 +35,28 @@ final class BoardViewController: RxBaseViewController {
             questionButtonTap:  mainView.questionButton.rx.tap
         )
         
+        mainView.mainCollectionView.rx.prefetchItems
+//            .compactMap(\.last?.row)
+            .bind(with: self) { owner, indexPath in
+                
+                print(indexPath, "✅")
+            }
+            .disposed(by: disposeBag)
+        
+//        mainView.mainCollectionView.rx.didScroll.subscribe { [weak self] _ in
+//            guard let self = self else { return }
+//            let offSetY = mainView.mainCollectionView.contentOffset.y
+//            let contentHeight = mainView.mainCollectionView.contentSize.height
+//
+//            print(offSetY)
+//            print(contentHeight)
+//            
+//            if offSetY > (contentHeight - mainView.mainCollectionView.frame.size.height - 100) {
+//                print(offSetY)
+//            }
+//        }
+//        .disposed(by: disposeBag)
+        
         let output = viewModel.transform(input: input)
         
         output.viewWillAppear

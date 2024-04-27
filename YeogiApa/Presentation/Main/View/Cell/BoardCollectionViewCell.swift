@@ -63,9 +63,16 @@ final class BoardCollectionViewCell: BaseCollectionViewCell {
     func updateUI(_ itemIdentifier : PostResponse) {
         
         titleLabel.text = itemIdentifier.title
-        
         commentCount.text = itemIdentifier.comments.count > 0 ? "[" + String(itemIdentifier.comments.count) + "]" : ""
         author.text = itemIdentifier.creator.nick
         createdAt.text = itemIdentifier.createdAt.formatDateString()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        titleLabel.text = nil
+        commentCount.text = nil
+        author.text = nil
+        createdAt.text = nil
     }
 }

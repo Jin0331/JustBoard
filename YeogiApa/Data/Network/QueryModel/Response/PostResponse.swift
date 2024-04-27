@@ -18,6 +18,18 @@ struct InquiryResponse : Decodable, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(data)
     }
+    enum CodingKeys: CodingKey {
+        case data
+        case next_cursor
+    }
+    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.data = (try? container.decode([PostResponse].self, forKey: .data)) ?? []
+        
+        self.next_cursor = try container.decode(String.self, forKey: .next_cursor)
+    }
+    
 }
 
 struct PostResponse: Decodable, Hashable {

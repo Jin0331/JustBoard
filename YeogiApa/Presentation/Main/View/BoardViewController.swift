@@ -46,11 +46,18 @@ final class BoardViewController: RxBaseViewController {
                 owner.tabBarController?.tabBar.isHidden = false
             }
             .disposed(by: disposeBag)
+
         
         output.postData
-            .debug("post data 🥲")
-            .bind(with: self) { owner, post in
-                owner.updateSnapshot(post)
+            .enumerated()
+            .bind(with: self) { owner, value in
+                print(value.index, " emit index ✅")
+                if value.index == 0 {
+                    owner.updateSnapshot(value.element)
+                } else {
+                    owner.afterUpdateSnapshot(value.element)
+                }
+                
             }
             .disposed(by: disposeBag)
         
@@ -77,12 +84,28 @@ extension BoardViewController : DiffableDataSource {
     }
     
     func updateSnapshot(_ data : [PostResponse]) {
-        var snapshot = BoardDataSourceSnapshot()
+        var snapshot = datasource.snapshot()
         snapshot.appendSections(BoardViewSection.allCases)
         snapshot.appendItems(data, toSection: .main)
         
-        datasource.apply(snapshot)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+//            guard let self = self else { return }
+            datasource.apply(snapshot)
+//        }
+        
     }
+    
+    func afterUpdateSnapshot(_ data : [PostResponse]) {
+        var snapshot = datasource.snapshot()
+        let uniqueItemsToAdd = data.filter { !snapshot.itemIdentifiers.contains($0) }
+        snapshot.appendItems(uniqueItemsToAdd, toSection: .main)
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+//            guard let self = self else { return }
+            datasource.apply(snapshot)
+//        }
+    }
+    
 }
 
 extension BoardViewController : UICollectionViewDelegate {

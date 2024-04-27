@@ -24,11 +24,13 @@ final class BoardViewModel : MainViewModelType {
         let viewWillAppear : Driver<Bool>
         let questionButtonTap : Driver<Void>
         let postData : PublishSubject<[PostResponse]>
+        let nextPost : PublishSubject<[PostResponse]>
     }
     
     func transform(input: Input) -> Output {
         
         let postData = PublishSubject<[PostResponse]>()
+        let nextPost = PublishSubject<[PostResponse]>()
         let nextCursor = PublishSubject<String>()
         let nextPage = PublishSubject<String>()
         
@@ -36,7 +38,7 @@ final class BoardViewModel : MainViewModelType {
             .flatMap { _ in
                 return NetworkManager.shared.post(query: InquiryRequest(next: InquiryRequest.InquiryRequestDefault.next,
                                                                         limit: InquiryRequest.InquiryRequestDefault.limit,
-                                                                        product_id: "nhj_test"))
+                                                                        product_id: ""))
                 // nhj_test gyjw_all
             }
             .bind(with: self) { owner, result in
@@ -53,10 +55,8 @@ final class BoardViewModel : MainViewModelType {
         let goNextPage = input.prefetchItems
             .map { [weak self] items in
                 guard let self = self else { return false }
-                
-                print(limit - 10)
-                
-                return items > limit - 10
+                print(items, "제한 ✅:", limit, items > limit - 2)
+                return items > limit - 2
             }
         
         Observable.combineLatest(goNextPage, nextCursor)
@@ -75,33 +75,25 @@ final class BoardViewModel : MainViewModelType {
             .flatMap { cursor in
                 return NetworkManager.shared.post(query: InquiryRequest(next: cursor,
                                                                         limit: InquiryRequest.InquiryRequestDefault.limit,
-                                                                        product_id: "nhj_test"))
+                                                                        product_id: ""))
             }
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let value):
-                    
                     owner.limit += 30
-                    
-                    print(owner.limit)
-                    
-                    print(value.data)
                     postData.onNext(value.data)
-//                    nextCursor.onNext(value.next_cursor)
-                    
-//                    dump(value)
-                    
+                    nextCursor.onNext(value.next_cursor)
                 case .failure(let error):
                     print(error)
                 }
             }
             .disposed(by: disposeBag)
         
-        
         return Output(
-            viewWillAppear:input.viewWillAppear.asDriver(onErrorJustReturn: false),
+            viewWillAppear: input.viewWillAppear.asDriver(onErrorJustReturn: false),
             questionButtonTap: input.questionButtonTap.asDriver(),
-            postData: postData
+            postData: postData,
+            nextPost: nextPost
         )
     }
 }

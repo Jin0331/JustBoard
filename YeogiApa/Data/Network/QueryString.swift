@@ -11,4 +11,6 @@ enum QueryString : String {
     case next = "next"
     case limit = "limit"
     case product_id = "product_id"
+    
+    
 }

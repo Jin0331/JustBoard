@@ -30,32 +30,14 @@ final class BoardViewController: RxBaseViewController {
     
     override func bind() {
         
+        let prefetchItems = mainView.mainCollectionView.rx.prefetchItems
+            .compactMap(\.last?.row)
+        
         let input = BoardViewModel.Input(
             viewWillAppear: rx.viewWillAppear,
-            questionButtonTap:  mainView.questionButton.rx.tap
+            questionButtonTap:  mainView.questionButton.rx.tap,
+            prefetchItems: prefetchItems
         )
-        
-        mainView.mainCollectionView.rx.prefetchItems
-//            .compactMap(\.last?.row)
-            .bind(with: self) { owner, indexPath in
-                
-                print(indexPath, "✅")
-            }
-            .disposed(by: disposeBag)
-        
-//        mainView.mainCollectionView.rx.didScroll.subscribe { [weak self] _ in
-//            guard let self = self else { return }
-//            let offSetY = mainView.mainCollectionView.contentOffset.y
-//            let contentHeight = mainView.mainCollectionView.contentSize.height
-//
-//            print(offSetY)
-//            print(contentHeight)
-//            
-//            if offSetY > (contentHeight - mainView.mainCollectionView.frame.size.height - 100) {
-//                print(offSetY)
-//            }
-//        }
-//        .disposed(by: disposeBag)
         
         let output = viewModel.transform(input: input)
         
@@ -66,9 +48,8 @@ final class BoardViewController: RxBaseViewController {
             .disposed(by: disposeBag)
         
         output.postData
+            .debug("post data 🥲")
             .bind(with: self) { owner, post in
-                
-                dump(post)
                 owner.updateSnapshot(post)
             }
             .disposed(by: disposeBag)

@@ -11,4 +11,9 @@ struct InquiryRequest {
     let next : String
     let limit : String
     let product_id : String
+    
+    enum InquiryRequestDefault {
+        static let next = "0"
+        static let limit = "30"
+    }
 }

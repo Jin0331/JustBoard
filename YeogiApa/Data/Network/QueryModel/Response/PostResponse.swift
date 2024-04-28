@@ -18,6 +18,18 @@ struct InquiryResponse : Decodable, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(data)
     }
+    enum CodingKeys: CodingKey {
+        case data
+        case next_cursor
+    }
+    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.data = try container.decode([PostResponse].self, forKey: .data)
+        
+        self.next_cursor = try container.decode(String.self, forKey: .next_cursor)
+    }
+    
 }
 
 struct PostResponse: Decodable, Hashable {
@@ -37,8 +49,8 @@ struct PostResponse: Decodable, Hashable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.postID = try container.decode(String.self, forKey: .postID)
-        self.productID = try container.decode(String.self, forKey: .productID)
-        self.title = try container.decode(String.self, forKey: .title)
+        self.productID = (try? container.decode(String.self, forKey: .productID)) ?? ""
+        self.title = (try? container.decode(String.self, forKey: .title)) ?? ""
         self.content = (try? container.decode(String.self, forKey: .content)) ?? ""
         self.content1 = (try? container.decode(String.self, forKey: .content1)) ?? ""
         self.content2 = (try? container.decode(String.self, forKey: .content2)) ?? ""
@@ -74,7 +86,8 @@ struct PostResponse: Decodable, Hashable {
         if content3.isEmpty {
             return []
         } else {
-            let convert = content3.split(separator: " ").map { Int($0)! }
+            let convert = content3.split(separator: " ").compactMap{ Int($0) }
+            
             return convert
         }
     }

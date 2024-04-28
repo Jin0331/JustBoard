@@ -30,9 +30,13 @@ final class BoardViewController: RxBaseViewController {
     
     override func bind() {
         
+        let prefetchItems = mainView.mainCollectionView.rx.prefetchItems
+            .compactMap(\.last?.row)
+        
         let input = BoardViewModel.Input(
             viewWillAppear: rx.viewWillAppear,
-            questionButtonTap:  mainView.questionButton.rx.tap
+            questionButtonTap:  mainView.questionButton.rx.tap,
+            prefetchItems: prefetchItems
         )
         
         let output = viewModel.transform(input: input)
@@ -42,12 +46,19 @@ final class BoardViewController: RxBaseViewController {
                 owner.tabBarController?.tabBar.isHidden = false
             }
             .disposed(by: disposeBag)
+
         
         output.postData
-            .bind(with: self) { owner, post in
+            .enumerated()
+            .debug("postData")
+            .bind(with: self) { owner, value in
+                print(value.index, " emit index ✅")
+                if value.index == 0 {
+                    owner.updateSnapshot(value.element)
+                } else {
+                    owner.afterUpdateSnapshot(value.element)
+                }
                 
-                dump(post)
-                owner.updateSnapshot(post)
             }
             .disposed(by: disposeBag)
         
@@ -74,12 +85,32 @@ extension BoardViewController : DiffableDataSource {
     }
     
     func updateSnapshot(_ data : [PostResponse]) {
-        var snapshot = BoardDataSourceSnapshot()
+        var snapshot = datasource.snapshot()
         snapshot.appendSections(BoardViewSection.allCases)
         snapshot.appendItems(data, toSection: .main)
         
         datasource.apply(snapshot)
     }
+    
+    func afterUpdateSnapshot(_ data : [PostResponse]) {
+        
+        var snapshot = datasource.snapshot()
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            mainView.setActivityIndicator()
+            let uniqueItemsToAdd = data.filter { !snapshot.itemIdentifiers.contains($0) }
+            snapshot.appendItems(uniqueItemsToAdd, toSection: .main)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            guard let self = self else { return }
+            mainView.activityIndicator.stopAnimating()
+            mainView.loadingBgView.removeFromSuperview()
+            datasource.apply(snapshot)
+        }
+    }
+    
 }
 
 extension BoardViewController : UICollectionViewDelegate {

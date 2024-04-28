@@ -2,6 +2,9 @@ PODS:
   - Alamofire (5.9.0)
   - IQKeyboardManagerSwift (7.0.1)
   - Kingfisher (7.11.0)
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
   - RxCocoa (6.6.0):
     - RxRelay (= 6.6.0)
     - RxSwift (= 6.6.0)
@@ -21,6 +24,7 @@ DEPENDENCIES:
   - Alamofire (~> 5.8)
   - IQKeyboardManagerSwift
   - Kingfisher (~> 7.0)
+  - NVActivityIndicatorView
   - RxCocoa (= 6.6.0)
   - RxSwift (= 6.6.0)
   - RxViewController
@@ -35,6 +39,7 @@ SPEC REPOS:
     - Alamofire
     - IQKeyboardManagerSwift
     - Kingfisher
+    - NVActivityIndicatorView
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -49,6 +54,7 @@ SPEC CHECKSUMS:
   Alamofire: 02b772c9910e8eba1a079227c32fbd9e46c90a24
   IQKeyboardManagerSwift: 7f6b1b1d1497855d2beea7f2f10ffcc6978525b1
   Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   RxCocoa: 44a80de90e25b739b5aeaae3c8c371a32e3343cc
   RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
   RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
@@ -59,6 +65,6 @@ SPEC CHECKSUMS:
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   Toast-Swift: dd369e68ee529f542c65bd0d0c6c50cd743cf6f2
 
-PODFILE CHECKSUM: 480492b9bcb49142aa761ce03f7d6bd97252ab37
+PODFILE CHECKSUM: e581ec43280a5aa5cd8e04cf390bf0fce26e23d9
 
 COCOAPODS: 1.15.2

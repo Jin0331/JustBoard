@@ -50,6 +50,7 @@ final class BoardViewController: RxBaseViewController {
         
         output.postData
             .enumerated()
+            .debug("postData")
             .bind(with: self) { owner, value in
                 print(value.index, " emit index ✅")
                 if value.index == 0 {

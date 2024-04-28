@@ -17,7 +17,6 @@ final class BoardView: BaseView {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         view.backgroundColor = DesignSystem.commonColorSet.white
         view.allowsMultipleSelection = true
-//        view.isPagingEnabled = true
         
        return view
     }()

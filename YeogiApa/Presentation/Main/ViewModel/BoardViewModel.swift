@@ -31,6 +31,7 @@ final class BoardViewModel : MainViewModelType {
         
         let postData = PublishSubject<[PostResponse]>()
         let nextPost = PublishSubject<[PostResponse]>()
+        let nextPageValid = BehaviorSubject<Bool>(value: false)
         let nextCursor = PublishSubject<String>()
         let nextPage = PublishSubject<String>()
         
@@ -38,7 +39,7 @@ final class BoardViewModel : MainViewModelType {
             .flatMap { _ in
                 return NetworkManager.shared.post(query: InquiryRequest(next: InquiryRequest.InquiryRequestDefault.next,
                                                                         limit: InquiryRequest.InquiryRequestDefault.limit,
-                                                                        product_id: ""))
+                                                                        product_id: "nhj_test"))
                 // nhj_test gyjw_all
             }
             .bind(with: self) { owner, result in
@@ -52,37 +53,48 @@ final class BoardViewModel : MainViewModelType {
             }
             .disposed(by: disposeBag)
         
-        let goNextPage = input.prefetchItems
+        input.prefetchItems
             .map { [weak self] items in
                 guard let self = self else { return false }
                 print(items, "제한 ✅:", limit, items > limit - 2)
                 return items > limit - 2
             }
+            .bind(with: self) { owner, valid in
+                nextPageValid.onNext(valid)
+            }
+            .disposed(by: disposeBag)
         
-        Observable.combineLatest(goNextPage, nextCursor)
-            .bind { goNextPage, nextCursor in
+        Observable.combineLatest(nextPageValid, nextCursor)
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .bind { page, curosr in
                 
-                if goNextPage && nextCursor != InquiryRequest.InquiryRequestDefault.next {
-                    print(goNextPage, nextCursor, "nextpage ✅")
-                    nextPage.onNext(nextCursor)
-                } else {
-                    print("Cursor 없음 ! 🥲")
+                print(page, curosr, "뭘까")
+                
+                if page && curosr != InquiryRequest.InquiryRequestDefault.next {
+                    print(page, curosr, "nextpage ✅")
+                    nextPage.onNext(curosr)
                 }
             }
             .disposed(by: disposeBag)
         
         nextPage
+            .debug("NextPage ✅")
             .flatMap { cursor in
                 return NetworkManager.shared.post(query: InquiryRequest(next: cursor,
                                                                         limit: InquiryRequest.InquiryRequestDefault.limit,
-                                                                        product_id: ""))
+                                                                        product_id: "nhj_test"))
             }
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let value):
+                    
+                    
+                    print(value.data)
+                    
                     owner.limit += 30
                     postData.onNext(value.data)
                     nextCursor.onNext(value.next_cursor)
+                    nextPageValid.onNext(false)
                 case .failure(let error):
                     print(error)
                 }

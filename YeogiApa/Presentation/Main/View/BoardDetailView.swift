@@ -54,6 +54,30 @@ final class BoardDetailView: BaseView {
         $0.isScrollEnabled = false // 스크롤 비활성화
     }
     
+    private let buttonBgView = UIView().then {
+        $0.backgroundColor = DesignSystem.commonColorSet.white
+    }
+    
+    private let buttonStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+        $0.spacing = 10
+    }
+    
+    let emptyLabel1 = DelimiterLine(lightGray: false).then { $0.backgroundColor = DesignSystem.commonColorSet.white }
+    let emptyLabel2 = DelimiterLine(lightGray: false).then { $0.backgroundColor = DesignSystem.commonColorSet.white }
+    
+    let likeButton = CompleteButton(title: "개념\n244", image: DesignSystem.sfSymbol.like, fontSize: 16).then {
+        $0.titleLabel?.numberOfLines = 0
+        $0.alignTextBelow(spacing: 4)
+    }
+    
+    let unlikeButton = CompleteButton(title: "비추\n244", image: DesignSystem.sfSymbol.unlike, fontSize: 16).then {
+        $0.titleLabel?.numberOfLines = 0
+        $0.backgroundColor = DesignSystem.commonColorSet.gray
+        $0.alignTextBelow(spacing: 4)
+    }
+    
     lazy var commentCollectionView : UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         view.backgroundColor = DesignSystem.commonColorSet.white
@@ -90,7 +114,10 @@ final class BoardDetailView: BaseView {
         [commentTextField, commentCompleteButton].forEach { commentBackgroundView.addSubview($0) }
         
         scrollView.addSubview(contentsView)
-        [title, author, createdAt, commentCountButton, textView, commentCollectionView].forEach { contentsView.addSubview($0) }
+        [title, author, createdAt, commentCountButton, textView, buttonBgView, commentCollectionView].forEach { contentsView.addSubview($0) }
+        
+        buttonBgView.addSubview(buttonStackView)
+        [emptyLabel1, likeButton, unlikeButton, emptyLabel2].forEach { buttonStackView.addArrangedSubview($0)}
     }
     
     override func configureLayout() {
@@ -136,7 +163,17 @@ final class BoardDetailView: BaseView {
             make.leading.equalToSuperview().inset(10)
             make.trailing.equalToSuperview().inset(5)
             make.height.equalTo(200)
+        }
+        
+        buttonBgView.snp.makeConstraints { make in
+            make.top.equalTo(textView.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(100)
             make.bottom.equalTo(commentCollectionView.snp.top).offset(-20)
+        }
+        
+        buttonStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(10)
         }
         
         commentCollectionView.snp.makeConstraints { make in

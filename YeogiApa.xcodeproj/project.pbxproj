@@ -31,6 +31,7 @@
 		DB4110142BD19E0A0088679F /* PostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110132BD19E0A0088679F /* PostResponse.swift */; };
 		DB4110162BD1AC720088679F /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */; };
 		DB802F462BDBD78500DC670D /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB802F452BDBD78500DC670D /* UICollectionView+Extension.swift */; };
+		DB802F482BDE31EF00DC670D /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB802F472BDE31EF00DC670D /* UIButton+Extension.swift */; };
 		DB901C5F2BD5835F003EEDC6 /* LinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C5E2BD5835F003EEDC6 /* LinkViewController.swift */; };
 		DB901C612BD58C7C003EEDC6 /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C602BD58C7C003EEDC6 /* CompleteButton.swift */; };
 		DB901C702BD694DC003EEDC6 /* FilesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */; };
@@ -121,6 +122,7 @@
 		DB4110132BD19E0A0088679F /* PostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResponse.swift; sourceTree = "<group>"; };
 		DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
 		DB802F452BDBD78500DC670D /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
+		DB802F472BDE31EF00DC670D /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		DB901C5E2BD5835F003EEDC6 /* LinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkViewController.swift; sourceTree = "<group>"; };
 		DB901C602BD58C7C003EEDC6 /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
 		DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesRequest.swift; sourceTree = "<group>"; };
@@ -499,10 +501,11 @@
 				DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */,
 				DB204D932BD29E5D006340BE /* UITabBarController+Extension.swift */,
 				DB204DA12BD2E926006340BE /* UITextView+Extension.swift */,
-				DB204DE52BD56158006340BE /* UIImage+Extension.swift */,
-				DBB7C6842BDA3A6B00D3081A /* CALayer+Extension.swift */,
-				DBB7C6882BDAD82A00D3081A /* Formatter+Extension.swift */,
 				DB802F452BDBD78500DC670D /* UICollectionView+Extension.swift */,
+				DB204DE52BD56158006340BE /* UIImage+Extension.swift */,
+				DBB7C6882BDAD82A00D3081A /* Formatter+Extension.swift */,
+				DBB7C6842BDA3A6B00D3081A /* CALayer+Extension.swift */,
+				DB802F472BDE31EF00DC670D /* UIButton+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				DBCBAA0D2BC7D0B9006B40CA /* HTTPHeader.swift in Sources */,
 				DBCBAA072BC7CE79006B40CA /* DesignSystem.swift in Sources */,
 				DB204DA22BD2E926006340BE /* UITextView+Extension.swift in Sources */,
+				DB802F482BDE31EF00DC670D /* UIButton+Extension.swift in Sources */,
 				DB4110052BD15B300088679F /* BoardCoordinator.swift in Sources */,
 				DBB7C6852BDA3A6B00D3081A /* CALayer+Extension.swift in Sources */,
 				DBB7C6812BDA1B8E00D3081A /* CommentRequest.swift in Sources */,

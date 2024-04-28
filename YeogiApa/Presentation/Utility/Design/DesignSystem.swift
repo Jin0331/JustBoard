@@ -32,6 +32,9 @@ enum DesignSystem {
         static let appleLogo = UIImage(systemName: "apple.logo", withConfiguration:sfSymbolLargeConfig)
         static let question = UIImage(systemName: "questionmark.bubble", withConfiguration:sfSymbolLargeConfig)
         static let photo = UIImage(systemName: "photo", withConfiguration:sfSymbolLargeConfig)
+        static let like = UIImage(systemName: "hand.thumbsup", withConfiguration:sfSymbolLargeConfig)
+        static let unlike = UIImage(systemName: "hand.thumbsdown", withConfiguration:sfSymbolLargeConfig)
+        
         static let link = UIImage(systemName: "link.badge.plus", withConfiguration:sfSymbolLargeConfig)
         static let comment = UIImage(systemName: "note.text", withConfiguration:sfSymbolSmallConfig)
     }

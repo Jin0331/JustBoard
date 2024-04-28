@@ -105,12 +105,11 @@ extension BoardViewController : DiffableDataSource {
             for newData in data {
                 if let index = snapshot.itemIdentifiers.firstIndex(where: { $0.postID == newData.postID }) {
                     snapshot.deleteItems([snapshot.itemIdentifiers[index]])
-                    snapshot.appendItems([newData])
+                    snapshot.insertItems([newData], afterItem: snapshot.itemIdentifiers[index])
                 } else {
                     snapshot.appendItems([newData], toSection: .main)
                 }
             }
-        
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in

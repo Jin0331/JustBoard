@@ -39,7 +39,7 @@ final class BoardViewModel : MainViewModelType {
             .flatMap { _ in
                 return NetworkManager.shared.post(query: InquiryRequest(next: InquiryRequest.InquiryRequestDefault.next,
                                                                         limit: InquiryRequest.InquiryRequestDefault.limit,
-                                                                        product_id: "gyjw_all"))
+                                                                        product_id: ""))
                 // nhj_test gyjw_all
             }
             .bind(with: self) { owner, result in
@@ -80,7 +80,7 @@ final class BoardViewModel : MainViewModelType {
             .flatMap { cursor in
                 return NetworkManager.shared.post(query: InquiryRequest(next: cursor,
                                                                         limit: InquiryRequest.InquiryRequestDefault.limit,
-                                                                        product_id: "gyjw_all"))
+                                                                        product_id: ""))
             }
             .bind(with: self) { owner, result in
                 switch result {

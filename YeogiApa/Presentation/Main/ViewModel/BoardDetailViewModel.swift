@@ -12,24 +12,26 @@ import RxCocoa
 final class BoardDetailViewModel : MainViewModelType {
     
     var postData : BehaviorSubject<PostResponse>
+    let updatedPostData : BehaviorSubject<PostResponse>
     var disposeBag: DisposeBag = DisposeBag()
     
     init(_ receiveData: PostResponse) {
         self.postData = BehaviorSubject<PostResponse>(value: receiveData)
+        self.updatedPostData = BehaviorSubject<PostResponse>(value: receiveData)
     }
     
     struct Input {
-        let viewWillAppear : ControlEvent<Bool>
+        let likeButton: ControlEvent<Void>
+        let unlikeButton: ControlEvent<Void>
         let commentText : ControlProperty<String>
         let commentComplete : ControlEvent<Void>
     }
     
     struct Output {
-        let viewWillAppear : Driver<Bool>
         let commentButtonUI : Driver<Bool>
         let postData : BehaviorSubject<PostResponse>
         let commentPost : PublishSubject<Comment>
-        let updatedPost : PublishSubject<PostResponse>
+        let updatedPost : BehaviorSubject<PostResponse>
         let commentComplete : Driver<Bool>
     }
     
@@ -38,9 +40,30 @@ final class BoardDetailViewModel : MainViewModelType {
         let commentButtonEnable = BehaviorSubject<Bool>(value: false)
         let commentRequestModel = PublishSubject<CommentRequest>()
         let postCommentData = PublishSubject<Comment>()
-        let updatedPostData = PublishSubject<PostResponse>()
         let commentComplete = PublishSubject<Bool>()
         
+        //MARK: - like
+        input.likeButton
+            .withLatestFrom(updatedPostData)
+            .map {
+                print($0.postID)
+                return $0.postID
+            }
+            .flatMap {
+                NetworkManager.shared.likes(query: LikesRequest(like_status: true), postId: $0)
+            }
+            .bind(with: self) { owner, data in
+                switch data {
+                case .success(let likestResponse):
+                    print(likestResponse, "✅ LikesResponse")
+                case .failure(let error):
+                    print(error, "✅ LikesResponse Error")
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        
+        //MARK: - Comment 관련
         input.commentText
             .bind { text in
                 commentButtonEnable.onNext(!text.isEmpty)
@@ -78,7 +101,7 @@ final class BoardDetailViewModel : MainViewModelType {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let postResponse):
-                    updatedPostData.onNext(postResponse)
+                    owner.updatedPostData.onNext(postResponse)
                     commentComplete.onNext(true)
                 case .failure(let error):
                     print(error, "✅ PostResponse Error ")
@@ -89,7 +112,6 @@ final class BoardDetailViewModel : MainViewModelType {
         
         
         return Output(
-            viewWillAppear:input.viewWillAppear.asDriver(onErrorJustReturn: false),
             commentButtonUI: commentButtonEnable.asDriver(onErrorJustReturn: false),
             postData:postData,
             commentPost: postCommentData,

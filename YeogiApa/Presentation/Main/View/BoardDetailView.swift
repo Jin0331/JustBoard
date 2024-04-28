@@ -210,6 +210,9 @@ final class BoardDetailView: BaseView {
         
         textView.text = data.content1
         addTextViewImage(data)
+        
+        print(data.likes)
+        
         collectionViewchangeLayout(itemCount: data.comments.count)
     }
     

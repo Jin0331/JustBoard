@@ -62,18 +62,13 @@ final class BoardDetailViewController: RxBaseViewController {
 
         
         let input = BoardDetailViewModel.Input(
-            viewWillAppear: rx.viewDidAppear,
+            likeButton: mainView.likeButton.rx.tap,
+            unlikeButton: mainView.unlikeButton.rx.tap,
             commentText: mainView.commentTextField.rx.text.orEmpty,
             commentComplete: mainView.commentCompleteButton.rx.tap
         )
         
         let output = viewModel.transform(input: input)
-        
-        output.viewWillAppear
-            .drive(with: self) { owner, value in
-                
-            }
-            .disposed(by: disposeBag)
         
         output.commentButtonUI
             .drive(with: self) { owner, valid in
@@ -126,7 +121,9 @@ extension BoardDetailViewController : DiffableDataSource, UICollectionViewDelega
         
         var snapshot = BoardDetailDataSourceSnapshot()
         snapshot.appendSections(BoardDetailViewSection.allCases)
-        snapshot.appendItems(data, toSection: .main)
+        
+        let uniqueItemsToAdd = data.filter { !snapshot.itemIdentifiers.contains($0) }
+        snapshot.appendItems(uniqueItemsToAdd, toSection: .main)
         
         datasource.apply(snapshot)
     }

@@ -38,12 +38,13 @@ struct PostResponse: Decodable, Hashable {
     let creator: Creator
     let files : [String]
     let comments: [Comment]
+    let likes : [String]
     let hashTags: [String]
 
     enum CodingKeys: String, CodingKey {
         case postID = "post_id"
         case productID = "product_id"
-        case title, content1, content2, content3, content, createdAt, creator, files, comments, hashTags
+        case title, content1, content2, content3, content, createdAt, creator, files, comments, likes,hashTags
     }
 
     init(from decoder: any Decoder) throws {
@@ -57,7 +58,8 @@ struct PostResponse: Decodable, Hashable {
         self.content3 = (try? container.decode(String.self, forKey: .content3)) ?? ""
         self.createdAt = try container.decode(String.self, forKey: .createdAt)
         self.creator = try container.decode(Creator.self, forKey: .creator)
-        self.files = try container.decode([String].self, forKey: .files)
+        self.files = (try? container.decode([String].self, forKey: .files)) ?? []
+        self.likes = (try? container.decode([String].self, forKey: .likes)) ?? []
         self.comments = try container.decode([Comment].self, forKey: .comments)
         self.hashTags = (try? container.decode([String].self, forKey: .hashTags)) ?? []
     }
@@ -74,6 +76,7 @@ struct PostResponse: Decodable, Hashable {
                lhs.creator == rhs.creator &&
                lhs.files == rhs.files &&
                lhs.comments == rhs.comments &&
+               lhs.likes == rhs.likes &&
                lhs.hashTags == rhs.hashTags
     }
 

@@ -94,6 +94,8 @@
 		DBCBE3D22BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE3D12BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift */; };
 		DBCBE3D42BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE3D32BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift */; };
 		DBCBE3D62BCE8A0700B6DAC5 /* JoinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE3D52BCE8A0700B6DAC5 /* JoinResponse.swift */; };
+		DBDD8A742BDE4337002ADA34 /* LikesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD8A732BDE4337002ADA34 /* LikesRequest.swift */; };
+		DBDD8A762BDE43C3002ADA34 /* LikesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD8A752BDE43C3002ADA34 /* LikesResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +189,8 @@
 		DBCBE3D12BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameWithPhoneViewController.swift; sourceTree = "<group>"; };
 		DBCBE3D32BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameWithPhoneViewModel.swift; sourceTree = "<group>"; };
 		DBCBE3D52BCE8A0700B6DAC5 /* JoinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinResponse.swift; sourceTree = "<group>"; };
+		DBDD8A732BDE4337002ADA34 /* LikesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesRequest.swift; sourceTree = "<group>"; };
+		DBDD8A752BDE43C3002ADA34 /* LikesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesResponse.swift; sourceTree = "<group>"; };
 		DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeogiApa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -298,6 +302,7 @@
 				DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */,
 				DBB7C6612BD7B77800D3081A /* InquiryRequest.swift */,
 				DBB7C6802BDA1B8E00D3081A /* CommentRequest.swift */,
+				DBDD8A732BDE4337002ADA34 /* LikesRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 				DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */,
 				DB4110132BD19E0A0088679F /* PostResponse.swift */,
 				DB901C732BD69531003EEDC6 /* FilesResponse.swift */,
+				DBDD8A752BDE43C3002ADA34 /* LikesResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -688,6 +694,7 @@
 				DBCBAA192BC7E106006B40CA /* EmailLoginView.swift in Sources */,
 				DB204DE82BD57525006340BE /* CategorySelectView.swift in Sources */,
 				DBCBAA0F2BC7D0E1006B40CA /* NetworkManager.swift in Sources */,
+				DBDD8A742BDE4337002ADA34 /* LikesRequest.swift in Sources */,
 				DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */,
 				DBCBE3B52BCD845F00B6DAC5 /* SignUpPasswordViewController.swift in Sources */,
 				DBCBAA2B2BC83A54006B40CA /* RefreshRequest.swift in Sources */,
@@ -728,6 +735,7 @@
 				DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */,
 				DBCBAA5A2BCD5D05006B40CA /* SignUpEmailViewController.swift in Sources */,
 				DBB7C66D2BD8AFAA00D3081A /* BaseCollectionViewCell.swift in Sources */,
+				DBDD8A762BDE43C3002ADA34 /* LikesResponse.swift in Sources */,
 				DBCBAA562BCD0705006B40CA /* SignInUpViewController.swift in Sources */,
 				DB410FF52BD0CFA10088679F /* MainViewController.swift in Sources */,
 				DB204D9A2BD2A6C7006340BE /* QuestionViewController.swift in Sources */,

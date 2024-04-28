@@ -89,22 +89,26 @@ extension BoardViewController : DiffableDataSource {
         snapshot.appendSections(BoardViewSection.allCases)
         snapshot.appendItems(data, toSection: .main)
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-//            guard let self = self else { return }
-            datasource.apply(snapshot)
-//        }
-        
+        datasource.apply(snapshot)
     }
     
     func afterUpdateSnapshot(_ data : [PostResponse]) {
-        var snapshot = datasource.snapshot()
-        let uniqueItemsToAdd = data.filter { !snapshot.itemIdentifiers.contains($0) }
-        snapshot.appendItems(uniqueItemsToAdd, toSection: .main)
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-//            guard let self = self else { return }
+        var snapshot = datasource.snapshot()
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            mainView.setActivityIndicator()
+            let uniqueItemsToAdd = data.filter { !snapshot.itemIdentifiers.contains($0) }
+            snapshot.appendItems(uniqueItemsToAdd, toSection: .main)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            guard let self = self else { return }
+            mainView.activityIndicator.stopAnimating()
+            mainView.loadingBgView.removeFromSuperview()
             datasource.apply(snapshot)
-//        }
+        }
     }
     
 }

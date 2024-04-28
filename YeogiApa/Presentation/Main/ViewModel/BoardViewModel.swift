@@ -39,7 +39,7 @@ final class BoardViewModel : MainViewModelType {
             .flatMap { _ in
                 return NetworkManager.shared.post(query: InquiryRequest(next: InquiryRequest.InquiryRequestDefault.next,
                                                                         limit: InquiryRequest.InquiryRequestDefault.limit,
-                                                                        product_id: "nhj_test"))
+                                                                        product_id: ""))
                 // nhj_test gyjw_all
             }
             .bind(with: self) { owner, result in
@@ -56,7 +56,7 @@ final class BoardViewModel : MainViewModelType {
         input.prefetchItems
             .map { [weak self] items in
                 guard let self = self else { return false }
-                print(items, "제한 ✅:", limit, items > limit - 2)
+                print(items, "제한 ✅:", limit, items > limit - 5)
                 return items > limit - 2
             }
             .bind(with: self) { owner, valid in
@@ -67,9 +67,7 @@ final class BoardViewModel : MainViewModelType {
         Observable.combineLatest(nextPageValid, nextCursor)
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .bind { page, curosr in
-                
-                print(page, curosr, "뭘까")
-                
+                print(page, curosr, "current ❗️")
                 if page && curosr != InquiryRequest.InquiryRequestDefault.next {
                     print(page, curosr, "nextpage ✅")
                     nextPage.onNext(curosr)
@@ -82,15 +80,11 @@ final class BoardViewModel : MainViewModelType {
             .flatMap { cursor in
                 return NetworkManager.shared.post(query: InquiryRequest(next: cursor,
                                                                         limit: InquiryRequest.InquiryRequestDefault.limit,
-                                                                        product_id: "nhj_test"))
+                                                                        product_id: ""))
             }
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let value):
-                    
-                    
-                    print(value.data)
-                    
                     owner.limit += 30
                     postData.onNext(value.data)
                     nextCursor.onNext(value.next_cursor)

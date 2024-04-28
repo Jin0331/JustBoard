@@ -509,9 +509,9 @@
 				DB204DA12BD2E926006340BE /* UITextView+Extension.swift */,
 				DB802F452BDBD78500DC670D /* UICollectionView+Extension.swift */,
 				DB204DE52BD56158006340BE /* UIImage+Extension.swift */,
+				DB802F472BDE31EF00DC670D /* UIButton+Extension.swift */,
 				DBB7C6882BDAD82A00D3081A /* Formatter+Extension.swift */,
 				DBB7C6842BDA3A6B00D3081A /* CALayer+Extension.swift */,
-				DB802F472BDE31EF00DC670D /* UIButton+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";

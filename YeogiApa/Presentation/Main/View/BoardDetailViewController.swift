@@ -63,7 +63,6 @@ final class BoardDetailViewController: RxBaseViewController {
         
         let input = BoardDetailViewModel.Input(
             likeButton: mainView.likeButton.rx.tap,
-            unlikeButton: mainView.unlikeButton.rx.tap,
             commentText: mainView.commentTextField.rx.text.orEmpty,
             commentComplete: mainView.commentCompleteButton.rx.tap
         )
@@ -86,6 +85,7 @@ final class BoardDetailViewController: RxBaseViewController {
         output.updatedPost
             .debug("updatedPost")
             .bind(with: self) { owner, postData in
+                owner.mainView.likeUpdateUI(postData)
                 owner.mainView.commentUpdateUI(postData)
                 owner.updateSnapshot(postData.comments)
             }

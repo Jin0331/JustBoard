@@ -32,9 +32,9 @@ final class BoardDetailView: BaseView {
         $0.numberOfLines = 2
     }
     
-    let author = UIButton().then {
-        $0.setTitleColor(DesignSystem.commonColorSet.gray, for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+    let author = UILabel().then {
+        $0.font = .systemFont(ofSize: 16, weight: .bold)
+        $0.textColor = DesignSystem.commonColorSet.gray
     }
     
     private let createdAt = UILabel().then {
@@ -43,8 +43,10 @@ final class BoardDetailView: BaseView {
         $0.textAlignment = .left
     }
     
-    let commentCountButton = CompleteButton(title: "0", image: DesignSystem.sfSymbol.comment, fontSize: 16, disable: false).then {
-        $0.frame = CGRect(x: 0, y: 0, width: 80, height: 20)
+    let commentCountButton = CompleteButton(title: "0", image: DesignSystem.sfSymbol.comment, fontSize: 18).then {
+        $0.titleLabel?.numberOfLines = 0
+        $0.alignTextBelow2()
+        $0.sizeToFit()
     }
     
     lazy var textView = UITextView().then {
@@ -61,23 +63,15 @@ final class BoardDetailView: BaseView {
     private let buttonStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .fillEqually
-        $0.spacing = 10
+        $0.spacing = 5
     }
     
-    let emptyLabel1 = DelimiterLine(lightGray: false).then { $0.backgroundColor = DesignSystem.commonColorSet.white }
-    let emptyLabel2 = DelimiterLine(lightGray: false).then { $0.backgroundColor = DesignSystem.commonColorSet.white }
-    
-    let likeButton = CompleteButton(title: "개념\n244", image: DesignSystem.sfSymbol.like, fontSize: 16).then {
+    let likeButton = CompleteButton(title: "0", image: DesignSystem.sfSymbol.like, fontSize: 18).then {
         $0.titleLabel?.numberOfLines = 0
-        $0.alignTextBelow(spacing: 4)
+        $0.alignTextBelow2()
+        $0.sizeToFit()
     }
-    
-    let unlikeButton = CompleteButton(title: "비추\n244", image: DesignSystem.sfSymbol.unlike, fontSize: 16).then {
-        $0.titleLabel?.numberOfLines = 0
-        $0.backgroundColor = DesignSystem.commonColorSet.gray
-        $0.alignTextBelow(spacing: 4)
-    }
-    
+
     lazy var commentCollectionView : UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         view.backgroundColor = DesignSystem.commonColorSet.white
@@ -114,10 +108,10 @@ final class BoardDetailView: BaseView {
         [commentTextField, commentCompleteButton].forEach { commentBackgroundView.addSubview($0) }
         
         scrollView.addSubview(contentsView)
-        [title, author, createdAt, commentCountButton, textView, buttonBgView, commentCollectionView].forEach { contentsView.addSubview($0) }
+        [title, author, createdAt, textView, buttonBgView, commentCollectionView].forEach { contentsView.addSubview($0) }
         
         buttonBgView.addSubview(buttonStackView)
-        [emptyLabel1, likeButton, unlikeButton, emptyLabel2].forEach { buttonStackView.addArrangedSubview($0)}
+        [likeButton, commentCountButton].forEach { buttonStackView.addArrangedSubview($0)}
     }
     
     override func configureLayout() {
@@ -141,8 +135,8 @@ final class BoardDetailView: BaseView {
         author.snp.makeConstraints { make in
             make.top.equalTo(title.snp.bottom).offset(10)
             make.height.equalTo(30)
-            make.width.equalTo(60)
-            make.leading.equalTo(title)
+            make.width.equalTo(80)
+            make.leading.equalToSuperview().inset(10)
         }
         
         createdAt.snp.makeConstraints { make in
@@ -152,14 +146,8 @@ final class BoardDetailView: BaseView {
             make.leading.equalTo(author.snp.trailing).offset(10)
         }
         
-        commentCountButton.snp.makeConstraints { make in
-            make.centerY.equalTo(author)
-            make.trailing.equalToSuperview().inset(10)
-            make.size.equalTo(author)
-        }
-        
         textView.snp.makeConstraints { make in
-            make.top.equalTo(commentCountButton.snp.bottom).offset(10)
+            make.top.equalTo(author.snp.bottom).offset(10)
             make.leading.equalToSuperview().inset(10)
             make.trailing.equalToSuperview().inset(5)
             make.height.equalTo(200)
@@ -173,7 +161,9 @@ final class BoardDetailView: BaseView {
         }
         
         buttonStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(10)
+            make.center.equalToSuperview()
+            make.height.equalTo(80)
+            make.width.equalTo(165)
         }
         
         commentCollectionView.snp.makeConstraints { make in
@@ -204,14 +194,12 @@ final class BoardDetailView: BaseView {
 
     func updateUI(_ data : PostResponse) {
         title.text = data.title
-        author.setTitle(data.creator.nick, for: .normal)
+        author.text = data.creator.nick
         createdAt.text = data.createdAtToTime
         commentCountButton.setTitle(String(data.comments.count), for: .normal)
-        
         textView.text = data.content1
         addTextViewImage(data)
         
-        print(data.likes)
         
         collectionViewchangeLayout(itemCount: data.comments.count)
     }
@@ -219,6 +207,10 @@ final class BoardDetailView: BaseView {
     func commentUpdateUI(_ data : PostResponse) {
         commentCountButton.setTitle(String(data.comments.count), for: .normal)
         collectionViewchangeLayout(itemCount: data.comments.count)
+    }
+    
+    func likeUpdateUI(_ data : PostResponse) {
+        likeButton.setTitle(String(data.likes.count), for: .normal)
     }
     
 }

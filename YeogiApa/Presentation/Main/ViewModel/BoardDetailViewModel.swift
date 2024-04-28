@@ -22,7 +22,6 @@ final class BoardDetailViewModel : MainViewModelType {
     
     struct Input {
         let likeButton: ControlEvent<Void>
-        let unlikeButton: ControlEvent<Void>
         let commentText : ControlProperty<String>
         let commentComplete : ControlEvent<Void>
     }
@@ -37,31 +36,51 @@ final class BoardDetailViewModel : MainViewModelType {
     
     func transform(input: Input) -> Output {
         
+        let likeButtonEnable = PublishSubject<Void>()
+        
         let commentButtonEnable = BehaviorSubject<Bool>(value: false)
         let commentRequestModel = PublishSubject<CommentRequest>()
         let postCommentData = PublishSubject<Comment>()
         let commentComplete = PublishSubject<Bool>()
         
+        
         //MARK: - like
         input.likeButton
             .withLatestFrom(updatedPostData)
             .map {
-                print($0.postID)
-                return $0.postID
+                let myLike = $0.likes.contains(UserDefaultManager.shared.userId!) ? true : false
+                return (myLike, $0.postID)
             }
-            .flatMap {
-                NetworkManager.shared.likes(query: LikesRequest(like_status: true), postId: $0)
+            .flatMap { value in
+                let toggleLike = !value.0
+                return NetworkManager.shared.likes(query: LikesRequest(like_status: toggleLike), postId: value.1)
             }
             .bind(with: self) { owner, data in
                 switch data {
                 case .success(let likestResponse):
                     print(likestResponse, "✅ LikesResponse")
+                    likeButtonEnable.onNext(())
                 case .failure(let error):
                     print(error, "✅ LikesResponse Error")
                 }
             }
             .disposed(by: disposeBag)
         
+        Observable.combineLatest(likeButtonEnable, postData)
+            .map { $0.1.postID }
+            .flatMap {
+                NetworkManager.shared.post(postId: $0)
+            }
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let postResponse):
+                    print(postResponse)
+                    owner.updatedPostData.onNext(postResponse)
+                case .failure(let error):
+                    print(error, "✅ PostResponse Error ")
+                }
+            }
+            .disposed(by: disposeBag)
         
         //MARK: - Comment 관련
         input.commentText

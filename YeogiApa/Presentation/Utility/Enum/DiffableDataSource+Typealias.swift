@@ -9,14 +9,14 @@ import Foundation
 import UIKit
 
 //MARK: - BoardView
-enum BoardViewSection : CaseIterable {
-    case main
-}
-
-
-typealias BoardDataSource = UICollectionViewDiffableDataSource<BoardViewSection, PostResponse>
-typealias BoardDataSourceSnapshot = NSDiffableDataSourceSnapshot<BoardViewSection, PostResponse>
-typealias BoardCellRegistration = UICollectionView.CellRegistration<BoardCollectionViewCell, PostResponse>
+//enum BoardViewSection : CaseIterable {
+//    case main
+//}
+//
+//
+//typealias BoardDataSource = UICollectionViewDiffableDataSource<BoardViewSection, PostResponse>
+//typealias BoardDataSourceSnapshot = NSDiffableDataSourceSnapshot<BoardViewSection, PostResponse>
+//typealias BoardCellRegistration = UICollectionView.CellRegistration<BoardCollectionViewCell, PostResponse>
 
 
 //MARK: - BoardDetailView

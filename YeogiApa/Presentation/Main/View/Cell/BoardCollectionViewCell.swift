@@ -8,8 +8,9 @@
 import UIKit
 import Then
 import SnapKit
+import Reusable
 
-final class BoardCollectionViewCell: BaseCollectionViewCell {
+final class BoardCollectionViewCell: BaseCollectionViewCell, Reusable {
     
     private let titleLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 18, weight: .bold)

@@ -96,6 +96,7 @@
 		DBCBE3D62BCE8A0700B6DAC5 /* JoinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE3D52BCE8A0700B6DAC5 /* JoinResponse.swift */; };
 		DBDD8A742BDE4337002ADA34 /* LikesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD8A732BDE4337002ADA34 /* LikesRequest.swift */; };
 		DBDD8A762BDE43C3002ADA34 /* LikesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD8A752BDE43C3002ADA34 /* LikesResponse.swift */; };
+		DBDD8ADF2BDFE77A002ADA34 /* RxDataSource+Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD8ADE2BDFE77A002ADA34 /* RxDataSource+Typealias.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -191,6 +192,7 @@
 		DBCBE3D52BCE8A0700B6DAC5 /* JoinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinResponse.swift; sourceTree = "<group>"; };
 		DBDD8A732BDE4337002ADA34 /* LikesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesRequest.swift; sourceTree = "<group>"; };
 		DBDD8A752BDE43C3002ADA34 /* LikesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesResponse.swift; sourceTree = "<group>"; };
+		DBDD8ADE2BDFE77A002ADA34 /* RxDataSource+Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxDataSource+Typealias.swift"; sourceTree = "<group>"; };
 		DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeogiApa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -220,6 +222,7 @@
 				DB204DEC2BD575AD006340BE /* Category.swift */,
 				DB901C752BD6D9A7003EEDC6 /* ImageResize.swift */,
 				DBB7C66E2BD9251A00D3081A /* DiffableDataSource+Typealias.swift */,
+				DBDD8ADE2BDFE77A002ADA34 /* RxDataSource+Typealias.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				DBCBE3B72BCD87B700B6DAC5 /* SignUpPasswordViewModel.swift in Sources */,
 				DBB7C66B2BD8AF9B00D3081A /* BoardCollectionViewCell.swift in Sources */,
 				DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */,
+				DBDD8ADF2BDFE77A002ADA34 /* RxDataSource+Typealias.swift in Sources */,
 				DBCBAA092BC7CEE8006B40CA /* UserRouter.swift in Sources */,
 				DBCBAA152BC7DC8C006B40CA /* JoinRequest.swift in Sources */,
 				DB204D9E2BD2DDBB006340BE /* QuestionView.swift in Sources */,

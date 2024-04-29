@@ -23,12 +23,13 @@ final class BoardViewModel : MainViewModelType {
     struct Output {
         let viewWillAppear : Driver<Bool>
         let questionButtonTap : Driver<Void>
+        let boardDataListSubject : BehaviorRelay<[BoardDataSection]>
         let postData : PublishSubject<[PostResponse]>
         let nextPost : PublishSubject<[PostResponse]>
     }
     
     func transform(input: Input) -> Output {
-        
+        let boardDataListSubject = BehaviorRelay(value: [BoardDataSection]())
         let postData = PublishSubject<[PostResponse]>()
         let nextPost = PublishSubject<[PostResponse]>()
         let nextPageValid = BehaviorSubject<Bool>(value: false)
@@ -45,7 +46,7 @@ final class BoardViewModel : MainViewModelType {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let value):
-                    postData.onNext(value.data)
+                    boardDataListSubject.accept([BoardDataSection(items: value.data)])
                     nextCursor.onNext(value.next_cursor)
                 case .failure(let error):
                     print(error)
@@ -98,6 +99,7 @@ final class BoardViewModel : MainViewModelType {
         return Output(
             viewWillAppear: input.viewWillAppear.asDriver(onErrorJustReturn: false),
             questionButtonTap: input.questionButtonTap.asDriver(),
+            boardDataListSubject : boardDataListSubject,
             postData: postData,
             nextPost: nextPost
         )

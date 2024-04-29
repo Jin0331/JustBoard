@@ -13,8 +13,8 @@ import RxViewController
 
 final class BoardViewController: RxBaseViewController {
     
-    private let mainView = BoardView()
-    private let viewModel = BoardViewModel()
+    let mainView = BoardView()
+    private let viewModel : BoardViewModel
     var parentCoordinator : BoardCoordinator?
     private var dataSource: BoardRxDataSource!
     
@@ -22,8 +22,11 @@ final class BoardViewController: RxBaseViewController {
         view = mainView
     }
     
+    init(productId : String) {
+        self.viewModel = BoardViewModel(productId)
+    }
+    
     override func viewDidLoad() {
-        mainView.mainCollectionView.delegate = self
         configureCollectionViewDataSource()
         super.viewDidLoad()
     }
@@ -39,7 +42,6 @@ final class BoardViewController: RxBaseViewController {
                 owner.parentCoordinator?.toDetail(value.0)
             }
             .disposed(by: disposeBag)
-        
         
         let input = BoardViewModel.Input(
             viewWillAppear: rx.viewWillAppear,
@@ -67,7 +69,10 @@ final class BoardViewController: RxBaseViewController {
             .debug("postData")
             .bind(to: mainView.mainCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-        
+    }
+    
+    deinit {
+        print(#function, "- BoardViewController ✅")
     }
 }
  
@@ -83,15 +88,5 @@ extension BoardViewController {
             return cell
         })
         
-    }
-}
-
-extension BoardViewController : UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-//        guard let item = datasource.itemIdentifier(for: indexPath) else { return }
-        
-//        parentCoordinator?.toDetail(item)
     }
 }

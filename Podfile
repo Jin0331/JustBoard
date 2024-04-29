@@ -20,6 +20,7 @@ target 'YeogiApa' do
   pod 'NVActivityIndicatorView'
   pod 'RxDataSources', '~> 5.0'
   pod 'Reusable'
+  pod 'Tabman', '~> 3.2'
 end
 
 post_install do |installer|

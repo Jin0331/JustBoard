@@ -8,7 +8,7 @@
 import UIKit
 
 extension UITabBarController {
-    func configureItemDesing(tabBar : UITabBar) {
+    func configureItemDesign(tabBar : UITabBar) {
         
         tabBar.tintColor = DesignSystem.commonColorSet.gray
         tabBar.barTintColor = DesignSystem.commonColorSet.white
@@ -20,7 +20,7 @@ extension UITabBarController {
             item[0].title = "홈"
             
             item[1].image = DesignSystem.tabbarImage.second
-            item[1].title = "더 보기"
+            item[1].title = "채널"
         }
     }
 }

@@ -94,13 +94,16 @@ extension BoardViewController : DiffableDataSource {
     
     func afterUpdateSnapshot(_ data : [PostResponse]) {
         
+        let group = DispatchGroup()
         var snapshot = datasource.snapshot()
         
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            mainView.setActivityIndicator()
-//            let uniqueItemsToAdd = data.filter { !snapshot.itemIdentifiers.contains($0) }
-//            snapshot.appendItems(uniqueItemsToAdd, toSection: .main)
+        group.enter()
+        DispatchQueue.main.async(group: group) {
+            self.mainView.setActivityIndicator()
+            self.mainView.activityIndicator.startAnimating()
+            
+            print(snapshot.itemIdentifiers.count, "✅ ???")
+            print(data.count, "✅ old Data")
             
             for newData in data {
                 if let index = snapshot.itemIdentifiers.firstIndex(where: { $0.postID == newData.postID }) {
@@ -110,13 +113,17 @@ extension BoardViewController : DiffableDataSource {
                     snapshot.appendItems([newData], toSection: .main)
                 }
             }
+            
+            group.leave()
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+        group.notify(queue: .main) { [weak self] in
             guard let self = self else { return }
-            mainView.activityIndicator.stopAnimating()
-            mainView.loadingBgView.removeFromSuperview()
-            datasource.apply(snapshot)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.mainView.activityIndicator.stopAnimating()
+                self.mainView.loadingBgView.removeFromSuperview()
+                self.datasource.apply(snapshot)
+            }
         }
     }
     

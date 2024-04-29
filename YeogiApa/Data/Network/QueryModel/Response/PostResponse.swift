@@ -104,6 +104,10 @@ struct PostResponse: Decodable, Hashable {
     var createdAtToTime : String {
         return createdAt.formatDateString()
     }
+    
+    var createdAtToTimeDate : Date {
+        return createdAt.toDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")!
+    }
 }
 
 struct Comment: Decodable, Hashable {

@@ -68,6 +68,23 @@ final class BoardViewController: RxBaseViewController {
                 owner.parentCoordinator?.toQuestion()
             }
             .disposed(by: disposeBag)
+        
+//        output.postData
+//            .debug("postData")
+//            .scan([]) { (previous, new) -> [PostResponse] in
+//                return previous + new
+//            }
+//            .bind(with: self) { owner, value in
+//                print(value.count, " postResponse count")
+//                if value.count <= Int(InquiryRequest.InquiryRequestDefault.limit)! {
+//                    owner.updateSnapshot(value)
+//                } else {
+//                    owner.afterUpdateSnapshot(value)
+//                }
+//                
+//            }
+//            .disposed(by: disposeBag)
+
     }
 }
 
@@ -89,23 +106,27 @@ extension BoardViewController : DiffableDataSource {
         snapshot.appendSections(BoardViewSection.allCases)
         snapshot.appendItems(data, toSection: .main)
         
-        datasource.apply(snapshot)
+        datasource.apply(snapshot, animatingDifferences: true)
     }
     
     func afterUpdateSnapshot(_ data : [PostResponse]) {
         
         let group = DispatchGroup()
         var snapshot = datasource.snapshot()
+        let sortedData = data.sorted {
+            $0.createdAtToTimeDate < $1.createdAtToTimeDate
+        }
         
         group.enter()
-        DispatchQueue.main.async(group: group) {
-            self.mainView.setActivityIndicator()
-            self.mainView.activityIndicator.startAnimating()
+        DispatchQueue.main.async(group: group) { [weak self] in
+            guard let self = self else { return }
+            mainView.setActivityIndicator()
+            mainView.activityIndicator.startAnimating()
             
-            print(snapshot.itemIdentifiers.count, "✅ ???")
-            print(data.count, "✅ old Data")
+            print(snapshot.itemIdentifiers.count, "✅ old data")
+            print(data.count, "✅ new Data")
             
-            for newData in data {
+            for newData in sortedData {
                 if let index = snapshot.itemIdentifiers.firstIndex(where: { $0.postID == newData.postID }) {
                     snapshot.deleteItems([snapshot.itemIdentifiers[index]])
                     snapshot.insertItems([newData], afterItem: snapshot.itemIdentifiers[index])
@@ -113,16 +134,16 @@ extension BoardViewController : DiffableDataSource {
                     snapshot.appendItems([newData], toSection: .main)
                 }
             }
-            
             group.leave()
         }
         
-        group.notify(queue: .main) { [weak self] in
-            guard let self = self else { return }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                self.mainView.activityIndicator.stopAnimating()
-                self.mainView.loadingBgView.removeFromSuperview()
-                self.datasource.apply(snapshot)
+        group.notify(queue: .main) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self]  in
+                guard let self = self else { return }
+                datasource.apply(snapshot, animatingDifferences: true)
+                mainView.activityIndicator.stopAnimating()
+                mainView.loadingBgView.removeFromSuperview()
+                
             }
         }
     }

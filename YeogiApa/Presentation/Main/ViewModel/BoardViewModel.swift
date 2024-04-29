@@ -12,7 +12,7 @@ import RxCocoa
 final class BoardViewModel : MainViewModelType {
     
     var disposeBag: DisposeBag = DisposeBag()
-    var limit = 30
+    var limit = Int(InquiryRequest.InquiryRequestDefault.limit)!
     
     struct Input {
         let viewWillAppear : ControlEvent<Bool>
@@ -85,7 +85,7 @@ final class BoardViewModel : MainViewModelType {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let value):
-                    owner.limit += 30
+                    owner.limit += Int(InquiryRequest.InquiryRequestDefault.limit)!
                     postData.onNext(value.data)
                     nextCursor.onNext(value.next_cursor)
                     nextPageValid.onNext(false)

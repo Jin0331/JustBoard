@@ -23,14 +23,12 @@ final class BoardViewModel : MainViewModelType {
     struct Output {
         let viewWillAppear : Driver<Bool>
         let questionButtonTap : Driver<Void>
-        let boardDataListSubject : BehaviorRelay<[BoardDataSection]>
-        let postData : PublishSubject<[PostResponse]>
+        let postData : BehaviorRelay<[BoardDataSection]>
         let nextPost : PublishSubject<[PostResponse]>
     }
     
     func transform(input: Input) -> Output {
-        let boardDataListSubject = BehaviorRelay(value: [BoardDataSection]())
-        let postData = PublishSubject<[PostResponse]>()
+        let postData = BehaviorRelay(value: [BoardDataSection]())
         let nextPost = PublishSubject<[PostResponse]>()
         let nextPageValid = BehaviorSubject<Bool>(value: false)
         let nextCursor = PublishSubject<String>()
@@ -46,7 +44,7 @@ final class BoardViewModel : MainViewModelType {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let value):
-                    boardDataListSubject.accept([BoardDataSection(items: value.data)])
+                    postData.accept([BoardDataSection(items: value.data)])
                     nextCursor.onNext(value.next_cursor)
                 case .failure(let error):
                     print(error)
@@ -87,7 +85,8 @@ final class BoardViewModel : MainViewModelType {
                 switch result {
                 case .success(let value):
                     owner.limit += Int(InquiryRequest.InquiryRequestDefault.limit)!
-                    postData.onNext(value.data)
+                    let currentData = postData.value
+                    postData.accept(currentData + [BoardDataSection(items: value.data)])
                     nextCursor.onNext(value.next_cursor)
                     nextPageValid.onNext(false)
                 case .failure(let error):
@@ -99,7 +98,6 @@ final class BoardViewModel : MainViewModelType {
         return Output(
             viewWillAppear: input.viewWillAppear.asDriver(onErrorJustReturn: false),
             questionButtonTap: input.questionButtonTap.asDriver(),
-            boardDataListSubject : boardDataListSubject,
             postData: postData,
             nextPost: nextPost
         )

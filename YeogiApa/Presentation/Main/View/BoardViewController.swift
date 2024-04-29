@@ -33,6 +33,14 @@ final class BoardViewController: RxBaseViewController {
         let prefetchItems = mainView.mainCollectionView.rx.prefetchItems
             .compactMap(\.last?.row)
         
+        mainView.mainCollectionView.rx
+            .modelAndIndexSelected(PostResponse.self)
+            .bind(with: self) { owner, value in
+                owner.parentCoordinator?.toDetail(value.0)
+            }
+            .disposed(by: disposeBag)
+        
+        
         let input = BoardViewModel.Input(
             viewWillAppear: rx.viewWillAppear,
             questionButtonTap:  mainView.questionButton.rx.tap,
@@ -55,7 +63,8 @@ final class BoardViewController: RxBaseViewController {
             }
             .disposed(by: disposeBag)
         
-        output.boardDataListSubject
+        output.postData
+            .debug("postData")
             .bind(to: mainView.mainCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         

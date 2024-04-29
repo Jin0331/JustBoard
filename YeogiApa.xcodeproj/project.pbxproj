@@ -97,6 +97,7 @@
 		DBDD8A742BDE4337002ADA34 /* LikesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD8A732BDE4337002ADA34 /* LikesRequest.swift */; };
 		DBDD8A762BDE43C3002ADA34 /* LikesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD8A752BDE43C3002ADA34 /* LikesResponse.swift */; };
 		DBDD8ADF2BDFE77A002ADA34 /* RxDataSource+Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD8ADE2BDFE77A002ADA34 /* RxDataSource+Typealias.swift */; };
+		DBDD8AE12BDFF97F002ADA34 /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD8AE02BDFF97F002ADA34 /* Reactive+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -193,6 +194,7 @@
 		DBDD8A732BDE4337002ADA34 /* LikesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesRequest.swift; sourceTree = "<group>"; };
 		DBDD8A752BDE43C3002ADA34 /* LikesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesResponse.swift; sourceTree = "<group>"; };
 		DBDD8ADE2BDFE77A002ADA34 /* RxDataSource+Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxDataSource+Typealias.swift"; sourceTree = "<group>"; };
+		DBDD8AE02BDFF97F002ADA34 /* Reactive+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Extension.swift"; sourceTree = "<group>"; };
 		DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeogiApa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -515,6 +517,7 @@
 				DB802F472BDE31EF00DC670D /* UIButton+Extension.swift */,
 				DBB7C6882BDAD82A00D3081A /* Formatter+Extension.swift */,
 				DBB7C6842BDA3A6B00D3081A /* CALayer+Extension.swift */,
+				DBDD8AE02BDFF97F002ADA34 /* Reactive+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				DB901C702BD694DC003EEDC6 /* FilesRequest.swift in Sources */,
 				DB204DED2BD575AD006340BE /* Category.swift in Sources */,
 				DB204DEF2BD57774006340BE /* CategorySelectViewController.swift in Sources */,
+				DBDD8AE12BDFF97F002ADA34 /* Reactive+Extension.swift in Sources */,
 				DBCBAA632BCD73D9006B40CA /* EmailValidationRequest.swift in Sources */,
 				DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */,
 				DBCBE3D22BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift in Sources */,

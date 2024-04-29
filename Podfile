@@ -18,6 +18,8 @@ target 'YeogiApa' do
   pod 'RxViewController'
   pod 'Kingfisher', '~> 7.0'
   pod 'NVActivityIndicatorView'
+  pod 'RxDataSources', '~> 5.0'
+  pod 'Reusable'
 end
 
 post_install do |installer|

@@ -12,10 +12,12 @@ import Pageboy
 final class BoardMainViewController: TabmanViewController, TMBarDataSource {
 
     var parentCoordinator : BoardCoordinator?
-    private var viewControllers: Array<RxBaseViewController>
+    private let viewControllers: Array<RxBaseViewController>
+    private let category : [Category]
 
-    init(viewControllersList : Array<RxBaseViewController>){
+    init(viewControllersList : Array<RxBaseViewController>, category : [Category]){
         self.viewControllers = viewControllersList
+        self.category = category
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -34,10 +36,8 @@ final class BoardMainViewController: TabmanViewController, TMBarDataSource {
 //MARK: - Tabman 관련 사항
 extension BoardMainViewController : PageboyViewControllerDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
-        let item = TMBarItem(title: "")
-        item.title = index == 0 ? "전체" : "생활꿀팁"
-        
-        return item
+        let title = category[index].rawValue
+        return TMBarItem(title: title)
     }
     
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
@@ -56,17 +56,13 @@ extension BoardMainViewController : PageboyViewControllerDataSource {
     func configureView() {
         view.backgroundColor = DesignSystem.commonColorSet.white
         
-        dataSource = self
+        self.dataSource = self
+
+        // Create bar
         let bar = TMBar.ButtonBar()
-        bar.buttons.customize { (button) in
-            button.tintColor = DesignSystem.commonColorSet.gray
-            button.selectedTintColor = DesignSystem.commonColorSet.lightBlack
-        }
-    
-        
         bar.layout.transitionStyle = .snap // Customize
-        bar.layout.contentMode = .fit
-        bar.layout.interButtonSpacing = 20 // 버튼 사이의 간격 조절
+
+        // Add to view
         addBar(bar, dataSource: self, at: .top)
     }
 }

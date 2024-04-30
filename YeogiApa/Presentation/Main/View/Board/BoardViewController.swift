@@ -22,10 +22,6 @@ final class BoardViewController: RxBaseViewController {
         view = mainView
     }
     
-//    self.limit = limit
-//    self.maxLimit = Int(limit)!
-//    self.bestBoard = bestBoard
-    
     init(productId : String, limit: String, bestBoard: Bool) {
         self.viewModel = BoardViewModel(product_id: productId,
                                         limit: limit,

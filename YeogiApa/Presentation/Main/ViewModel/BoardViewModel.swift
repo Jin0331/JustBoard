@@ -58,14 +58,17 @@ final class BoardViewModel : MainViewModelType {
             }
             .enumerated()
             .bind(with: self) { owner, result in
+                
                 switch result.element {
                 case .success(let value):
+                
+                    print(value.rankData)
                     
                     let sortedData = owner.bestBoard ? value.data.sorted {
                         $0.comments.count > $1.comments.count } : value.data
-                    let maxLength = sortedData.count > 30 ? 30 : sortedData.count - 1
+                    let maxLength = sortedData.count > InquiryRequest.InquiryRequestDefault.maxPage ? InquiryRequest.InquiryRequestDefault.maxPage : sortedData.count
                     
-                    let returnPost = owner.bestBoard ? Array(sortedData[0...maxLength]) : sortedData
+                    let returnPost = owner.bestBoard ? Array(sortedData[0..<maxLength]) : sortedData
                     
                     postData.accept([BoardDataSection(items: returnPost)])
                     nextCursor.onNext(value.next_cursor)
@@ -79,7 +82,7 @@ final class BoardViewModel : MainViewModelType {
             .map { [weak self] items in
                 guard let self = self else { return false }                
                 print(items, "제한 ✅:", maxLimit, maxLimit > maxLimit - 5)
-                return items > maxLimit - 2
+                return items > maxLimit - 5
             }
             .bind(with: self) { owner, valid in
                 if !owner.bestBoard {

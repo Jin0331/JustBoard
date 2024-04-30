@@ -30,6 +30,26 @@ struct InquiryResponse : Decodable, Hashable {
         self.next_cursor = try container.decode(String.self, forKey: .next_cursor)
     }
     
+    var rankData : [PostRank] {
+        var returndata : [PostRank] = []
+            
+        var productCountDict: [String: Int] = [:]
+        for post in data {
+            if let count = productCountDict[post.productID] {
+                productCountDict[post.productID] = count + 1
+            } else {
+                productCountDict[post.productID] = 1
+            }
+        }
+
+        for (productID, count) in productCountDict {
+            print("Product ID: \(productID), Count: \(count)")
+            returndata.append(PostRank(productId: productID, postCount: count))
+        }
+        
+        return returndata
+    }
+    
 }
 
 struct PostResponse: Decodable, Hashable {
@@ -147,4 +167,16 @@ struct Creator: Decodable, Hashable {
     }
 }
 
-
+struct PostRank : Hashable {
+    let productId : String
+    let postCount : Int
+    
+    static func == (lhs: PostRank, rhs: PostRank) -> Bool {
+        return lhs.productId == rhs.productId &&
+        lhs.postCount == rhs.postCount
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(productId)
+    }
+}

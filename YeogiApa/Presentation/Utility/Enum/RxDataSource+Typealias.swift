@@ -7,6 +7,7 @@
 
 import RxDataSources
 
+//MARK: - BoardMain - 실시간 게시글 순위
 struct BoardDataSection {
     var items: [PostResponse]
 }
@@ -20,4 +21,4 @@ extension BoardDataSection: SectionModelType {
     }
 }
 
-typealias BoardRxDataSource = RxCollectionViewSectionedReloadDataSource<BoardDataSection> 
+typealias BoardRxDataSource = RxCollectionViewSectionedReloadDataSource<BoardDataSection>

@@ -22,8 +22,14 @@ final class BoardViewController: RxBaseViewController {
         view = mainView
     }
     
-    init(productId : String) {
-        self.viewModel = BoardViewModel(productId)
+//    self.limit = limit
+//    self.maxLimit = Int(limit)!
+//    self.bestBoard = bestBoard
+    
+    init(productId : String, limit: String, bestBoard: Bool) {
+        self.viewModel = BoardViewModel(product_id: productId,
+                                        limit: limit,
+                                        bestBoard: bestBoard)
     }
     
     override func viewDidLoad() {
@@ -64,6 +70,7 @@ final class BoardViewController: RxBaseViewController {
                 owner.parentCoordinator?.toQuestion()
             }
             .disposed(by: disposeBag)
+        
         
         output.postData
             .debug("postData")

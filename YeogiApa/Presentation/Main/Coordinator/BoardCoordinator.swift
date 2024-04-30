@@ -61,8 +61,12 @@ extension BoardCoordinator {
         let category = Category.allCases
         var viewControllersList: Array<RxBaseViewController> = []
         
+        let bestBoard = true
+        
         category.forEach {
-            let vc = BoardViewController(productId: $0.productId)
+            let vc = BoardViewController(productId: $0.productId,
+                                         limit: InquiryRequest.InquiryRequestDefault.maxLimit,
+                                         bestBoard: true)
             vc.parentCoordinator = self
             viewControllersList.append(vc)
         }

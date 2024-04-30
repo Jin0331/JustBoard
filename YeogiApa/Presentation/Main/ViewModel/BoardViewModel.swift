@@ -11,12 +11,17 @@ import RxCocoa
 
 final class BoardViewModel : MainViewModelType {
 
-    private var limit = Int(InquiryRequest.InquiryRequestDefault.limit)!
+    private var bestBoard : Bool
+    private var limit : String /*Int(InquiryRequest.InquiryRequestDefault.limit)!*/
+    private var maxLimit : Int
     private var product_id : String
     var disposeBag: DisposeBag = DisposeBag()
     
-    init(_ product_id: String) {
+    init(product_id: String, limit: String, bestBoard: Bool) {
         self.product_id = product_id
+        self.limit = limit
+        self.maxLimit = Int(limit)!
+        self.bestBoard = bestBoard
     }
     
     struct Input {
@@ -34,26 +39,35 @@ final class BoardViewModel : MainViewModelType {
     
     func transform(input: Input) -> Output {
         let product_id = BehaviorSubject<String>(value: product_id)
+        let limit = BehaviorSubject<String>(value: String(limit))
         let postData = BehaviorRelay(value: [BoardDataSection]())
         let nextPost = PublishSubject<[PostResponse]>()
         let nextPageValid = BehaviorSubject<Bool>(value: false)
         let nextCursor = PublishSubject<String>()
         let nextPage = PublishSubject<String>()
         
+        let productIdWithLimit = Observable.combineLatest(product_id,limit)
+        
         input.viewWillAppear
-            .withLatestFrom(product_id)
-            .flatMap { product_id in
+            .withLatestFrom(productIdWithLimit)
+            .flatMap { product_id, limit in
                 return NetworkManager.shared.post(query: InquiryRequest(next: InquiryRequest.InquiryRequestDefault.next,
-                                                                        limit: InquiryRequest.InquiryRequestDefault.limit,
+                                                                        limit: limit,
                                                                         product_id: product_id))
                 // nhj_test gyjw_all
             }
             .enumerated()
             .bind(with: self) { owner, result in
-//                print(result.index, "event index ✅", postData.value, "current Post ✅")
                 switch result.element {
                 case .success(let value):
-                    postData.accept([BoardDataSection(items: value.data)])
+                    
+                    let sortedData = owner.bestBoard ? value.data.sorted {
+                        $0.comments.count > $1.comments.count } : value.data
+                    let maxLength = sortedData.count > 30 ? 30 : sortedData.count - 1
+                    
+                    let returnPost = owner.bestBoard ? Array(sortedData[0...maxLength]) : sortedData
+                    
+                    postData.accept([BoardDataSection(items: returnPost)])
                     nextCursor.onNext(value.next_cursor)
                 case .failure(let error):
                     print(error)
@@ -63,12 +77,15 @@ final class BoardViewModel : MainViewModelType {
         
         input.prefetchItems
             .map { [weak self] items in
-                guard let self = self else { return false }
-                print(items, "제한 ✅:", limit, items > limit - 5)
-                return items > limit - 2
+                guard let self = self else { return false }                
+                print(items, "제한 ✅:", maxLimit, maxLimit > maxLimit - 5)
+                return items > maxLimit - 2
             }
             .bind(with: self) { owner, valid in
-                nextPageValid.onNext(valid)
+                if !owner.bestBoard {
+                    nextPageValid.onNext(valid)
+                }
+
             }
             .disposed(by: disposeBag)
         

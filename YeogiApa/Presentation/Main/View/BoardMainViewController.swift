@@ -14,6 +14,7 @@ final class BoardMainViewController: TabmanViewController, TMBarDataSource {
     var parentCoordinator : BoardCoordinator?
     private let viewControllers: Array<RxBaseViewController>
     private let category : [Category]
+    
 
     init(viewControllersList : Array<RxBaseViewController>, category : [Category]){
         self.viewControllers = viewControllersList
@@ -37,6 +38,7 @@ final class BoardMainViewController: TabmanViewController, TMBarDataSource {
 extension BoardMainViewController : PageboyViewControllerDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
         let title = category[index].rawValue
+        
         return TMBarItem(title: title)
     }
     
@@ -60,7 +62,8 @@ extension BoardMainViewController : PageboyViewControllerDataSource {
 
         // Create bar
         let bar = TMBar.ButtonBar()
-        bar.layout.transitionStyle = .snap // Customize
+//        bar.layout.transitionStyle = .snap // Customize
+        bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0)
 
         // Add to view
         addBar(bar, dataSource: self, at: .top)

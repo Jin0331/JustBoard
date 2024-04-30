@@ -15,5 +15,6 @@ struct InquiryRequest {
     enum InquiryRequestDefault {
         static let next = "0"
         static let limit = "80"
+        static let maxLimit = "9999"
     }
 }

@@ -13,6 +13,7 @@ enum CategorySection : CaseIterable {
 
 enum Category : String, CaseIterable {
     
+    case all_test = "전체_테스트"
     case all = "전체"
     case life = "생활꿀팁"
     case concerns = "고민상담"
@@ -25,6 +26,8 @@ enum Category : String, CaseIterable {
     
     var name : String {
         switch self {
+        case .all_test:
+            return "all"
         case .all:
             return "all"
         case .life:
@@ -48,6 +51,8 @@ enum Category : String, CaseIterable {
     
     var productId : String {
         switch self {
+        case .all_test:
+            return ""
         default :
             return "gyjw_" + self.name
         }

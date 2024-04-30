@@ -12,20 +12,19 @@ import Pageboy
 final class BoardMainViewController: TabmanViewController, TMBarDataSource {
 
     var parentCoordinator : BoardCoordinator?
-    private var viewControllers: Array<RxBaseViewController> = []
+    private var viewControllers: Array<RxBaseViewController>
+
+    init(viewControllersList : Array<RxBaseViewController>){
+        self.viewControllers = viewControllersList
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let itemEditVC = BoardViewController(productId: "")
-        let dataEditVC = BoardViewController(productId: "gyjw_all")
-        
-        itemEditVC.parentCoordinator = parentCoordinator
-        dataEditVC.parentCoordinator = parentCoordinator
-        
-        viewControllers.append(itemEditVC)
-        viewControllers.append(dataEditVC)
-        
         configureView()
     }
     

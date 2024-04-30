@@ -19,7 +19,7 @@ final class BoardCoordinator : Coordinator {
     }
     
     func start() {
-        let vc = BoardMainViewController()
+        let vc = BoardMainViewController(viewControllersList: boardChildViewController())
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }
@@ -52,5 +52,23 @@ extension BoardCoordinator {
         let vc = BoardDetailViewController(postResponse: item)
         vc.parentCoordinator = self
         navigationController.pushViewController(vc, animated: true)
+    }
+}
+
+extension BoardCoordinator {
+    func boardChildViewController() -> Array<RxBaseViewController> {
+        
+        var viewControllersList: Array<RxBaseViewController> = []
+        
+        let itemEditVC = BoardViewController(productId: "")
+        let dataEditVC = BoardViewController(productId: "gyjw_all")
+
+        itemEditVC.parentCoordinator = self
+        dataEditVC.parentCoordinator = self
+
+        viewControllersList.append(itemEditVC)
+        viewControllersList.append(dataEditVC)
+        
+        return viewControllersList
     }
 }

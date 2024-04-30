@@ -9,6 +9,8 @@ import UIKit
 import Then
 import SnapKit
 import NVActivityIndicatorView
+import RxDataSources
+import Reusable
 
 final class BoardView: BaseView {
 
@@ -19,6 +21,7 @@ final class BoardView: BaseView {
         view.backgroundColor = DesignSystem.commonColorSet.white
         view.allowsMultipleSelection = true
         view.isPagingEnabled = true
+        view.register(cellType: BoardCollectionViewCell.self)
         
        return view
     }()
@@ -83,14 +86,6 @@ extension BoardView {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
-    }
-    
-    
-    func boardCellRegistration() -> BoardCellRegistration  {
-        
-        return BoardCellRegistration { cell, indexPath, itemIdentifier in
-            cell.updateUI(itemIdentifier)
-        }
     }
 }
 

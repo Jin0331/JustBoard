@@ -27,16 +27,17 @@ enum DesignSystem {
     }
 
     enum sfSymbol {
-        static let sfSymbolLargeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .bold, scale: .large)
         static let sfSymbolSmallConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .bold, scale: .large)
+        static let sfSymbolLargeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .bold, scale: .large)
+        static let sfSymbolLargeConfig2 = UIImage.SymbolConfiguration(pointSize: 20, weight: .heavy, scale: .large)
+        
         static let appleLogo = UIImage(systemName: "apple.logo", withConfiguration:sfSymbolLargeConfig)
         static let question = UIImage(systemName: "questionmark.bubble", withConfiguration:sfSymbolLargeConfig)
         static let photo = UIImage(systemName: "photo", withConfiguration:sfSymbolLargeConfig)
-        static let like = UIImage(systemName: "hand.thumbsup", withConfiguration:sfSymbolLargeConfig)
-        static let unlike = UIImage(systemName: "hand.thumbsdown", withConfiguration:sfSymbolLargeConfig)
+        static let like = UIImage(systemName: "hand.thumbsup", withConfiguration:sfSymbolLargeConfig2)
+        static let comment = UIImage(systemName: "bubble", withConfiguration:sfSymbolLargeConfig2)
         
         static let link = UIImage(systemName: "link.badge.plus", withConfiguration:sfSymbolLargeConfig)
-        static let comment = UIImage(systemName: "note.text", withConfiguration:sfSymbolSmallConfig)
     }
     
     enum tabbarImage {

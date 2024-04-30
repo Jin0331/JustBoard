@@ -19,7 +19,7 @@ final class BoardCoordinator : Coordinator {
     }
     
     func start() {
-        let vc = BoardViewController()
+        let vc = BoardMainViewController()
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }

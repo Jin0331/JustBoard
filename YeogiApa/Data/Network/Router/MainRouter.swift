@@ -14,6 +14,7 @@ enum MainRouter {
     case inquiry(query : InquiryRequest)
     case specificInquiry(postId : String)
     case comment(query : CommentRequest, postId : String)
+    case likes(query : LikesRequest, postId : String)
 }
 
 
@@ -24,7 +25,7 @@ extension MainRouter : TargetType {
         
     var method: HTTPMethod {
         switch self {
-        case .write, .files, .comment:
+        case .write, .files, .comment, .likes:
             return .post
         case .inquiry, .specificInquiry:
             return .get
@@ -41,6 +42,8 @@ extension MainRouter : TargetType {
             return "/posts/" + postId
         case .comment(query: _ , postId: let postId):
             return "/posts/" + postId + "/comments"
+        case .likes(query: _ , postId: let postId):
+            return "/posts/" + postId + "/like"
         }
     }
     
@@ -48,7 +51,7 @@ extension MainRouter : TargetType {
         guard let token = UserDefaultManager.shared.accessToken else { return [:] }
         
         switch self {
-        case .write, .comment :
+        case .write, .comment, .likes:
             return [
                 HTTPHeader.authorization.rawValue : token,
                 HTTPHeader.contentType.rawValue : HTTPHeader.json.rawValue,
@@ -92,6 +95,12 @@ extension MainRouter : TargetType {
             return try? encoder.encode(query)
             
         case .comment(query: let query, postId: _):
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            
+            return try? encoder.encode(query)
+        
+        case .likes(query: let query, postId: _):
             let encoder = JSONEncoder()
             encoder.keyEncodingStrategy = .convertToSnakeCase
             

@@ -19,7 +19,7 @@ final class MainTabBarController: UITabBarController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        configureItemDesing(tabBar: tabBar)
+        configureItemDesign(tabBar: tabBar)
     }
     
     private func configureView() {

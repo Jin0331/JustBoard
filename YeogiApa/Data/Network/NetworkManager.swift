@@ -210,4 +210,29 @@ final class NetworkManager  {
             return Disposables.create()
         }
     }
+    
+    //MARK: - Likes
+    func likes(query : LikesRequest, postId : String) -> Single<Result<LikesResponse, AFError>> {
+        
+        return Single<Result<LikesResponse, AFError>>.create { single in
+            do {
+                let urlRequest = try MainRouter.likes(query: query, postId: postId).asURLRequest()
+                
+                AF.request(urlRequest, interceptor: AuthManager())
+                    .validate(statusCode: 200..<300)
+                    .responseDecodable(of: LikesResponse.self) { response in
+                        switch response.result {
+                        case .success(let likesResponse):
+                            single(.success(.success(likesResponse)))
+                        case .failure(let error):
+                            print(response.response?.statusCode as Any, error, "✅ NetworkManager - like")
+                            single(.success(.failure(error)))
+                        }
+                    }
+            } catch {
+                single(.failure(error))
+            }
+            return Disposables.create()
+        }
+    }
 }

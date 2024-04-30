@@ -94,6 +94,11 @@
 		DBCBE3D22BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE3D12BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift */; };
 		DBCBE3D42BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE3D32BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift */; };
 		DBCBE3D62BCE8A0700B6DAC5 /* JoinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE3D52BCE8A0700B6DAC5 /* JoinResponse.swift */; };
+		DBDD8A742BDE4337002ADA34 /* LikesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD8A732BDE4337002ADA34 /* LikesRequest.swift */; };
+		DBDD8A762BDE43C3002ADA34 /* LikesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD8A752BDE43C3002ADA34 /* LikesResponse.swift */; };
+		DBDD8ADF2BDFE77A002ADA34 /* RxDataSource+Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD8ADE2BDFE77A002ADA34 /* RxDataSource+Typealias.swift */; };
+		DBDD8AE12BDFF97F002ADA34 /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD8AE02BDFF97F002ADA34 /* Reactive+Extension.swift */; };
+		DBDD8AE52BE01002002ADA34 /* BoardMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD8AE42BE01002002ADA34 /* BoardMainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +192,11 @@
 		DBCBE3D12BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameWithPhoneViewController.swift; sourceTree = "<group>"; };
 		DBCBE3D32BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameWithPhoneViewModel.swift; sourceTree = "<group>"; };
 		DBCBE3D52BCE8A0700B6DAC5 /* JoinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinResponse.swift; sourceTree = "<group>"; };
+		DBDD8A732BDE4337002ADA34 /* LikesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesRequest.swift; sourceTree = "<group>"; };
+		DBDD8A752BDE43C3002ADA34 /* LikesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesResponse.swift; sourceTree = "<group>"; };
+		DBDD8ADE2BDFE77A002ADA34 /* RxDataSource+Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxDataSource+Typealias.swift"; sourceTree = "<group>"; };
+		DBDD8AE02BDFF97F002ADA34 /* Reactive+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Extension.swift"; sourceTree = "<group>"; };
+		DBDD8AE42BE01002002ADA34 /* BoardMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMainViewController.swift; sourceTree = "<group>"; };
 		DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeogiApa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -216,6 +226,7 @@
 				DB204DEC2BD575AD006340BE /* Category.swift */,
 				DB901C752BD6D9A7003EEDC6 /* ImageResize.swift */,
 				DBB7C66E2BD9251A00D3081A /* DiffableDataSource+Typealias.swift */,
+				DBDD8ADE2BDFE77A002ADA34 /* RxDataSource+Typealias.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -235,13 +246,9 @@
 			children = (
 				DB204D952BD29F0A006340BE /* MainTabBarController.swift */,
 				DB410FF42BD0CFA10088679F /* MainViewController.swift */,
-				DB41100A2BD160F80088679F /* BoardView.swift */,
-				DBB7C6742BD93F2400D3081A /* BoardViewController.swift */,
-				DBB7C6782BD944FC00D3081A /* BoardDetailView.swift */,
-				DBB7C6762BD93F9000D3081A /* BoardDetailViewController.swift */,
-				DB204D9D2BD2DDBB006340BE /* QuestionView.swift */,
-				DB204D992BD2A6C7006340BE /* QuestionViewController.swift */,
-				DB901C5D2BD58312003EEDC6 /* QuestionSubView */,
+				DBDD8AE42BE01002002ADA34 /* BoardMainViewController.swift */,
+				DBDD8AE32BE00FDD002ADA34 /* Question */,
+				DBDD8AE22BE00FCB002ADA34 /* Board */,
 				DBB7C6672BD8AF1F00D3081A /* Cell */,
 			);
 			path = View;
@@ -298,6 +305,7 @@
 				DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */,
 				DBB7C6612BD7B77800D3081A /* InquiryRequest.swift */,
 				DBB7C6802BDA1B8E00D3081A /* CommentRequest.swift */,
+				DBDD8A732BDE4337002ADA34 /* LikesRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -311,6 +319,7 @@
 				DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */,
 				DB4110132BD19E0A0088679F /* PostResponse.swift */,
 				DB901C732BD69531003EEDC6 /* FilesResponse.swift */,
+				DBDD8A752BDE43C3002ADA34 /* LikesResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -503,9 +512,10 @@
 				DB204DA12BD2E926006340BE /* UITextView+Extension.swift */,
 				DB802F452BDBD78500DC670D /* UICollectionView+Extension.swift */,
 				DB204DE52BD56158006340BE /* UIImage+Extension.swift */,
+				DB802F472BDE31EF00DC670D /* UIButton+Extension.swift */,
 				DBB7C6882BDAD82A00D3081A /* Formatter+Extension.swift */,
 				DBB7C6842BDA3A6B00D3081A /* CALayer+Extension.swift */,
-				DB802F472BDE31EF00DC670D /* UIButton+Extension.swift */,
+				DBDD8AE02BDFF97F002ADA34 /* Reactive+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -536,6 +546,27 @@
 				DB901C602BD58C7C003EEDC6 /* CompleteButton.swift */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		DBDD8AE22BE00FCB002ADA34 /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				DB41100A2BD160F80088679F /* BoardView.swift */,
+				DBB7C6742BD93F2400D3081A /* BoardViewController.swift */,
+				DBB7C6782BD944FC00D3081A /* BoardDetailView.swift */,
+				DBB7C6762BD93F9000D3081A /* BoardDetailViewController.swift */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
+		DBDD8AE32BE00FDD002ADA34 /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				DB204D9D2BD2DDBB006340BE /* QuestionView.swift */,
+				DB204D992BD2A6C7006340BE /* QuestionViewController.swift */,
+				DB901C5D2BD58312003EEDC6 /* QuestionSubView */,
+			);
+			path = Question;
 			sourceTree = "<group>";
 		};
 		FE20E17095C8CCE921DF3EF4 /* Pods */ = {
@@ -666,6 +697,7 @@
 				DB901C702BD694DC003EEDC6 /* FilesRequest.swift in Sources */,
 				DB204DED2BD575AD006340BE /* Category.swift in Sources */,
 				DB204DEF2BD57774006340BE /* CategorySelectViewController.swift in Sources */,
+				DBDD8AE12BDFF97F002ADA34 /* Reactive+Extension.swift in Sources */,
 				DBCBAA632BCD73D9006B40CA /* EmailValidationRequest.swift in Sources */,
 				DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */,
 				DBCBE3D22BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift in Sources */,
@@ -688,6 +720,7 @@
 				DBCBAA192BC7E106006B40CA /* EmailLoginView.swift in Sources */,
 				DB204DE82BD57525006340BE /* CategorySelectView.swift in Sources */,
 				DBCBAA0F2BC7D0E1006B40CA /* NetworkManager.swift in Sources */,
+				DBDD8A742BDE4337002ADA34 /* LikesRequest.swift in Sources */,
 				DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */,
 				DBCBE3B52BCD845F00B6DAC5 /* SignUpPasswordViewController.swift in Sources */,
 				DBCBAA2B2BC83A54006B40CA /* RefreshRequest.swift in Sources */,
@@ -696,6 +729,7 @@
 				DBCBE3B72BCD87B700B6DAC5 /* SignUpPasswordViewModel.swift in Sources */,
 				DBB7C66B2BD8AF9B00D3081A /* BoardCollectionViewCell.swift in Sources */,
 				DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */,
+				DBDD8ADF2BDFE77A002ADA34 /* RxDataSource+Typealias.swift in Sources */,
 				DBCBAA092BC7CEE8006B40CA /* UserRouter.swift in Sources */,
 				DBCBAA152BC7DC8C006B40CA /* JoinRequest.swift in Sources */,
 				DB204D9E2BD2DDBB006340BE /* QuestionView.swift in Sources */,
@@ -727,7 +761,9 @@
 				DBB7C6622BD7B77800D3081A /* InquiryRequest.swift in Sources */,
 				DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */,
 				DBCBAA5A2BCD5D05006B40CA /* SignUpEmailViewController.swift in Sources */,
+				DBDD8AE52BE01002002ADA34 /* BoardMainViewController.swift in Sources */,
 				DBB7C66D2BD8AFAA00D3081A /* BaseCollectionViewCell.swift in Sources */,
+				DBDD8A762BDE43C3002ADA34 /* LikesResponse.swift in Sources */,
 				DBCBAA562BCD0705006B40CA /* SignInUpViewController.swift in Sources */,
 				DB410FF52BD0CFA10088679F /* MainViewController.swift in Sources */,
 				DB204D9A2BD2A6C7006340BE /* QuestionViewController.swift in Sources */,

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 import RxSwift
 import RxCocoa
 
@@ -48,32 +49,28 @@ final class BoardViewModel : MainViewModelType {
         
         let productIdWithLimit = Observable.combineLatest(product_id,limit)
         
-        Observable.combineLatest(input.viewWillAppear, NotificationCenter.default.rx.notification(.boardRefresh))
+        
+        NotificationCenter.default.rx.notification(.boardRefresh)
             .withLatestFrom(productIdWithLimit)
             .flatMap { product_id, limit in
                 return NetworkManager.shared.post(query: InquiryRequest(next: InquiryRequest.InquiryRequestDefault.next,
-                                                                        limit: limit,
-                                                                        product_id: product_id))
-                // nhj_test gyjw_all
+                                                                        limit: limit, product_id: product_id))
             }
             .enumerated()
             .bind(with: self) { owner, result in
-                
-                print("BoardViewModel - 게시글 최신화 ✅")
-                
-                switch result.element {
-                case .success(let value):
-                
-                    let sortedData = owner.bestBoard ? value.data.sorted {
-                        $0.comments.count > $1.comments.count } : value.data
-                    let maxLength = sortedData.count > InquiryRequest.InquiryRequestDefault.maxPage ? InquiryRequest.InquiryRequestDefault.maxPage : sortedData.count
-                    let returnPost = owner.bestBoard ? Array(sortedData[0..<maxLength]) : sortedData
-                    
-                    postData.accept([BoardDataSection(items: returnPost)])
-                    nextCursor.onNext(value.next_cursor)
-                case .failure(let error):
-                    print(error)
-                }
+                owner.handleBoardData(result: result, bestBoard: owner.bestBoard, postData: postData, nextCursor: nextCursor)
+            }
+            .disposed(by: disposeBag)
+        
+        input.viewWillAppear
+            .withLatestFrom(productIdWithLimit)
+            .flatMap { product_id, limit in
+                return NetworkManager.shared.post(query: InquiryRequest(next: InquiryRequest.InquiryRequestDefault.next,
+                                                                        limit: limit, product_id: product_id))
+            }
+            .enumerated()
+            .bind(with: self) { owner, result in
+                owner.handleBoardData(result: result, bestBoard: owner.bestBoard, postData: postData, nextCursor: nextCursor)
             }
             .disposed(by: disposeBag)
         
@@ -129,4 +126,19 @@ final class BoardViewModel : MainViewModelType {
             nextPost: nextPost
         )
     }
+
+    private func handleBoardData(result: (index: Int, element: PrimitiveSequence<SingleTrait, Result<InquiryResponse, AFError>>.Element), bestBoard: Bool, postData: BehaviorRelay<[BoardDataSection]>, nextCursor: PublishSubject<String>) {
+        switch result.element {
+        case .success(let value):
+            let sortedData = bestBoard ? value.data.sorted { $0.comments.count > $1.comments.count } : value.data
+            let maxLength = sortedData.count > InquiryRequest.InquiryRequestDefault.maxPage ? InquiryRequest.InquiryRequestDefault.maxPage : sortedData.count
+            let returnPost = bestBoard ? Array(sortedData[0..<maxLength]) : sortedData
+            
+            postData.accept([BoardDataSection(items: returnPost)])
+            nextCursor.onNext(value.next_cursor)
+        case .failure(let error):
+            print(error)
+        }
+    }
+
 }

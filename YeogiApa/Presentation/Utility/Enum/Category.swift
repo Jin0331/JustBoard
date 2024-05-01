@@ -7,12 +7,29 @@
 
 import UIKit
 
+//MARK: - 실시간 베스트 목록
+enum BestCategory : String, CaseIterable  {
+    case commentSort = "댓글"
+    case likeSort = "공감"
+    case unlikeSort = "공감비율"
+    
+    var productId : String {
+        switch self {
+        default :
+            return ""
+        }
+    }
+}
+
+//MARK: - 게시판 목록
+// questionVC에서 게시판 목록 선택
 enum CategorySection : CaseIterable {
     case main
 }
 
 enum Category : String, CaseIterable {
     
+    case all_test = "전체_테스트"
     case all = "전체"
     case life = "생활꿀팁"
     case concerns = "고민상담"
@@ -25,6 +42,8 @@ enum Category : String, CaseIterable {
     
     var name : String {
         switch self {
+        case .all_test:
+            return "all"
         case .all:
             return "all"
         case .life:
@@ -48,6 +67,8 @@ enum Category : String, CaseIterable {
     
     var productId : String {
         switch self {
+        case .all_test:
+            return ""
         default :
             return "gyjw_" + self.name
         }

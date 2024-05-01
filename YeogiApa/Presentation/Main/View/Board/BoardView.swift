@@ -13,14 +13,21 @@ import RxDataSources
 import Reusable
 
 final class BoardView: BaseView {
+    
+    let bestBoard : Bool
+    
+    init(bestBoard : Bool) {
+        self.bestBoard = bestBoard
+        super.init(frame: .zero)
+    }
 
     let questionButton = CompleteButton(title: "작성하기", image: DesignSystem.sfSymbol.question, fontSize: 15)
     
     lazy var mainCollectionView : UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         view.backgroundColor = DesignSystem.commonColorSet.white
-        view.allowsMultipleSelection = true
         view.isPagingEnabled = true
+        view.isScrollEnabled = bestBoard ? false : true
         view.register(cellType: BoardCollectionViewCell.self)
         
        return view
@@ -52,15 +59,18 @@ final class BoardView: BaseView {
     }
     
     override func configureLayout() {
-        questionButton.snp.makeConstraints { make in
-            make.bottom.equalTo(safeAreaLayoutGuide).inset(10)
-            make.centerX.equalTo(safeAreaLayoutGuide)
-            make.height.equalTo(50)
-            make.width.equalTo(110)
+        if !bestBoard {
+            questionButton.snp.makeConstraints { make in
+                make.bottom.equalTo(safeAreaLayoutGuide).inset(10)
+                make.centerX.equalTo(safeAreaLayoutGuide)
+                make.height.equalTo(50)
+                make.width.equalTo(110)
+            }
         }
         
         mainCollectionView.snp.makeConstraints { make in
-            make.edges.equalTo(safeAreaLayoutGuide)
+            make.top.equalToSuperview().inset(60)
+            make.bottom.horizontalEdges.equalToSuperview()
         }
     }
 }

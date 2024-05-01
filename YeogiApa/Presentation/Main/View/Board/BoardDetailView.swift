@@ -201,7 +201,7 @@ final class BoardDetailView: BaseView {
         addTextViewImage(data)
         
         
-        collectionViewchangeLayout(itemCount: data.comments.count)
+//        collectionViewchangeLayout(itemCount: data.comments.count)
     }
     
     func commentUpdateUI(_ data : PostResponse) {

@@ -19,7 +19,7 @@ final class BoardCoordinator : Coordinator {
     }
     
     func start() {
-        let vc = BoardMainViewController()
+        let vc = BoardMainViewController(viewControllersList: boardChildViewController(), category: BestCategory.allCases, productId: InquiryRequest.InquiryRequestDefault.productId, limit: InquiryRequest.InquiryRequestDefault.maxLimit)
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }
@@ -48,9 +48,42 @@ extension BoardCoordinator {
         print(#function, childCoordinators, "✅ BoardCoordinator")
     }
     
+    //TODO: - Board Specific Coordinator로 분리해야 됨
+    
     func toDetail(_ item : PostResponse) {
         let vc = BoardDetailViewController(postResponse: item)
         vc.parentCoordinator = self
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func toSpecificBoard(_ item : String) {
+        let vc = BoardViewController(productId: item,
+                                     limit: InquiryRequest.InquiryRequestDefault.limit,
+                                     bestBoard: false, bestBoardType: nil)
+        
+        
+        vc.parentCoordinator = self
+        navigationController.pushViewController(vc, animated: true)
+    }
+}
+
+extension BoardCoordinator {
+    func boardChildViewController() -> Array<RxBaseViewController> {
+        
+        let category = BestCategory.allCases
+        var viewControllersList: Array<RxBaseViewController> = []
+        let bestBoard = true
+        
+        category.forEach {
+            let vc = BoardViewController(productId: $0.productId,
+                                         limit: InquiryRequest.InquiryRequestDefault.maxLimit,
+                                         bestBoard: bestBoard,
+                                         bestBoardType: $0
+            )
+            vc.parentCoordinator = self
+            viewControllersList.append(vc)
+        }
+        
+        return viewControllersList
     }
 }

@@ -13,17 +13,26 @@ import RxViewController
 
 final class BoardViewController: RxBaseViewController {
     
-    let mainView = BoardView()
+    lazy var mainView = BoardView(bestBoard: self.bestBoard)
     private let viewModel : BoardViewModel
     var parentCoordinator : BoardCoordinator?
     private var dataSource: BoardRxDataSource!
+    let bestBoard : Bool
+    let bestBoardType : BestCategory?
     
     override func loadView() {
         view = mainView
     }
     
-    init(productId : String) {
-        self.viewModel = BoardViewModel(productId)
+    init(productId : String, limit: String, bestBoard: Bool, bestBoardType : BestCategory?) {
+        self.bestBoard = bestBoard
+        self.bestBoardType = bestBoardType
+        self.viewModel = BoardViewModel(product_id: productId,
+                                        limit: limit,
+                                        bestBoard: bestBoard,
+                                        bestBoardType : bestBoardType
+        )
+        
     }
     
     override func viewDidLoad() {
@@ -54,6 +63,7 @@ final class BoardViewController: RxBaseViewController {
         output.viewWillAppear
             .drive(with: self) { owner, value in
                 owner.tabBarController?.tabBar.isHidden = false
+                print("BoardViewController - viewWillApper✅")
             }
             .disposed(by: disposeBag)
         
@@ -65,8 +75,8 @@ final class BoardViewController: RxBaseViewController {
             }
             .disposed(by: disposeBag)
         
+        
         output.postData
-            .debug("postData")
             .bind(to: mainView.mainCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }

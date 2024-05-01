@@ -6,17 +6,25 @@
 //
 
 import Foundation
+import Alamofire
 import RxSwift
 import RxCocoa
 
 final class BoardViewModel : MainViewModelType {
 
-    private var limit = Int(InquiryRequest.InquiryRequestDefault.limit)!
+    private var bestBoard : Bool
+    private var limit : String /*Int(InquiryRequest.InquiryRequestDefault.limit)!*/
+    private var maxLimit : Int
     private var product_id : String
+    private var bestBoardType : BestCategory?
     var disposeBag: DisposeBag = DisposeBag()
     
-    init(_ product_id: String) {
+    init(product_id: String, limit: String, bestBoard: Bool, bestBoardType: BestCategory?) {
         self.product_id = product_id
+        self.limit = limit
+        self.maxLimit = Int(limit)!
+        self.bestBoard = bestBoard
+        self.bestBoardType = bestBoardType
     }
     
     struct Input {
@@ -34,41 +42,51 @@ final class BoardViewModel : MainViewModelType {
     
     func transform(input: Input) -> Output {
         let product_id = BehaviorSubject<String>(value: product_id)
+        let limit = BehaviorSubject<String>(value: String(limit))
         let postData = BehaviorRelay(value: [BoardDataSection]())
         let nextPost = PublishSubject<[PostResponse]>()
         let nextPageValid = BehaviorSubject<Bool>(value: false)
         let nextCursor = PublishSubject<String>()
         let nextPage = PublishSubject<String>()
         
-        input.viewWillAppear
-            .withLatestFrom(product_id)
-            .flatMap { product_id in
+        let productIdWithLimit = Observable.combineLatest(product_id,limit)
+        
+        
+        NotificationCenter.default.rx.notification(.boardRefresh)
+            .withLatestFrom(productIdWithLimit)
+            .flatMap { product_id, limit in
                 return NetworkManager.shared.post(query: InquiryRequest(next: InquiryRequest.InquiryRequestDefault.next,
-                                                                        limit: InquiryRequest.InquiryRequestDefault.limit,
-                                                                        product_id: product_id))
-                // nhj_test gyjw_all
+                                                                        limit: limit, product_id: product_id))
             }
             .enumerated()
             .bind(with: self) { owner, result in
-//                print(result.index, "event index ✅", postData.value, "current Post ✅")
-                switch result.element {
-                case .success(let value):
-                    postData.accept([BoardDataSection(items: value.data)])
-                    nextCursor.onNext(value.next_cursor)
-                case .failure(let error):
-                    print(error)
-                }
+                owner.handleBoardData(result: result, bestBoard: owner.bestBoard, bestBoardType: owner.bestBoardType, postData: postData, nextCursor: nextCursor)
+            }
+            .disposed(by: disposeBag)
+        
+        input.viewWillAppear
+            .withLatestFrom(productIdWithLimit)
+            .flatMap { product_id, limit in
+                return NetworkManager.shared.post(query: InquiryRequest(next: InquiryRequest.InquiryRequestDefault.next,
+                                                                        limit: limit, product_id: product_id))
+            }
+            .enumerated()
+            .bind(with: self) { owner, result in
+                owner.handleBoardData(result: result, bestBoard: owner.bestBoard, bestBoardType: owner.bestBoardType, postData: postData, nextCursor: nextCursor)
             }
             .disposed(by: disposeBag)
         
         input.prefetchItems
             .map { [weak self] items in
-                guard let self = self else { return false }
-                print(items, "제한 ✅:", limit, items > limit - 5)
-                return items > limit - 2
+                guard let self = self else { return false }                
+                print(items, "제한 ✅:", maxLimit, maxLimit > maxLimit - 5)
+                return items > maxLimit - 5
             }
             .bind(with: self) { owner, valid in
-                nextPageValid.onNext(valid)
+                if !owner.bestBoard {
+                    nextPageValid.onNext(valid)
+                }
+
             }
             .disposed(by: disposeBag)
         
@@ -110,4 +128,38 @@ final class BoardViewModel : MainViewModelType {
             nextPost: nextPost
         )
     }
+
+    private func handleBoardData(result: (index: Int, element: PrimitiveSequence<SingleTrait, Result<InquiryResponse, AFError>>.Element), bestBoard: Bool, bestBoardType : BestCategory?, postData: BehaviorRelay<[BoardDataSection]>, nextCursor: PublishSubject<String>) {
+        switch result.element {
+        case .success(let value):
+            
+            if let type = bestBoardType {
+                let sortedData: [PostResponse]
+                let returnData: [PostResponse]
+                lazy var maxLength = sortedData.count > InquiryRequest.InquiryRequestDefault.maxPage ? InquiryRequest.InquiryRequestDefault.maxPage : sortedData.count
+                
+                switch type {
+                case .commentSort:
+                    sortedData = value.data.sorted { $0.comments.count > $1.comments.count }
+                case .likeSort:
+                    sortedData = value.data.sorted { $0.likes.count > $1.likes.count }
+                case .unlikeSort:
+                    sortedData = value.data.sorted { calculateLikesRatio(post: $0) > calculateLikesRatio(post: $1) }
+                }
+                returnData = bestBoard ? Array(sortedData[0..<maxLength]) : sortedData
+                postData.accept([BoardDataSection(items: returnData)])
+                nextCursor.onNext(value.next_cursor)
+            } else {
+                postData.accept([BoardDataSection(items: value.data)])
+                nextCursor.onNext(value.next_cursor)
+            }
+        case .failure(let error):
+            print(error)
+        }
+    }
+    
+    func calculateLikesRatio(post: PostResponse) -> Double {
+        return Double(post.likes.count) / Double(post.likes.count + post.likes2.count)
+    }
+
 }

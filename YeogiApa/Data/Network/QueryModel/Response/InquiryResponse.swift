@@ -30,6 +30,57 @@ struct InquiryResponse : Decodable, Hashable {
         self.next_cursor = try container.decode(String.self, forKey: .next_cursor)
     }
     
+    var rankData : [PostRank] {
+        var returndata : [PostRank] = []
+            
+        var productCountDict: [String: Int] = [:]
+        for post in data {
+            if post.productID == "" {
+                continue // productID가 ""인 경우 제외
+            }
+            
+            if let count = productCountDict[post.productID] {
+                productCountDict[post.productID] = count + 1
+            } else {
+                productCountDict[post.productID] = 1
+            }
+        }
+
+        let sortedCounts = productCountDict.sorted { $0.value > $1.value }
+        
+        for (rank, post) in sortedCounts.enumerated() {
+            returndata.append(PostRank(productId: post.key, boardRank: rank, count: productCountDict[post.key]!))
+        }
+        
+        return returndata
+    }
+    
+    var userRankData : [UserRank] {
+        var returndata : [UserRank] = []
+            
+        var productCountDict: [String: Int] = [:]
+        for post in data {
+            if let count = productCountDict[post.nickname] {
+                productCountDict[post.nickname] = count + 1
+            } else {
+                productCountDict[post.nickname] = 1
+            }
+        }
+
+        let sortedCounts = productCountDict.sorted { $0.value > $1.value }
+        
+        for (rank, post) in sortedCounts.enumerated() {
+            returndata.append(UserRank(nickName: post.key, boardRank: rank, count: productCountDict[post.key]!))
+        }
+        
+        return returndata
+    }
+    
+    var postRank : [(PostRank, UserRank)] {
+        let ranks = zip(rankData, userRankData)
+        return Array(ranks)
+    }
+    
 }
 
 struct PostResponse: Decodable, Hashable {
@@ -39,12 +90,13 @@ struct PostResponse: Decodable, Hashable {
     let files : [String]
     let comments: [Comment]
     let likes : [String]
+    let likes2 : [String]
     let hashTags: [String]
 
     enum CodingKeys: String, CodingKey {
         case postID = "post_id"
         case productID = "product_id"
-        case title, content1, content2, content3, content, createdAt, creator, files, comments, likes,hashTags
+        case title, content1, content2, content3, content, createdAt, creator, files, comments, likes, likes2, hashTags
     }
 
     init(from decoder: any Decoder) throws {
@@ -60,6 +112,7 @@ struct PostResponse: Decodable, Hashable {
         self.creator = try container.decode(Creator.self, forKey: .creator)
         self.files = (try? container.decode([String].self, forKey: .files)) ?? []
         self.likes = (try? container.decode([String].self, forKey: .likes)) ?? []
+        self.likes2 = (try? container.decode([String].self, forKey: .likes2)) ?? []
         self.comments = try container.decode([Comment].self, forKey: .comments)
         self.hashTags = (try? container.decode([String].self, forKey: .hashTags)) ?? []
     }
@@ -77,6 +130,7 @@ struct PostResponse: Decodable, Hashable {
                lhs.files == rhs.files &&
                lhs.comments == rhs.comments &&
                lhs.likes == rhs.likes &&
+               lhs.likes2 == rhs.likes2 &&
                lhs.hashTags == rhs.hashTags
     }
 
@@ -107,6 +161,10 @@ struct PostResponse: Decodable, Hashable {
     
     var createdAtToTimeDate : Date {
         return createdAt.toDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")!
+    }
+    
+    var nickname : String {
+        return creator.nick
     }
 }
 
@@ -147,4 +205,32 @@ struct Creator: Decodable, Hashable {
     }
 }
 
+struct PostRank : Hashable {
+    let productId : String
+    let boardRank : Int
+    let count : Int
+    
+    static func == (lhs: PostRank, rhs: PostRank) -> Bool {
+        return lhs.productId == rhs.productId &&
+        lhs.boardRank == rhs.boardRank
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(productId)
+    }
+}
 
+struct UserRank : Hashable {
+    let nickName : String
+    let boardRank : Int
+    let count : Int
+    
+    static func == (lhs: UserRank, rhs: UserRank) -> Bool {
+        return lhs.nickName == rhs.nickName &&
+        lhs.boardRank == rhs.boardRank
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(nickName)
+    }
+}

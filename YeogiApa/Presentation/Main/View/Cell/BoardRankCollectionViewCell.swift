@@ -50,7 +50,7 @@ final class BoardRankCollectionViewCell : BaseCollectionViewCell, Reusable {
     override func prepareForReuse() {
         super.prepareForReuse()
         rankLabel.text = nil
-//        rankLabel.font = nil
+        rankLabel.font = nil
         rankLabel.textColor = DesignSystem.commonColorSet.black
         boardNameLabel.text = nil
     }

@@ -15,7 +15,7 @@ import Pageboy
 
 final class BoardTabmanViewController: TabmanViewController, TMBarDataSource {
     
-    let baseView = BoardView()
+    let baseView = UIView()
     var parentCoordinator : BoardCoordinator?
     private let viewControllers: Array<RxBaseViewController>
     private let category : [Category]

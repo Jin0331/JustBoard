@@ -10,9 +10,21 @@ import Then
 import SnapKit
 import RxDataSources
 import Reusable
+import Tabman
+import Pageboy
 
 final class BoardMainView: BaseView {
-
+    let tabmanViewController : TabmanViewController
+    
+    init(tabmanViewController: TabmanViewController) {
+        self.tabmanViewController = tabmanViewController
+        super.init(frame: .zero)
+    }
+    
+    let containerView = UIView().then {
+        $0.backgroundColor = .red
+    }
+    
     lazy var mainCollectionView : UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         view.backgroundColor = DesignSystem.commonColorSet.white
@@ -22,14 +34,26 @@ final class BoardMainView: BaseView {
         
        return view
     }()
-    
+        
     override func configureHierarchy() {
         addSubview(mainCollectionView)
+        addSubview(containerView)
+        containerView.addSubview(tabmanViewController.view)
     }
     
     override func configureLayout() {
+        
         mainCollectionView.snp.makeConstraints { make in
-            make.edges.equalTo(safeAreaLayoutGuide)
+            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
+            make.height.equalTo(300)
+        }
+        tabmanViewController.view.snp.makeConstraints { make in
+            make.edges.equalTo(containerView)
+        }
+        
+        containerView.snp.makeConstraints { make in
+            make.top.equalTo(mainCollectionView.snp.bottom).offset(10)
+            make.horizontalEdges.bottom.equalTo(safeAreaLayoutGuide)
         }
     }
 }
@@ -42,7 +66,7 @@ extension BoardMainView {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         // Group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.5))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
         // Section

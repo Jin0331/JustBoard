@@ -13,19 +13,21 @@ import RxViewController
 
 final class BoardViewController: RxBaseViewController {
     
-    let mainView = BoardView()
+    lazy var mainView = BoardView(bestBoard: self.bestBoard)
     private let viewModel : BoardViewModel
     var parentCoordinator : BoardCoordinator?
     private var dataSource: BoardRxDataSource!
+    let bestBoard : Bool
     
     override func loadView() {
         view = mainView
     }
     
     init(productId : String, limit: String, bestBoard: Bool) {
+        self.bestBoard = bestBoard
         self.viewModel = BoardViewModel(product_id: productId,
                                         limit: limit,
-                                        bestBoard: bestBoard)
+                                        bestBoard: self.bestBoard)
     }
     
     override func viewDidLoad() {

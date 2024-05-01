@@ -29,10 +29,8 @@ final class BoardMainView: BaseView {
     }
     
     let contentsView = UIView().then {
-        $0.backgroundColor = DesignSystem.commonColorSet.red
+        $0.backgroundColor = DesignSystem.commonColorSet.lightGray
     }
-    
-//    let containerView = UIView()
     
     lazy var mainCollectionView : UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -43,14 +41,20 @@ final class BoardMainView: BaseView {
         
        return view
     }()
+    
+    let movewToAllBoard = CompleteButton(title: "전체 실시간 게시판으로 이동 >", image: nil, fontSize: 17).then {
+        $0.layer.cornerRadius = 0
+    }
+    
+    let boardRankLabel = CommonLabel(title: "실시간 게시판 순위", fontSize: 18)
+    let boardPostRankLabel = CommonLabel(title: "실시간 게시글 순위", fontSize: 18)
         
     override func configureHierarchy() {
         
         [scrollView].forEach { addSubview($0) }
         scrollView.addSubview(contentsView)
         
-        [mainCollectionView, tabmanViewController.view].forEach { contentsView.addSubview($0)}
-//        containerView.addSubview(tabmanViewController.view)
+        [boardRankLabel, mainCollectionView, boardPostRankLabel, tabmanViewController.view, movewToAllBoard].forEach { contentsView.addSubview($0)}
     }
     
     override func configureLayout() {
@@ -66,16 +70,35 @@ final class BoardMainView: BaseView {
             $0.top.bottom.equalToSuperview()
         }
         
+        boardRankLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(10)
+            make.height.equalTo(40)
+            make.horizontalEdges.equalToSuperview()
+        }
+        
         mainCollectionView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalToSuperview()
+            make.top.equalTo(boardRankLabel.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
             make.height.equalTo(300)
         }
         
+        boardPostRankLabel.snp.makeConstraints { make in
+            make.top.equalTo(mainCollectionView.snp.bottom).offset(10)
+            make.height.equalTo(40)
+            make.horizontalEdges.equalToSuperview()
+        }
+        
         tabmanViewController.view.snp.makeConstraints { make in
-            make.top.equalTo(mainCollectionView.snp.bottom)
+            make.top.equalTo(boardPostRankLabel.snp.bottom)
             make.horizontalEdges.equalTo(mainCollectionView)
-            make.height.equalTo(1000)
-            make.bottom.equalToSuperview().inset(50)
+            make.height.equalTo(2200)
+        }
+        
+        movewToAllBoard.snp.makeConstraints { make in
+            make.top.equalTo(tabmanViewController.view.snp.bottom).offset(10)
+            make.horizontalEdges.equalTo(tabmanViewController.view)
+            make.height.equalTo(50)
+            make.bottom.equalToSuperview().inset(12)
         }
     }
 }

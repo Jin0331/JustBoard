@@ -40,7 +40,7 @@ final class BoardViewModel : MainViewModelType {
     func transform(input: Input) -> Output {
         let product_id = BehaviorSubject<String>(value: product_id)
         let limit = BehaviorSubject<String>(value: String(limit))
-        let postData = BehaviorRelay(value: [BoardDataSection]())        
+        let postData = BehaviorRelay(value: [BoardDataSection]())
         let nextPost = PublishSubject<[PostResponse]>()
         let nextPageValid = BehaviorSubject<Bool>(value: false)
         let nextCursor = PublishSubject<String>()
@@ -65,6 +65,11 @@ final class BoardViewModel : MainViewModelType {
                     let sortedData = owner.bestBoard ? value.data.sorted {
                         $0.comments.count > $1.comments.count } : value.data
                     let maxLength = sortedData.count > InquiryRequest.InquiryRequestDefault.maxPage ? InquiryRequest.InquiryRequestDefault.maxPage : sortedData.count
+                    
+                    // bestBoard scrollview height 설정을 위함
+                    if owner.bestBoard {
+                        NotificationCenter.default.post(name: .bestBoard, object: maxLength)
+                    }
                     
                     let returnPost = owner.bestBoard ? Array(sortedData[0..<maxLength]) : sortedData
                     

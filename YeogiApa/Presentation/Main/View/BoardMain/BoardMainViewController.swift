@@ -33,7 +33,6 @@ final class BoardMainViewController: RxBaseViewController {
     
     override func viewDidLoad() {
         configureCollectionViewDataSource()
-//        NotificationCenter.default.addObserver(self, selector: #selector(resetLogined), name: .bestBoard, object: nil) // CollectionView Size
         super.viewDidLoad()
     }
     

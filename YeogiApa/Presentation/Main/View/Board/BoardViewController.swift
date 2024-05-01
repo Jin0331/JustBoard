@@ -18,16 +18,21 @@ final class BoardViewController: RxBaseViewController {
     var parentCoordinator : BoardCoordinator?
     private var dataSource: BoardRxDataSource!
     let bestBoard : Bool
+    let bestBoardType : BestCategory?
     
     override func loadView() {
         view = mainView
     }
     
-    init(productId : String, limit: String, bestBoard: Bool) {
+    init(productId : String, limit: String, bestBoard: Bool, bestBoardType : BestCategory?) {
         self.bestBoard = bestBoard
+        self.bestBoardType = bestBoardType
         self.viewModel = BoardViewModel(product_id: productId,
                                         limit: limit,
-                                        bestBoard: self.bestBoard)
+                                        bestBoard: bestBoard,
+                                        bestBoardType : bestBoardType
+        )
+        
     }
     
     override func viewDidLoad() {

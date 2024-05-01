@@ -15,7 +15,7 @@ final class BoardMainViewController: RxBaseViewController {
     private var postRankDataSource: BoardRankRxDataSource!
     private var userRankDataSource: BoardRankRxDataSource!
 
-    init(viewControllersList : Array<RxBaseViewController>, category : [Category], productId : String, limit : String){
+    init(viewControllersList : Array<RxBaseViewController>, category : [BestCategory], productId : String, limit : String){
         self.viewModel = BoardMainViewModel(product_id: productId, limit: limit)
         
         let tabmanVC = BoardTabmanViewController(viewControllersList: viewControllersList, 

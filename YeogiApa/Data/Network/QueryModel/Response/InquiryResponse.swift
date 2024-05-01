@@ -35,6 +35,10 @@ struct InquiryResponse : Decodable, Hashable {
             
         var productCountDict: [String: Int] = [:]
         for post in data {
+            if post.productID == "" {
+                continue // productID가 ""인 경우 제외
+            }
+            
             if let count = productCountDict[post.productID] {
                 productCountDict[post.productID] = count + 1
             } else {
@@ -86,12 +90,13 @@ struct PostResponse: Decodable, Hashable {
     let files : [String]
     let comments: [Comment]
     let likes : [String]
+    let likes2 : [String]
     let hashTags: [String]
 
     enum CodingKeys: String, CodingKey {
         case postID = "post_id"
         case productID = "product_id"
-        case title, content1, content2, content3, content, createdAt, creator, files, comments, likes,hashTags
+        case title, content1, content2, content3, content, createdAt, creator, files, comments, likes, likes2, hashTags
     }
 
     init(from decoder: any Decoder) throws {
@@ -107,6 +112,7 @@ struct PostResponse: Decodable, Hashable {
         self.creator = try container.decode(Creator.self, forKey: .creator)
         self.files = (try? container.decode([String].self, forKey: .files)) ?? []
         self.likes = (try? container.decode([String].self, forKey: .likes)) ?? []
+        self.likes2 = (try? container.decode([String].self, forKey: .likes2)) ?? []
         self.comments = try container.decode([Comment].self, forKey: .comments)
         self.hashTags = (try? container.decode([String].self, forKey: .hashTags)) ?? []
     }
@@ -124,6 +130,7 @@ struct PostResponse: Decodable, Hashable {
                lhs.files == rhs.files &&
                lhs.comments == rhs.comments &&
                lhs.likes == rhs.likes &&
+               lhs.likes2 == rhs.likes2 &&
                lhs.hashTags == rhs.hashTags
     }
 

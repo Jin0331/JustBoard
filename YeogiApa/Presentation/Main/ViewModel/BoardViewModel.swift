@@ -16,13 +16,15 @@ final class BoardViewModel : MainViewModelType {
     private var limit : String /*Int(InquiryRequest.InquiryRequestDefault.limit)!*/
     private var maxLimit : Int
     private var product_id : String
+    private var bestBoardType : BestCategory?
     var disposeBag: DisposeBag = DisposeBag()
     
-    init(product_id: String, limit: String, bestBoard: Bool) {
+    init(product_id: String, limit: String, bestBoard: Bool, bestBoardType: BestCategory?) {
         self.product_id = product_id
         self.limit = limit
         self.maxLimit = Int(limit)!
         self.bestBoard = bestBoard
+        self.bestBoardType = bestBoardType
     }
     
     struct Input {
@@ -58,7 +60,7 @@ final class BoardViewModel : MainViewModelType {
             }
             .enumerated()
             .bind(with: self) { owner, result in
-                owner.handleBoardData(result: result, bestBoard: owner.bestBoard, postData: postData, nextCursor: nextCursor)
+                owner.handleBoardData(result: result, bestBoard: owner.bestBoard, bestBoardType: owner.bestBoardType, postData: postData, nextCursor: nextCursor)
             }
             .disposed(by: disposeBag)
         
@@ -70,7 +72,7 @@ final class BoardViewModel : MainViewModelType {
             }
             .enumerated()
             .bind(with: self) { owner, result in
-                owner.handleBoardData(result: result, bestBoard: owner.bestBoard, postData: postData, nextCursor: nextCursor)
+                owner.handleBoardData(result: result, bestBoard: owner.bestBoard, bestBoardType: owner.bestBoardType, postData: postData, nextCursor: nextCursor)
             }
             .disposed(by: disposeBag)
         
@@ -127,18 +129,37 @@ final class BoardViewModel : MainViewModelType {
         )
     }
 
-    private func handleBoardData(result: (index: Int, element: PrimitiveSequence<SingleTrait, Result<InquiryResponse, AFError>>.Element), bestBoard: Bool, postData: BehaviorRelay<[BoardDataSection]>, nextCursor: PublishSubject<String>) {
+    private func handleBoardData(result: (index: Int, element: PrimitiveSequence<SingleTrait, Result<InquiryResponse, AFError>>.Element), bestBoard: Bool, bestBoardType : BestCategory?, postData: BehaviorRelay<[BoardDataSection]>, nextCursor: PublishSubject<String>) {
         switch result.element {
         case .success(let value):
-            let sortedData = bestBoard ? value.data.sorted { $0.comments.count > $1.comments.count } : value.data
-            let maxLength = sortedData.count > InquiryRequest.InquiryRequestDefault.maxPage ? InquiryRequest.InquiryRequestDefault.maxPage : sortedData.count
-            let returnPost = bestBoard ? Array(sortedData[0..<maxLength]) : sortedData
             
-            postData.accept([BoardDataSection(items: returnPost)])
-            nextCursor.onNext(value.next_cursor)
+            if let type = bestBoardType {
+                let sortedData: [PostResponse]
+                let returnData: [PostResponse]
+                lazy var maxLength = sortedData.count > InquiryRequest.InquiryRequestDefault.maxPage ? InquiryRequest.InquiryRequestDefault.maxPage : sortedData.count
+                
+                switch type {
+                case .commentSort:
+                    sortedData = value.data.sorted { $0.comments.count > $1.comments.count }
+                case .likeSort:
+                    sortedData = value.data.sorted { $0.likes.count > $1.likes.count }
+                case .unlikeSort:
+                    sortedData = value.data.sorted { calculateLikesRatio(post: $0) > calculateLikesRatio(post: $1) }
+                }
+                returnData = bestBoard ? Array(sortedData[0..<maxLength]) : sortedData
+                postData.accept([BoardDataSection(items: returnData)])
+                nextCursor.onNext(value.next_cursor)
+            } else {
+                postData.accept([BoardDataSection(items: value.data)])
+                nextCursor.onNext(value.next_cursor)
+            }
         case .failure(let error):
             print(error)
         }
+    }
+    
+    func calculateLikesRatio(post: PostResponse) -> Double {
+        return Double(post.likes.count) / Double(post.likes.count + post.likes2.count)
     }
 
 }

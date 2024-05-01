@@ -18,9 +18,9 @@ final class BoardTabmanViewController: TabmanViewController, TMBarDataSource {
     let baseView = UIView()
     var parentCoordinator : BoardCoordinator?
     private let viewControllers: Array<RxBaseViewController>
-    private let category : [Category]
+    private let category : [BestCategory]
 
-    init(viewControllersList : Array<RxBaseViewController>, category : [Category], productId : String, limit : String){
+    init(viewControllersList : Array<RxBaseViewController>, category : [BestCategory], productId : String, limit : String){
         self.viewControllers = viewControllersList
         self.category = category
         super.init(nibName: nil, bundle: nil)

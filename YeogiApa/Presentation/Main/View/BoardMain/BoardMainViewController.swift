@@ -56,8 +56,14 @@ final class BoardMainViewController: RxBaseViewController {
         output.postData
             .bind(to: baseView.userRankCollectionView.rx.items(dataSource: userRankDataSource))
             .disposed(by: disposeBag)
-
-        
+    }
+    
+    override func configureNavigation() {
+        navigationItem.title = "Bulletin Board"
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.black,
+            .font: UIFont(name: "MarkerFelt-Thin", size: 25)!
+        ]
     }
 }
 

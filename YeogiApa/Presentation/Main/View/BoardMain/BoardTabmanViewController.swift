@@ -73,23 +73,21 @@ extension BoardTabmanViewController : PageboyViewControllerDataSource {
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
         }
         
-        // Create bar
         let bar = TMBar.ButtonBar()
-        bar.backgroundView.style = .clear
-        bar.layout.transitionStyle = .snap // Customize
-        bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0)
-        
+        self.isScrollEnabled = false
         bar.buttons.customize { (button) in
             button.tintColor = DesignSystem.commonColorSet.black
             button.selectedTintColor = DesignSystem.commonColorSet.black
             button.font = .systemFont(ofSize: 18, weight: .heavy)
         }
+    
+        bar.layout.transitionStyle = .snap // Customize
+        bar.layout.contentMode = .fit
+        bar.layout.interButtonSpacing = 20 // 버튼 사이의 간격 조절
         
-        bar.indicator.weight = .custom(value: 2)
         bar.indicator.tintColor = DesignSystem.commonColorSet.black
         bar.indicator.overscrollBehavior = .none
         
-
         // Add to view
         addBar(bar, dataSource: self, at: .custom(view: baseView, layout: nil))
     }

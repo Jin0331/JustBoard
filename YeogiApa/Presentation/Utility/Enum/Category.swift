@@ -9,9 +9,9 @@ import UIKit
 
 //MARK: - 실시간 베스트 목록
 enum BestCategory : String, CaseIterable  {
-    case commentSort = "댓글순 🤔"
-    case likeSort = "공감순 👍🏻"
-    case unlikeSort = "공감비율순 👎🏻"
+    case commentSort = "댓글"
+    case likeSort = "공감"
+    case unlikeSort = "공감비율"
     
     var productId : String {
         switch self {

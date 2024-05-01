@@ -27,7 +27,7 @@ final class BoardView: BaseView {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         view.backgroundColor = DesignSystem.commonColorSet.white
         view.isPagingEnabled = true
-        view.isScrollEnabled = false
+        view.isScrollEnabled = bestBoard ? false : true
         view.register(cellType: BoardCollectionViewCell.self)
         
        return view

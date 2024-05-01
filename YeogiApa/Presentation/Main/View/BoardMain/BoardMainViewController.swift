@@ -38,6 +38,14 @@ final class BoardMainViewController: RxBaseViewController {
     }
     
     override func bind() {
+        
+        baseView.postRankCollectionView.rx
+            .modelAndIndexSelected((postRank:PostRank, userRank:UserRank).self)
+            .bind(with: self) { owner, value in
+                owner.parentCoordinator?.toSpecificBoard(value.0.postRank.productId)
+            }
+            .disposed(by: disposeBag)
+        
         let input = BoardMainViewModel.Input(viewWillAppear: rx.viewWillAppear)
         
         let output = viewModel.transform(input: input)

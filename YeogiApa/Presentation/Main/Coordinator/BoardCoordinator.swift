@@ -48,8 +48,20 @@ extension BoardCoordinator {
         print(#function, childCoordinators, "✅ BoardCoordinator")
     }
     
+    //TODO: - Board Specific Coordinator로 분리해야 됨
+    
     func toDetail(_ item : PostResponse) {
         let vc = BoardDetailViewController(postResponse: item)
+        vc.parentCoordinator = self
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func toSpecificBoard(_ item : String) {
+        let vc = BoardViewController(productId: item,
+                                     limit: InquiryRequest.InquiryRequestDefault.limit,
+                                     bestBoard: false, bestBoardType: nil)
+        
+        
         vc.parentCoordinator = self
         navigationController.pushViewController(vc, animated: true)
     }

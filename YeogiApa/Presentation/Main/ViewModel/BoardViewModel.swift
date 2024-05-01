@@ -40,7 +40,7 @@ final class BoardViewModel : MainViewModelType {
     func transform(input: Input) -> Output {
         let product_id = BehaviorSubject<String>(value: product_id)
         let limit = BehaviorSubject<String>(value: String(limit))
-        let postData = BehaviorRelay(value: [BoardDataSection]())
+        let postData = BehaviorRelay(value: [BoardDataSection]())        
         let nextPost = PublishSubject<[PostResponse]>()
         let nextPageValid = BehaviorSubject<Bool>(value: false)
         let nextCursor = PublishSubject<String>()
@@ -62,8 +62,6 @@ final class BoardViewModel : MainViewModelType {
                 switch result.element {
                 case .success(let value):
                 
-                    print(value.rankData)
-                    
                     let sortedData = owner.bestBoard ? value.data.sorted {
                         $0.comments.count > $1.comments.count } : value.data
                     let maxLength = sortedData.count > InquiryRequest.InquiryRequestDefault.maxPage ? InquiryRequest.InquiryRequestDefault.maxPage : sortedData.count

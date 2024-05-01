@@ -13,6 +13,7 @@ enum DesignSystem {
     }
 
     enum commonColorSet  {
+        static let red = UIColor.red
         static let black = UIColor.pillBlack
         static let lightBlack = UIColor.pillLightBlack
         static let gray = UIColor.pillGray

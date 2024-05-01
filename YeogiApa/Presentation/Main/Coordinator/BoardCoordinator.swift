@@ -19,7 +19,7 @@ final class BoardCoordinator : Coordinator {
     }
     
     func start() {
-        let vc = BoardMainViewController(viewControllersList: boardChildViewController(), category: Category.allCases)
+        let vc = BoardMainViewController(viewControllersList: boardChildViewController(), category: Category.allCases, productId: InquiryRequest.InquiryRequestDefault.productId, limit: InquiryRequest.InquiryRequestDefault.maxLimit)
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }
@@ -60,13 +60,12 @@ extension BoardCoordinator {
         
         let category = Category.allCases
         var viewControllersList: Array<RxBaseViewController> = []
-        
-        let bestBoard = true
+        var bestBoard = true
         
         category.forEach {
             let vc = BoardViewController(productId: $0.productId,
                                          limit: InquiryRequest.InquiryRequestDefault.maxLimit,
-                                         bestBoard: true)
+                                         bestBoard: bestBoard)
             vc.parentCoordinator = self
             viewControllersList.append(vc)
         }

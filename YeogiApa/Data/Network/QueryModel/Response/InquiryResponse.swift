@@ -42,9 +42,11 @@ struct InquiryResponse : Decodable, Hashable {
             }
         }
 
-        for (productID, count) in productCountDict {
-            print("Product ID: \(productID), Count: \(count)")
-            returndata.append(PostRank(productId: productID, postCount: count))
+        let sortedCounts = productCountDict.sorted { $0.value > $1.value }
+        
+        for (rank, post) in sortedCounts.enumerated() {
+            print("Product ID: \(post.key), Rank: \(rank)")
+            returndata.append(PostRank(productId: post.key, boardRank: rank))
         }
         
         return returndata
@@ -169,11 +171,11 @@ struct Creator: Decodable, Hashable {
 
 struct PostRank : Hashable {
     let productId : String
-    let postCount : Int
+    let boardRank : Int
     
     static func == (lhs: PostRank, rhs: PostRank) -> Bool {
         return lhs.productId == rhs.productId &&
-        lhs.postCount == rhs.postCount
+        lhs.boardRank == rhs.boardRank
     }
     
     func hash(into hasher: inout Hasher) {

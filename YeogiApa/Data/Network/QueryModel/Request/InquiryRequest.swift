@@ -13,6 +13,7 @@ struct InquiryRequest {
     let product_id : String
     
     enum InquiryRequestDefault {
+        static let productId = ""
         static let next = "0"
         static let limit = "80"
         static let maxLimit = "9999"

@@ -7,6 +7,23 @@
 
 import RxDataSources
 
+//MARK: - BoardMain - 실시간 게시판 순위
+struct BoardRankDataSection {
+    var items: [PostRank]
+}
+
+extension BoardRankDataSection: SectionModelType {
+    typealias Item = PostRank
+    
+    init(original: BoardRankDataSection, items: [PostRank]) {
+        self = original
+        self.items = items
+    }
+}
+
+typealias BoardRankRxDataSource = RxCollectionViewSectionedReloadDataSource<BoardRankDataSection>
+
+
 //MARK: - BoardMain - 실시간 게시글 순위
 struct BoardDataSection {
     var items: [PostResponse]

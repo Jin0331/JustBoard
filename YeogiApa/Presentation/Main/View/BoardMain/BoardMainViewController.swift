@@ -2,71 +2,63 @@
 //  BoardMainViewController.swift
 //  YeogiApa
 //
-//  Created by JinwooLee on 4/30/24.
+//  Created by JinwooLee on 5/1/24.
 //
 
 import UIKit
-import Tabman
-import Pageboy
 
-final class BoardMainViewController: TabmanViewController, TMBarDataSource {
+final class BoardMainViewController: RxBaseViewController {
 
+    let baseView = BoardMainView()
     var parentCoordinator : BoardCoordinator?
     private let viewControllers: Array<RxBaseViewController>
     private let category : [Category]
-    
+    private let viewModel : BoardMainViewModel
+    private var dataSource: BoardRankRxDataSource!
 
-    init(viewControllersList : Array<RxBaseViewController>, category : [Category]){
+    init(viewControllersList : Array<RxBaseViewController>, category : [Category], productId : String, limit : String){
         self.viewControllers = viewControllersList
         self.category = category
-        super.init(nibName: nil, bundle: nil)
+        self.viewModel = BoardMainViewModel(product_id: productId, limit: limit)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    override func loadView() {
+        view = baseView
+    }
+    
     override func viewDidLoad() {
+        configureCollectionViewDataSource()
         super.viewDidLoad()
-        configureView()
     }
     
-
-}
-
-//MARK: - Tabman 관련 사항
-extension BoardMainViewController : PageboyViewControllerDataSource {
-    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
-        let title = category[index].rawValue
+    override func bind() {
+        let input = BoardMainViewModel.Input(viewWillAppear: rx.viewWillAppear)
         
-        return TMBarItem(title: title)
-    }
-    
-    func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        return viewControllers.count
-    }
-
-    func viewController(for pageboyViewController: PageboyViewController,
-                        at index: PageboyViewController.PageIndex) -> UIViewController? {
-        return viewControllers[index]
-    }
-
-    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return nil
-    }
-    
-    func configureView() {
-        view.backgroundColor = DesignSystem.commonColorSet.white
+        let output = viewModel.transform(input: input)
         
-        self.dataSource = self
-
-        // Create bar
-        let bar = TMBar.ButtonBar()
-//        bar.layout.transitionStyle = .snap // Customize
-        bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0)
-
-        // Add to view
-        addBar(bar, dataSource: self, at: .top)
+        output.postData
+            .debug("postData")
+            .bind(to: baseView.mainCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
     }
 }
 
+//MARK: - RxDataSource CollectionView
+extension BoardMainViewController {
+    private func configureCollectionViewDataSource() {
+        
+        dataSource = BoardRankRxDataSource(configureCell: { dataSource, collectionView, indexPath, item in
+            
+            let cell: BoardRankCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+            cell.updateUI(item)
+            
+            return cell
+        })
+        
+    }
+}

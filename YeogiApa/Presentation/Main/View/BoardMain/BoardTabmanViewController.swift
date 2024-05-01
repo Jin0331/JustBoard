@@ -70,8 +70,20 @@ extension BoardTabmanViewController : PageboyViewControllerDataSource {
         
         // Create bar
         let bar = TMBar.ButtonBar()
-//        bar.layout.transitionStyle = .snap // Customize
+        bar.backgroundView.style = .clear
+        bar.layout.transitionStyle = .snap // Customize
         bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0)
+        
+        bar.buttons.customize { (button) in
+            button.tintColor = DesignSystem.commonColorSet.black
+            button.selectedTintColor = DesignSystem.commonColorSet.black
+            button.font = .systemFont(ofSize: 18, weight: .heavy)
+        }
+        
+        bar.indicator.weight = .custom(value: 2)
+        bar.indicator.tintColor = DesignSystem.commonColorSet.black
+        bar.indicator.overscrollBehavior = .none
+        
 
         // Add to view
         addBar(bar, dataSource: self, at: .custom(view: baseView, layout: nil))

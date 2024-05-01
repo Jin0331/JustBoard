@@ -26,6 +26,7 @@ final class BoardMainViewModel : MainViewModelType {
     
     struct Output {
         let postData : BehaviorRelay<[BoardRankDataSection]>
+        let viewWillAppear : Driver<Bool>
     }
     
     func transform(input: Input) -> Output {
@@ -55,6 +56,9 @@ final class BoardMainViewModel : MainViewModelType {
             }
             .disposed(by: disposeBag)
         
-        return Output(postData : postData)
+        return Output(
+            postData : postData,
+            viewWillAppear: input.viewWillAppear.asDriver(onErrorJustReturn: false)
+        )
     }
 }

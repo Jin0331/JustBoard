@@ -21,14 +21,23 @@ final class BoardMainView: BaseView {
         super.init(frame: .zero)
     }
     
-    let containerView = UIView().then {
-        $0.backgroundColor = .red
+    let scrollView = UIScrollView().then {
+        $0.backgroundColor = DesignSystem.commonColorSet.white
+        $0.isScrollEnabled = true
+        $0.showsVerticalScrollIndicator = false
+        $0.bounces = false
     }
+    
+    let contentsView = UIView().then {
+        $0.backgroundColor = DesignSystem.commonColorSet.red
+    }
+    
+//    let containerView = UIView()
     
     lazy var mainCollectionView : UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         view.backgroundColor = DesignSystem.commonColorSet.white
-        view.allowsMultipleSelection = true
+        view.isScrollEnabled = false
         view.isPagingEnabled = true
         view.register(cellType: BoardRankCollectionViewCell.self)
         
@@ -36,24 +45,37 @@ final class BoardMainView: BaseView {
     }()
         
     override func configureHierarchy() {
-        addSubview(mainCollectionView)
-        addSubview(containerView)
-        containerView.addSubview(tabmanViewController.view)
+        
+        [scrollView].forEach { addSubview($0) }
+        scrollView.addSubview(contentsView)
+        
+        [mainCollectionView, tabmanViewController.view].forEach { contentsView.addSubview($0)}
+//        containerView.addSubview(tabmanViewController.view)
     }
     
     override func configureLayout() {
         
-        mainCollectionView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
-            make.height.equalTo(300)
-        }
-        tabmanViewController.view.snp.makeConstraints { make in
-            make.edges.equalTo(containerView)
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide).inset(10)
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
         
-        containerView.snp.makeConstraints { make in
-            make.top.equalTo(mainCollectionView.snp.bottom).offset(10)
-            make.horizontalEdges.bottom.equalTo(safeAreaLayoutGuide)
+        contentsView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.top.bottom.equalToSuperview()
+        }
+        
+        mainCollectionView.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalToSuperview()
+            make.height.equalTo(300)
+        }
+        
+        tabmanViewController.view.snp.makeConstraints { make in
+            make.top.equalTo(mainCollectionView.snp.bottom)
+            make.horizontalEdges.equalTo(mainCollectionView)
+            make.height.equalTo(1000)
+            make.bottom.equalToSuperview().inset(50)
         }
     }
 }

@@ -19,8 +19,8 @@ final class BoardView: BaseView {
     lazy var mainCollectionView : UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         view.backgroundColor = DesignSystem.commonColorSet.white
-        view.allowsMultipleSelection = true
         view.isPagingEnabled = true
+        view.isScrollEnabled = false
         view.register(cellType: BoardCollectionViewCell.self)
         
        return view
@@ -60,7 +60,8 @@ final class BoardView: BaseView {
         }
         
         mainCollectionView.snp.makeConstraints { make in
-            make.edges.equalTo(safeAreaLayoutGuide)
+            make.top.equalToSuperview().inset(60)
+            make.bottom.horizontalEdges.equalToSuperview()
         }
     }
 }

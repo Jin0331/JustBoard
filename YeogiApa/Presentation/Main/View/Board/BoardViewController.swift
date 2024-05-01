@@ -69,7 +69,6 @@ final class BoardViewController: RxBaseViewController {
         
         
         output.postData
-            .debug("postData")
             .bind(to: mainView.mainCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }

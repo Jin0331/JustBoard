@@ -33,6 +33,7 @@ final class BoardMainViewController: RxBaseViewController {
     
     override func viewDidLoad() {
         configureCollectionViewDataSource()
+//        NotificationCenter.default.addObserver(self, selector: #selector(resetLogined), name: .bestBoard, object: nil) // CollectionView Size
         super.viewDidLoad()
     }
     
@@ -41,8 +42,13 @@ final class BoardMainViewController: RxBaseViewController {
         
         let output = viewModel.transform(input: input)
         
+        output.viewWillAppear
+            .drive(with: self) { owner, value in
+                owner.tabBarController?.tabBar.isHidden = false
+            }
+            .disposed(by: disposeBag)
+        
         output.postData
-            .debug("postData")
             .bind(to: baseView.mainCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }

@@ -48,7 +48,7 @@ final class BoardViewModel : MainViewModelType {
         
         let productIdWithLimit = Observable.combineLatest(product_id,limit)
         
-        input.viewWillAppear
+        Observable.combineLatest(input.viewWillAppear, NotificationCenter.default.rx.notification(.boardRefresh))
             .withLatestFrom(productIdWithLimit)
             .flatMap { product_id, limit in
                 return NetworkManager.shared.post(query: InquiryRequest(next: InquiryRequest.InquiryRequestDefault.next,
@@ -59,18 +59,14 @@ final class BoardViewModel : MainViewModelType {
             .enumerated()
             .bind(with: self) { owner, result in
                 
+                print("BoardViewModel - 게시글 최신화 ✅")
+                
                 switch result.element {
                 case .success(let value):
                 
                     let sortedData = owner.bestBoard ? value.data.sorted {
                         $0.comments.count > $1.comments.count } : value.data
                     let maxLength = sortedData.count > InquiryRequest.InquiryRequestDefault.maxPage ? InquiryRequest.InquiryRequestDefault.maxPage : sortedData.count
-                    
-                    // bestBoard scrollview height 설정을 위함
-                    if owner.bestBoard {
-                        NotificationCenter.default.post(name: .bestBoard, object: maxLength)
-                    }
-                    
                     let returnPost = owner.bestBoard ? Array(sortedData[0..<maxLength]) : sortedData
                     
                     postData.accept([BoardDataSection(items: returnPost)])

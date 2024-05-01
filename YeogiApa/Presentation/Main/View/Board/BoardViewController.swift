@@ -58,6 +58,7 @@ final class BoardViewController: RxBaseViewController {
         output.viewWillAppear
             .drive(with: self) { owner, value in
                 owner.tabBarController?.tabBar.isHidden = false
+                print("BoardViewController - viewWillApper✅")
             }
             .disposed(by: disposeBag)
         

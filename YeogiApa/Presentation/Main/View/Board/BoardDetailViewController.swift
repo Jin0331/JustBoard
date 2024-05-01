@@ -83,7 +83,6 @@ final class BoardDetailViewController: RxBaseViewController {
             .disposed(by: disposeBag)
         
         output.updatedPost
-            .debug("updatedPost")
             .bind(with: self) { owner, postData in
                 owner.mainView.likeUpdateUI(postData)
                 owner.mainView.commentUpdateUI(postData)

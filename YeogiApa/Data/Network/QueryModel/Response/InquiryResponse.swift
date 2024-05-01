@@ -45,7 +45,6 @@ struct InquiryResponse : Decodable, Hashable {
         let sortedCounts = productCountDict.sorted { $0.value > $1.value }
         
         for (rank, post) in sortedCounts.enumerated() {
-            print("Product ID: \(post.key), Rank: \(rank)")
             returndata.append(PostRank(productId: post.key, boardRank: rank, count: productCountDict[post.key]!))
         }
         
@@ -67,7 +66,6 @@ struct InquiryResponse : Decodable, Hashable {
         let sortedCounts = productCountDict.sorted { $0.value > $1.value }
         
         for (rank, post) in sortedCounts.enumerated() {
-            print("Nickname: \(post.key), Rank: \(rank)")
             returndata.append(UserRank(nickName: post.key, boardRank: rank, count: productCountDict[post.key]!))
         }
         

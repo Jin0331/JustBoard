@@ -49,11 +49,8 @@ final class BoardMainViewModel : MainViewModelType {
                 
                 switch result.element {
                 case .success(let value):
-                    postData.accept([BoardRankDataSection(items: value.postRank)])
-                    
-                    print(value.userRankData)
-                    
-                    
+                    postData.accept([BoardRankDataSection(items: Array(value.postRank[0..<20]))])
+                    NotificationCenter.default.post(name: .boardRefresh, object: nil)
                 case .failure(let error):
                     print(error)
                 }

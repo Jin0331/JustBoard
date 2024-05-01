@@ -56,8 +56,8 @@ final class BoardMainView: BaseView {
         $0.layer.cornerRadius = 0
     }
     
-    let boardRankLabel = CommonLabel(title: "실시간 게시판 순위", fontSize: 18)
-    let boardUserRankLabel = CommonLabel(title: "실시간 유저 순위", fontSize: 18)
+    let boardRankLabel = CommonLabel(title: "실시간 게시판 Best 20", fontSize: 18)
+    let boardUserRankLabel = CommonLabel(title: "실시간 유저 Best 20", fontSize: 18)
     let boardPostRankLabel = CommonLabel(title: "실시간 게시글 순위", fontSize: 18)
         
     override func configureHierarchy() {
@@ -130,7 +130,7 @@ extension BoardMainView {
     private func createLayout() -> UICollectionViewLayout {
         
         // Cell
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.2))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         // Group
@@ -139,7 +139,7 @@ extension BoardMainView {
 
         // Section
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 10
+        section.interGroupSpacing = 5
         section.orthogonalScrollingBehavior = .groupPaging
         
         

@@ -34,6 +34,11 @@ final class BoardTabmanViewController: TabmanViewController, TMBarDataSource {
         configureView()
         super.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("BoardTabmanViewController - viewWillApper✅")
+    }
 }
 
 //MARK: - Tabman 관련 사항

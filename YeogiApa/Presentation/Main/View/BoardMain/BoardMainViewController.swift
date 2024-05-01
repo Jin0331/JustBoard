@@ -12,7 +12,8 @@ final class BoardMainViewController: RxBaseViewController {
     let baseView : BoardMainView
     var parentCoordinator : BoardCoordinator?
     private let viewModel : BoardMainViewModel
-    private var dataSource: BoardRankRxDataSource!
+    private var postRankDataSource: BoardRankRxDataSource!
+    private var userRankDataSource: BoardRankRxDataSource!
 
     init(viewControllersList : Array<RxBaseViewController>, category : [Category], productId : String, limit : String){
         self.viewModel = BoardMainViewModel(product_id: productId, limit: limit)
@@ -48,8 +49,14 @@ final class BoardMainViewController: RxBaseViewController {
             .disposed(by: disposeBag)
         
         output.postData
-            .bind(to: baseView.mainCollectionView.rx.items(dataSource: dataSource))
+            .bind(to: baseView.postRankCollectionView.rx.items(dataSource: postRankDataSource))
             .disposed(by: disposeBag)
+        
+        output.postData
+            .bind(to: baseView.userRankCollectionView.rx.items(dataSource: userRankDataSource))
+            .disposed(by: disposeBag)
+
+        
     }
 }
 
@@ -57,10 +64,18 @@ final class BoardMainViewController: RxBaseViewController {
 extension BoardMainViewController {
     private func configureCollectionViewDataSource() {
         
-        dataSource = BoardRankRxDataSource(configureCell: { dataSource, collectionView, indexPath, item in
+        postRankDataSource = BoardRankRxDataSource(configureCell: { dataSource, collectionView, indexPath, item in
             
             let cell: BoardRankCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-            cell.updateUI(item)
+            cell.updateUI(item.postRank)
+            
+            return cell
+        })
+        
+        userRankDataSource = BoardRankRxDataSource(configureCell: { dataSource, collectionView, indexPath, item in
+            
+            let cell: BoardRankCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+            cell.updateUI(item.userRank)
             
             return cell
         })

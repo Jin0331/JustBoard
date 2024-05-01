@@ -49,7 +49,11 @@ final class BoardMainViewModel : MainViewModelType {
                 
                 switch result.element {
                 case .success(let value):
-                    postData.accept([BoardRankDataSection(items: value.rankData)])
+                    postData.accept([BoardRankDataSection(items: value.postRank)])
+                    
+                    print(value.userRankData)
+                    
+                    
                 case .failure(let error):
                     print(error)
                 }

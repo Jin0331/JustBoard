@@ -47,6 +47,15 @@ final class BoardRankCollectionViewCell : BaseCollectionViewCell, Reusable {
         boardNameLabel.font = itemIdentifier.boardRank < 3 ? .systemFont(ofSize: 18, weight: .bold) : .systemFont(ofSize: 18, weight: .regular)
     }
     
+    func updateUI(_ itemIdentifier : UserRank) {
+        rankLabel.text = String(itemIdentifier.boardRank + 1) + "."
+        rankLabel.font = itemIdentifier.boardRank < 3 ? .systemFont(ofSize: 18, weight: .bold) : .systemFont(ofSize: 18, weight: .regular)
+        rankLabel.textColor = itemIdentifier.boardRank < 3 ? DesignSystem.commonColorSet.red : DesignSystem.commonColorSet.black
+        
+        boardNameLabel.text = itemIdentifier.nickName
+        boardNameLabel.font = itemIdentifier.boardRank < 3 ? .systemFont(ofSize: 18, weight: .bold) : .systemFont(ofSize: 18, weight: .regular)
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         rankLabel.text = nil

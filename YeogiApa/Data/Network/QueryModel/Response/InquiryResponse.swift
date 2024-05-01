@@ -46,10 +46,37 @@ struct InquiryResponse : Decodable, Hashable {
         
         for (rank, post) in sortedCounts.enumerated() {
             print("Product ID: \(post.key), Rank: \(rank)")
-            returndata.append(PostRank(productId: post.key, boardRank: rank))
+            returndata.append(PostRank(productId: post.key, boardRank: rank, count: productCountDict[post.key]!))
         }
         
         return returndata
+    }
+    
+    var userRankData : [UserRank] {
+        var returndata : [UserRank] = []
+            
+        var productCountDict: [String: Int] = [:]
+        for post in data {
+            if let count = productCountDict[post.nickname] {
+                productCountDict[post.nickname] = count + 1
+            } else {
+                productCountDict[post.nickname] = 1
+            }
+        }
+
+        let sortedCounts = productCountDict.sorted { $0.value > $1.value }
+        
+        for (rank, post) in sortedCounts.enumerated() {
+            print("Nickname: \(post.key), Rank: \(rank)")
+            returndata.append(UserRank(nickName: post.key, boardRank: rank, count: productCountDict[post.key]!))
+        }
+        
+        return returndata
+    }
+    
+    var postRank : [(PostRank, UserRank)] {
+        let ranks = zip(rankData, userRankData)
+        return Array(ranks)
     }
     
 }
@@ -130,6 +157,10 @@ struct PostResponse: Decodable, Hashable {
     var createdAtToTimeDate : Date {
         return createdAt.toDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")!
     }
+    
+    var nickname : String {
+        return creator.nick
+    }
 }
 
 struct Comment: Decodable, Hashable {
@@ -172,6 +203,7 @@ struct Creator: Decodable, Hashable {
 struct PostRank : Hashable {
     let productId : String
     let boardRank : Int
+    let count : Int
     
     static func == (lhs: PostRank, rhs: PostRank) -> Bool {
         return lhs.productId == rhs.productId &&
@@ -180,5 +212,20 @@ struct PostRank : Hashable {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(productId)
+    }
+}
+
+struct UserRank : Hashable {
+    let nickName : String
+    let boardRank : Int
+    let count : Int
+    
+    static func == (lhs: UserRank, rhs: UserRank) -> Bool {
+        return lhs.nickName == rhs.nickName &&
+        lhs.boardRank == rhs.boardRank
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(nickName)
     }
 }

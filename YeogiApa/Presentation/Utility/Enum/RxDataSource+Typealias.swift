@@ -9,13 +9,13 @@ import RxDataSources
 
 //MARK: - BoardMain - 실시간 게시판 순위
 struct BoardRankDataSection {
-    var items: [PostRank]
+    var items: [(postRank:PostRank, userRank:UserRank)]
 }
 
 extension BoardRankDataSection: SectionModelType {
-    typealias Item = PostRank
+    typealias Item = (postRank:PostRank, userRank:UserRank)
     
-    init(original: BoardRankDataSection, items: [PostRank]) {
+    init(original: BoardRankDataSection, items: [(postRank:PostRank, userRank:UserRank)]) {
         self = original
         self.items = items
     }

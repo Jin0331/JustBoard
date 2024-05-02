@@ -14,7 +14,7 @@ final class BoardDetailViewController: RxBaseViewController {
 
     private let mainView = BoardDetailView()
     private let viewModel : BoardDetailViewModel
-    var parentCoordinator : BoardCoordinator?
+    var parentCoordinator : BoardDetailCoordinator?
     private var datasource : BoardDetailDataSource!
     
     override func loadView() {

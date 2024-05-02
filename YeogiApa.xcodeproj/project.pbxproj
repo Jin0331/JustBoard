@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		217C9232DB0C64915C533AF0 /* Pods_YeogiApa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBEC6A0F713D23C5F15574E0 /* Pods_YeogiApa.framework */; };
+		DB0598B02BE31F9300AE0973 /* BoardSpecificCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0598AF2BE31F9300AE0973 /* BoardSpecificCoordinator.swift */; };
+		DB0598B22BE3456800AE0973 /* BoardDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0598B12BE3456800AE0973 /* BoardDetailCoordinator.swift */; };
 		DB204D942BD29E5D006340BE /* UITabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D932BD29E5D006340BE /* UITabBarController+Extension.swift */; };
 		DB204D962BD29F0A006340BE /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D952BD29F0A006340BE /* MainTabBarController.swift */; };
 		DB204D982BD2A669006340BE /* QuestionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D972BD2A669006340BE /* QuestionCoordinator.swift */; };
@@ -23,7 +25,7 @@
 		DB204DEF2BD57774006340BE /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204DEE2BD57774006340BE /* CategorySelectViewController.swift */; };
 		DB410FF52BD0CFA10088679F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF42BD0CFA10088679F /* MainViewController.swift */; };
 		DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */; };
-		DB4110052BD15B300088679F /* BoardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110042BD15B300088679F /* BoardCoordinator.swift */; };
+		DB4110052BD15B300088679F /* BoardMainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110042BD15B300088679F /* BoardMainCoordinator.swift */; };
 		DB4110072BD15B3B0088679F /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110062BD15B3B0088679F /* SettingCoordinator.swift */; };
 		DB41100B2BD160F80088679F /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB41100A2BD160F80088679F /* BoardView.swift */; };
 		DB4110102BD173860088679F /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB41100F2BD173860088679F /* MainRouter.swift */; };
@@ -109,6 +111,8 @@
 /* Begin PBXFileReference section */
 		6E065FA89B28CFAB4A4CCE5E /* Pods-YeogiApa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeogiApa.debug.xcconfig"; path = "Target Support Files/Pods-YeogiApa/Pods-YeogiApa.debug.xcconfig"; sourceTree = "<group>"; };
 		CE70E4E40DA521BFE3917A88 /* Pods-YeogiApa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeogiApa.release.xcconfig"; path = "Target Support Files/Pods-YeogiApa/Pods-YeogiApa.release.xcconfig"; sourceTree = "<group>"; };
+		DB0598AF2BE31F9300AE0973 /* BoardSpecificCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSpecificCoordinator.swift; sourceTree = "<group>"; };
+		DB0598B12BE3456800AE0973 /* BoardDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailCoordinator.swift; sourceTree = "<group>"; };
 		DB204D932BD29E5D006340BE /* UITabBarController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extension.swift"; sourceTree = "<group>"; };
 		DB204D952BD29F0A006340BE /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		DB204D972BD2A669006340BE /* QuestionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCoordinator.swift; sourceTree = "<group>"; };
@@ -124,7 +128,7 @@
 		DB204DEE2BD57774006340BE /* CategorySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.swift; sourceTree = "<group>"; };
 		DB410FF42BD0CFA10088679F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarCoordinator.swift; sourceTree = "<group>"; };
-		DB4110042BD15B300088679F /* BoardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCoordinator.swift; sourceTree = "<group>"; };
+		DB4110042BD15B300088679F /* BoardMainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMainCoordinator.swift; sourceTree = "<group>"; };
 		DB4110062BD15B3B0088679F /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		DB41100A2BD160F80088679F /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		DB41100F2BD173860088679F /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
@@ -288,8 +292,10 @@
 			isa = PBXGroup;
 			children = (
 				DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */,
-				DB4110042BD15B300088679F /* BoardCoordinator.swift */,
+				DB4110042BD15B300088679F /* BoardMainCoordinator.swift */,
+				DB0598AF2BE31F9300AE0973 /* BoardSpecificCoordinator.swift */,
 				DB204D972BD2A669006340BE /* QuestionCoordinator.swift */,
+				DB0598B12BE3456800AE0973 /* BoardDetailCoordinator.swift */,
 				DB4110062BD15B3B0088679F /* SettingCoordinator.swift */,
 			);
 			path = Coordinator;
@@ -736,7 +742,7 @@
 				DBDD8B022BE2983E002ADA34 /* CommonLabel.swift in Sources */,
 				DB204DA22BD2E926006340BE /* UITextView+Extension.swift in Sources */,
 				DB802F482BDE31EF00DC670D /* UIButton+Extension.swift in Sources */,
-				DB4110052BD15B300088679F /* BoardCoordinator.swift in Sources */,
+				DB4110052BD15B300088679F /* BoardMainCoordinator.swift in Sources */,
 				DBDD8B002BE255DB002ADA34 /* BoardMainViewController.swift in Sources */,
 				DBB7C6852BDA3A6B00D3081A /* CALayer+Extension.swift in Sources */,
 				DBB7C6812BDA1B8E00D3081A /* CommentRequest.swift in Sources */,
@@ -745,6 +751,7 @@
 				DBCBAA192BC7E106006B40CA /* EmailLoginView.swift in Sources */,
 				DB204DE82BD57525006340BE /* CategorySelectView.swift in Sources */,
 				DBCBAA0F2BC7D0E1006B40CA /* NetworkManager.swift in Sources */,
+				DB0598B22BE3456800AE0973 /* BoardDetailCoordinator.swift in Sources */,
 				DBDD8AFC2BE0DADA002ADA34 /* BoardRankCollectionViewCell.swift in Sources */,
 				DBDD8A742BDE4337002ADA34 /* LikesRequest.swift in Sources */,
 				DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */,
@@ -795,6 +802,7 @@
 				DB410FF52BD0CFA10088679F /* MainViewController.swift in Sources */,
 				DB204D9A2BD2A6C7006340BE /* QuestionViewController.swift in Sources */,
 				DB4110162BD1AC720088679F /* Notification.Name+Extension.swift in Sources */,
+				DB0598B02BE31F9300AE0973 /* BoardSpecificCoordinator.swift in Sources */,
 				DBB7C6752BD93F2400D3081A /* BoardViewController.swift in Sources */,
 				DBCBE3B92BCD892500B6DAC5 /* NextButton.swift in Sources */,
 				DB204D9C2BD2A8C9006340BE /* BoardViewModel.swift in Sources */,

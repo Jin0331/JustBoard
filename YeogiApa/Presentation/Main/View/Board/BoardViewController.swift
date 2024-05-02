@@ -15,7 +15,8 @@ final class BoardViewController: RxBaseViewController {
     
     lazy var mainView = BoardView(bestBoard: self.bestBoard)
     private let viewModel : BoardViewModel
-    var parentCoordinator : BoardCoordinator?
+    var parentMainCoordinator : BoardMainCoordinator?
+    var parentCoordinator : BoardSpecificCoordinator?
     private var dataSource: BoardRxDataSource!
     let bestBoard : Bool
     let bestBoardType : BestCategory?
@@ -48,7 +49,9 @@ final class BoardViewController: RxBaseViewController {
         mainView.mainCollectionView.rx
             .modelAndIndexSelected(PostResponse.self)
             .bind(with: self) { owner, value in
+                print("hi")
                 owner.parentCoordinator?.toDetail(value.0)
+                owner.parentMainCoordinator?.toDetail(value.0)
             }
             .disposed(by: disposeBag)
         

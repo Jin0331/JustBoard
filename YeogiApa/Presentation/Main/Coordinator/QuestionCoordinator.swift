@@ -10,7 +10,7 @@ import UIKit
 final class QuestionCoordinator : Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-    var parentCoordinator : BoardCoordinator?
+    var parentCoordinator : BoardSpecificCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

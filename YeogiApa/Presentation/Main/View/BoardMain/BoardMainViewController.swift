@@ -10,7 +10,7 @@ import UIKit
 final class BoardMainViewController: RxBaseViewController {
 
     let baseView : BoardMainView
-    var parentCoordinator : BoardCoordinator?
+    var parentCoordinator : BoardMainCoordinator?
     private let viewModel : BoardMainViewModel
     private var postRankDataSource: BoardRankRxDataSource!
     private var userRankDataSource: BoardRankRxDataSource!
@@ -18,7 +18,7 @@ final class BoardMainViewController: RxBaseViewController {
     init(viewControllersList : Array<RxBaseViewController>, category : [BestCategory], productId : String, limit : String){
         self.viewModel = BoardMainViewModel(product_id: productId, limit: limit)
         
-        let tabmanVC = BoardTabmanViewController(viewControllersList: viewControllersList, 
+        let tabmanVC = BoardTabmanViewController(viewControllersList: viewControllersList,
                                                  category: category, 
                                                  productId: productId, limit: limit)
         self.baseView = BoardMainView(tabmanViewController: tabmanVC)

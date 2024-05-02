@@ -27,24 +27,7 @@ final class QuestionView: BaseView {
     let contentsView = UIView().then {
         $0.backgroundColor = DesignSystem.commonColorSet.white
     }
-    
-    private let categoryTitleLabel = UILabel().then {
-        $0.text = "분야를 선택하고 글을 작성해주세요"
-        $0.textColor = DesignSystem.commonColorSet.gray
-        $0.font = .systemFont(ofSize: 15, weight: .bold)
-    }
-    
-    let categorySelectButton = UIButton().then {
-        $0.setTitle("분야 선택하기", for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        $0.titleLabel?.textAlignment = .left
-        $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
-        $0.backgroundColor = DesignSystem.commonColorSet.lightGray
-        $0.layer.cornerRadius = DesignSystem.cornerRadius.commonCornerRadius
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = DesignSystem.commonColorSet.gray.cgColor
-    }
-    
+
     let titleTextField = STTextView().then {
                 
         $0.font = .systemFont(ofSize: 25, weight: .heavy)
@@ -62,7 +45,7 @@ final class QuestionView: BaseView {
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .semibold), // Set the desired font size
             NSAttributedString.Key.foregroundColor: DesignSystem.commonColorSet.gray
         ]
-        $0.attributedPlaceholder = NSAttributedString(string: " 게시글의 본문을작성해주세요.", attributes: attributes)
+        $0.attributedPlaceholder = NSAttributedString(string: " 게시글의 본문을 작성해주세요.", attributes: attributes)
         $0.placeholderVerticalAlignment = .center
         $0.textContainerInset = .init(top: 10, left: 10, bottom: 10, right: 10)
     }
@@ -97,7 +80,7 @@ final class QuestionView: BaseView {
         
         scrollView.addSubview(contentsView)
         
-        [categoryTitleLabel, categorySelectButton, brView1, titleTextField, brView2, stackBackgroundView, contentsTextView].forEach { contentsView.addSubview($0) }
+        [brView1, titleTextField, brView2, stackBackgroundView, contentsTextView].forEach { contentsView.addSubview($0) }
         
         stackBackgroundView.addSubview(buttonStackView)
         
@@ -117,19 +100,8 @@ final class QuestionView: BaseView {
             $0.top.bottom.equalToSuperview()
         }
         
-        categoryTitleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.horizontalEdges.equalToSuperview().inset(10)
-        }
-        
-        categorySelectButton.snp.makeConstraints { make in
-            make.top.equalTo(categoryTitleLabel.snp.bottom).offset(10)
-            make.horizontalEdges.equalTo(categoryTitleLabel)
-            make.height.equalTo(60)
-        }
-        
         brView1.snp.makeConstraints { make in
-            make.top.equalTo(categorySelectButton.snp.bottom).offset(15)
+            make.top.equalToSuperview()
             make.horizontalEdges.equalToSuperview()
             make.height.equalTo(10)
         }

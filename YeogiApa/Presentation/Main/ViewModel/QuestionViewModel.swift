@@ -22,7 +22,7 @@ final class QuestionViewModel : MainViewModelType {
         let titleText : ControlProperty<String>
         let contentsText : ControlProperty<String> // content1
         let addedImage : Observable<UIImage> // files
-        let addCategory : Observable<Category> // content2
+        let addProductId : Observable<String> // content2
         let addLink : BehaviorSubject<String> // content3
         let completeButtonTap : ControlEvent<Void>
     }
@@ -37,7 +37,7 @@ final class QuestionViewModel : MainViewModelType {
         
         let validTitle = BehaviorSubject<Bool>(value: false)
         let validContents = BehaviorSubject<Bool>(value: false)
-        let validCategory = BehaviorSubject<Bool>(value: false)
+        let validProductId = BehaviorSubject<Bool>(value: false)
         let overAddedImageCount = BehaviorSubject<Bool>(value: false)
         
         let completeButtonTap = PublishSubject<Bool>()
@@ -52,10 +52,10 @@ final class QuestionViewModel : MainViewModelType {
             }
             .disposed(by: disposeBag)
         
-        input.addCategory
-            .map { !$0.productId.isEmpty}
+        input.addProductId
+            .map { !$0.isEmpty}
             .bind(with: self) { owner, valid in
-                validCategory.onNext(valid)
+                validProductId.onNext(valid)
             }
             .disposed(by: disposeBag)
         
@@ -110,7 +110,7 @@ final class QuestionViewModel : MainViewModelType {
             .disposed(by: disposeBag)
         
         // complete Button 활성
-        Observable.combineLatest(validTitle, validContents, overAddedImageCount, validCategory)
+        Observable.combineLatest(validTitle, validContents, overAddedImageCount, validProductId)
             .map { validTitle, validContents, validImageCount, validCategory in
                 return validTitle && validContents && !validImageCount && validCategory
             }
@@ -121,9 +121,9 @@ final class QuestionViewModel : MainViewModelType {
             .disposed(by: disposeBag)
         
         // Post 작성
-        let writeRequest = Observable.combineLatest(input.addCategory, input.titleText, input.contentsText, input.addLink, uploadedFilesLocation, uploadedFiles)
-            .map { category, title, contents, link, position, files in
-                return PostRequest(product_id: category.productId, title: title,
+        let writeRequest = Observable.combineLatest(input.addProductId, input.titleText, input.contentsText, input.addLink, uploadedFilesLocation, uploadedFiles)
+            .map { productId, title, contents, link, position, files in
+                return PostRequest(product_id: productId, title: title,
                                     content1: contents, content2: link, content3: position,
                                     files: files)
             }

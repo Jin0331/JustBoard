@@ -16,8 +16,10 @@ final class QuestionCoordinator : Coordinator {
         self.navigationController = navigationController
     }
     
-    func start() {
-        let vc = QuestionViewController()
+    func start() { }
+    
+    func start(productId : String) {
+        let vc = QuestionViewController(productId: productId)
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }

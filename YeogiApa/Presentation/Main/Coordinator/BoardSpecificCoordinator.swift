@@ -36,10 +36,10 @@ final class BoardSpecificCoordinator : Coordinator {
 }
 
 extension BoardSpecificCoordinator {
-    func toQuestion() {
+    func toQuestion(_ productId : String) {
         let questionCoordinator = QuestionCoordinator(navigationController: navigationController)
         questionCoordinator.parentCoordinator = self
-        questionCoordinator.start()
+        questionCoordinator.start(productId: productId)
         childCoordinators.append(questionCoordinator)
     }
     

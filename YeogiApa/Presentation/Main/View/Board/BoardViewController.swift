@@ -13,21 +13,20 @@ import RxViewController
 
 final class BoardViewController: RxBaseViewController {
     
-    lazy var mainView = BoardView(bestBoard: self.bestBoard)
+    private let mainView : BoardView
     private let viewModel : BoardViewModel
+    private let productId : String
     var parentMainCoordinator : BoardMainCoordinator?
     var parentCoordinator : BoardSpecificCoordinator?
     private var dataSource: BoardRxDataSource!
-    let bestBoard : Bool
-    let bestBoardType : BestCategory?
     
     override func loadView() {
         view = mainView
     }
     
     init(productId : String, limit: String, bestBoard: Bool, bestBoardType : BestCategory?) {
-        self.bestBoard = bestBoard
-        self.bestBoardType = bestBoardType
+        self.productId = productId
+        self.mainView = BoardView(bestBoard: bestBoard)
         self.viewModel = BoardViewModel(product_id: productId,
                                         limit: limit,
                                         bestBoard: bestBoard,
@@ -72,8 +71,8 @@ final class BoardViewController: RxBaseViewController {
         
         output.questionButtonTap
             .drive(with: self) { owner, _ in
-                print("question Button Tap ✅")
-                owner.parentCoordinator?.toQuestion()
+                print("question Button Tap ✅", owner.productId)
+                owner.parentCoordinator?.toQuestion(owner.productId)
             }
             .disposed(by: disposeBag)
         

@@ -95,7 +95,7 @@ extension BoardMainViewController {
         
         postRankDataSource = BoardRankRxDataSource(configureCell: { dataSource, collectionView, indexPath, item in
             
-            let cell: BoardRankCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+            let cell: BoardRankCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)            
             cell.updateUI(item.postRank)
             
             return cell

@@ -70,7 +70,7 @@ struct InquiryResponse : Decodable, Hashable {
         let sortedCounts = productCountDict.sorted { $0.value > $1.value }
         
         for (rank, post) in sortedCounts.enumerated() {
-            returndata.append(UserRank(userId:post.key.userID,nickName: post.key.nick, boardRank: rank, count: productCountDict[post.key]!))
+            returndata.append(UserRank(userId:post.key.userID,nickName: post.key.nick, boardRank: rank, count: productCountDict[post.key]!, profileImage: post.key.profileImage))
         }
         
         return returndata
@@ -168,7 +168,7 @@ struct PostResponse: Decodable, Hashable {
     }
 
     var userIdWithNickname: UserKey {
-        return UserKey(userID: creator.userID, nick: creator.nick)
+        return UserKey(userID: creator.userID, nick: creator.nick, profileImage: creator.profileImageToUrl)
     }
 }
 
@@ -205,7 +205,12 @@ struct Creator: Decodable, Hashable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.userID = try container.decode(String.self, forKey: .userID)
         self.nick = try container.decode(String.self, forKey: .nick)
-        self.profileImage = (try? container.decode(String.self, forKey: .profileImage)) ?? ""
+        self.profileImage = (try? container.decode(String.self, forKey: .profileImage)) ?? DesignSystem.defaultimage.defaultProfile
+    }
+    
+    var profileImageToUrl : URL {
+        return URL(string: APIKey.baseURLWithVersion() + "/" + profileImage)!
+        
     }
 }
 
@@ -229,6 +234,7 @@ struct UserRank : Hashable {
     let nickName : String
     let boardRank : Int
     let count : Int
+    let profileImage : URL
     
     static func == (lhs: UserRank, rhs: UserRank) -> Bool {
         return lhs.userId == rhs.userId &&
@@ -244,6 +250,7 @@ struct UserRank : Hashable {
 struct UserKey: Hashable {
     let userID: String
     let nick: String
+    let profileImage: URL
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(userID)
@@ -251,6 +258,8 @@ struct UserKey: Hashable {
     }
     
     static func == (lhs: UserKey, rhs: UserKey) -> Bool {
-        return lhs.userID == rhs.userID && lhs.nick == rhs.nick
+        return lhs.userID == rhs.userID &&
+        lhs.nick == rhs.nick &&
+        lhs.profileImage == rhs.profileImage
     }
 }

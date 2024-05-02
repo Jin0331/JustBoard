@@ -33,7 +33,7 @@ enum DesignSystem {
         static let sfSymbolLargeConfig2 = UIImage.SymbolConfiguration(pointSize: 20, weight: .heavy, scale: .large)
         
         static let appleLogo = UIImage(systemName: "apple.logo", withConfiguration:sfSymbolLargeConfig)
-        static let question = UIImage(systemName: "questionmark.bubble", withConfiguration:sfSymbolLargeConfig)
+        static let question = UIImage(systemName: "square.and.pencil", withConfiguration:sfSymbolLargeConfig2)
         static let photo = UIImage(systemName: "photo", withConfiguration:sfSymbolLargeConfig)
         static let like = UIImage(systemName: "hand.thumbsup", withConfiguration:sfSymbolLargeConfig2)
         static let comment = UIImage(systemName: "bubble", withConfiguration:sfSymbolLargeConfig2)
@@ -45,5 +45,9 @@ enum DesignSystem {
         static let sfSymbolConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .heavy, scale: .large)
         static let first = UIImage(systemName: "house", withConfiguration: sfSymbolConfig)
         static let second = UIImage(systemName: "person.fill", withConfiguration: sfSymbolConfig)
+    }
+    
+    enum defaultimage {
+        static let defaultProfile = "uploads/posts/defaultProfile@3x_1714675687120.jpg"
     }
 }

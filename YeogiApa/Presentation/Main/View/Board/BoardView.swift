@@ -21,7 +21,7 @@ final class BoardView: BaseView {
         super.init(frame: .zero)
     }
 
-    let questionButton = CompleteButton(title: "작성하기", image: DesignSystem.sfSymbol.question, fontSize: 15)
+    let questionButton = CompleteButton(title: nil, image: DesignSystem.sfSymbol.question, fontSize: 15)
     
     lazy var mainCollectionView : UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -61,10 +61,8 @@ final class BoardView: BaseView {
     override func configureLayout() {
         if !bestBoard {
             questionButton.snp.makeConstraints { make in
-                make.bottom.equalTo(safeAreaLayoutGuide).inset(10)
-                make.centerX.equalTo(safeAreaLayoutGuide)
-                make.height.equalTo(50)
-                make.width.equalTo(110)
+                make.trailing.bottom.equalTo(safeAreaLayoutGuide).inset(20)
+                make.size.equalTo(50)
             }
         }
         

@@ -114,7 +114,7 @@ final class BoardMainView: BaseView {
         tabmanViewController.view.snp.makeConstraints { make in
             make.top.equalTo(boardPostRankLabel.snp.bottom)
             make.horizontalEdges.equalTo(postRankCollectionView)
-            make.height.equalTo(2200)
+            make.height.equalTo(2300)
         }
         
         movewToAllBoard.snp.makeConstraints { make in

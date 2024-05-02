@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class BoardMainViewController: RxBaseViewController {
 
     let baseView : BoardMainView
-    var parentCoordinator : BoardCoordinator?
+    var parentCoordinator : BoardMainCoordinator?
     private let viewModel : BoardMainViewModel
     private var postRankDataSource: BoardRankRxDataSource!
     private var userRankDataSource: BoardRankRxDataSource!
@@ -18,7 +20,7 @@ final class BoardMainViewController: RxBaseViewController {
     init(viewControllersList : Array<RxBaseViewController>, category : [BestCategory], productId : String, limit : String){
         self.viewModel = BoardMainViewModel(product_id: productId, limit: limit)
         
-        let tabmanVC = BoardTabmanViewController(viewControllersList: viewControllersList, 
+        let tabmanVC = BoardTabmanViewController(viewControllersList: viewControllersList,
                                                  category: category, 
                                                  productId: productId, limit: limit)
         self.baseView = BoardMainView(tabmanViewController: tabmanVC)
@@ -39,6 +41,8 @@ final class BoardMainViewController: RxBaseViewController {
     
     override func bind() {
         
+        let userProfileInquiry = PublishSubject<String>()
+        
         baseView.postRankCollectionView.rx
             .modelAndIndexSelected((postRank:PostRank, userRank:UserRank).self)
             .bind(with: self) { owner, value in
@@ -46,7 +50,18 @@ final class BoardMainViewController: RxBaseViewController {
             }
             .disposed(by: disposeBag)
         
-        let input = BoardMainViewModel.Input(viewWillAppear: rx.viewWillAppear)
+        // User Profile 조회 -> PostResponse -> transition
+        baseView.userRankCollectionView.rx
+            .modelAndIndexSelected((postRank:PostRank, userRank:UserRank).self)
+            .bind(with: self) { owner, value in
+                userProfileInquiry.onNext(value.0.userRank.userId)
+            }
+            .disposed(by: disposeBag)
+        
+        let input = BoardMainViewModel.Input(
+            viewWillAppear: rx.viewWillAppear,
+            userProfileInquiry: userProfileInquiry
+        )
         
         let output = viewModel.transform(input: input)
         
@@ -54,6 +69,7 @@ final class BoardMainViewController: RxBaseViewController {
             .drive(with: self) { owner, value in
                 print("BoardMainViewController - viewWillApper✅")
                 owner.tabBarController?.tabBar.isHidden = false
+                owner.mainNavigationAttribute()
             }
             .disposed(by: disposeBag)
         
@@ -64,14 +80,12 @@ final class BoardMainViewController: RxBaseViewController {
         output.postData
             .bind(to: baseView.userRankCollectionView.rx.items(dataSource: userRankDataSource))
             .disposed(by: disposeBag)
-    }
-    
-    override func configureNavigation() {
-        navigationItem.title = "Bulletin Board"
-        navigationController?.navigationBar.titleTextAttributes = [
-            .foregroundColor: UIColor.black,
-            .font: UIFont(name: "MarkerFelt-Thin", size: 25)!
-        ]
+        
+        output.userProfile
+            .bind(with: self) { owner, userProfile in
+                owner.parentCoordinator?.toUser(userProfile)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -81,7 +95,7 @@ extension BoardMainViewController {
         
         postRankDataSource = BoardRankRxDataSource(configureCell: { dataSource, collectionView, indexPath, item in
             
-            let cell: BoardRankCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+            let cell: BoardRankCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)            
             cell.updateUI(item.postRank)
             
             return cell

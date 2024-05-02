@@ -13,20 +13,20 @@ import RxViewController
 
 final class BoardViewController: RxBaseViewController {
     
-    lazy var mainView = BoardView(bestBoard: self.bestBoard)
+    private let mainView : BoardView
     private let viewModel : BoardViewModel
-    var parentCoordinator : BoardCoordinator?
+    private let productId : String
+    var parentMainCoordinator : BoardMainCoordinator?
+    var parentCoordinator : BoardSpecificCoordinator?
     private var dataSource: BoardRxDataSource!
-    let bestBoard : Bool
-    let bestBoardType : BestCategory?
     
     override func loadView() {
         view = mainView
     }
     
     init(productId : String, limit: String, bestBoard: Bool, bestBoardType : BestCategory?) {
-        self.bestBoard = bestBoard
-        self.bestBoardType = bestBoardType
+        self.productId = productId
+        self.mainView = BoardView(bestBoard: bestBoard)
         self.viewModel = BoardViewModel(product_id: productId,
                                         limit: limit,
                                         bestBoard: bestBoard,
@@ -49,6 +49,7 @@ final class BoardViewController: RxBaseViewController {
             .modelAndIndexSelected(PostResponse.self)
             .bind(with: self) { owner, value in
                 owner.parentCoordinator?.toDetail(value.0)
+                owner.parentMainCoordinator?.toDetail(value.0)
             }
             .disposed(by: disposeBag)
         
@@ -70,8 +71,8 @@ final class BoardViewController: RxBaseViewController {
         
         output.questionButtonTap
             .drive(with: self) { owner, _ in
-                print("question Button Tap ✅")
-                owner.parentCoordinator?.toQuestion()
+                print("question Button Tap ✅", owner.productId)
+                owner.parentCoordinator?.toQuestion(owner.productId)
             }
             .disposed(by: disposeBag)
         
@@ -79,6 +80,12 @@ final class BoardViewController: RxBaseViewController {
         output.postData
             .bind(to: mainView.mainCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+    }
+    
+    override func configureNavigation() {
+        super.configureNavigation()
+        navigationController?.navigationBar.titleTextAttributes = nil
+        navigationItem.title = productId + " 게시판"
     }
     
     deinit {

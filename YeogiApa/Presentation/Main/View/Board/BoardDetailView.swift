@@ -32,6 +32,10 @@ final class BoardDetailView: BaseView {
         $0.numberOfLines = 2
     }
     
+    let profileImage = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+    }
+    
     let author = UILabel().then {
         $0.font = .systemFont(ofSize: 16, weight: .bold)
         $0.textColor = DesignSystem.commonColorSet.gray
@@ -108,7 +112,7 @@ final class BoardDetailView: BaseView {
         [commentTextField, commentCompleteButton].forEach { commentBackgroundView.addSubview($0) }
         
         scrollView.addSubview(contentsView)
-        [title, author, createdAt, textView, buttonBgView, commentCollectionView].forEach { contentsView.addSubview($0) }
+        [title, profileImage, author, createdAt, textView, buttonBgView, commentCollectionView].forEach { contentsView.addSubview($0) }
         
         buttonBgView.addSubview(buttonStackView)
         [likeButton, commentCountButton].forEach { buttonStackView.addArrangedSubview($0)}
@@ -132,11 +136,18 @@ final class BoardDetailView: BaseView {
             make.height.lessThanOrEqualTo(120)
         }
         
-        author.snp.makeConstraints { make in
+        profileImage.snp.makeConstraints { make in
             make.top.equalTo(title.snp.bottom).offset(10)
-            make.height.equalTo(30)
-            make.width.equalTo(80)
             make.leading.equalToSuperview().inset(10)
+            make.size.equalTo(30)
+        }
+        
+        author.snp.makeConstraints { make in
+//            make.top.equalTo(profileImage)
+            make.centerY.equalTo(profileImage)
+            make.height.equalTo(30)
+            make.width.lessThanOrEqualTo(120)
+            make.leading.equalTo(profileImage.snp.trailing).offset(10)
         }
         
         createdAt.snp.makeConstraints { make in
@@ -147,7 +158,7 @@ final class BoardDetailView: BaseView {
         }
         
         textView.snp.makeConstraints { make in
-            make.top.equalTo(author.snp.bottom).offset(10)
+            make.top.equalTo(profileImage.snp.bottom).offset(10)
             make.leading.equalToSuperview().inset(10)
             make.trailing.equalToSuperview().inset(5)
             make.height.equalTo(200)
@@ -200,6 +211,7 @@ final class BoardDetailView: BaseView {
         textView.text = data.content1
         addTextViewImage(data)
         
+        addimage(imageUrl: data.creator.profileImageToUrl)
         
 //        collectionViewchangeLayout(itemCount: data.comments.count)
     }
@@ -211,6 +223,37 @@ final class BoardDetailView: BaseView {
     
     func likeUpdateUI(_ data : PostResponse) {
         likeButton.setTitle(String(data.likes.count), for: .normal)
+    }
+    
+    private func addimage(imageUrl : URL) {
+        
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.startAnimating()
+        profileImage.addSubview(indicator)
+        
+        KingfisherManager.shared
+            .retrieveImage(with: imageUrl, options: [.requestModifier(AuthManager.kingfisherAuth())]) { [weak self] result in
+                guard let self = self else { return }
+                
+                indicator.stopAnimating()
+                indicator.removeFromSuperview()
+                
+                switch result {
+                case .success(let value):
+                    profileImage.image = value.image
+                    profileImageCircle()
+                case .failure(_):
+                    print("profile image 없음")
+                }
+            }
+    }
+    
+    private func profileImageCircle() {
+        DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
+            guard let self = self else { return }
+            profileImage.layer.masksToBounds = true
+            profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
+        }
     }
     
 }

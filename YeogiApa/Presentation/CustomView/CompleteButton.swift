@@ -9,9 +9,12 @@ import UIKit
 
 final class CompleteButton : UIButton {
     
-    init(title: String, image: UIImage?, fontSize: Double, disable : Bool = false) {
+    init(title: String?, image: UIImage?, fontSize: Double, disable : Bool = false) {
         super.init(frame: .zero)
-        setTitle(" \(title)", for: .normal)
+        
+        if let title {
+            setTitle(" \(title)", for: .normal)
+        }
         titleLabel?.font = .systemFont(ofSize: fontSize, weight: .heavy)
         setImage(image, for: .normal)
         tintColor = DesignSystem.commonColorSet.white

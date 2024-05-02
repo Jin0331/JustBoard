@@ -14,19 +14,20 @@ final class QuestionViewController: RxBaseViewController {
     private let mainView = QuestionView()
     lazy var viewModel = QuestionViewModel(textView: mainView.contentsTextView)
     weak var parentCoordinator : QuestionCoordinator?
+    private let productId : String
     private let seletecedImage = PublishSubject<UIImage>()
+    
+    init(productId : String) {
+        self.productId = productId
+    }
     
     override func loadView() {
         view = mainView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func bind() {
-        
-        let category = PublishSubject<Category>()
+        let productId = BehaviorSubject<String>(value: productId)
         let link = BehaviorSubject<String>(value: "")
         
         // image Picker
@@ -37,13 +38,13 @@ final class QuestionViewController: RxBaseViewController {
             .disposed(by: disposeBag)
         
         // category Picker
-        mainView.categorySelectButton.rx.tap
-            .bind(with: self) { owner, _ in
-                owner.addCategory() { value in
-                    category.onNext(value)
-                }
-            }
-            .disposed(by: disposeBag)
+//        mainView.categorySelectButton.rx.tap
+//            .bind(with: self) { owner, _ in
+//                owner.addCategory() { value in
+//                    category.onNext(value)
+//                }
+//            }
+//            .disposed(by: disposeBag)
         
         mainView.linkAddButton.rx.tap
             .bind(with: self) { owner, _ in
@@ -57,7 +58,7 @@ final class QuestionViewController: RxBaseViewController {
             titleText: mainView.titleTextField.rx.text.orEmpty,
             contentsText: mainView.contentsTextView.rx.text.orEmpty,
             addedImage: seletecedImage,
-            addCategory: category,
+            addProductId: productId,
             addLink: link,
             completeButtonTap: mainView.completeButtonItem.rx.tap
         )
@@ -96,7 +97,8 @@ final class QuestionViewController: RxBaseViewController {
     
     override func configureNavigation() {
         super.configureNavigation()
-//        navigationItem.rightBarButtonItem = mainView.completeButtonItem
+        navigationController?.navigationBar.titleTextAttributes = nil
+        navigationItem.title = productId + " 게시판"
     }
     
     override func configureView() {
@@ -119,18 +121,6 @@ final class QuestionViewController: RxBaseViewController {
 
 //MARK: - Present (PopUpview) -> Coordinator로 하는 건 좀 힘든듯?
 extension QuestionViewController {
-    private func addCategory(completion : @escaping ((Category) -> Void)) {
-        let vc = CategorySelectViewController()
-        vc.setupSheetPresentationFlexible()
-        
-        vc.sendData = { [weak self] value in
-            guard let self = self else { return }
-            mainView.categorySelectButton.setTitle(value.rawValue, for: .normal)
-            completion(value)
-        }
-
-        present(vc, animated: true)
-    }
     
     private func addLink(completion : @escaping ((String) -> Void)) {
         let vc = LinkViewController()

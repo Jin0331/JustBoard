@@ -8,7 +8,7 @@
 import UIKit
 import NotificationCenter
 
-final class BoardCoordinator : Coordinator {
+final class BoardMainCoordinator : Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var parentCoordinator : MainTabbarCoordinator?
@@ -18,56 +18,54 @@ final class BoardCoordinator : Coordinator {
         NotificationCenter.default.addObserver(self, selector: #selector(resetLogined), name: .resetLogin, object: nil)
     }
     
+    //MARK: -
     func start() {
         let vc = BoardMainViewController(viewControllersList: boardChildViewController(), category: BestCategory.allCases, productId: InquiryRequest.InquiryRequestDefault.productId, limit: InquiryRequest.InquiryRequestDefault.maxLimit)
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }
-    
     @objc func resetLogined(_ notification: Notification) {
         print("토큰초기화됨 ✅")
         parentCoordinator?.resetLogined(self)
     }
-        
+    
     deinit {
-        print(#function, "-BoardCoordinator ✅")
+        print(#function, "- BoardCoordinator ✅")
+        parentCoordinator?.childDidFinish(self)
     }
 }
 
-extension BoardCoordinator {
-    
-    func toQuestion() {
-        let questionCoordinator = QuestionCoordinator(navigationController: navigationController)
-        questionCoordinator.parentCoordinator = self
-        questionCoordinator.start()
-        childCoordinators.append(questionCoordinator)
-    }
-    
-    func toBoard(_ coordinator: QuestionCoordinator) {
-        childCoordinators = childCoordinators.filter { $0 !== coordinator }
-        print(#function, childCoordinators, "✅ BoardCoordinator")
-    }
+extension BoardMainCoordinator {
     
     //TODO: - Board Specific Coordinator로 분리해야 됨
     
-    func toDetail(_ item : PostResponse) {
-        let vc = BoardDetailViewController(postResponse: item)
-        vc.parentCoordinator = self
-        navigationController.pushViewController(vc, animated: true)
+    func toSpecificBoard(_ item : String) {
+        let boardSpecificCoordinator = BoardSpecificCoordinator(navigationController: navigationController)
+        boardSpecificCoordinator.parentCoordinator = self
+        childCoordinators.append(boardSpecificCoordinator)
+        
+        boardSpecificCoordinator.start(productId: item,
+                                       limit: InquiryRequest.InquiryRequestDefault.limit,
+                                       bestBoard: false,
+                                       bestBoardType: nil)
     }
     
-    func toSpecificBoard(_ item : String) {
-        let vc = BoardViewController(productId: item,
-                                     limit: InquiryRequest.InquiryRequestDefault.limit,
-                                     bestBoard: false, bestBoardType: nil)
-        
-        
-        vc.parentCoordinator = self
-        navigationController.pushViewController(vc, animated: true)
+    func toDetail(_ item : PostResponse) {
+        let boardDetailCoordinator = BoardDetailCoordinator(navigationController: navigationController)
+        boardDetailCoordinator.parentMainBoardCoordinator = self
+        boardDetailCoordinator.start(postResponse: item)
+        childCoordinators.append(boardDetailCoordinator)
+    }
+    
+    func toUser(_ item : ([String], String)) {
+        let boardUserCoordinator = BoardUserCoordinator(navigationController: navigationController)
+        boardUserCoordinator.parentCoordinator = self
+        boardUserCoordinator.start(userProfile: item)
+        childCoordinators.append(boardUserCoordinator)
     }
 }
 
-extension BoardCoordinator {
+extension BoardMainCoordinator {
     func boardChildViewController() -> Array<RxBaseViewController> {
         
         let category = BestCategory.allCases
@@ -80,7 +78,7 @@ extension BoardCoordinator {
                                          bestBoard: bestBoard,
                                          bestBoardType: $0
             )
-            vc.parentCoordinator = self
+            vc.parentMainCoordinator = self
             viewControllersList.append(vc)
         }
         

@@ -235,4 +235,30 @@ final class NetworkManager  {
             return Disposables.create()
         }
     }
+    
+    //MARK: - Profile
+    // other
+    func profile(userId : String) -> Single<Result<ProfileResponse, AFError>> {
+        
+        return Single<Result<ProfileResponse, AFError>>.create { single in
+            do {
+                let urlRequest = try MainRouter.otherProfile(userId: userId).asURLRequest()
+                
+                AF.request(urlRequest, interceptor: AuthManager())
+                    .validate(statusCode: 200..<300)
+                    .responseDecodable(of: ProfileResponse.self) { response in
+                        switch response.result {
+                        case .success(let profileResponse):
+                            single(.success(.success(profileResponse)))
+                        case .failure(let error):
+                            print(response.response?.statusCode as Any, error, "✅ NetworkManager - profile")
+                            single(.success(.failure(error)))
+                        }
+                    }
+            } catch {
+                single(.failure(error))
+            }
+            return Disposables.create()
+        }
+    }
 }

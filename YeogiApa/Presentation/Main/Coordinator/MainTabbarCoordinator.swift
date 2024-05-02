@@ -20,7 +20,7 @@ final class MainTabbarCoordinator : Coordinator {
         let tabbarController = MainTabBarController()
         
         let boardNavigationController = UINavigationController()
-        let boardCoordinator = BoardCoordinator(navigationController: boardNavigationController)
+        let boardCoordinator = BoardMainCoordinator(navigationController: boardNavigationController)
         boardCoordinator.parentCoordinator = self
         
         
@@ -40,13 +40,14 @@ final class MainTabbarCoordinator : Coordinator {
         settingCoordinator.start()
     }
     
-    func resetLogined(_ coordinator : BoardCoordinator) {
+    func resetLogined(_ coordinator : BoardMainCoordinator) {
         childCoordinators = childCoordinators.filter { $0 !== coordinator }
         parentCoordinator?.resetLoggedIn(self)
     }
     
     deinit {
         print(#function, "-MainTabbarCoordinator ✅")
+        parentCoordinator?.childDidFinish(self)
     }
     
 }

@@ -15,19 +15,20 @@ enum MainRouter {
     case specificInquiry(postId : String)
     case comment(query : CommentRequest, postId : String)
     case likes(query : LikesRequest, postId : String)
+    case meProfile
+    case otherProfile(userId : String)
 }
-
 
 extension MainRouter : TargetType {
     var baseURL: URL {
         return URL(string:APIKey.baseURLWithVersion())!
     }
-        
+    
     var method: HTTPMethod {
         switch self {
         case .write, .files, .comment, .likes:
             return .post
-        case .inquiry, .specificInquiry:
+        case .inquiry, .specificInquiry, .meProfile, .otherProfile:
             return .get
         }
     }
@@ -44,6 +45,10 @@ extension MainRouter : TargetType {
             return "/posts/" + postId + "/comments"
         case .likes(query: _ , postId: let postId):
             return "/posts/" + postId + "/like"
+        case .meProfile:
+            return "/users/me/profile"
+        case .otherProfile(userId: let userId):
+            return "/users/" + userId + "/profile"
         }
     }
     
@@ -63,7 +68,7 @@ extension MainRouter : TargetType {
                 HTTPHeader.contentType.rawValue : HTTPHeader.multipart.rawValue,
                 HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue
             ]
-        case .inquiry, .specificInquiry:
+        case .inquiry, .specificInquiry, .meProfile, .otherProfile:
             return [
                 HTTPHeader.authorization.rawValue : token,
                 HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue
@@ -99,7 +104,7 @@ extension MainRouter : TargetType {
             encoder.keyEncodingStrategy = .convertToSnakeCase
             
             return try? encoder.encode(query)
-        
+            
         case .likes(query: let query, postId: _):
             let encoder = JSONEncoder()
             encoder.keyEncodingStrategy = .convertToSnakeCase
@@ -112,24 +117,25 @@ extension MainRouter : TargetType {
     }
     
     var multipart: MultipartFormData {
-          switch self {
-          case .files(let filesRequest, let category):
-              let multiPart = MultipartFormData()
-
-              // 빈 배열일 경우
-              if filesRequest.files.isEmpty {
-                  print("빈배열")
-                  return multiPart
-              } else {
-                  filesRequest.files.forEach { file in
-                      multiPart.append(file, withName: "files", fileName: category + ".jpeg", mimeType: "image/jpeg")
-                      print("✅ fielsRequest \(file)")
-                  }
-                  return multiPart
-              }
-
-          default: return MultipartFormData()
-          }
-     }
-        
+        switch self {
+        case .files(let filesRequest, let category):
+            let multiPart = MultipartFormData()
+            
+            // 빈 배열일 경우
+            if filesRequest.files.isEmpty {
+                print("빈배열")
+                return multiPart
+            } else {
+                filesRequest.files.forEach { file in
+                    multiPart.append(file, withName: "files", fileName: category + ".jpeg", mimeType: "image/jpeg")
+                    print("✅ fielsRequest \(file)")
+                }
+                return multiPart
+            }
+            
+        default: return MultipartFormData()
+            
+        }
+    }
 }
+

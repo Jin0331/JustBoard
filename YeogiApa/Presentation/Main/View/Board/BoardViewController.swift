@@ -49,7 +49,6 @@ final class BoardViewController: RxBaseViewController {
         mainView.mainCollectionView.rx
             .modelAndIndexSelected(PostResponse.self)
             .bind(with: self) { owner, value in
-                print("hi")
                 owner.parentCoordinator?.toDetail(value.0)
                 owner.parentMainCoordinator?.toDetail(value.0)
             }

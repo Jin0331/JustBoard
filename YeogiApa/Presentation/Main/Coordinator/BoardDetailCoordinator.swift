@@ -12,6 +12,7 @@ final class BoardDetailCoordinator : Coordinator {
     var navigationController: UINavigationController
     var parentMainBoardCoordinator : BoardMainCoordinator?
     var parentSpecificBoardCoordinator : BoardSpecificCoordinator?
+    var parentUserBoardCoordinator : BoardUserCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

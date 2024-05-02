@@ -94,10 +94,9 @@ final class QuestionViewController: RxBaseViewController {
     }
     
     
-    override func configureNavigation() {
-        super.configureNavigation()
-//        navigationItem.rightBarButtonItem = mainView.completeButtonItem
-    }
+//    override func configureNavigation() {
+//        super.configureNavigation()
+//    }
     
     override func configureView() {
         super.configureView()

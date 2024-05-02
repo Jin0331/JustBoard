@@ -22,8 +22,8 @@ final class BoardUserViewController: RxBaseViewController {
         view = mainView
     }
     
-    init(userPost : [PostResponse]) {
-        self.viewModel = BoardUserViewModel(userPost: userPost)
+    init(userPostId : [String]) {
+        self.viewModel = BoardUserViewModel(userPostId: userPostId)
     }
     
     override func viewDidLoad() {
@@ -33,14 +33,21 @@ final class BoardUserViewController: RxBaseViewController {
     
     override func bind() {
         
-        let input = BoardUserViewModel.Input()
+        mainView.mainCollectionView.rx
+            .modelAndIndexSelected(PostResponse.self)
+            .bind(with: self) { owner, value in
+                owner.parentCoordinator?.toDetail(value.0)
+            }
+            .disposed(by: disposeBag)
+        
+        let input = BoardUserViewModel.Input(
+            viewWillAppear: rx.viewWillAppear
+        )
         
         let output = viewModel.transform(input: input)
-        
-    }
-    
-    override func configureView() {
-        view.backgroundColor = .red
+        output.postData
+            .bind(to: mainView.mainCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
     }
 }
 

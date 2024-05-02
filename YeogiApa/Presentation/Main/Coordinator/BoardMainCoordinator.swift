@@ -57,10 +57,10 @@ extension BoardMainCoordinator {
         childCoordinators.append(boardDetailCoordinator)
     }
     
-    func toUser(_ item : [PostResponse]) {
+    func toUser(_ item : [String]) {
         let boardUserCoordinator = BoardUserCoordinator(navigationController: navigationController)
         boardUserCoordinator.parentCoordinator = self
-        boardUserCoordinator.start(userPost: item)
+        boardUserCoordinator.start(userPostId: item)
         childCoordinators.append(boardUserCoordinator)
     }
 }

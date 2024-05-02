@@ -18,8 +18,8 @@ final class BoardUserCoordinator : Coordinator {
     
     func start() { }
     
-    func start(userPost : [PostResponse]) {
-        let vc = BoardUserViewController(userPost: userPost)
+    func start(userPostId : [String]) {
+        let vc = BoardUserViewController(userPostId: userPostId)
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }
@@ -27,5 +27,14 @@ final class BoardUserCoordinator : Coordinator {
     deinit {
         print(#function, "- BoardDetailCoordinator ✅")
         parentCoordinator?.childDidFinish(self)
+    }
+}
+
+extension BoardUserCoordinator {
+    func toDetail(_ item : PostResponse) {
+        let boardDetailCoordinator = BoardDetailCoordinator(navigationController: navigationController)
+        boardDetailCoordinator.parentUserBoardCoordinator = self
+        boardDetailCoordinator.start(postResponse: item)
+        childCoordinators.append(boardDetailCoordinator)
     }
 }

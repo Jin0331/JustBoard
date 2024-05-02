@@ -80,14 +80,15 @@ final class BoardMainViewController: RxBaseViewController {
             .bind(to: baseView.userRankCollectionView.rx.items(dataSource: userRankDataSource))
             .disposed(by: disposeBag)
         
-        output.userPost
-            .bind(with: self) { owner, userPost in
-                owner.parentCoordinator?.toUser(userPost)
+        output.userPostId
+            .bind(with: self) { owner, userPostId in
+                owner.parentCoordinator?.toUser(userPostId)
             }
             .disposed(by: disposeBag)
     }
     
     override func configureNavigation() {
+        super.configureNavigation()
         navigationItem.title = "Bulletin Board"
         navigationController?.navigationBar.titleTextAttributes = [
             .foregroundColor: UIColor.black,

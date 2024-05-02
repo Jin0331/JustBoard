@@ -30,7 +30,7 @@ class BoardUserView: BaseView {
     
     override func configureLayout() {
         mainCollectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(safeAreaLayoutGuide)
         }
     }
 }

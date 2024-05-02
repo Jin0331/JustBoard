@@ -294,8 +294,8 @@
 				DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */,
 				DB4110042BD15B300088679F /* BoardMainCoordinator.swift */,
 				DB0598AF2BE31F9300AE0973 /* BoardSpecificCoordinator.swift */,
-				DB204D972BD2A669006340BE /* QuestionCoordinator.swift */,
 				DB0598B12BE3456800AE0973 /* BoardDetailCoordinator.swift */,
+				DB204D972BD2A669006340BE /* QuestionCoordinator.swift */,
 				DB4110062BD15B3B0088679F /* SettingCoordinator.swift */,
 			);
 			path = Coordinator;

@@ -58,19 +58,19 @@ struct InquiryResponse : Decodable, Hashable {
     var userRankData : [UserRank] {
         var returndata : [UserRank] = []
             
-        var productCountDict: [String: Int] = [:]
+        var productCountDict: [UserKey: Int] = [:]
         for post in data {
-            if let count = productCountDict[post.nickname] {
-                productCountDict[post.nickname] = count + 1
+            if let count = productCountDict[post.userIdWithNickname] {
+                productCountDict[post.userIdWithNickname] = count + 1
             } else {
-                productCountDict[post.nickname] = 1
+                productCountDict[post.userIdWithNickname] = 1
             }
         }
 
         let sortedCounts = productCountDict.sorted { $0.value > $1.value }
         
         for (rank, post) in sortedCounts.enumerated() {
-            returndata.append(UserRank(nickName: post.key, boardRank: rank, count: productCountDict[post.key]!))
+            returndata.append(UserRank(userId:post.key.userID,nickName: post.key.nick, boardRank: rank, count: productCountDict[post.key]!))
         }
         
         return returndata
@@ -166,6 +166,10 @@ struct PostResponse: Decodable, Hashable {
     var nickname : String {
         return creator.nick
     }
+
+    var userIdWithNickname: UserKey {
+        return UserKey(userID: creator.userID, nick: creator.nick)
+    }
 }
 
 struct Comment: Decodable, Hashable {
@@ -221,16 +225,32 @@ struct PostRank : Hashable {
 }
 
 struct UserRank : Hashable {
+    let userId : String
     let nickName : String
     let boardRank : Int
     let count : Int
     
     static func == (lhs: UserRank, rhs: UserRank) -> Bool {
-        return lhs.nickName == rhs.nickName &&
+        return lhs.userId == rhs.userId &&
+        lhs.nickName == rhs.nickName &&
         lhs.boardRank == rhs.boardRank
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(nickName)
+        hasher.combine(userId)
+    }
+}
+
+struct UserKey: Hashable {
+    let userID: String
+    let nick: String
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(userID)
+        hasher.combine(nick)
+    }
+    
+    static func == (lhs: UserKey, rhs: UserKey) -> Bool {
+        return lhs.userID == rhs.userID && lhs.nick == rhs.nick
     }
 }

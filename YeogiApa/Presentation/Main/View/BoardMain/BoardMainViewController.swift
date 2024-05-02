@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class BoardMainViewController: RxBaseViewController {
 
@@ -39,6 +41,8 @@ final class BoardMainViewController: RxBaseViewController {
     
     override func bind() {
         
+        let userProfileInquiry = PublishSubject<String>()
+        
         baseView.postRankCollectionView.rx
             .modelAndIndexSelected((postRank:PostRank, userRank:UserRank).self)
             .bind(with: self) { owner, value in
@@ -46,7 +50,18 @@ final class BoardMainViewController: RxBaseViewController {
             }
             .disposed(by: disposeBag)
         
-        let input = BoardMainViewModel.Input(viewWillAppear: rx.viewWillAppear)
+        // User Profile 조회 -> PostResponse -> transition
+        baseView.userRankCollectionView.rx
+            .modelAndIndexSelected((postRank:PostRank, userRank:UserRank).self)
+            .bind(with: self) { owner, value in
+                userProfileInquiry.onNext(value.0.userRank.userId)
+            }
+            .disposed(by: disposeBag)
+        
+        let input = BoardMainViewModel.Input(
+            viewWillAppear: rx.viewWillAppear,
+            userProfileInquiry: userProfileInquiry
+        )
         
         let output = viewModel.transform(input: input)
         
@@ -63,6 +78,14 @@ final class BoardMainViewController: RxBaseViewController {
         
         output.postData
             .bind(to: baseView.userRankCollectionView.rx.items(dataSource: userRankDataSource))
+            .disposed(by: disposeBag)
+        
+        output.userPost
+            .bind(with: self) { owner, userPost in
+                
+                print(userPost.first)
+                
+            }
             .disposed(by: disposeBag)
     }
     

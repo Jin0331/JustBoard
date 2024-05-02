@@ -135,6 +135,5 @@ final class BoardRankCollectionViewCell : BaseCollectionViewCell, Reusable {
             profileImage.layer.masksToBounds = true
             profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
         }
-
     }
 }

@@ -69,8 +69,14 @@ final class BoardView: BaseView {
         }
         
         mainCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide)
-            make.bottom.horizontalEdges.equalTo(safeAreaLayoutGuide)
+            if bestBoard {
+                make.top.equalToSuperview().inset(60)
+                make.bottom.horizontalEdges.equalToSuperview()
+            } else {
+                make.top.equalTo(safeAreaLayoutGuide)
+                make.bottom.horizontalEdges.equalTo(safeAreaLayoutGuide)
+            }
+
         }
     }
 }

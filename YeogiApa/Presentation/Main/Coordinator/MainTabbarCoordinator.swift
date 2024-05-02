@@ -47,6 +47,7 @@ final class MainTabbarCoordinator : Coordinator {
     
     deinit {
         print(#function, "-MainTabbarCoordinator ✅")
+        parentCoordinator?.childDidFinish(self)
     }
     
 }

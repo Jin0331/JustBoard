@@ -81,7 +81,7 @@ final class BoardMainViewModel : MainViewModelType {
             .disposed(by: disposeBag)
         
         //TODO: - 특정 유저 Post
-        Observable.combineLatest(currentPostData, userPostDataId)
+        Observable.zip(currentPostData, userPostDataId)
             .map { postData, userId in
                 
                 var specificUserPost : [PostResponse] = []

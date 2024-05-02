@@ -82,9 +82,7 @@ final class BoardMainViewController: RxBaseViewController {
         
         output.userPost
             .bind(with: self) { owner, userPost in
-                
-                print(userPost.first)
-                
+                owner.parentCoordinator?.toUser(userPost)
             }
             .disposed(by: disposeBag)
     }

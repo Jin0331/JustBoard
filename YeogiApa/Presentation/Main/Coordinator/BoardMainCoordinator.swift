@@ -30,7 +30,8 @@ final class BoardMainCoordinator : Coordinator {
     }
     
     deinit {
-        print(#function, "-BoardCoordinator ✅")
+        print(#function, "- BoardCoordinator ✅")
+        parentCoordinator?.childDidFinish(self)
     }
 }
 
@@ -54,6 +55,13 @@ extension BoardMainCoordinator {
         boardDetailCoordinator.parentMainBoardCoordinator = self
         boardDetailCoordinator.start(postResponse: item)
         childCoordinators.append(boardDetailCoordinator)
+    }
+    
+    func toUser(_ item : [PostResponse]) {
+        let boardUserCoordinator = BoardUserCoordinator(navigationController: navigationController)
+        boardUserCoordinator.parentCoordinator = self
+        boardUserCoordinator.start(userPost: item)
+        childCoordinators.append(boardUserCoordinator)
     }
 }
 

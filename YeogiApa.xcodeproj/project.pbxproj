@@ -32,6 +32,10 @@
 		DB4110122BD173D60088679F /* PostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110112BD173D60088679F /* PostRequest.swift */; };
 		DB4110142BD19E0A0088679F /* InquiryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110132BD19E0A0088679F /* InquiryResponse.swift */; };
 		DB4110162BD1AC720088679F /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */; };
+		DB797BB22BE3CA3A00E490C3 /* BoardUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB797BB12BE3CA3A00E490C3 /* BoardUserViewController.swift */; };
+		DB797BB42BE3CB0000E490C3 /* BoardUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB797BB32BE3CB0000E490C3 /* BoardUserView.swift */; };
+		DB797BB62BE3CC2600E490C3 /* BoardUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB797BB52BE3CC2600E490C3 /* BoardUserViewModel.swift */; };
+		DB797BB82BE3CD7B00E490C3 /* BoardUserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB797BB72BE3CD7B00E490C3 /* BoardUserCoordinator.swift */; };
 		DB802F462BDBD78500DC670D /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB802F452BDBD78500DC670D /* UICollectionView+Extension.swift */; };
 		DB802F482BDE31EF00DC670D /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB802F472BDE31EF00DC670D /* UIButton+Extension.swift */; };
 		DB901C5F2BD5835F003EEDC6 /* LinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C5E2BD5835F003EEDC6 /* LinkViewController.swift */; };
@@ -135,6 +139,10 @@
 		DB4110112BD173D60088679F /* PostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequest.swift; sourceTree = "<group>"; };
 		DB4110132BD19E0A0088679F /* InquiryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryResponse.swift; sourceTree = "<group>"; };
 		DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
+		DB797BB12BE3CA3A00E490C3 /* BoardUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardUserViewController.swift; sourceTree = "<group>"; };
+		DB797BB32BE3CB0000E490C3 /* BoardUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardUserView.swift; sourceTree = "<group>"; };
+		DB797BB52BE3CC2600E490C3 /* BoardUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardUserViewModel.swift; sourceTree = "<group>"; };
+		DB797BB72BE3CD7B00E490C3 /* BoardUserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardUserCoordinator.swift; sourceTree = "<group>"; };
 		DB802F452BDBD78500DC670D /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		DB802F472BDE31EF00DC670D /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		DB901C5E2BD5835F003EEDC6 /* LinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkViewController.swift; sourceTree = "<group>"; };
@@ -273,6 +281,7 @@
 			children = (
 				DBDD8AFD2BE0ED05002ADA34 /* BoardMainViewModel.swift */,
 				DB204D9B2BD2A8C9006340BE /* BoardViewModel.swift */,
+				DB797BB52BE3CC2600E490C3 /* BoardUserViewModel.swift */,
 				DBB7C67A2BD95D0A00D3081A /* BoardDetailViewModel.swift */,
 				DB204DA32BD422A7006340BE /* QuestionViewModel.swift */,
 			);
@@ -294,6 +303,7 @@
 				DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */,
 				DB4110042BD15B300088679F /* BoardMainCoordinator.swift */,
 				DB0598AF2BE31F9300AE0973 /* BoardSpecificCoordinator.swift */,
+				DB797BB72BE3CD7B00E490C3 /* BoardUserCoordinator.swift */,
 				DB0598B12BE3456800AE0973 /* BoardDetailCoordinator.swift */,
 				DB204D972BD2A669006340BE /* QuestionCoordinator.swift */,
 				DB4110062BD15B3B0088679F /* SettingCoordinator.swift */,
@@ -572,6 +582,8 @@
 			children = (
 				DB41100A2BD160F80088679F /* BoardView.swift */,
 				DBB7C6742BD93F2400D3081A /* BoardViewController.swift */,
+				DB797BB32BE3CB0000E490C3 /* BoardUserView.swift */,
+				DB797BB12BE3CA3A00E490C3 /* BoardUserViewController.swift */,
 				DBB7C6782BD944FC00D3081A /* BoardDetailView.swift */,
 				DBB7C6762BD93F9000D3081A /* BoardDetailViewController.swift */,
 			);
@@ -751,9 +763,12 @@
 				DBCBAA192BC7E106006B40CA /* EmailLoginView.swift in Sources */,
 				DB204DE82BD57525006340BE /* CategorySelectView.swift in Sources */,
 				DBCBAA0F2BC7D0E1006B40CA /* NetworkManager.swift in Sources */,
+				DB797BB42BE3CB0000E490C3 /* BoardUserView.swift in Sources */,
 				DB0598B22BE3456800AE0973 /* BoardDetailCoordinator.swift in Sources */,
+				DB797BB22BE3CA3A00E490C3 /* BoardUserViewController.swift in Sources */,
 				DBDD8AFC2BE0DADA002ADA34 /* BoardRankCollectionViewCell.swift in Sources */,
 				DBDD8A742BDE4337002ADA34 /* LikesRequest.swift in Sources */,
+				DB797BB62BE3CC2600E490C3 /* BoardUserViewModel.swift in Sources */,
 				DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */,
 				DBCBE3B52BCD845F00B6DAC5 /* SignUpPasswordViewController.swift in Sources */,
 				DBCBAA2B2BC83A54006B40CA /* RefreshRequest.swift in Sources */,
@@ -785,6 +800,7 @@
 				DBCBE3D02BCE28E800B6DAC5 /* EmailLoginCoordinator.swift in Sources */,
 				DBCBAA5F2BCD61E5006B40CA /* SignTextField.swift in Sources */,
 				DB204DA02BD2E58D006340BE /* DelimiterLine.swift in Sources */,
+				DB797BB82BE3CD7B00E490C3 /* BoardUserCoordinator.swift in Sources */,
 				DBCBAA1F2BC7E7F2006B40CA /* ReusableID.swift in Sources */,
 				DBCBAA272BC82D5A006B40CA /* UserDefaultManager.swift in Sources */,
 				DBB7C67F2BDA15D000D3081A /* CommentCollectionViewCell.swift in Sources */,

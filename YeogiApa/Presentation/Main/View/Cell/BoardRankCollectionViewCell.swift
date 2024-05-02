@@ -66,37 +66,28 @@ final class BoardRankCollectionViewCell : BaseCollectionViewCell, Reusable {
         }
     }
     
-    func updateUI(_ itemIdentifier : PostRank) {
+    func updateUI(_ itemIdentifier: PostRank) {
         profileImageCircle()
-        
-        rankLabel.text = String(itemIdentifier.boardRank + 1) + "."
-        rankLabel.font = itemIdentifier.boardRank < 3 ? .systemFont(ofSize: 18, weight: .heavy) : .systemFont(ofSize: 18, weight: .regular)
-        rankLabel.textColor = itemIdentifier.boardRank < 3 ? DesignSystem.commonColorSet.red : DesignSystem.commonColorSet.black
-        
-        boardNameLabel.text = itemIdentifier.productId
-        boardNameLabel.font = itemIdentifier.boardRank < 3 ? .systemFont(ofSize: 18, weight: .heavy) : .systemFont(ofSize: 18, weight: .regular)
-        
-        countLabel.text = String(itemIdentifier.count)
-        countLabel.font = itemIdentifier.boardRank < 3 ? .systemFont(ofSize: 15, weight: .heavy) : .systemFont(ofSize: 15, weight: .regular)
-        countLabel.backgroundColor = itemIdentifier.boardRank < 3 ? DesignSystem.commonColorSet.red : DesignSystem.commonColorSet.lightBlack
+        updateUICommon(rank: itemIdentifier.boardRank, name: itemIdentifier.productId, count: itemIdentifier.count)
     }
-    
-    func updateUI(_ itemIdentifier : UserRank) {
+
+    func updateUI(_ itemIdentifier: UserRank) {
         profileImageCircle()
-        
-        rankLabel.text = String(itemIdentifier.boardRank + 1) + "."
-        rankLabel.font = itemIdentifier.boardRank < 3 ? .systemFont(ofSize: 18, weight: .heavy) : .systemFont(ofSize: 18, weight: .regular)
-        rankLabel.textColor = itemIdentifier.boardRank < 3 ? DesignSystem.commonColorSet.red : DesignSystem.commonColorSet.black
-        
         addimage(imageUrl: itemIdentifier.profileImage)
+        updateUICommon(rank: itemIdentifier.boardRank, name: itemIdentifier.nickName, count: itemIdentifier.count)
+    }
+
+    private func updateUICommon(rank: Int, name: String, count: Int) {
+        rankLabel.text = "\(rank + 1)."
+        rankLabel.font = rank < 3 ? .systemFont(ofSize: 18, weight: .heavy) : .systemFont(ofSize: 18, weight: .regular)
+        rankLabel.textColor = rank < 3 ? DesignSystem.commonColorSet.red : DesignSystem.commonColorSet.black
         
-        boardNameLabel.text = itemIdentifier.nickName
-        boardNameLabel.font = itemIdentifier.boardRank < 3 ? .systemFont(ofSize: 18, weight: .heavy) : .systemFont(ofSize: 18, weight: .regular)
+        boardNameLabel.text = name
+        boardNameLabel.font = rank < 3 ? .systemFont(ofSize: 18, weight: .heavy) : .systemFont(ofSize: 18, weight: .regular)
         
-        countLabel.text = String(itemIdentifier.count)
-        countLabel.font = itemIdentifier.boardRank < 3 ? .systemFont(ofSize: 15, weight: .heavy) : .systemFont(ofSize: 15, weight: .regular)
-        countLabel.backgroundColor = itemIdentifier.boardRank < 3 ? DesignSystem.commonColorSet.red : DesignSystem.commonColorSet.lightBlack
-        
+        countLabel.text = "\(count)"
+        countLabel.font = rank < 3 ? .systemFont(ofSize: 15, weight: .heavy) : .systemFont(ofSize: 15, weight: .regular)
+        countLabel.backgroundColor = rank < 3 ? DesignSystem.commonColorSet.red : DesignSystem.commonColorSet.lightBlack
     }
     
     override func prepareForReuse() {
@@ -105,7 +96,7 @@ final class BoardRankCollectionViewCell : BaseCollectionViewCell, Reusable {
         rankLabel.font = nil
         rankLabel.textColor = DesignSystem.commonColorSet.black
         
-//        profileImage.image = nil
+        profileImage.image = nil
         
         boardNameLabel.text = nil
         boardNameLabel.font = nil

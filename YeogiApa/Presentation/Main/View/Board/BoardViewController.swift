@@ -82,6 +82,12 @@ final class BoardViewController: RxBaseViewController {
             .disposed(by: disposeBag)
     }
     
+    override func configureNavigation() {
+        super.configureNavigation()
+        navigationController?.navigationBar.titleTextAttributes = nil
+        navigationItem.title = productId + " 게시판"
+    }
+    
     deinit {
         print(#function, "- BoardViewController ✅")
     }

@@ -44,6 +44,14 @@ class BaseViewController: UIViewController {
         navigationItem.backBarButtonItem = backBarButtonItem
     }
     
+    func mainNavigationAttribute() {
+        navigationItem.title = "Bulletin Board"
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.black,
+            .font: UIFont(name: "MarkerFelt-Thin", size: 25)!
+        ]
+    }
+    
     
     @available (*, unavailable)
     required init?(coder: NSCoder) {

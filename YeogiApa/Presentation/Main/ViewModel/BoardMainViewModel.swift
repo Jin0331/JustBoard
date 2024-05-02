@@ -28,7 +28,7 @@ final class BoardMainViewModel : MainViewModelType {
     struct Output {
         let postData : BehaviorRelay<[BoardRankDataSection]>
         let viewWillAppear : Driver<Bool>
-        let userPostId : PublishSubject<[String]>
+        let userProfile : Observable<(userPostId:[String], userNickname:String)>
     }
     
     func transform(input: Input) -> Output {
@@ -36,6 +36,7 @@ final class BoardMainViewModel : MainViewModelType {
         let limit = BehaviorSubject<String>(value: String(limit))
         let postData = BehaviorRelay(value: [BoardRankDataSection]())
         let userPostId = PublishSubject<[String]>()
+        let userNickname = PublishSubject<String>()
         let productIdWithLimit = Observable.combineLatest(product_id,limit)
         
         input.viewWillAppear
@@ -69,6 +70,7 @@ final class BoardMainViewModel : MainViewModelType {
                 case .success(let value):
                     print("BoardMainViewModel userProfileInquiry ✅")
                     userPostId.onNext(value.posts)
+                    userNickname.onNext(value.nick)
                 case .failure(let error):
                     print(error)
                 }
@@ -78,7 +80,8 @@ final class BoardMainViewModel : MainViewModelType {
         return Output(
             postData : postData,
             viewWillAppear: input.viewWillAppear.asDriver(onErrorJustReturn: false),
-            userPostId: userPostId
+            userProfile:  Observable.zip(userPostId, userNickname)
+                                    .map { (userPostId: $0, userNickname: $1) }
         )
     }
 }

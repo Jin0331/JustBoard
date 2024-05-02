@@ -69,6 +69,7 @@ final class BoardMainViewController: RxBaseViewController {
             .drive(with: self) { owner, value in
                 print("BoardMainViewController - viewWillApper✅")
                 owner.tabBarController?.tabBar.isHidden = false
+                owner.mainNavigationAttribute()
             }
             .disposed(by: disposeBag)
         
@@ -80,20 +81,11 @@ final class BoardMainViewController: RxBaseViewController {
             .bind(to: baseView.userRankCollectionView.rx.items(dataSource: userRankDataSource))
             .disposed(by: disposeBag)
         
-        output.userPostId
-            .bind(with: self) { owner, userPostId in
-                owner.parentCoordinator?.toUser(userPostId)
+        output.userProfile
+            .bind(with: self) { owner, userProfile in
+                owner.parentCoordinator?.toUser(userProfile)
             }
             .disposed(by: disposeBag)
-    }
-    
-    override func configureNavigation() {
-        super.configureNavigation()
-        navigationItem.title = "Bulletin Board"
-        navigationController?.navigationBar.titleTextAttributes = [
-            .foregroundColor: UIColor.black,
-            .font: UIFont(name: "MarkerFelt-Thin", size: 25)!
-        ]
     }
 }
 

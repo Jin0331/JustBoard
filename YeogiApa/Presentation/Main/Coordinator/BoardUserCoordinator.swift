@@ -18,8 +18,8 @@ final class BoardUserCoordinator : Coordinator {
     
     func start() { }
     
-    func start(userPostId : [String]) {
-        let vc = BoardUserViewController(userPostId: userPostId)
+    func start(userProfile : (userPostId:[String], userNickname:String)) {
+        let vc = BoardUserViewController(userProfile: userProfile)
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }

@@ -13,10 +13,10 @@ import RxCocoa
 final class BoardUserViewModel : MainViewModelType {
     
     var disposeBag: DisposeBag = DisposeBag()
-    var userPostId : [String]
+    var userProfile : (userPostId:[String], userNickname:String)
     
-    init(userPostId : [String]) {
-        self.userPostId = userPostId
+    init(userProfile : (userPostId:[String], userNickname:String)) {
+        self.userProfile = userProfile
     }
     
     struct Input {
@@ -25,10 +25,11 @@ final class BoardUserViewModel : MainViewModelType {
     
     struct Output {
         let postData : BehaviorRelay<[BoardDataSection]>
+        let viewWillAppear : Driver<Bool>
     }
     
     func transform(input: Input) -> Output {
-        let userPostId = BehaviorSubject<[String]>(value: userPostId)
+        let userPostId = BehaviorSubject<[String]>(value: userProfile.userPostId)
         let postData = BehaviorRelay(value: [BoardDataSection]())
         let currentPostData = PublishSubject<[PostResponse]>()
         
@@ -44,7 +45,6 @@ final class BoardUserViewModel : MainViewModelType {
                 case .success(let value):
                     print("BoardUser ViewWillApper ✅")
                     currentPostData.onNext(value.data)
-//                    NotificationCenter.default.post(name: .boardRefresh, object: nil)
                 case .failure(let error):
                     print(error)
                 }
@@ -69,7 +69,8 @@ final class BoardUserViewModel : MainViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            postData: postData
+            postData: postData,
+            viewWillAppear: input.viewWillAppear.asDriver(onErrorJustReturn: false)
         )
     }
 }

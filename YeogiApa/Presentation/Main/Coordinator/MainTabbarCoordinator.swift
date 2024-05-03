@@ -14,6 +14,7 @@ final class MainTabbarCoordinator : Coordinator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        NotificationCenter.default.addObserver(self, selector: #selector(goToMain), name: .goToMain, object: nil)
     }
     
     func start() {
@@ -43,11 +44,25 @@ final class MainTabbarCoordinator : Coordinator {
     func resetLogined(_ coordinator : BoardMainCoordinator) {
         childCoordinators = childCoordinators.filter { $0 !== coordinator }
         parentCoordinator?.resetLoggedIn(self)
+        parentCoordinator?.childDidFinish(self)
+    }
+    
+    @objc func goToMain(_ notification: Notification) {
+        print("gotohome ✅")
+        
+        guard let tabBarController = UIApplication.shared.tabbarController() as? MainTabBarController else { return }
+        
+        if tabBarController.selectedIndex != 0 {
+            tabBarController.selectedIndex = 0
+        } else {
+            if let navController = tabBarController.viewControllers?.first as? UINavigationController {
+                navController.popToRootViewController(animated: false)
+            }
+        }
     }
     
     deinit {
         print(#function, "-MainTabbarCoordinator ✅")
-        parentCoordinator?.childDidFinish(self)
     }
     
 }

@@ -33,6 +33,7 @@
 		DB4110142BD19E0A0088679F /* InquiryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110132BD19E0A0088679F /* InquiryResponse.swift */; };
 		DB4110162BD1AC720088679F /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */; };
 		DB743A962BE5278D00BBAE5F /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB743A952BE5278D00BBAE5F /* MenuCollectionViewCell.swift */; };
+		DB743A982BE53F0100BBAE5F /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB743A972BE53F0100BBAE5F /* UIApplication+Extension.swift */; };
 		DB797BB22BE3CA3A00E490C3 /* BoardUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB797BB12BE3CA3A00E490C3 /* BoardUserViewController.swift */; };
 		DB797BB42BE3CB0000E490C3 /* BoardUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB797BB32BE3CB0000E490C3 /* BoardUserView.swift */; };
 		DB797BB62BE3CC2600E490C3 /* BoardUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB797BB52BE3CC2600E490C3 /* BoardUserViewModel.swift */; };
@@ -142,6 +143,7 @@
 		DB4110132BD19E0A0088679F /* InquiryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryResponse.swift; sourceTree = "<group>"; };
 		DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
 		DB743A952BE5278D00BBAE5F /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		DB743A972BE53F0100BBAE5F /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		DB797BB12BE3CA3A00E490C3 /* BoardUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardUserViewController.swift; sourceTree = "<group>"; };
 		DB797BB32BE3CB0000E490C3 /* BoardUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardUserView.swift; sourceTree = "<group>"; };
 		DB797BB52BE3CC2600E490C3 /* BoardUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardUserViewModel.swift; sourceTree = "<group>"; };
@@ -540,6 +542,7 @@
 		DBCBAA1C2BC7E7D9006B40CA /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				DB743A972BE53F0100BBAE5F /* UIApplication+Extension.swift */,
 				DBCBAA212BC7E804006B40CA /* UIViewController+Extension.swift */,
 				DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */,
 				DB204D932BD29E5D006340BE /* UITabBarController+Extension.swift */,
@@ -810,6 +813,7 @@
 				DBCBAA1F2BC7E7F2006B40CA /* ReusableID.swift in Sources */,
 				DBCBAA272BC82D5A006B40CA /* UserDefaultManager.swift in Sources */,
 				DBB7C67F2BDA15D000D3081A /* CommentCollectionViewCell.swift in Sources */,
+				DB743A982BE53F0100BBAE5F /* UIApplication+Extension.swift in Sources */,
 				DBCBAA582BCD0ACC006B40CA /* SignInUpView.swift in Sources */,
 				DB901C612BD58C7C003EEDC6 /* CompleteButton.swift in Sources */,
 				DBCBE3D42BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift in Sources */,

@@ -12,6 +12,8 @@ import Kingfisher
 
 class MenuViewController: UIViewController {
 
+    var parentCoordinator : MainTabbarCoordinator?
+    
     private var datasource : MenuDataSource!
     
     private let headerTitle = UILabel().then {
@@ -36,6 +38,7 @@ class MenuViewController: UIViewController {
         
         configureDataSource()
         updateSnapshot(MenuCase.allCases)
+        menuCollectionView.delegate = self
         
         configureHierarchy()
         configureLayout()
@@ -115,5 +118,21 @@ extension MenuViewController {
         snapshot.appendItems(uniqueItemsToAdd, toSection: .main)
         
         datasource.apply(snapshot)
+    }
+}
+
+extension MenuViewController : UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let menuCase = datasource.itemIdentifier(for: indexPath) else { return }
+        
+        switch menuCase {
+        case .home:
+            NotificationCenter.default.post(name: .goToMain, object: nil)
+            dismiss(animated: true)
+        default:
+            dismiss(animated: true)
+        }
     }
 }

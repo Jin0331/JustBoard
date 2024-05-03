@@ -24,9 +24,11 @@ final class BoardMainCoordinator : Coordinator {
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }
+    
     @objc func resetLogined(_ notification: Notification) {
         print("토큰초기화됨 ✅")
         parentCoordinator?.resetLogined(self)
+        parentCoordinator?.childDidFinish(self)
     }
     
     deinit {

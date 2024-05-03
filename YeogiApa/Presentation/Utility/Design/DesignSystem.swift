@@ -37,8 +37,14 @@ enum DesignSystem {
         static let photo = UIImage(systemName: "photo", withConfiguration:sfSymbolLargeConfig)
         static let like = UIImage(systemName: "hand.thumbsup", withConfiguration:sfSymbolLargeConfig2)
         static let comment = UIImage(systemName: "bubble", withConfiguration:sfSymbolLargeConfig2)
-        
         static let link = UIImage(systemName: "link.badge.plus", withConfiguration:sfSymbolLargeConfig)
+        
+        // Menu
+        static let list = UIImage(systemName: "list.dash", withConfiguration:sfSymbolLargeConfig)
+        static let home = UIImage(systemName: "house", withConfiguration:sfSymbolSmallConfig)
+        static let profile = UIImage(systemName: "person.crop.circle", withConfiguration:sfSymbolSmallConfig)
+        static let latest = UIImage(systemName: "clock.arrow.circlepath", withConfiguration:sfSymbolSmallConfig)
+    
     }
     
     enum tabbarImage {
@@ -49,5 +55,10 @@ enum DesignSystem {
     
     enum defaultimage {
         static let defaultProfile = "uploads/posts/defaultProfile@3x_1714675687120.jpg"
+    }
+    
+    enum mainFont {
+        static let large = UIFont(name: "MarkerFelt-Thin", size: 28)
+        static let medium = UIFont(name: "MarkerFelt-Thin", size: 22)
     }
 }

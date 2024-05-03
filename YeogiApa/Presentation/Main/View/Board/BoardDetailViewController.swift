@@ -98,6 +98,11 @@ final class BoardDetailViewController: RxBaseViewController {
             .disposed(by: disposeBag)
     }
     
+    override func configureNavigation() {
+        super.configureNavigation()
+//        navigationItem.rightBarButtonItem = nil
+    }
+    
     deinit {
         print(#function, "- BoardDetailViewController ✅")
     }

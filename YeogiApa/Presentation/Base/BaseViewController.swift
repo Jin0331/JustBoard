@@ -56,6 +56,8 @@ class BaseViewController: UIViewController {
         
         // side menu
         menu = SideMenuNavigationController(rootViewController: MenuViewController())
+        menu?.pushStyle = .popWhenPossible
+        menu?.allowPushOfSameClassTwice = true
     }
     
     func mainNavigationAttribute() {

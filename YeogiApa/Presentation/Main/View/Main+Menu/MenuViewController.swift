@@ -12,7 +12,7 @@ import Kingfisher
 
 class MenuViewController: UIViewController {
 
-    var parentCoordinator : MainTabbarCoordinator?
+    var parentCoordinator : BoardMainCoordinator?
     
     private var datasource : MenuDataSource!
     
@@ -131,8 +131,29 @@ extension MenuViewController : UICollectionViewDelegate {
         case .home:
             NotificationCenter.default.post(name: .goToMain, object: nil)
             dismiss(animated: true)
+        case .myProfile:
+//            parentCoordinator?.toProfile()
+//            NotificationCenter.post
+            
+            
+            navigationController?.pushViewController(ProfileViewController(), animated: true)
+//            dismiss(animated: true)
+//            present(UINavigationController(rootViewController: ProfileViewController()), animated: true)
+            
+        
         default:
             dismiss(animated: true)
         }
     }
 }
+
+//extension MenuViewController {
+//    func toProfile() {
+//        let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
+//        profileCoordinator.parentCoordinator = self
+//        print("hi")
+//        profileCoordinator.start()
+//        childCoordinators.append(profileCoordinator)
+//    }
+//
+//}

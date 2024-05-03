@@ -25,12 +25,6 @@ final class BoardMainCoordinator : Coordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    @objc func resetLogined(_ notification: Notification) {
-        print("토큰초기화됨 ✅")
-        parentCoordinator?.resetLogined(self)
-        parentCoordinator?.childDidFinish(self)
-    }
-    
     deinit {
         print(#function, "- BoardCoordinator ✅")
         parentCoordinator?.childDidFinish(self)
@@ -38,8 +32,6 @@ final class BoardMainCoordinator : Coordinator {
 }
 
 extension BoardMainCoordinator {
-    
-    //TODO: - Board Specific Coordinator로 분리해야 됨
     
     func toSpecificBoard(_ item : String) {
         let boardSpecificCoordinator = BoardSpecificCoordinator(navigationController: navigationController)
@@ -64,6 +56,21 @@ extension BoardMainCoordinator {
         boardUserCoordinator.parentCoordinator = self
         boardUserCoordinator.start(userProfile: item)
         childCoordinators.append(boardUserCoordinator)
+    }
+    
+//    func toProfile() {
+//        let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
+//        profileCoordinator.parentCoordinator = self
+//        print("hi")
+//        profileCoordinator.start()
+//        childCoordinators.append(profileCoordinator)
+//    }
+    
+    
+    @objc func resetLogined(_ notification: Notification) {
+        print("토큰초기화됨 ✅")
+        parentCoordinator?.resetLogined(self)
+        parentCoordinator?.childDidFinish(self)
     }
 }
 

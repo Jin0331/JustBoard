@@ -15,7 +15,6 @@ final class NetworkManager  {
     
     private init() { }
     
-    //TODO: - 제네릭 구조로 변경 필요
     private func makeRequest<T: Decodable>(router: URLRequestConvertible) -> Single<Result<T, AFError>> {
         return Single<Result<T, AFError>>.create { single in
             do {
@@ -39,6 +38,7 @@ final class NetworkManager  {
         }
     }
     
+    //MARK: - User
     func createJoin(query: JoinRequest) -> Single<Result<JoinResponse, AFError>> {
         return makeRequest(router: UserRouter.join(query: query))
     }
@@ -51,6 +51,7 @@ final class NetworkManager  {
         return makeRequest(router: UserRouter.emailValidation(query: query))
     }
     
+    //MARK: - Main
     func post(query: FilesRequest, category: String) -> Single<Result<FilesResponse, AFError>> {
         let router = MainRouter.files(query: query, category: category)
         let url = router.baseURL.appendingPathComponent(router.path).absoluteString.removingPercentEncoding!

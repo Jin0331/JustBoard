@@ -21,7 +21,7 @@ target 'YeogiApa' do
   pod 'RxDataSources', '~> 5.0'
   pod 'Reusable'
   pod 'Tabman', '~> 3.2'
-  pod 'SideMenuSwift'
+  pod 'SideMenu', '~> 6.0'
 end
 
 post_install do |installer|

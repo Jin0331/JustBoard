@@ -64,4 +64,12 @@ extension BoardSpecificCoordinator {
         vc.parentCoordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
+    
+    func toProfile() {
+        let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
+        profileCoordinator.boardSpecificCoordinator = self
+        print("hi")
+        profileCoordinator.start()
+        childCoordinators.append(profileCoordinator)
+    }
 }

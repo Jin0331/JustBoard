@@ -58,13 +58,12 @@ extension BoardMainCoordinator {
         childCoordinators.append(boardUserCoordinator)
     }
     
-//    func toProfile() {
-//        let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
-//        profileCoordinator.parentCoordinator = self
-//        print("hi")
-//        profileCoordinator.start()
-//        childCoordinators.append(profileCoordinator)
-//    }
+    func toProfile() {
+        let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
+        profileCoordinator.boardMainCoordinator = self
+        profileCoordinator.start()
+        childCoordinators.append(profileCoordinator)
+    }
     
     
     @objc func resetLogined(_ notification: Notification) {

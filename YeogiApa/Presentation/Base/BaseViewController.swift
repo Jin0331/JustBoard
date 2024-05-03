@@ -10,20 +10,12 @@ import Then
 import RxSwift
 import RxCocoa
 import RxViewController
-import SideMenu
 
 class RxBaseViewController : BaseViewController {
     let disposeBag = DisposeBag()
 }
 
 class BaseViewController: UIViewController {
-    
-    //MARK: - SideMenu
-    var menu : SideMenuNavigationController?
-    
-    lazy var menuBarButtonItem = UIBarButtonItem(image: DesignSystem.sfSymbol.list?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(menuBarButtonItemTapped)).then {
-        $0.tintColor = DesignSystem.commonColorSet.lightBlack
-    }
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -50,14 +42,6 @@ class BaseViewController: UIViewController {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil) // title 부분 수정
         backBarButtonItem.tintColor = DesignSystem.commonColorSet.lightBlack
         navigationItem.backBarButtonItem = backBarButtonItem
-        
-        // left button
-        navigationItem.setRightBarButton(menuBarButtonItem, animated: true)
-        
-        // side menu
-        menu = SideMenuNavigationController(rootViewController: MenuViewController())
-        menu?.pushStyle = .popWhenPossible
-        menu?.allowPushOfSameClassTwice = true
     }
     
     func mainNavigationAttribute() {
@@ -67,11 +51,6 @@ class BaseViewController: UIViewController {
             .font: DesignSystem.mainFont.large!
         ]
     }
-    
-    @objc func menuBarButtonItemTapped() {
-        present(menu!, animated: true)
-    }
-    
     
     @available (*, unavailable)
     required init?(coder: NSCoder) {

@@ -8,9 +8,10 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SideMenu
 
 final class BoardMainViewController: RxBaseViewController {
-
+    
     let baseView : BoardMainView
     var parentCoordinator : BoardMainCoordinator?
     private let viewModel : BoardMainViewModel
@@ -36,6 +37,7 @@ final class BoardMainViewController: RxBaseViewController {
     
     override func viewDidLoad() {
         configureCollectionViewDataSource()
+        attachSideMenuVC()
         super.viewDidLoad()
     }
     
@@ -109,5 +111,30 @@ extension BoardMainViewController {
             return cell
         })
         
+    }
+}
+
+//MARK: - SideMenu에서 선택한 VC 현재 Coordinator에 부착하기
+extension BoardMainViewController : MenuViewControllerDelegate {
+    
+    private func attachSideMenuVC() {
+        // left button
+        let menuBarButtonItem = UIBarButtonItem(image: DesignSystem.sfSymbol.list?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(menuBarButtonItemTapped)).then {
+            $0.tintColor = DesignSystem.commonColorSet.lightBlack
+        }
+        navigationItem.setRightBarButton(menuBarButtonItem, animated: true)
+    }
+
+    @objc private func menuBarButtonItemTapped() {
+        let containerView = MenuViewController()
+        containerView.sendDelegate = self
+        present(SideMenuNavigationController(rootViewController: containerView), animated: true)
+    }
+    
+    func sendProfileViewController(vc: RxBaseViewController) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+            guard let self = self else { return }
+            parentCoordinator?.toProfile()
+        }
     }
 }

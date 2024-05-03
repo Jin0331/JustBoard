@@ -10,11 +10,14 @@ import Then
 import SnapKit
 import Kingfisher
 
-class MenuViewController: UIViewController {
+protocol MenuViewControllerDelegate {
+    func sendProfileViewController(vc : RxBaseViewController)
+}
 
-    var parentCoordinator : BoardMainCoordinator?
+final class MenuViewController: BaseViewController {
     
     private var datasource : MenuDataSource!
+    var sendDelegate : MenuViewControllerDelegate?
     
     private let headerTitle = UILabel().then {
         $0.font = DesignSystem.mainFont.medium
@@ -46,11 +49,11 @@ class MenuViewController: UIViewController {
     }
     
     
-    private func configureHierarchy() {
+    override func configureHierarchy() {
         [headerTitle, menuCollectionView].forEach { view.addSubview($0)}
     }
     
-    private func configureLayout() {
+    override func configureLayout() {
         
         headerTitle.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
@@ -62,7 +65,7 @@ class MenuViewController: UIViewController {
         }
     }
     
-    private func configureView() {
+    override func configureView() {
         view.backgroundColor = DesignSystem.commonColorSet.lightBlack
     }
 }
@@ -132,28 +135,10 @@ extension MenuViewController : UICollectionViewDelegate {
             NotificationCenter.default.post(name: .goToMain, object: nil)
             dismiss(animated: true)
         case .myProfile:
-//            parentCoordinator?.toProfile()
-//            NotificationCenter.post
-            
-            
-            navigationController?.pushViewController(ProfileViewController(), animated: true)
-//            dismiss(animated: true)
-//            present(UINavigationController(rootViewController: ProfileViewController()), animated: true)
-            
-        
+            sendDelegate?.sendProfileViewController(vc: ProfileViewController())
+            dismiss(animated: true)
         default:
             dismiss(animated: true)
         }
     }
 }
-
-//extension MenuViewController {
-//    func toProfile() {
-//        let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
-//        profileCoordinator.parentCoordinator = self
-//        print("hi")
-//        profileCoordinator.start()
-//        childCoordinators.append(profileCoordinator)
-//    }
-//
-//}

@@ -10,7 +10,9 @@ import UIKit
 final class ProfileCoordinator : Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-    var parentCoordinator : BoardMainCoordinator?
+    var boardMainCoordinator : BoardMainCoordinator?
+    var boardSpecificCoordinator : BoardSpecificCoordinator?
+    var boardUserCoordinator : BoardUserCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

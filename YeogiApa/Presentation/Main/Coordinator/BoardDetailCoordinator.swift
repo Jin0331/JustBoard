@@ -10,6 +10,7 @@ import UIKit
 final class BoardDetailCoordinator : Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
+    var parentProfileCoordinator : ProfileCoordinator?
     var parentMainBoardCoordinator : BoardMainCoordinator?
     var parentSpecificBoardCoordinator : BoardSpecificCoordinator?
     var parentUserBoardCoordinator : BoardUserCoordinator?

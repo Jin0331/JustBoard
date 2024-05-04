@@ -8,21 +8,20 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SideMenu
 
 final class BoardMainViewController: RxBaseViewController {
-
+    
     let baseView : BoardMainView
     var parentCoordinator : BoardMainCoordinator?
     private let viewModel : BoardMainViewModel
     private var postRankDataSource: BoardRankRxDataSource!
     private var userRankDataSource: BoardRankRxDataSource!
 
-    init(viewControllersList : Array<RxBaseViewController>, category : [BestCategory], productId : String, limit : String){
+    init(viewControllersList : Array<RxBaseViewController>, category : TabmanCategory, productId : String, limit : String){
         self.viewModel = BoardMainViewModel(product_id: productId, limit: limit)
         
-        let tabmanVC = BoardTabmanViewController(viewControllersList: viewControllersList,
-                                                 category: category, 
-                                                 productId: productId, limit: limit)
+        let tabmanVC = BoardTabmanViewController(viewControllersList: viewControllersList, category: category)
         self.baseView = BoardMainView(tabmanViewController: tabmanVC)
     }
     
@@ -36,6 +35,7 @@ final class BoardMainViewController: RxBaseViewController {
     
     override func viewDidLoad() {
         configureCollectionViewDataSource()
+        attachSideMenuVC()
         super.viewDidLoad()
     }
     
@@ -109,5 +109,30 @@ extension BoardMainViewController {
             return cell
         })
         
+    }
+}
+
+//MARK: - SideMenu에서 선택한 VC 현재 Coordinator에 부착하기
+extension BoardMainViewController : MenuViewControllerDelegate {
+    
+    private func attachSideMenuVC() {
+        // left button
+        let menuBarButtonItem = UIBarButtonItem(image: DesignSystem.sfSymbol.list?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(menuBarButtonItemTapped)).then {
+            $0.tintColor = DesignSystem.commonColorSet.lightBlack
+        }
+        navigationItem.setRightBarButton(menuBarButtonItem, animated: true)
+    }
+
+    @objc private func menuBarButtonItemTapped() {
+        let containerView = MenuViewController()
+        containerView.sendDelegate = self
+        present(SideMenuNavigationController(rootViewController: containerView), animated: true)
+    }
+    
+    func sendProfileViewController(userID: String, me: Bool) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+            guard let self = self else { return }
+            parentCoordinator?.toProfile(userID: userID, me: me)
+        }
     }
 }

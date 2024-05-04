@@ -21,11 +21,12 @@ final class BoardSpecificCoordinator : Coordinator {
         
     }
     
-    func start(productId : String, limit : String, bestBoard: Bool, bestBoardType : BestCategory?) {
+    func start(productId : String, limit : String, bestBoard: Bool, profileBoard: Bool) {
         let vc = BoardViewController(productId: productId,
                                      limit: InquiryRequest.InquiryRequestDefault.limit,
                                      bestBoard: bestBoard, 
-                                     bestBoardType: bestBoardType)
+                                     profileBoard: profileBoard)
+                                        
         vc.parentCoordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
@@ -58,10 +59,19 @@ extension BoardSpecificCoordinator {
     func toSpecificBoard(_ item : String) {
         let vc = BoardViewController(productId: item,
                                      limit: InquiryRequest.InquiryRequestDefault.limit,
-                                     bestBoard: false, bestBoardType: nil)
+                                     bestBoard: false, 
+                                     profileBoard: false)
 
 
         vc.parentCoordinator = self
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func toProfile(userID : String, me : Bool) {
+        let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
+        profileCoordinator.boardSpecificCoordinator = self
+        print("hi")
+        profileCoordinator.start(userID: userID, me: me)
+        childCoordinators.append(profileCoordinator)
     }
 }

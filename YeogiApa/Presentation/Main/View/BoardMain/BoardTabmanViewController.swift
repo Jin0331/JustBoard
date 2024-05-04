@@ -18,9 +18,9 @@ final class BoardTabmanViewController: TabmanViewController, TMBarDataSource {
     let baseView = UIView()
     var parentCoordinator : BoardMainCoordinator?
     private let viewControllers: Array<RxBaseViewController>
-    private let category : [BestCategory]
+    private let category : TabmanCategory
 
-    init(viewControllersList : Array<RxBaseViewController>, category : [BestCategory], productId : String, limit : String){
+    init(viewControllersList : Array<RxBaseViewController>, category : TabmanCategory){
         self.viewControllers = viewControllersList
         self.category = category
         super.init(nibName: nil, bundle: nil)
@@ -44,9 +44,15 @@ final class BoardTabmanViewController: TabmanViewController, TMBarDataSource {
 //MARK: - Tabman 관련 사항
 extension BoardTabmanViewController : PageboyViewControllerDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
-        let title = category[index].rawValue
+        let currentCategory = getTammanCategoryList(for: category)
         
-        return TMBarItem(title: title)
+        if let bestCategory = currentCategory as? [BestCategory] {
+            return TMBarItem(title: bestCategory[index].rawValue)
+        } else if let profileCategory = currentCategory as? [ProfilePostCategory] {
+            return TMBarItem(title: profileCategory[index].rawValue)
+        } else  {
+            return TMBarItem(title:"")
+        }
     }
     
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {

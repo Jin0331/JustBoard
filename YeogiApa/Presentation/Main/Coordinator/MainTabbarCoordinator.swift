@@ -41,6 +41,13 @@ final class MainTabbarCoordinator : Coordinator {
         settingCoordinator.start()
     }
     
+    deinit {
+        print(#function, "-MainTabbarCoordinator ✅")
+    }
+    
+}
+
+extension MainTabbarCoordinator {
     func resetLogined(_ coordinator : BoardMainCoordinator) {
         childCoordinators = childCoordinators.filter { $0 !== coordinator }
         parentCoordinator?.resetLoggedIn(self)
@@ -60,9 +67,4 @@ final class MainTabbarCoordinator : Coordinator {
             }
         }
     }
-    
-    deinit {
-        print(#function, "-MainTabbarCoordinator ✅")
-    }
-    
 }

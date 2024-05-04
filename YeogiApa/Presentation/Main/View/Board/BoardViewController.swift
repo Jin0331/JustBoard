@@ -10,12 +10,14 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import RxViewController
+import SideMenu
 
 final class BoardViewController: RxBaseViewController {
     
     private let mainView : BoardView
     private let viewModel : BoardViewModel
     private let productId : String
+    var parentPorifleCoordinator : ProfileCoordinator?
     var parentMainCoordinator : BoardMainCoordinator?
     var parentCoordinator : BoardSpecificCoordinator?
     private var dataSource: BoardRxDataSource!
@@ -24,19 +26,23 @@ final class BoardViewController: RxBaseViewController {
         view = mainView
     }
     
-    init(productId : String, limit: String, bestBoard: Bool, bestBoardType : BestCategory?) {
+    init(productId : String, userID : String? = nil, limit: String, bestBoard: Bool, profileBoard: Bool, bestBoardType : BestCategory? = nil, profileBoardType : ProfilePostCategory? = nil) {
         self.productId = productId
-        self.mainView = BoardView(bestBoard: bestBoard)
+        self.mainView = BoardView(bestBoard: bestBoard, profileBoard: profileBoard)
         self.viewModel = BoardViewModel(product_id: productId,
+                                        userId: userID,
                                         limit: limit,
                                         bestBoard: bestBoard,
-                                        bestBoardType : bestBoardType
+                                        profileBoard: profileBoard,
+                                        bestBoardType : bestBoardType,
+                                        profileBoardType: profileBoardType
         )
         
     }
     
     override func viewDidLoad() {
         configureCollectionViewDataSource()
+        attachSideMenuVC()
         super.viewDidLoad()
     }
     
@@ -50,6 +56,7 @@ final class BoardViewController: RxBaseViewController {
             .bind(with: self) { owner, value in
                 owner.parentCoordinator?.toDetail(value.0)
                 owner.parentMainCoordinator?.toDetail(value.0)
+                owner.parentPorifleCoordinator?.toDetail(value.0)
             }
             .disposed(by: disposeBag)
         
@@ -105,5 +112,30 @@ extension BoardViewController {
             return cell
         })
         
+    }
+}
+
+//MARK: - SideMenu에서 선택한 VC 현재 Coordinator에 부착하기
+extension BoardViewController : MenuViewControllerDelegate {
+    
+    private func attachSideMenuVC() {
+        // left button
+        let menuBarButtonItem = UIBarButtonItem(image: DesignSystem.sfSymbol.list?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(menuBarButtonItemTapped)).then {
+            $0.tintColor = DesignSystem.commonColorSet.lightBlack
+        }
+        navigationItem.setRightBarButton(menuBarButtonItem, animated: true)
+    }
+
+    @objc private func menuBarButtonItemTapped() {
+        let containerView = MenuViewController()
+        containerView.sendDelegate = self
+        present(SideMenuNavigationController(rootViewController: containerView), animated: true)
+    }
+    
+    func sendProfileViewController(userID: String, me: Bool) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+            guard let self = self else { return }
+            parentCoordinator?.toProfile(userID: userID, me: me)
+        }
     }
 }

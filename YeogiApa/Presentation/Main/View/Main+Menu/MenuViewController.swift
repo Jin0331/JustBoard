@@ -10,11 +10,14 @@ import Then
 import SnapKit
 import Kingfisher
 
-class MenuViewController: UIViewController {
+protocol MenuViewControllerDelegate {
+    func sendProfileViewController(userID : String, me : Bool)
+}
 
-    var parentCoordinator : MainTabbarCoordinator?
+final class MenuViewController: BaseViewController {
     
     private var datasource : MenuDataSource!
+    var sendDelegate : MenuViewControllerDelegate?
     
     private let headerTitle = UILabel().then {
         $0.font = DesignSystem.mainFont.medium
@@ -46,11 +49,11 @@ class MenuViewController: UIViewController {
     }
     
     
-    private func configureHierarchy() {
+    override func configureHierarchy() {
         [headerTitle, menuCollectionView].forEach { view.addSubview($0)}
     }
     
-    private func configureLayout() {
+    override func configureLayout() {
         
         headerTitle.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
@@ -62,7 +65,7 @@ class MenuViewController: UIViewController {
         }
     }
     
-    private func configureView() {
+    override func configureView() {
         view.backgroundColor = DesignSystem.commonColorSet.lightBlack
     }
 }
@@ -130,6 +133,10 @@ extension MenuViewController : UICollectionViewDelegate {
         switch menuCase {
         case .home:
             NotificationCenter.default.post(name: .goToMain, object: nil)
+            dismiss(animated: true)
+        case .myProfile:
+            sendDelegate?.sendProfileViewController(userID: UserDefaultManager.shared.userId!,
+                                                    me: true)
             dismiss(animated: true)
         default:
             dismiss(animated: true)

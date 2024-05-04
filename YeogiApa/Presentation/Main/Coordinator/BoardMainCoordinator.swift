@@ -20,15 +20,9 @@ final class BoardMainCoordinator : Coordinator {
     
     //MARK: -
     func start() {
-        let vc = BoardMainViewController(viewControllersList: boardChildViewController(), category: BestCategory.allCases, productId: InquiryRequest.InquiryRequestDefault.productId, limit: InquiryRequest.InquiryRequestDefault.maxLimit)
+        let vc = BoardMainViewController(viewControllersList: boardChildViewController(), category: .best, productId: InquiryRequest.InquiryRequestDefault.productId, limit: InquiryRequest.InquiryRequestDefault.maxLimit)
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
-    }
-    
-    @objc func resetLogined(_ notification: Notification) {
-        print("토큰초기화됨 ✅")
-        parentCoordinator?.resetLogined(self)
-        parentCoordinator?.childDidFinish(self)
     }
     
     deinit {
@@ -39,8 +33,6 @@ final class BoardMainCoordinator : Coordinator {
 
 extension BoardMainCoordinator {
     
-    //TODO: - Board Specific Coordinator로 분리해야 됨
-    
     func toSpecificBoard(_ item : String) {
         let boardSpecificCoordinator = BoardSpecificCoordinator(navigationController: navigationController)
         boardSpecificCoordinator.parentCoordinator = self
@@ -49,7 +41,8 @@ extension BoardMainCoordinator {
         boardSpecificCoordinator.start(productId: item,
                                        limit: InquiryRequest.InquiryRequestDefault.limit,
                                        bestBoard: false,
-                                       bestBoardType: nil)
+                                       profileBoard: false
+        )
     }
     
     func toDetail(_ item : PostResponse) {
@@ -65,19 +58,35 @@ extension BoardMainCoordinator {
         boardUserCoordinator.start(userProfile: item)
         childCoordinators.append(boardUserCoordinator)
     }
+    
+    func toProfile(userID : String, me : Bool) {
+        let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
+        profileCoordinator.boardMainCoordinator = self
+        profileCoordinator.start(userID: userID, me: me)
+        childCoordinators.append(profileCoordinator)
+    }
+    
+    
+    @objc func resetLogined(_ notification: Notification) {
+        print("토큰초기화됨 ✅")
+        parentCoordinator?.resetLogined(self)
+        parentCoordinator?.childDidFinish(self)
+    }
 }
 
 extension BoardMainCoordinator {
-    func boardChildViewController() -> Array<RxBaseViewController> {
+    private func boardChildViewController() -> Array<RxBaseViewController> {
         
         let category = BestCategory.allCases
         var viewControllersList: Array<RxBaseViewController> = []
         let bestBoard = true
+        let profileBoard = false
         
         category.forEach {
             let vc = BoardViewController(productId: $0.productId,
                                          limit: InquiryRequest.InquiryRequestDefault.maxLimit,
                                          bestBoard: bestBoard,
+                                         profileBoard: profileBoard,
                                          bestBoardType: $0
             )
             vc.parentMainCoordinator = self

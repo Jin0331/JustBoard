@@ -25,14 +25,40 @@ final class FollowViewModel : MainViewModelType {
     }
     
     struct Input {
+        
     }
     
     struct Output {
+        let followData : BehaviorRelay<[FollowDataSection]>
     }
     
     func transform(input: Input) -> Output {
-
+        let followData = BehaviorRelay(value: [FollowDataSection]())
         
-        return Output()
+        userID
+            .flatMap { userId in
+                return NetworkManager.shared.profile(userId: userId)
+            }
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let profileResponse):
+                    
+                    if owner.follower && !owner.following {
+                        followData.accept([FollowDataSection(items: profileResponse.followers)])
+                        print(profileResponse.followers, "⚠️Follower")
+                    } else {
+                        followData.accept([FollowDataSection(items: profileResponse.following)])
+                        print(profileResponse.following, "⚠️Following")
+                    }
+
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        return Output(
+            followData:followData
+        )
     }
 }

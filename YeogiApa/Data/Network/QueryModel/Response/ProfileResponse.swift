@@ -43,10 +43,21 @@ struct ProfileResponse : Decodable {
 
 struct Follow: Decodable {
     let userID, nick: String
-    let profileImage: String?
+    let profileImage: String
 
     enum CodingKeys: String, CodingKey {
         case userID = "user_id"
         case nick, profileImage
+    }
+    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.userID = try container.decode(String.self, forKey: .userID)
+        self.nick = try container.decode(String.self, forKey: .nick)
+        self.profileImage = (try? container.decode(String.self, forKey: .profileImage)) ?? DesignSystem.defaultimage.defaultProfile
+    }
+    
+    var profileImageToUrl : URL {
+        return URL(string: APIKey.baseURLWithVersion() + "/" + profileImage)!
     }
 }

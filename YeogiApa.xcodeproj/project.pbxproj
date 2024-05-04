@@ -337,9 +337,9 @@
 				DB797BB72BE3CD7B00E490C3 /* BoardUserCoordinator.swift */,
 				DB0598B12BE3456800AE0973 /* BoardDetailCoordinator.swift */,
 				DB204D972BD2A669006340BE /* QuestionCoordinator.swift */,
-				DB4110062BD15B3B0088679F /* SettingCoordinator.swift */,
 				DB743A9B2BE544FE00BBAE5F /* ProfileCoordinator.swift */,
 				DB63A4482BE6B54400882670 /* FollowCoordinator.swift */,
+				DB4110062BD15B3B0088679F /* SettingCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";

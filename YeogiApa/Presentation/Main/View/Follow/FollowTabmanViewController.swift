@@ -26,8 +26,14 @@ final class FollowTabmanViewController: TabmanViewController, TMBarDataSource {
     }
     
     override func viewDidLoad() {
-        configureView()
         super.viewDidLoad()
+        configureView()
+        configureNavigation()
+    }
+    
+    private func configureNavigation() {
+        navigationController?.navigationBar.titleTextAttributes = nil
+        navigationItem.title = "ggg"
     }
 
 }
@@ -54,7 +60,6 @@ extension FollowTabmanViewController : PageboyViewControllerDataSource {
         self.dataSource = self
 
         let bar = TMBar.ButtonBar()
-        self.isScrollEnabled = false
         bar.buttons.customize { (button) in
             button.tintColor = DesignSystem.commonColorSet.black
             button.selectedTintColor = DesignSystem.commonColorSet.black
@@ -63,11 +68,10 @@ extension FollowTabmanViewController : PageboyViewControllerDataSource {
     
         bar.layout.transitionStyle = .snap // Customize
         bar.layout.contentMode = .fit
-        bar.layout.interButtonSpacing = 20 // 버튼 사이의 간격 조절
         
         bar.indicator.tintColor = DesignSystem.commonColorSet.black
         bar.indicator.overscrollBehavior = .none
-        
+//        
         // Add to view
         addBar(bar, dataSource: self, at: .top)
     }

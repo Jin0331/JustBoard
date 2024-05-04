@@ -33,6 +33,16 @@ final class FollowViewController: RxBaseViewController {
         configureCollectionViewDataSource()
         super.viewDidLoad()
     }
+    
+    override func bind() {
+        let input = FollowViewModel.Input()
+        
+        let output = viewModel.transform(input: input)
+        
+        output.followData
+            .bind(to: baseView.mainCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+    }
 }
 
 //MARK: - RxDataSource CollectionView

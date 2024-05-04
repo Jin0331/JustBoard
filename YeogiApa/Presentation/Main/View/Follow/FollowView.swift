@@ -29,8 +29,7 @@ final class FollowView: BaseView {
     
     override func configureLayout() {
         mainCollectionView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(60)
-            make.bottom.horizontalEdges.equalToSuperview()
+            make.edges.equalTo(safeAreaLayoutGuide)
         }
     }
 }
@@ -44,13 +43,13 @@ extension FollowView {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         // Group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(30))
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         // Section
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 15
+        section.interGroupSpacing = 0
         
         let layout = UICollectionViewCompositionalLayout(section: section)
         

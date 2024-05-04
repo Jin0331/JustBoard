@@ -17,7 +17,7 @@ final class FollowCollectionViewCell: BaseCollectionViewCell, Reusable {
     }
     
     private let author = UILabel().then {
-        $0.font = .systemFont(ofSize: 18, weight: .regular)
+        $0.font = .systemFont(ofSize: 19, weight: .bold)
         $0.textColor = DesignSystem.commonColorSet.black
     }
     
@@ -28,7 +28,7 @@ final class FollowCollectionViewCell: BaseCollectionViewCell, Reusable {
     override func configureLayout() {
         profileImage.snp.makeConstraints { make in
             make.centerY.equalTo(contentView.safeAreaLayoutGuide)
-            make.leading.equalTo(contentView.safeAreaLayoutGuide).inset(10)
+            make.leading.equalTo(contentView.safeAreaLayoutGuide).inset(20)
             make.size.equalTo(50)
         }
         
@@ -38,8 +38,8 @@ final class FollowCollectionViewCell: BaseCollectionViewCell, Reusable {
         }
     }
     
-    func updateUI(_ itemIdentifier: ProfileResponse) {
-        profileImageCircle()
+    func updateUI(_ itemIdentifier: Follow) {
+        addimage(imageUrl: itemIdentifier.profileImageToUrl)
         author.text = itemIdentifier.nick
     }
     

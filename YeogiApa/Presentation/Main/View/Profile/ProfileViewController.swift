@@ -29,12 +29,27 @@ final class ProfileViewController: RxBaseViewController {
     
     override func bind() {
         
+        
         let input = ProfileViewModel.Input(
             viewWillAppear: rx.viewWillAppear,
-            followButton: baseView.followButton.rx.tap
+            followButton: baseView.followButton.rx.tap,
+            followerCountButton: baseView.followerCountButton.rx.tap,
+            followingCountButton: baseView.followingCountButton.rx.tap
         )
         
         let output = viewModel.transform(input: input)
+        
+        output.followerCountButton
+            .bind(with: self) { owner, profileResponse in
+                owner.parentCoordinator?.toFollow(profileResponse, owner.me)
+            }
+            .disposed(by: disposeBag)
+        
+        output.followingCountButton
+            .bind(with: self) { owner, profileResponse in
+                owner.parentCoordinator?.toFollow(profileResponse, owner.me)
+            }
+            .disposed(by: disposeBag)
         
         output.userProfile
             .bind(with: self) { owner, profileResponse in

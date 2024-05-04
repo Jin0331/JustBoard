@@ -39,3 +39,20 @@ extension BoardDataSection: SectionModelType {
 }
 
 typealias BoardRxDataSource = RxCollectionViewSectionedReloadDataSource<BoardDataSection>
+
+
+//MARK: - Follow
+struct FollowDataSection {
+    var items: [Follow]
+}
+
+extension FollowDataSection: SectionModelType {
+    typealias Item = Follow
+    
+    init(original: FollowDataSection, items: [Follow]) {
+        self = original
+        self.items = items
+    }
+}
+
+typealias FollowRxDataSource = RxCollectionViewSectionedReloadDataSource<FollowDataSection>

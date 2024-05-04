@@ -23,17 +23,23 @@ final class ProfileViewModel : MainViewModelType {
     struct Input {
         let viewWillAppear : ControlEvent<Bool>
         let followButton : ControlEvent<Void>
+        let followerCountButton : ControlEvent<Void>
+        let followingCountButton : ControlEvent<Void>
     }
     
     struct Output {
         let userProfile : PublishSubject<ProfileResponse>
         let followStatus : BehaviorSubject<Bool>
+        let followerCountButton : PublishSubject<ProfileResponse>
+        let followingCountButton : PublishSubject<ProfileResponse>
     }
     
     func transform(input: Input) -> Output {
         
         let userProfile = PublishSubject<ProfileResponse>()
         let followStatus = BehaviorSubject<Bool>(value: false)
+        let followerCountButton = PublishSubject<ProfileResponse>()
+        let followingCountButton = PublishSubject<ProfileResponse>()
         
         input.viewWillAppear
             .bind(with: self) { owner, _ in
@@ -82,6 +88,45 @@ final class ProfileViewModel : MainViewModelType {
                 case .success(let followResponse):
                     followStatus.onNext(followResponse.following_status)
                     NotificationCenter.default.post(name: .boardRefresh, object: nil)
+                    NotificationCenter.default.post(name: .followRefresh, object: nil)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        // Follow 화면전환
+        input.followerCountButton
+            .withLatestFrom(userProfile)
+            .bind(to: followerCountButton)
+            .disposed(by: disposeBag)
+        
+        input.followingCountButton
+            .withLatestFrom(userProfile)
+            .bind(to: followingCountButton)
+            .disposed(by: disposeBag)
+        
+        // Profile Update
+        NotificationCenter.default.rx.notification(.followRefresh)
+            .withLatestFrom(userID)
+            .flatMap { userId in
+                return NetworkManager.shared.profile(userId: userId)
+            }
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let profileResponse):
+                    let myId = UserDefaultManager.shared.userId
+                    if !owner.me {
+                        if profileResponse.followers.contains(where: { follow in
+                            follow.userID == myId!
+                        }) {
+                            followStatus.onNext(true)
+                        } else {
+                            followStatus.onNext(false)
+                        }
+                    }
+                    userProfile.onNext(profileResponse)
+
                 case .failure(let error):
                     print(error)
                 }
@@ -90,7 +135,9 @@ final class ProfileViewModel : MainViewModelType {
         
         return Output(
             userProfile:userProfile,
-            followStatus: followStatus
+            followStatus: followStatus,
+            followerCountButton: followerCountButton,
+            followingCountButton: followingCountButton
         )
     }
 }

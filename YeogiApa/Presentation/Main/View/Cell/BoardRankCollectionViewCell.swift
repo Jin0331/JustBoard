@@ -72,7 +72,7 @@ final class BoardRankCollectionViewCell : BaseCollectionViewCell, Reusable {
     }
 
     func updateUI(_ itemIdentifier: UserRank) {
-        profileImageCircle()
+//        profileImageCircle()
         addimage(imageUrl: itemIdentifier.profileImage)
         updateUICommon(rank: itemIdentifier.boardRank, name: itemIdentifier.nickName, count: itemIdentifier.count)
     }

@@ -7,9 +7,6 @@
 
 import UIKit
 import SnapKit
-import RxSwift
-import RxCocoa
-import RxViewController
 import Tabman
 import Pageboy
 
@@ -33,11 +30,6 @@ final class BoardTabmanViewController: TabmanViewController, TMBarDataSource {
     override func viewDidLoad() {
         configureView()
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("BoardTabmanViewController - viewWillApper✅")
     }
 }
 

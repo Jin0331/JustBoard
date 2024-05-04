@@ -21,9 +21,7 @@ final class BoardMainViewController: RxBaseViewController {
     init(viewControllersList : Array<RxBaseViewController>, category : [BestCategory], productId : String, limit : String){
         self.viewModel = BoardMainViewModel(product_id: productId, limit: limit)
         
-        let tabmanVC = BoardTabmanViewController(viewControllersList: viewControllersList,
-                                                 category: category, 
-                                                 productId: productId, limit: limit)
+        let tabmanVC = BoardTabmanViewController(viewControllersList: viewControllersList, category: category)
         self.baseView = BoardMainView(tabmanViewController: tabmanVC)
     }
     

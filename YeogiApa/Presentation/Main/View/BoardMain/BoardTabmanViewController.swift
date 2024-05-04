@@ -20,7 +20,7 @@ final class BoardTabmanViewController: TabmanViewController, TMBarDataSource {
     private let viewControllers: Array<RxBaseViewController>
     private let category : [BestCategory]
 
-    init(viewControllersList : Array<RxBaseViewController>, category : [BestCategory], productId : String, limit : String){
+    init(viewControllersList : Array<RxBaseViewController>, category : [BestCategory]){
         self.viewControllers = viewControllersList
         self.category = category
         super.init(nibName: nil, bundle: nil)

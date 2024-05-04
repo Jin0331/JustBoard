@@ -210,7 +210,6 @@ struct Creator: Decodable, Hashable {
     
     var profileImageToUrl : URL {
         return URL(string: APIKey.baseURLWithVersion() + "/" + profileImage)!
-        
     }
 }
 

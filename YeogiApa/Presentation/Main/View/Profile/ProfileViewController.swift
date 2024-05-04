@@ -13,20 +13,20 @@ final class ProfileViewController: RxBaseViewController {
 
 //    private let userID : BehaviorSubject<String>
     private let me : Bool
-    private let baseView = ProfileView()
+    private let baseView : ProfileView
     private let viewModel : ProfileViewModel
     var parentCoordinator : ProfileCoordinator?
     
-    init(userID: String, me: Bool) {
+    init(userID: String, me: Bool, viewControllersList : Array<RxBaseViewController>, category : [BestCategory]) {
         self.me = me
         self.viewModel = ProfileViewModel(userID: BehaviorSubject<String>(value: userID))
+        let tabmanVC = BoardTabmanViewController(viewControllersList: viewControllersList, category: category)
+        self.baseView = ProfileView(tabmanViewController: tabmanVC, me: me)
     }
     
     override func loadView() {
         view = baseView
     }
-    
-    
     
     override func bind() {
         
@@ -36,7 +36,7 @@ final class ProfileViewController: RxBaseViewController {
         
         output.userProfile
             .bind(with: self) { owner, profileResponse in
-                print(profileResponse)
+                owner.baseView.updateUI(profileResponse)
             }
             .disposed(by: disposeBag)
         

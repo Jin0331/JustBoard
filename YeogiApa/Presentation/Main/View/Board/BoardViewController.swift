@@ -17,6 +17,7 @@ final class BoardViewController: RxBaseViewController {
     private let mainView : BoardView
     private let viewModel : BoardViewModel
     private let productId : String
+    var parentPorifleCoordinator : ProfileCoordinator?
     var parentMainCoordinator : BoardMainCoordinator?
     var parentCoordinator : BoardSpecificCoordinator?
     private var dataSource: BoardRxDataSource!
@@ -52,6 +53,7 @@ final class BoardViewController: RxBaseViewController {
             .bind(with: self) { owner, value in
                 owner.parentCoordinator?.toDetail(value.0)
                 owner.parentMainCoordinator?.toDetail(value.0)
+                owner.parentPorifleCoordinator?.toDetail(value.0)
             }
             .disposed(by: disposeBag)
         

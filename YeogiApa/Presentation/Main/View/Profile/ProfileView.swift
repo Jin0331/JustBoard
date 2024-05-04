@@ -9,28 +9,41 @@ import UIKit
 import Then
 import SnapKit
 import Kingfisher
+import RxDataSources
+import Reusable
+import Tabman
+import Pageboy
 
 final class ProfileView: BaseView {
 
+    let me : Bool
+    let tabmanViewController : TabmanViewController
+    
+    init(tabmanViewController: TabmanViewController, me: Bool) {
+        self.tabmanViewController = tabmanViewController
+        self.me = me
+        super.init(frame: .zero)
+    }
+    
     let profileImage = UIImageView().then {
         $0.contentMode = .scaleAspectFill
-        $0.backgroundColor = .red
     }
     
     let author = UILabel().then {
-        $0.font = .systemFont(ofSize: 16, weight: .bold)
-        $0.textColor = DesignSystem.commonColorSet.gray
-        $0.backgroundColor = .yellow
+        $0.font = .systemFont(ofSize: 22, weight: .heavy)
+        $0.textColor = DesignSystem.commonColorSet.black
     }
     
+    let profileEditButton = CompleteButton(title: "프로필 수정", image: nil, fontSize: 16, disable: false)
+    
     override func configureHierarchy() {
-        [profileImage, author].forEach { addSubview($0)}
+        [profileImage, author, profileEditButton, tabmanViewController.view].forEach { addSubview($0)}
     }
     
     override func configureLayout() {
         profileImage.snp.makeConstraints { make in
-            make.top.leading.equalTo(safeAreaLayoutGuide).inset(10)
-            make.size.equalTo(80)
+            make.top.leading.equalTo(safeAreaLayoutGuide).inset(20)
+            make.size.equalTo(85)
         }
         
         author.snp.makeConstraints { make in
@@ -38,13 +51,29 @@ final class ProfileView: BaseView {
             make.leading.equalTo(profileImage.snp.trailing).offset(10)
             make.height.equalTo(40)
         }
+        
+        if me {
+            profileEditButton.snp.makeConstraints { make in
+                make.bottom.equalTo(profileImage)
+                make.leading.equalTo(profileImage.snp.trailing).offset(10)
+                make.height.equalTo(40)
+                make.width.equalTo(90)
+            }
+        }
+        
+        tabmanViewController.view.snp.makeConstraints { make in
+            make.top.equalTo(profileImage.snp.bottom).offset(30)
+            make.bottom.horizontalEdges.equalTo(safeAreaLayoutGuide)
+        }
+        
     }
 }
 
 extension ProfileView {
     
-    func updateUI() {
-        
+    func updateUI(_ data : ProfileResponse) {
+        addimage(imageUrl: data.profileImageToUrl)
+        author.text = data.nick
     }
     
     private func addimage(imageUrl : URL) {

@@ -15,9 +15,11 @@ import Reusable
 final class BoardView: BaseView {
     
     let bestBoard : Bool
+    let profileBoard : Bool
     
-    init(bestBoard : Bool) {
+    init(bestBoard : Bool, profileBoard : Bool) {
         self.bestBoard = bestBoard
+        self.profileBoard = profileBoard
         super.init(frame: .zero)
     }
 
@@ -59,7 +61,7 @@ final class BoardView: BaseView {
     }
     
     override func configureLayout() {
-        if !bestBoard {
+        if !bestBoard && !profileBoard {
             questionButton.snp.makeConstraints { make in
                 make.trailing.bottom.equalTo(safeAreaLayoutGuide).inset(20)
                 make.size.equalTo(50)
@@ -67,7 +69,7 @@ final class BoardView: BaseView {
         }
         
         mainCollectionView.snp.makeConstraints { make in
-            if bestBoard {
+            if bestBoard || profileBoard {
                 make.top.equalToSuperview().inset(60)
                 make.bottom.horizontalEdges.equalToSuperview()
             } else {

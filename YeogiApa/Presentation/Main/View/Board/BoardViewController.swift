@@ -28,7 +28,7 @@ final class BoardViewController: RxBaseViewController {
     
     init(productId : String, userID : String? = nil, limit: String, bestBoard: Bool, profileBoard: Bool, bestBoardType : BestCategory? = nil, profileBoardType : ProfilePostCategory? = nil) {
         self.productId = productId
-        self.mainView = BoardView(bestBoard: bestBoard)
+        self.mainView = BoardView(bestBoard: bestBoard, profileBoard: profileBoard)
         self.viewModel = BoardViewModel(product_id: productId,
                                         userId: userID,
                                         limit: limit,

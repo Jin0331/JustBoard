@@ -30,6 +30,12 @@ final class ProfileViewModel : MainViewModelType {
         
         let userProfile = PublishSubject<ProfileResponse>()
         
+        input.viewWillAppear
+            .bind(with: self) { owner, _ in
+                NotificationCenter.default.post(name: .boardRefresh, object: nil)
+            }
+            .disposed(by: disposeBag)
+        
         userID
             .flatMap { userId in
                 return NetworkManager.shared.profile(userId: userId)

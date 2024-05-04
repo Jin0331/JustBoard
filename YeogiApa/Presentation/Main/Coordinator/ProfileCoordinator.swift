@@ -18,8 +18,10 @@ final class ProfileCoordinator : Coordinator {
         self.navigationController = navigationController
     }
     
-    func start() {
-        let vc = ProfileViewController()
+    func start() { }
+    
+    func start(userID : String, me : Bool) {
+        let vc = ProfileViewController(userID: userID, me: me)
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }

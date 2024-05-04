@@ -32,6 +32,8 @@
 		DB4110122BD173D60088679F /* PostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110112BD173D60088679F /* PostRequest.swift */; };
 		DB4110142BD19E0A0088679F /* InquiryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110132BD19E0A0088679F /* InquiryResponse.swift */; };
 		DB4110162BD1AC720088679F /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */; };
+		DB63A4402BE574B500882670 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A43F2BE574B500882670 /* ProfileView.swift */; };
+		DB63A4422BE6088E00882670 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A4412BE6088E00882670 /* ProfileViewModel.swift */; };
 		DB743A962BE5278D00BBAE5F /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB743A952BE5278D00BBAE5F /* MenuCollectionViewCell.swift */; };
 		DB743A982BE53F0100BBAE5F /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB743A972BE53F0100BBAE5F /* UIApplication+Extension.swift */; };
 		DB743A9C2BE544FE00BBAE5F /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB743A9B2BE544FE00BBAE5F /* ProfileCoordinator.swift */; };
@@ -144,6 +146,8 @@
 		DB4110112BD173D60088679F /* PostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequest.swift; sourceTree = "<group>"; };
 		DB4110132BD19E0A0088679F /* InquiryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryResponse.swift; sourceTree = "<group>"; };
 		DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
+		DB63A43F2BE574B500882670 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		DB63A4412BE6088E00882670 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DB743A952BE5278D00BBAE5F /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		DB743A972BE53F0100BBAE5F /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		DB743A9B2BE544FE00BBAE5F /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
@@ -294,6 +298,7 @@
 				DB797BB52BE3CC2600E490C3 /* BoardUserViewModel.swift */,
 				DBB7C67A2BD95D0A00D3081A /* BoardDetailViewModel.swift */,
 				DB204DA32BD422A7006340BE /* QuestionViewModel.swift */,
+				DB63A4412BE6088E00882670 /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -335,6 +340,7 @@
 		DB743A9A2BE5424500BBAE5F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				DB63A43F2BE574B500882670 /* ProfileView.swift */,
 				DB743A9D2BE548E800BBAE5F /* ProfileViewController.swift */,
 			);
 			path = Profile;
@@ -831,6 +837,7 @@
 				DBCBAA2D2BC84842006B40CA /* ProfileResponse.swift in Sources */,
 				DBCBE3D02BCE28E800B6DAC5 /* EmailLoginCoordinator.swift in Sources */,
 				DBCBAA5F2BCD61E5006B40CA /* SignTextField.swift in Sources */,
+				DB63A4422BE6088E00882670 /* ProfileViewModel.swift in Sources */,
 				DB204DA02BD2E58D006340BE /* DelimiterLine.swift in Sources */,
 				DB797BB82BE3CD7B00E490C3 /* BoardUserCoordinator.swift in Sources */,
 				DBCBAA1F2BC7E7F2006B40CA /* ReusableID.swift in Sources */,
@@ -847,6 +854,7 @@
 				DBDD8AE52BE01002002ADA34 /* BoardTabmanViewController.swift in Sources */,
 				DBB7C66D2BD8AFAA00D3081A /* BaseCollectionViewCell.swift in Sources */,
 				DBDD8A762BDE43C3002ADA34 /* LikesResponse.swift in Sources */,
+				DB63A4402BE574B500882670 /* ProfileView.swift in Sources */,
 				DB743A9C2BE544FE00BBAE5F /* ProfileCoordinator.swift in Sources */,
 				DBCBAA562BCD0705006B40CA /* SignInUpViewController.swift in Sources */,
 				DB410FF52BD0CFA10088679F /* MainViewController.swift in Sources */,

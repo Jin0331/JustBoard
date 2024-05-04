@@ -127,11 +127,10 @@ extension BoardViewController : MenuViewControllerDelegate {
         present(SideMenuNavigationController(rootViewController: containerView), animated: true)
     }
     
-    func sendProfileViewController(vc: RxBaseViewController) {
+    func sendProfileViewController(userID: String, me: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
             guard let self = self else { return }
-            parentCoordinator?.toProfile()
-            parentMainCoordinator?.toProfile()
+            parentCoordinator?.toProfile(userID: userID, me: me)
         }
     }
 }

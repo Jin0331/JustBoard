@@ -13,6 +13,8 @@ struct ProfileResponse : Decodable {
     let nick : String
     let profileImage : String
     let posts : [String]
+    let followers: [String]
+    let following: [String]
     
     enum CodingKeys: String, CodingKey {
         case user_id
@@ -20,6 +22,7 @@ struct ProfileResponse : Decodable {
         case nick
         case profileImage
         case posts
+        case followers, following
     }
     
     init(from decoder: any Decoder) throws {
@@ -29,5 +32,7 @@ struct ProfileResponse : Decodable {
         self.nick = try container.decode(String.self, forKey: .nick)
         self.profileImage = (try? container.decodeIfPresent(String.self, forKey: .profileImage)) ?? ""
         self.posts = (try? container.decodeIfPresent([String].self, forKey: .posts)) ?? []
+        self.followers = (try? container.decodeIfPresent([String].self, forKey: .followers)) ?? []
+        self.following = (try? container.decodeIfPresent([String].self, forKey: .following)) ?? []
     }
 }

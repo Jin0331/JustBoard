@@ -11,7 +11,7 @@ import SnapKit
 import Kingfisher
 
 protocol MenuViewControllerDelegate {
-    func sendProfileViewController(vc : RxBaseViewController)
+    func sendProfileViewController(userID : String, me : Bool)
 }
 
 final class MenuViewController: BaseViewController {
@@ -135,7 +135,8 @@ extension MenuViewController : UICollectionViewDelegate {
             NotificationCenter.default.post(name: .goToMain, object: nil)
             dismiss(animated: true)
         case .myProfile:
-            sendDelegate?.sendProfileViewController(vc: ProfileViewController())
+            sendDelegate?.sendProfileViewController(userID: UserDefaultManager.shared.userId!,
+                                                    me: true)
             dismiss(animated: true)
         default:
             dismiss(animated: true)

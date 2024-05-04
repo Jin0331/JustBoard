@@ -34,12 +34,50 @@ final class ProfileView: BaseView {
         $0.textColor = DesignSystem.commonColorSet.black
     }
     
+    let countStackView = UIStackView().then {
+        $0.distribution = .fillEqually
+        $0.axis = .horizontal
+    }
+    
+    let postCountLabel = UIButton().then {
+        $0.titleLabel?.font = .systemFont(ofSize: 17, weight: .heavy)
+        $0.titleLabel?.numberOfLines = 2
+        $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
+        $0.backgroundColor = .clear
+        $0.titleLabel?.textAlignment = .center
+        
+        $0.setTitle("게시물\n444", for: .normal)
+    }
+    
+    let followerCountButton = UIButton().then {
+        $0.titleLabel?.font = .systemFont(ofSize: 17, weight: .heavy)
+        $0.titleLabel?.numberOfLines = 2
+        $0.titleLabel?.textAlignment = .center
+        $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
+        $0.backgroundColor = .clear
+        
+        $0.setTitle("팔로워\n444", for: .normal)
+    }
+    
+    let followingCountButton = UIButton().then {
+        $0.titleLabel?.font = .systemFont(ofSize: 17, weight: .heavy)
+        $0.titleLabel?.numberOfLines = 2
+        $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
+        $0.backgroundColor = .clear
+        $0.titleLabel?.textAlignment = .center
+        
+        $0.setTitle("팔로잉\n444", for: .normal)
+    }
+    
+    
     let profileEditButton = CompleteButton(title: "프로필 수정", image: nil, fontSize: 16, disable: false)
     
     let followButton = CompleteButton(title: "팔로우", image: nil, fontSize: 16, disable: false)
     
     override func configureHierarchy() {
-        [profileImage, author, profileEditButton, followButton, tabmanViewController.view].forEach { addSubview($0)}
+        [profileImage, author, profileEditButton, countStackView, followButton, tabmanViewController.view].forEach { addSubview($0)}
+        
+        [postCountLabel, followerCountButton, followingCountButton].forEach { countStackView.addArrangedSubview($0) }
     }
     
     override func configureLayout() {
@@ -52,6 +90,12 @@ final class ProfileView: BaseView {
             make.top.equalTo(profileImage)
             make.leading.equalTo(profileImage.snp.trailing).offset(10)
             make.height.equalTo(40)
+        }
+        
+        countStackView.snp.makeConstraints { make in
+            make.top.equalTo(profileImage.snp.bottom).offset(15)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(20)
+            make.height.equalTo(80)
         }
         
         if me {
@@ -72,7 +116,7 @@ final class ProfileView: BaseView {
         }
         
         tabmanViewController.view.snp.makeConstraints { make in
-            make.top.equalTo(profileImage.snp.bottom).offset(30)
+            make.top.equalTo(countStackView.snp.bottom).offset(10)
             make.bottom.horizontalEdges.equalTo(safeAreaLayoutGuide)
         }
         
@@ -84,6 +128,7 @@ extension ProfileView {
     func updateUI(_ data : ProfileResponse) {
         addimage(imageUrl: data.profileImageToUrl)
         author.text = data.nick
+        updateCountUI(data)
     }
     
     func updateFollowButton(_ data : Bool) {
@@ -95,6 +140,14 @@ extension ProfileView {
             followButton.backgroundColor = .systemBlue
         }
     }
+    
+    func updateCountUI(_ data : ProfileResponse) {
+        postCountLabel.setTitle("게시물\n" + String(data.posts.count), for: .normal)
+        followerCountButton.setTitle("팔로워\n" + String(data.followers.count), for: .normal)
+        followingCountButton.setTitle("팔로잉\n" + String(data.following.count), for: .normal)
+    }
+    
+
     
     private func addimage(imageUrl : URL) {
         

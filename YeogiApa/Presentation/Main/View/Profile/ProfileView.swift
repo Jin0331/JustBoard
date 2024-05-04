@@ -45,8 +45,6 @@ final class ProfileView: BaseView {
         $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
         $0.backgroundColor = .clear
         $0.titleLabel?.textAlignment = .center
-        
-        $0.setTitle("게시물\n444", for: .normal)
     }
     
     let followerCountButton = UIButton().then {
@@ -55,8 +53,6 @@ final class ProfileView: BaseView {
         $0.titleLabel?.textAlignment = .center
         $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
         $0.backgroundColor = .clear
-        
-        $0.setTitle("팔로워\n444", for: .normal)
     }
     
     let followingCountButton = UIButton().then {
@@ -65,13 +61,10 @@ final class ProfileView: BaseView {
         $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
         $0.backgroundColor = .clear
         $0.titleLabel?.textAlignment = .center
-        
-        $0.setTitle("팔로잉\n444", for: .normal)
     }
     
     
     let profileEditButton = CompleteButton(title: "프로필 수정", image: nil, fontSize: 16, disable: false)
-    
     let followButton = CompleteButton(title: "팔로우", image: nil, fontSize: 16, disable: false)
     
     override func configureHierarchy() {

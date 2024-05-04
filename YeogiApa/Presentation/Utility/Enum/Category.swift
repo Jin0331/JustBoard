@@ -47,6 +47,30 @@ enum ProfilePostCategory : String, CaseIterable,CustomStringConvertibleEnum {
     }
 }
 
+//MARK: - Follow
+enum FollowCategory : String, CaseIterable {
+    case followers = "팔로워"
+    case following = "팔로잉"
+    
+    var followers : Bool {
+        switch self {
+        case .followers:
+            return true
+        case .following:
+            return false
+        }
+    }
+    
+    var following : Bool {
+        switch self {
+        case .followers:
+            return false
+        case .following:
+            return true
+        }
+    }
+}
+
 func getTammanCategoryList(for tabmanCategory: TabmanCategory) -> [CustomStringConvertibleEnum] {
     switch tabmanCategory {
     case .best:

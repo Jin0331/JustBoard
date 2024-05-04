@@ -37,11 +37,17 @@ extension ProfileCoordinator {
         childCoordinators.append(boardDetailCoordinator)
     }
     
+    func toFollow(_ item : ProfileResponse, _ me : Bool) {
+        let followCoordinator = FollowCoordinator(navigationController: navigationController)
+        followCoordinator.parentCoordinator = self
+        followCoordinator.start(userID: item.user_id, me: me)
+        childCoordinators.append(followCoordinator)
+    }
+    
     private func profileChildViewController(userId : String) -> Array<RxBaseViewController> {
         
         let category = ProfilePostCategory.allCases
         var viewControllersList: Array<RxBaseViewController> = []
-        let bestBoard = false
         
         category.forEach {
             let vc = BoardViewController(productId: $0.productId,

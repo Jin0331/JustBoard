@@ -36,6 +36,10 @@ final class BoardDetailView: BaseView {
         $0.contentMode = .scaleAspectFill
     }
     
+    let profileButton = UIButton().then {
+        $0.backgroundColor = .clear
+    }
+    
     let author = UILabel().then {
         $0.font = .systemFont(ofSize: 16, weight: .bold)
         $0.textColor = DesignSystem.commonColorSet.gray
@@ -112,7 +116,7 @@ final class BoardDetailView: BaseView {
         [commentTextField, commentCompleteButton].forEach { commentBackgroundView.addSubview($0) }
         
         scrollView.addSubview(contentsView)
-        [title, profileImage, author, createdAt, textView, buttonBgView, commentCollectionView].forEach { contentsView.addSubview($0) }
+        [title, profileImage, profileButton, author, createdAt, textView, buttonBgView, commentCollectionView].forEach { contentsView.addSubview($0) }
         
         buttonBgView.addSubview(buttonStackView)
         [likeButton, commentCountButton].forEach { buttonStackView.addArrangedSubview($0)}
@@ -139,22 +143,28 @@ final class BoardDetailView: BaseView {
         profileImage.snp.makeConstraints { make in
             make.top.equalTo(title.snp.bottom).offset(10)
             make.leading.equalToSuperview().inset(10)
-            make.size.equalTo(30)
+            make.size.equalTo(50)
+        }
+        
+        profileButton.snp.makeConstraints { make in
+            make.edges.equalTo(profileImage)
         }
         
         author.snp.makeConstraints { make in
-//            make.top.equalTo(profileImage)
-            make.centerY.equalTo(profileImage)
+            make.top.equalTo(profileImage)
+//            make.centerY.equalTo(profileImage)
             make.height.equalTo(30)
             make.width.lessThanOrEqualTo(120)
             make.leading.equalTo(profileImage.snp.trailing).offset(10)
         }
         
         createdAt.snp.makeConstraints { make in
-            make.centerY.equalTo(author)
+//            make.centerY.equalTo(author)
+            make.bottom.equalTo(profileImage)
             make.height.equalTo(author)
             make.width.equalTo(130)
-            make.leading.equalTo(author.snp.trailing).offset(10)
+            make.leading.equalTo(author)
+//            make.leading.equalTo(author.snp.trailing).offset(10)
         }
         
         textView.snp.makeConstraints { make in

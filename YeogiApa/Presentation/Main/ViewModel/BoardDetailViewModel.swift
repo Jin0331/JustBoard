@@ -11,22 +11,26 @@ import RxCocoa
 
 final class BoardDetailViewModel : MainViewModelType {
     
-    var postData : BehaviorSubject<PostResponse>
-    let updatedPostData : BehaviorSubject<PostResponse>
+    private let postData : BehaviorSubject<PostResponse>
+    private let userID : BehaviorSubject<String>
+    private let updatedPostData : BehaviorSubject<PostResponse>
     var disposeBag: DisposeBag = DisposeBag()
     
     init(_ receiveData: PostResponse) {
         self.postData = BehaviorSubject<PostResponse>(value: receiveData)
         self.updatedPostData = BehaviorSubject<PostResponse>(value: receiveData)
+        self.userID = BehaviorSubject<String>(value: receiveData.creator.userID)
     }
     
     struct Input {
+        let profileButton : ControlEvent<Void>
         let likeButton: ControlEvent<Void>
         let commentText : ControlProperty<String>
         let commentComplete : ControlEvent<Void>
     }
     
     struct Output {
+        let profileType : PublishSubject<(userID:String, me:Bool)>
         let commentButtonUI : Driver<Bool>
         let postData : BehaviorSubject<PostResponse>
         let commentPost : PublishSubject<Comment>
@@ -36,13 +40,21 @@ final class BoardDetailViewModel : MainViewModelType {
     
     func transform(input: Input) -> Output {
         
+        let profileType = PublishSubject<(userID:String, me:Bool)>()
         let likeButtonEnable = PublishSubject<Void>()
-        
         let commentButtonEnable = BehaviorSubject<Bool>(value: false)
         let commentRequestModel = PublishSubject<CommentRequest>()
         let postCommentData = PublishSubject<Comment>()
         let commentComplete = PublishSubject<Bool>()
-        
+
+        //MARK: - Profile
+        input.profileButton
+            .withLatestFrom(userID)
+            .bind(with: self) { owner, userID in
+                let me = UserDefaultManager.shared.userId == userID
+                profileType.onNext((userID, me))
+            }
+            .disposed(by: disposeBag)
         
         //MARK: - like
         input.likeButton
@@ -131,6 +143,7 @@ final class BoardDetailViewModel : MainViewModelType {
         
         
         return Output(
+            profileType:profileType,
             commentButtonUI: commentButtonEnable.asDriver(onErrorJustReturn: false),
             postData:postData,
             commentPost: postCommentData,

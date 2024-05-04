@@ -94,4 +94,12 @@ final class NetworkManager  {
     func profile(userId: String) -> Single<Result<ProfileResponse, AFError>> {
         return makeRequest(router: MainRouter.otherProfile(userId: userId))
     }
+    
+    func follow(userId: String) -> Single<Result<FollowResponse, AFError>> {
+        return makeRequest(router: MainRouter.follow(userId: userId))
+    }
+    
+    func followCancel(userId: String) -> Single<Result<FollowResponse, AFError>> {
+        return makeRequest(router: MainRouter.followCancel(userId: userId))
+    }
 }

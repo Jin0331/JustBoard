@@ -41,7 +41,8 @@ extension BoardMainCoordinator {
         boardSpecificCoordinator.start(productId: item,
                                        limit: InquiryRequest.InquiryRequestDefault.limit,
                                        bestBoard: false,
-                                       bestBoardType: nil)
+                                       profileBoard: false
+        )
     }
     
     func toDetail(_ item : PostResponse) {
@@ -74,16 +75,18 @@ extension BoardMainCoordinator {
 }
 
 extension BoardMainCoordinator {
-    func boardChildViewController() -> Array<RxBaseViewController> {
+    private func boardChildViewController() -> Array<RxBaseViewController> {
         
         let category = BestCategory.allCases
         var viewControllersList: Array<RxBaseViewController> = []
         let bestBoard = true
+        let profileBoard = false
         
         category.forEach {
             let vc = BoardViewController(productId: $0.productId,
                                          limit: InquiryRequest.InquiryRequestDefault.maxLimit,
                                          bestBoard: bestBoard,
+                                         profileBoard: profileBoard,
                                          bestBoardType: $0
             )
             vc.parentMainCoordinator = self

@@ -38,6 +38,13 @@ enum ProfilePostCategory : String, CaseIterable,CustomStringConvertibleEnum {
     case myPost = "작성글"
     case myComment = "댓글"
     case myFavorite = "좋아요"
+    
+    var productId : String {
+        switch self {
+        default :
+            return ""
+        }
+    }
 }
 
 func getTammanCategoryList(for tabmanCategory: TabmanCategory) -> [CustomStringConvertibleEnum] {

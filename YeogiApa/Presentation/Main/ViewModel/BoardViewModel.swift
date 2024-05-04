@@ -11,20 +11,26 @@ import RxSwift
 import RxCocoa
 
 final class BoardViewModel : MainViewModelType {
-
-    private var bestBoard : Bool
-    private var limit : String /*Int(InquiryRequest.InquiryRequestDefault.limit)!*/
-    private var maxLimit : Int
+    
     private var product_id : String
+    private var userId : String?
+    private var limit : String
+    private var maxLimit : Int
+    private var bestBoard : Bool
+    private var profileBoard : Bool
     private var bestBoardType : BestCategory?
+    private var profileBoardType : ProfilePostCategory?
     var disposeBag: DisposeBag = DisposeBag()
     
-    init(product_id: String, limit: String, bestBoard: Bool, bestBoardType: BestCategory?) {
+    init(product_id: String, userId : String?, limit: String, bestBoard: Bool, profileBoard:Bool, bestBoardType: BestCategory?, profileBoardType: ProfilePostCategory?) {
         self.product_id = product_id
+        self.userId = userId
         self.limit = limit
         self.maxLimit = Int(limit)!
         self.bestBoard = bestBoard
+        self.profileBoard = profileBoard
         self.bestBoardType = bestBoardType
+        self.profileBoardType = profileBoardType
     }
     
     struct Input {
@@ -51,7 +57,7 @@ final class BoardViewModel : MainViewModelType {
         
         let productIdWithLimit = Observable.combineLatest(product_id,limit)
         
-        
+        // Board Refresh
         NotificationCenter.default.rx.notification(.boardRefresh)
             .withLatestFrom(productIdWithLimit)
             .flatMap { product_id, limit in
@@ -60,10 +66,11 @@ final class BoardViewModel : MainViewModelType {
             }
             .enumerated()
             .bind(with: self) { owner, result in
-                owner.handleBoardData(result: result, bestBoard: owner.bestBoard, bestBoardType: owner.bestBoardType, postData: postData, nextCursor: nextCursor)
+                owner.handleBoardData(result: result, bestBoard: owner.bestBoard, profileBoard: owner.profileBoard,bestBoardType: owner.bestBoardType, profileBoardType: owner.profileBoardType,postData: postData, nextCursor: nextCursor)
             }
             .disposed(by: disposeBag)
         
+        //
         input.viewWillAppear
             .withLatestFrom(productIdWithLimit)
             .flatMap { product_id, limit in
@@ -72,7 +79,7 @@ final class BoardViewModel : MainViewModelType {
             }
             .enumerated()
             .bind(with: self) { owner, result in
-                owner.handleBoardData(result: result, bestBoard: owner.bestBoard, bestBoardType: owner.bestBoardType, postData: postData, nextCursor: nextCursor)
+                owner.handleBoardData(result: result, bestBoard: owner.bestBoard, profileBoard: owner.profileBoard,bestBoardType: owner.bestBoardType, profileBoardType: owner.profileBoardType,postData: postData, nextCursor: nextCursor)
             }
             .disposed(by: disposeBag)
         
@@ -129,7 +136,7 @@ final class BoardViewModel : MainViewModelType {
         )
     }
 
-    private func handleBoardData(result: (index: Int, element: PrimitiveSequence<SingleTrait, Result<InquiryResponse, AFError>>.Element), bestBoard: Bool, bestBoardType : BestCategory?, postData: BehaviorRelay<[BoardDataSection]>, nextCursor: PublishSubject<String>) {
+    private func handleBoardData(result: (index: Int, element: PrimitiveSequence<SingleTrait, Result<InquiryResponse, AFError>>.Element), bestBoard: Bool, profileBoard : Bool, bestBoardType : BestCategory?, profileBoardType : ProfilePostCategory?, postData: BehaviorRelay<[BoardDataSection]>, nextCursor: PublishSubject<String>) {
         switch result.element {
         case .success(let value):
             
@@ -149,6 +156,34 @@ final class BoardViewModel : MainViewModelType {
                 returnData = bestBoard ? Array(sortedData[0..<maxLength]) : sortedData
                 postData.accept([BoardDataSection(items: returnData)])
                 nextCursor.onNext(value.next_cursor)
+                
+            } else if let type = profileBoardType {
+                
+                guard let userId = userId else { return }
+                let returnData: [PostResponse]
+                
+                switch type {
+                case .myPost:
+                    returnData = value.data.filter {
+                        $0.creator.userID == userId
+                    }
+                case .myComment:
+                    returnData = value.data.filter {
+                        return $0.comments.contains {
+                            return $0.creator.userID == userId
+                        }
+                    }
+                case .myFavorite:
+                    returnData = value.data.filter {
+                        return $0.likes.contains {
+                            return $0 == userId
+                        }
+                    } 
+                }
+                
+                postData.accept([BoardDataSection(items: returnData)])
+                nextCursor.onNext(value.next_cursor)
+                
             } else {
                 postData.accept([BoardDataSection(items: value.data)])
                 nextCursor.onNext(value.next_cursor)

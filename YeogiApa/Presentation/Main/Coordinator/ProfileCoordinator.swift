@@ -21,7 +21,7 @@ final class ProfileCoordinator : Coordinator {
     func start() { }
     
     func start(userID : String, me : Bool) {
-        let vc = ProfileViewController(userID: userID, me: me, viewControllersList: profileChildViewController(), category: .profile)
+        let vc = ProfileViewController(userID: userID, me: me, viewControllersList: profileChildViewController(userId: userID), category: .profile)
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }
@@ -36,17 +36,20 @@ extension ProfileCoordinator {
         childCoordinators.append(boardDetailCoordinator)
     }
     
-    func profileChildViewController() -> Array<RxBaseViewController> {
+    private func profileChildViewController(userId : String) -> Array<RxBaseViewController> {
         
-        let category = BestCategory.allCases
+        let category = ProfilePostCategory.allCases
         var viewControllersList: Array<RxBaseViewController> = []
         let bestBoard = false
         
         category.forEach {
             let vc = BoardViewController(productId: $0.productId,
+                                         userID: userId,
                                          limit: InquiryRequest.InquiryRequestDefault.maxLimit,
-                                         bestBoard: bestBoard,
-                                         bestBoardType: $0
+                                         bestBoard: false,
+                                         profileBoard: true,
+                                         bestBoardType: nil,
+                                         profileBoardType: $0
             )
             vc.parentPorifleCoordinator = self
             viewControllersList.append(vc)

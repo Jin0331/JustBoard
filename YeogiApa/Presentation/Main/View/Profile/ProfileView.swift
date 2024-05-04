@@ -36,8 +36,10 @@ final class ProfileView: BaseView {
     
     let profileEditButton = CompleteButton(title: "프로필 수정", image: nil, fontSize: 16, disable: false)
     
+    let followButton = CompleteButton(title: "팔로우", image: nil, fontSize: 16, disable: false)
+    
     override func configureHierarchy() {
-        [profileImage, author, profileEditButton, tabmanViewController.view].forEach { addSubview($0)}
+        [profileImage, author, profileEditButton, followButton, tabmanViewController.view].forEach { addSubview($0)}
     }
     
     override func configureLayout() {
@@ -59,6 +61,14 @@ final class ProfileView: BaseView {
                 make.height.equalTo(40)
                 make.width.equalTo(90)
             }
+            
+        } else {
+            followButton.snp.makeConstraints { make in
+                make.bottom.equalTo(profileImage)
+                make.leading.equalTo(profileImage.snp.trailing).offset(10)
+                make.height.equalTo(40)
+                make.width.equalTo(90)
+            }
         }
         
         tabmanViewController.view.snp.makeConstraints { make in
@@ -74,6 +84,16 @@ extension ProfileView {
     func updateUI(_ data : ProfileResponse) {
         addimage(imageUrl: data.profileImageToUrl)
         author.text = data.nick
+    }
+    
+    func updateFollowButton(_ data : Bool) {
+        if data {
+            followButton.setTitle("팔로잉", for: .normal)
+            followButton.backgroundColor = DesignSystem.commonColorSet.black
+        } else {
+            followButton.setTitle("팔로우", for: .normal)
+            followButton.backgroundColor = .systemBlue
+        }
     }
     
     private func addimage(imageUrl : URL) {

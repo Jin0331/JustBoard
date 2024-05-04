@@ -17,6 +17,8 @@ enum MainRouter {
     case likes(query : LikesRequest, postId : String)
     case meProfile
     case otherProfile(userId : String)
+    case follow(userId : String)
+    case followCancel(userId : String)
 }
 
 extension MainRouter : TargetType {
@@ -26,10 +28,12 @@ extension MainRouter : TargetType {
     
     var method: HTTPMethod {
         switch self {
-        case .write, .files, .comment, .likes:
+        case .write, .files, .comment, .likes, .follow:
             return .post
         case .inquiry, .specificInquiry, .meProfile, .otherProfile:
             return .get
+        case .followCancel:
+            return .delete
         }
     }
     
@@ -49,6 +53,8 @@ extension MainRouter : TargetType {
             return "/users/me/profile"
         case .otherProfile(userId: let userId):
             return "/users/" + userId + "/profile"
+        case .follow(userId: let userId), .followCancel(userId: let userId):
+            return "/follow/" + userId
         }
     }
     
@@ -68,7 +74,7 @@ extension MainRouter : TargetType {
                 HTTPHeader.contentType.rawValue : HTTPHeader.multipart.rawValue,
                 HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue
             ]
-        case .inquiry, .specificInquiry, .meProfile, .otherProfile:
+        case .inquiry, .specificInquiry, .meProfile, .otherProfile, .follow, .followCancel:
             return [
                 HTTPHeader.authorization.rawValue : token,
                 HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue

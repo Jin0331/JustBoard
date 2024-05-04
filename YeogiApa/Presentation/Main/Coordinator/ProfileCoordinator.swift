@@ -13,6 +13,7 @@ final class ProfileCoordinator : Coordinator {
     var boardMainCoordinator : BoardMainCoordinator?
     var boardSpecificCoordinator : BoardSpecificCoordinator?
     var boardUserCoordinator : BoardUserCoordinator?
+    var boardDetailCoordinator : BoardDetailCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

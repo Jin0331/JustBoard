@@ -11,7 +11,6 @@ import RxCocoa
 
 final class ProfileViewController: RxBaseViewController {
 
-//    private let userID : BehaviorSubject<String>
     private let me : Bool
     private let baseView : ProfileView
     private let viewModel : ProfileViewModel
@@ -19,7 +18,7 @@ final class ProfileViewController: RxBaseViewController {
     
     init(userID: String, me: Bool, viewControllersList : Array<RxBaseViewController>, category : TabmanCategory) {
         self.me = me
-        self.viewModel = ProfileViewModel(userID: BehaviorSubject<String>(value: userID))
+        self.viewModel = ProfileViewModel(userID: BehaviorSubject<String>(value: userID), me: me)
         let tabmanVC = BoardTabmanViewController(viewControllersList: viewControllersList, category: category)
         self.baseView = ProfileView(tabmanViewController: tabmanVC, me: me)
     }
@@ -30,7 +29,10 @@ final class ProfileViewController: RxBaseViewController {
     
     override func bind() {
         
-        let input = ProfileViewModel.Input(viewWillAppear: rx.viewWillAppear)
+        let input = ProfileViewModel.Input(
+            viewWillAppear: rx.viewWillAppear,
+            followButton: baseView.followButton.rx.tap
+        )
         
         let output = viewModel.transform(input: input)
         
@@ -40,6 +42,11 @@ final class ProfileViewController: RxBaseViewController {
             }
             .disposed(by: disposeBag)
         
+        output.followStatus
+            .bind(with: self) { owner, followStatus in
+                owner.baseView.updateFollowButton(followStatus)
+            }
+            .disposed(by: disposeBag)
         
     }
 

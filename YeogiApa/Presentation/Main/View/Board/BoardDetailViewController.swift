@@ -62,12 +62,19 @@ final class BoardDetailViewController: RxBaseViewController {
 
         
         let input = BoardDetailViewModel.Input(
+            profileButton : mainView.profileButton.rx.tap,
             likeButton: mainView.likeButton.rx.tap,
             commentText: mainView.commentTextField.rx.text.orEmpty,
             commentComplete: mainView.commentCompleteButton.rx.tap
         )
         
         let output = viewModel.transform(input: input)
+        
+        output.profileType
+            .bind(with: self) { owner, profileType in
+                owner.parentCoordinator?.toProfile(userID: profileType.userID, me: profileType.me)
+            }
+            .disposed(by: disposeBag)
         
         output.commentButtonUI
             .drive(with: self) { owner, valid in

@@ -34,6 +34,7 @@
 		DB4110162BD1AC720088679F /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */; };
 		DB63A4402BE574B500882670 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A43F2BE574B500882670 /* ProfileView.swift */; };
 		DB63A4422BE6088E00882670 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A4412BE6088E00882670 /* ProfileViewModel.swift */; };
+		DB63A4442BE64D4300882670 /* FollowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A4432BE64D4300882670 /* FollowResponse.swift */; };
 		DB743A962BE5278D00BBAE5F /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB743A952BE5278D00BBAE5F /* MenuCollectionViewCell.swift */; };
 		DB743A982BE53F0100BBAE5F /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB743A972BE53F0100BBAE5F /* UIApplication+Extension.swift */; };
 		DB743A9C2BE544FE00BBAE5F /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB743A9B2BE544FE00BBAE5F /* ProfileCoordinator.swift */; };
@@ -148,6 +149,7 @@
 		DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
 		DB63A43F2BE574B500882670 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DB63A4412BE6088E00882670 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		DB63A4432BE64D4300882670 /* FollowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowResponse.swift; sourceTree = "<group>"; };
 		DB743A952BE5278D00BBAE5F /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		DB743A972BE53F0100BBAE5F /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		DB743A9B2BE544FE00BBAE5F /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				DB4110132BD19E0A0088679F /* InquiryResponse.swift */,
 				DB901C732BD69531003EEDC6 /* FilesResponse.swift */,
 				DBDD8A752BDE43C3002ADA34 /* LikesResponse.swift */,
+				DB63A4432BE64D4300882670 /* FollowResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -804,6 +807,7 @@
 				DB0598B22BE3456800AE0973 /* BoardDetailCoordinator.swift in Sources */,
 				DB797BB22BE3CA3A00E490C3 /* BoardUserViewController.swift in Sources */,
 				DBDD8AFC2BE0DADA002ADA34 /* BoardRankCollectionViewCell.swift in Sources */,
+				DB63A4442BE64D4300882670 /* FollowResponse.swift in Sources */,
 				DBDD8A742BDE4337002ADA34 /* LikesRequest.swift in Sources */,
 				DB797BB62BE3CC2600E490C3 /* BoardUserViewModel.swift in Sources */,
 				DBCBA9E02BC7BE34006B40CA /* AppDelegate.swift in Sources */,

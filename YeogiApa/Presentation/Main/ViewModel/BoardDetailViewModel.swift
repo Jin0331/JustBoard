@@ -142,6 +142,25 @@ final class BoardDetailViewModel : MainViewModelType {
             .disposed(by: disposeBag)
         
         
+        //TODO: - Follow 눌렀을 때 Post 업데이트 필요함
+        NotificationCenter.default.rx.notification(.boardRefresh)
+            .withLatestFrom(updatedPostData)
+            .map { $0.postID }
+            .flatMap {
+                NetworkManager.shared.post(postId: $0)
+            }
+            .debug("NotificationCenter.default.rx.notification(.boardRefresh), boardDetail")
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let postResponse):
+                    print(postResponse)
+                    owner.updatedPostData.onNext(postResponse)
+                case .failure(let error):
+                    print(error, "✅ PostResponse Error ")
+                }
+            }
+            .disposed(by: disposeBag)
+        
         return Output(
             profileType:profileType,
             commentButtonUI: commentButtonEnable.asDriver(onErrorJustReturn: false),

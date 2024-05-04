@@ -41,8 +41,6 @@ final class ProfileViewModel : MainViewModelType {
             }
             .disposed(by: disposeBag)
         
-        // Follow 여부 UserID 가져올 떄 contain으로 여부 파악해서,
-        
         userID
             .flatMap { userId in
                 return NetworkManager.shared.profile(userId: userId)
@@ -50,17 +48,18 @@ final class ProfileViewModel : MainViewModelType {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let profileResponse):
-                    print("ProfileViewModel userProfileInquiry ✅")
                     let myId = UserDefaultManager.shared.userId
-                    
                     if !owner.me {
-                        if profileResponse.followers.contains(myId!) {
+                        if profileResponse.followers.contains(where: { follow in
+                            follow.userID == myId!
+                        }) {
                             followStatus.onNext(true)
                         } else {
                             followStatus.onNext(false)
                         }
                     }
                     userProfile.onNext(profileResponse)
+
                 case .failure(let error):
                     print(error)
                 }
@@ -82,6 +81,7 @@ final class ProfileViewModel : MainViewModelType {
                 switch result {
                 case .success(let followResponse):
                     followStatus.onNext(followResponse.following_status)
+                    NotificationCenter.default.post(name: .boardRefresh, object: nil)
                 case .failure(let error):
                     print(error)
                 }

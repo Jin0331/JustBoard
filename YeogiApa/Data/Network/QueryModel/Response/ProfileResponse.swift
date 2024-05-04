@@ -13,8 +13,8 @@ struct ProfileResponse : Decodable {
     let nick : String
     let profileImage : String
     let posts : [String]
-    let followers: [String]
-    let following: [String]
+    let followers: [Follow]
+    let following: [Follow]
     
     enum CodingKeys: String, CodingKey {
         case user_id
@@ -32,11 +32,21 @@ struct ProfileResponse : Decodable {
         self.nick = try container.decode(String.self, forKey: .nick)
         self.profileImage = (try? container.decode(String.self, forKey: .profileImage)) ?? DesignSystem.defaultimage.defaultProfile
         self.posts = (try? container.decodeIfPresent([String].self, forKey: .posts)) ?? []
-        self.followers = (try? container.decodeIfPresent([String].self, forKey: .followers)) ?? []
-        self.following = (try? container.decodeIfPresent([String].self, forKey: .following)) ?? []
+        self.followers = (try? container.decodeIfPresent([Follow].self, forKey: .followers)) ?? []
+        self.following = (try? container.decodeIfPresent([Follow].self, forKey: .following)) ?? []
     }
     
     var profileImageToUrl : URL {
         return URL(string: APIKey.baseURLWithVersion() + "/" + profileImage)!
+    }
+}
+
+struct Follow: Decodable {
+    let userID, nick: String
+    let profileImage: String?
+
+    enum CodingKeys: String, CodingKey {
+        case userID = "user_id"
+        case nick, profileImage
     }
 }

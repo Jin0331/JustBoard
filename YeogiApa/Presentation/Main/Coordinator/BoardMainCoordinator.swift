@@ -20,7 +20,7 @@ final class BoardMainCoordinator : Coordinator {
     
     //MARK: -
     func start() {
-        let vc = BoardMainViewController(viewControllersList: boardChildViewController(), category: BestCategory.allCases, productId: InquiryRequest.InquiryRequestDefault.productId, limit: InquiryRequest.InquiryRequestDefault.maxLimit)
+        let vc = BoardMainViewController(viewControllersList: boardChildViewController(), category: .best, productId: InquiryRequest.InquiryRequestDefault.productId, limit: InquiryRequest.InquiryRequestDefault.maxLimit)
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }

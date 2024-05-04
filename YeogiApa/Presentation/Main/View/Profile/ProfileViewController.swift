@@ -17,7 +17,7 @@ final class ProfileViewController: RxBaseViewController {
     private let viewModel : ProfileViewModel
     var parentCoordinator : ProfileCoordinator?
     
-    init(userID: String, me: Bool, viewControllersList : Array<RxBaseViewController>, category : [BestCategory]) {
+    init(userID: String, me: Bool, viewControllersList : Array<RxBaseViewController>, category : TabmanCategory) {
         self.me = me
         self.viewModel = ProfileViewModel(userID: BehaviorSubject<String>(value: userID))
         let tabmanVC = BoardTabmanViewController(viewControllersList: viewControllersList, category: category)

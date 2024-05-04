@@ -7,8 +7,20 @@
 
 import UIKit
 
+protocol CustomStringConvertibleEnum: CustomStringConvertible {}
+
+extension CustomStringConvertibleEnum {
+    var description: String {
+        return "\(self)"
+    }
+}
+enum TabmanCategory : CaseIterable {
+    case best
+    case profile
+}
+
 //MARK: - 실시간 베스트 목록
-enum BestCategory : String, CaseIterable  {
+enum BestCategory : String, CaseIterable,CustomStringConvertibleEnum  {
     case commentSort = "댓글"
     case likeSort = "공감"
     case unlikeSort = "공감비율"
@@ -18,6 +30,22 @@ enum BestCategory : String, CaseIterable  {
         default :
             return ""
         }
+    }
+}
+
+//MARK: - 프로필 내가 작성한 글
+enum ProfilePostCategory : String, CaseIterable,CustomStringConvertibleEnum {
+    case myPost = "작성글"
+    case myComment = "댓글"
+    case myFavorite = "좋아요"
+}
+
+func getTammanCategoryList(for tabmanCategory: TabmanCategory) -> [CustomStringConvertibleEnum] {
+    switch tabmanCategory {
+    case .best:
+        return BestCategory.allCases
+    case .profile:
+        return ProfilePostCategory.allCases
     }
 }
 

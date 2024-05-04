@@ -21,7 +21,7 @@ final class ProfileCoordinator : Coordinator {
     func start() { }
     
     func start(userID : String, me : Bool) {
-        let vc = ProfileViewController(userID: userID, me: me, viewControllersList: profileChildViewController(), category: BestCategory.allCases)
+        let vc = ProfileViewController(userID: userID, me: me, viewControllersList: profileChildViewController(), category: .profile)
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }

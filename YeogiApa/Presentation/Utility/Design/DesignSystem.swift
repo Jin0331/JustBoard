@@ -44,6 +44,8 @@ enum DesignSystem {
         static let home = UIImage(systemName: "house", withConfiguration:sfSymbolSmallConfig)
         static let profile = UIImage(systemName: "person.crop.circle", withConfiguration:sfSymbolSmallConfig)
         static let latest = UIImage(systemName: "clock.arrow.circlepath", withConfiguration:sfSymbolSmallConfig)
+        
+        static let doc = UIImage(systemName: "chart.bar.doc.horizontal", withConfiguration:sfSymbolLargeConfig)
     
     }
     

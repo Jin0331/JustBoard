@@ -30,6 +30,18 @@ struct InquiryResponse : Decodable, Hashable {
         self.next_cursor = try container.decode(String.self, forKey: .next_cursor)
     }
     
+    var postList : [String] {
+        var returnData : [String] = []
+        
+        data.forEach {
+            if $0.productID != "" {
+                returnData.append($0.productID)
+            }
+        }
+        
+        return Array(Set(returnData))
+    }
+    
     var rankData : [PostRank] {
         var returndata : [PostRank] = []
             

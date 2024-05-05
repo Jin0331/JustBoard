@@ -22,6 +22,7 @@ target 'YeogiApa' do
   pod 'Reusable'
   pod 'Tabman', '~> 3.2'
   pod 'SideMenu', '~> 6.0'
+  pod 'MarqueeLabel'
 end
 
 post_install do |installer|

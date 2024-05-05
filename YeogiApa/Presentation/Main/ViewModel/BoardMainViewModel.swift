@@ -45,7 +45,6 @@ final class BoardMainViewModel : MainViewModelType {
                 return NetworkManager.shared.post(query: InquiryRequest(next: InquiryRequest.InquiryRequestDefault.next,
                                                                         limit: limit,
                                                                         product_id: product_id))
-                // nhj_test gyjw_all
             }
             .enumerated()
             .bind(with: self) { owner, result in

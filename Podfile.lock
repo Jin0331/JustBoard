@@ -3,6 +3,7 @@ PODS:
   - Differentiator (5.0.0)
   - IQKeyboardManagerSwift (7.0.1)
   - Kingfisher (7.11.0)
+  - MarqueeLabel (4.5.0)
   - NVActivityIndicatorView (5.1.1):
     - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - Alamofire (~> 5.8)
   - IQKeyboardManagerSwift
   - Kingfisher (~> 7.0)
+  - MarqueeLabel
   - NVActivityIndicatorView
   - Reusable
   - RxCocoa (= 6.6.0)
@@ -58,6 +60,7 @@ SPEC REPOS:
     - Differentiator
     - IQKeyboardManagerSwift
     - Kingfisher
+    - MarqueeLabel
     - NVActivityIndicatorView
     - Pageboy
     - Reusable
@@ -79,6 +82,7 @@ SPEC CHECKSUMS:
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   IQKeyboardManagerSwift: 7f6b1b1d1497855d2beea7f2f10ffcc6978525b1
   Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
+  MarqueeLabel: 4b46d196abd253448e830cbd976f9eacc3af0849
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   Pageboy: 7f7886f61c76633df635861bf7839caf2cabdb3e
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
@@ -95,6 +99,6 @@ SPEC CHECKSUMS:
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   Toast-Swift: dd369e68ee529f542c65bd0d0c6c50cd743cf6f2
 
-PODFILE CHECKSUM: 1608b017503719451dc5210e7ccbdbc3d36b4153
+PODFILE CHECKSUM: 476e168169d809303a303a37b73902b219d609be
 
 COCOAPODS: 1.15.2

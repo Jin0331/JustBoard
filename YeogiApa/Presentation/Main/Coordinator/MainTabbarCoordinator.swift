@@ -25,20 +25,20 @@ final class MainTabbarCoordinator : Coordinator {
         boardCoordinator.parentCoordinator = self
         
         
-        let settingNavigationController = UINavigationController()
-        let settingCoordinator = SettingCoordinator(navigationController: settingNavigationController)
-        settingCoordinator.parentCoordinator = self
+        let boardListNavigationController = UINavigationController()
+        let boardListCoordinator = BoardListCoordinator(navigationController: boardListNavigationController)
+        boardListCoordinator.parentCoordinator = self
         
         // tabbar 설정 및 child 추가
-        tabbarController.viewControllers = [boardNavigationController, settingNavigationController]
+        tabbarController.viewControllers = [boardNavigationController, boardListNavigationController]
         navigationController.pushViewController(tabbarController, animated: true)
         navigationController.isNavigationBarHidden = true
         
         childCoordinators.append(boardCoordinator)
-        childCoordinators.append(settingCoordinator)
+        childCoordinators.append(boardListCoordinator)
         
         boardCoordinator.start()
-        settingCoordinator.start()
+        boardListCoordinator.start()
     }
     
     deinit {

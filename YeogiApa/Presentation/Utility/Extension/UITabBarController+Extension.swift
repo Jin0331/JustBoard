@@ -20,7 +20,7 @@ extension UITabBarController {
             item[0].title = "홈"
             
             item[1].image = DesignSystem.tabbarImage.second
-            item[1].title = "채널"
+            item[1].title = "게시판"
         }
     }
 }

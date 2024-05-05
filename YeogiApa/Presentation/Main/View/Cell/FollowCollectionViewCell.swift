@@ -61,13 +61,18 @@ final class FollowCollectionViewCell: BaseCollectionViewCell, Reusable {
         author.text = itemIdentifier.nick
     }
     
-    func updateFollowButton(_ data : Bool) {
-        if data {
-            followButton.setTitle("팔로잉", for: .normal)
-            followButton.backgroundColor = DesignSystem.commonColorSet.black
+    func updateFollowButton(_ data : Bool, _ me : Bool) {
+        
+        if me {
+            followButton.isHidden = true
         } else {
-            followButton.setTitle("팔로우", for: .normal)
-            followButton.backgroundColor = .systemBlue
+            if data {
+                followButton.setTitle("팔로잉", for: .normal)
+                followButton.backgroundColor = DesignSystem.commonColorSet.black
+            } else {
+                followButton.setTitle("팔로우", for: .normal)
+                followButton.backgroundColor = .systemBlue
+            }
         }
     }
     

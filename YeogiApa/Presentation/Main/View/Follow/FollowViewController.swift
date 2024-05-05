@@ -117,7 +117,7 @@ extension FollowViewController {
             
             followStatus
                 .bind(with: self) { owner, followStatus in
-                    cell.updateFollowButton(followStatus)
+                    cell.updateFollowButton(followStatus,checkUserId)
                 }
                 .disposed(by: disposeBag)
             cell.profileButton.rx.tap

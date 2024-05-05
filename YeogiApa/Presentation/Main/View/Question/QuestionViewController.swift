@@ -66,7 +66,6 @@ final class QuestionViewController: RxBaseViewController {
         let output = viewModel.transform(input: input)
         
         output.overAddedImageCount
-            .debug("overAddedImageCount")
             .drive(with: self) { owner, validImageAdd in
                 
                 if validImageAdd {
@@ -79,7 +78,6 @@ final class QuestionViewController: RxBaseViewController {
 
         
         output.writeButtonUI
-            .debug("button UI")
             .drive(with: self) { owner, valid in
                 owner.navigationItem.rightBarButtonItem = valid ? UIBarButtonItem(customView: owner.mainView.completeButtonItem) : nil
             }

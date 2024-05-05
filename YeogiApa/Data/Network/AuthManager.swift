@@ -54,7 +54,7 @@ final class AuthManager : RequestInterceptor {
                     case .success(let refreshResponse): // Token이 Refresh 성공했을 때
                         print("Access Token Refresh Success ✅")
                         UserDefaultManager.shared.accessToken = refreshResponse.accessToken
-                        completion(.retryWithDelay(10))
+                        completion(.retryWithDelay(1))
                     case .failure(let error): // Token이 Refresh 실패했을 때,, refreshToken이 만료되었거나(418), 비정상적인 접근(401, 403)
                         print("Token Refresh Fail : \(error)")
                         

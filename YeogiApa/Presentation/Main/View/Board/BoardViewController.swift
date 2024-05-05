@@ -135,7 +135,7 @@ extension BoardViewController : MenuViewControllerDelegate {
     func sendProfileViewController(userID: String, me: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
             guard let self = self else { return }
-            parentCoordinator?.toProfile(userID: userID, me: me)
+            parentCoordinator?.toProfile(userID: userID, me: me, defaultPage: 0)
         }
     }
 }

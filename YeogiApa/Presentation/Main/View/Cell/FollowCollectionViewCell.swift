@@ -12,6 +12,11 @@ import Reusable
 import Kingfisher
 
 final class FollowCollectionViewCell: BaseCollectionViewCell, Reusable {
+    
+    var profileButton = UIButton().then {
+        $0.backgroundColor = .clear
+    }
+    
     let profileImage = UIImageView().then {
         $0.contentMode = .scaleAspectFill
     }
@@ -21,8 +26,10 @@ final class FollowCollectionViewCell: BaseCollectionViewCell, Reusable {
         $0.textColor = DesignSystem.commonColorSet.black
     }
     
+    let followButton = CompleteButton(title: "팔로우", image: nil, fontSize: 16, disable: false)
+    
     override func configureHierarchy() {
-        [profileImage, author].forEach { contentView.addSubview($0)}
+        [profileButton, profileImage, author, followButton].forEach { contentView.addSubview($0)}
     }
     
     override func configureLayout() {
@@ -32,21 +39,47 @@ final class FollowCollectionViewCell: BaseCollectionViewCell, Reusable {
             make.size.equalTo(50)
         }
         
+        profileButton.snp.makeConstraints { make in
+            make.edges.equalTo(profileImage)
+        }
+        
         author.snp.makeConstraints { make in
             make.centerY.equalTo(profileImage)
             make.leading.equalTo(profileImage.snp.trailing).offset(10)
         }
+        
+        followButton.snp.makeConstraints { make in
+            make.centerY.equalTo(profileImage)
+            make.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(20)
+            make.height.equalTo(40)
+            make.width.equalTo(90)
+        }
     }
     
-    func updateUI(_ itemIdentifier: Follow) {
+    func updateUI(_ itemIdentifier: ProfileResponse) {
         addimage(imageUrl: itemIdentifier.profileImageToUrl)
         author.text = itemIdentifier.nick
+    }
+    
+    func updateFollowButton(_ data : Bool, _ me : Bool) {
+        
+        if me {
+            followButton.isHidden = true
+        } else {
+            if data {
+                followButton.setTitle("팔로잉", for: .normal)
+                followButton.backgroundColor = DesignSystem.commonColorSet.black
+            } else {
+                followButton.setTitle("팔로우", for: .normal)
+                followButton.backgroundColor = .systemBlue
+            }
+        }
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         profileImage.image = nil
-        
+
         author.text = nil
         author.font = nil
     }

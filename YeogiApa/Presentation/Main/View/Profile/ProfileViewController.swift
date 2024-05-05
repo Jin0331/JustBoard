@@ -41,13 +41,13 @@ final class ProfileViewController: RxBaseViewController {
         
         output.followerCountButton
             .bind(with: self) { owner, profileResponse in
-                owner.parentCoordinator?.toFollow(profileResponse, owner.me)
+                owner.parentCoordinator?.toFollow(profileResponse, owner.me, 0)
             }
             .disposed(by: disposeBag)
         
         output.followingCountButton
             .bind(with: self) { owner, profileResponse in
-                owner.parentCoordinator?.toFollow(profileResponse, owner.me)
+                owner.parentCoordinator?.toFollow(profileResponse, owner.me, 1)
             }
             .disposed(by: disposeBag)
         
@@ -62,7 +62,11 @@ final class ProfileViewController: RxBaseViewController {
                 owner.baseView.updateFollowButton(followStatus)
             }
             .disposed(by: disposeBag)
-        
+    }
+    
+    override func configureNavigation() {
+        super.configureNavigation()
+        navigationController?.navigationBar.titleTextAttributes = nil
     }
 
     deinit {

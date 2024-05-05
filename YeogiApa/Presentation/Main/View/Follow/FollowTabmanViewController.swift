@@ -14,10 +14,14 @@ final class FollowTabmanViewController: TabmanViewController, TMBarDataSource {
     var parentCoordinator : FollowCoordinator?
     private let viewControllers: Array<RxBaseViewController>
     private let category : [FollowCategory]
+    private let userNickname : String
+    private let defaultPage : Int
 
-    init(viewControllersList : Array<RxBaseViewController>, category : [FollowCategory]){
+    init(viewControllersList : Array<RxBaseViewController>, userNickname: String, category : [FollowCategory], defaultPage: Int){
         self.viewControllers = viewControllersList
+        self.userNickname = userNickname
         self.category = category
+        self.defaultPage = defaultPage
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -28,12 +32,15 @@ final class FollowTabmanViewController: TabmanViewController, TMBarDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        configureNavigation()
+        configureNavigation(title: userNickname)
     }
     
-    private func configureNavigation() {
-        navigationController?.navigationBar.titleTextAttributes = nil
-        navigationItem.title = "ggg"
+    private func configureNavigation(title : String) {
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil) // title 부분 수정
+        backBarButtonItem.tintColor = DesignSystem.commonColorSet.lightBlack
+        navigationItem.backBarButtonItem = backBarButtonItem
+        
+        navigationItem.title = title
     }
 
 }
@@ -51,7 +58,7 @@ extension FollowTabmanViewController : PageboyViewControllerDataSource {
     }
     
     func defaultPage(for pageboyViewController: Pageboy.PageboyViewController) -> Pageboy.PageboyViewController.Page? {
-        return nil
+        return .at(index: defaultPage)
     }
     
     func configureView() {

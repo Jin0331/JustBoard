@@ -38,7 +38,7 @@ extension BoardDetailCoordinator {
     func toProfile(userID : String, me : Bool) {
         let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
         profileCoordinator.boardDetailCoordinator = self
-        profileCoordinator.start(userID: userID, me: me)
+        profileCoordinator.start(userID: userID, me: me, defaultPage: 0)
         childCoordinators.append(profileCoordinator)
     }
 }

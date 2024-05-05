@@ -60,7 +60,11 @@ extension FollowViewController {
             // Profile Coordinator
             cell.profileButton.rx.tap
                 .bind(with: self) { owner, _ in
-                    owner.parentCoordinator?.toProfile(userID: item.userID, me: owner.me)
+                    
+                    guard let myID = UserDefaultManager.shared.userId else { return }
+                    let checkUserId = item.userID == myID
+                    
+                    owner.parentCoordinator?.toProfile(userID: item.userID, me: checkUserId)
                 }
                 .disposed(by: disposeBag)
             

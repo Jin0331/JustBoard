@@ -35,22 +35,38 @@ final class FollowViewModel : MainViewModelType {
     func transform(input: Input) -> Output {
         let followData = BehaviorRelay(value: [FollowDataSection]())
         
-        userID
-            .flatMap { userId in
-                return NetworkManager.shared.profile(userId: userId)
-            }
+        func updateFollowData(with response: ProfileResponse) {
+            let items = follower ? response.followers : response.following
+            followData.accept([FollowDataSection(items: items)])
+            print(items, follower ? "⚠️Follower" : "⚠️Following")
+        }
+        
+        let fetchProfile = userID.flatMap { userId in
+            NetworkManager.shared.profile(userId: userId)
+        }
+        
+        fetchProfile
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let profileResponse):
-                    
-                    if owner.follower && !owner.following {
-                        followData.accept([FollowDataSection(items: profileResponse.followers)])
-                        print(profileResponse.followers, "⚠️Follower")
-                    } else {
-                        followData.accept([FollowDataSection(items: profileResponse.following)])
-                        print(profileResponse.following, "⚠️Following")
-                    }
-
+                    updateFollowData(with: profileResponse)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        let profileUpdate = NotificationCenter.default.rx.notification(.followRefresh)
+            .withLatestFrom(userID)
+            .flatMap { userId in
+                NetworkManager.shared.profile(userId: userId)
+            }
+        
+        profileUpdate
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let profileResponse):
+                    updateFollowData(with: profileResponse)
                 case .failure(let error):
                     print(error)
                 }

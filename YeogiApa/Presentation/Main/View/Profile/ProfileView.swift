@@ -92,12 +92,13 @@ final class ProfileView: BaseView {
         }
         
         if me {
-            profileEditButton.snp.makeConstraints { make in
-                make.bottom.equalTo(profileImage)
-                make.leading.equalTo(profileImage.snp.trailing).offset(10)
-                make.height.equalTo(40)
-                make.width.equalTo(90)
-            }
+            //MARK: - 추후 추가
+//            profileEditButton.snp.makeConstraints { make in
+//                make.bottom.equalTo(profileImage)
+//                make.leading.equalTo(profileImage.snp.trailing).offset(10)
+//                make.height.equalTo(40)
+//                make.width.equalTo(90)
+//            }
             
         } else {
             followButton.snp.makeConstraints { make in

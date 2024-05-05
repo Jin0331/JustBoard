@@ -43,7 +43,6 @@ final class EmailLoginViewModel : UserViewModelType {
         //MARK: - 이메일, 패스워드 유효성 검증에 따른 Button 비/활성화 및 alpha 추가
         loginObservable
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
-            .debug("ButtonUI")
             .bind(with: self) { owner, loginRequest in
                 let valid = owner.isValidEmail(loginRequest.email) && owner.isValidPassword(loginRequest.password)
                 loginButtonUIUpdate.onNext(valid)

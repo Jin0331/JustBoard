@@ -149,7 +149,6 @@ final class BoardDetailViewModel : MainViewModelType {
             .flatMap {
                 NetworkManager.shared.post(postId: $0)
             }
-            .debug("NotificationCenter.default.rx.notification(.boardRefresh), boardDetail")
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let postResponse):

@@ -41,7 +41,6 @@ class SignUpEmailViewModel : UserViewModelType {
         input.nextButtonTap
             .withLatestFrom(input.email)
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
-            .debug("Email Duplicate Valid")
             .flatMapLatest { email in
                 return NetworkManager.shared.validationEmail(query: EmailValidationRequest(email: email))
             }

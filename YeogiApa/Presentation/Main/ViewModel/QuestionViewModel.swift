@@ -114,7 +114,6 @@ final class QuestionViewModel : MainViewModelType {
             .map { validTitle, validContents, validImageCount, validCategory in
                 return validTitle && validContents && !validImageCount && validCategory
             }
-            .debug("Complete Button UI")
             .bind(with: self) { owner, valid in
                 completeButtonTap.onNext(valid)
             }

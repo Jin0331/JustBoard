@@ -109,7 +109,6 @@ final class BoardViewModel : MainViewModelType {
             .disposed(by: disposeBag)
         
         Observable.combineLatest(nextPage, product_id)
-            .debug("NextPage ✅")
             .flatMap { cursurWithProductId in
                 return NetworkManager.shared.post(query: InquiryRequest(next: cursurWithProductId.0,
                                                                         limit: InquiryRequest.InquiryRequestDefault.limit,

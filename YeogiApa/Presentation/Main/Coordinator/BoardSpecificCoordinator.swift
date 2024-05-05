@@ -67,11 +67,11 @@ extension BoardSpecificCoordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func toProfile(userID : String, me : Bool) {
+    func toProfile(userID : String, me : Bool, defaultPage:Int) {
         let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
         profileCoordinator.boardSpecificCoordinator = self
         print("hi")
-        profileCoordinator.start(userID: userID, me: me)
+        profileCoordinator.start(userID: userID, me: me, defaultPage: defaultPage)
         childCoordinators.append(profileCoordinator)
     }
 }

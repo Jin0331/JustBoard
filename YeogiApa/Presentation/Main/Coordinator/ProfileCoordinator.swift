@@ -22,7 +22,7 @@ final class ProfileCoordinator : Coordinator {
     
     func start() { }
     
-    func start(userID : String, me : Bool) {
+    func start(userID : String, me : Bool, defaultPage: Int) {
         let vc = ProfileViewController(userID: userID, me: me, viewControllersList: profileChildViewController(userId: userID), category: .profile)
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
@@ -38,10 +38,10 @@ extension ProfileCoordinator {
         childCoordinators.append(boardDetailCoordinator)
     }
     
-    func toFollow(_ item : ProfileResponse, _ me : Bool) {
+    func toFollow(_ item : ProfileResponse, _ me : Bool, _ defaultPage : Int) {
         let followCoordinator = FollowCoordinator(navigationController: navigationController)
         followCoordinator.parentCoordinator = self
-        followCoordinator.start(userID: item.user_id, userNickname: item.nick, me: me)
+        followCoordinator.start(userID: item.user_id, userNickname: item.nick, me: me, defaultPage: defaultPage)
         childCoordinators.append(followCoordinator)
     }
     

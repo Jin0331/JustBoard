@@ -15,11 +15,13 @@ final class FollowTabmanViewController: TabmanViewController, TMBarDataSource {
     private let viewControllers: Array<RxBaseViewController>
     private let category : [FollowCategory]
     private let userNickname : String
+    private let defaultPage : Int
 
-    init(viewControllersList : Array<RxBaseViewController>, userNickname: String, category : [FollowCategory]){
+    init(viewControllersList : Array<RxBaseViewController>, userNickname: String, category : [FollowCategory], defaultPage: Int){
         self.viewControllers = viewControllersList
         self.userNickname = userNickname
         self.category = category
+        self.defaultPage = defaultPage
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -56,7 +58,7 @@ extension FollowTabmanViewController : PageboyViewControllerDataSource {
     }
     
     func defaultPage(for pageboyViewController: Pageboy.PageboyViewController) -> Pageboy.PageboyViewController.Page? {
-        return nil
+        return .at(index: defaultPage)
     }
     
     func configureView() {

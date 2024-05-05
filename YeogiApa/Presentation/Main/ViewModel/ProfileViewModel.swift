@@ -133,6 +133,32 @@ final class ProfileViewModel : MainViewModelType {
             }
             .disposed(by: disposeBag)
         
+        NotificationCenter.default.rx.notification(.boardRefresh)
+            .withLatestFrom(userID)
+            .flatMap { userId in
+                return NetworkManager.shared.profile(userId: userId)
+            }
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let profileResponse):
+                    let myId = UserDefaultManager.shared.userId
+                    if !owner.me {
+                        if profileResponse.followers.contains(where: { follow in
+                            follow.userID == myId!
+                        }) {
+                            followStatus.onNext(true)
+                        } else {
+                            followStatus.onNext(false)
+                        }
+                    }
+                    userProfile.onNext(profileResponse)
+
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .disposed(by: disposeBag)
+        
         return Output(
             userProfile:userProfile,
             followStatus: followStatus,

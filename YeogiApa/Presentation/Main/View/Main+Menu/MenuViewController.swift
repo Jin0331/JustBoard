@@ -61,6 +61,7 @@ final class MenuViewController: BaseViewController {
 
         showAlert2(title: "로그아웃", text: "로그아웃 하시겠습니까? 🤔", addButtonText1: "네", addButtonText2: "아뇨") { [weak self] in
             guard let self = self else { return }
+            UserDefaultManager.shared.isLogined = false
             NotificationCenter.default.post(name: .resetLogin, object: nil)
             dismiss(animated: true)
         }

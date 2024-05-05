@@ -36,21 +36,21 @@ final class SignInUpViewController : RxBaseViewController{
     
     override func bind() {
 
-        mainView.kakaoLoginButton.rx
-            .tap
-            .bind(with: self) { owner, _ in
-                //TODO: - 소셜로그인 적용시 화면전환
-                owner.parentCoordinator?.kakaoLogin()
-            }
-            .disposed(by: disposeBag)
-        
-        mainView.appleLoginButton.rx
-            .tap
-            .bind(with: self) { owner, _ in
-                //TODO: - 소셜로그인 적용시 화면전환
-                owner.parentCoordinator?.appleLogin()
-            }
-            .disposed(by: disposeBag)
+//        mainView.kakaoLoginButton.rx
+//            .tap
+//            .bind(with: self) { owner, _ in
+//                //TODO: - 소셜로그인 적용시 화면전환
+//                owner.parentCoordinator?.kakaoLogin()
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        mainView.appleLoginButton.rx
+//            .tap
+//            .bind(with: self) { owner, _ in
+//                //TODO: - 소셜로그인 적용시 화면전환
+//                owner.parentCoordinator?.appleLogin()
+//            }
+//            .disposed(by: disposeBag)
         
         mainView.emailLoginButton.rx
             .tap

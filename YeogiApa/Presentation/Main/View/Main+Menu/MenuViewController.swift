@@ -131,12 +131,15 @@ extension MenuViewController : UICollectionViewDelegate {
         guard let menuCase = datasource.itemIdentifier(for: indexPath) else { return }
         
         switch menuCase {
-        case .home:
-            NotificationCenter.default.post(name: .goToMain, object: nil)
-            dismiss(animated: true)
         case .myProfile:
             sendDelegate?.sendProfileViewController(userID: UserDefaultManager.shared.userId!,
                                                     me: true)
+            dismiss(animated: true)
+        case .home:
+            NotificationCenter.default.post(name: .goToMain, object: nil)
+            dismiss(animated: true)
+        case .board:
+            NotificationCenter.default.post(name: .goToBoard, object: nil)
             dismiss(animated: true)
         default:
             dismiss(animated: true)

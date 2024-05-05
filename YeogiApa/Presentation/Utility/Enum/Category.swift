@@ -82,6 +82,16 @@ enum BoardListCategory : String, CaseIterable {
             return ""
         }
     }
+    
+    var specificBoard : [String] {
+        switch self {
+        case .my:
+            return ["생활꿀팁", "아무거나올리는짤방게시판","이게시판은뭐지"]
+            
+        default:
+            return []
+        }
+    }
 }
 
 

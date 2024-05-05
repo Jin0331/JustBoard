@@ -15,6 +15,7 @@ final class MainTabbarCoordinator : Coordinator {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         NotificationCenter.default.addObserver(self, selector: #selector(goToMain), name: .goToMain, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(goToBoard), name: .goToBoard, object: nil)
     }
     
     func start() {
@@ -61,6 +62,20 @@ extension MainTabbarCoordinator {
         
         if tabBarController.selectedIndex != 0 {
             tabBarController.selectedIndex = 0
+        } else {
+            if let navController = tabBarController.viewControllers?.first as? UINavigationController {
+                navController.popToRootViewController(animated: false)
+            }
+        }
+    }
+    
+    @objc func goToBoard(_ notification: Notification) {
+        print("gotoBoard ✅")
+        
+        guard let tabBarController = UIApplication.shared.tabbarController() as? MainTabBarController else { return }
+        
+        if tabBarController.selectedIndex != 1 {
+            tabBarController.selectedIndex = 1
         } else {
             if let navController = tabBarController.viewControllers?.first as? UINavigationController {
                 navController.popToRootViewController(animated: false)

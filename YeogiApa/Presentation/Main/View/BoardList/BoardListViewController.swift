@@ -19,9 +19,9 @@ final class BoardListViewController: RxBaseViewController {
     var parentCoordinator : BoardListCoordinator?
     private var dataSource: BoardListRxDataSource!
     
-    init(productId: String) {
+    init(productId: String, specificBoard:[String]) {
         self.baseView = BoardListView()
-        self.viewModel = BoardListViewModel(product_id: productId)
+        self.viewModel = BoardListViewModel(product_id: productId, specificBoard:specificBoard)
     }
     
     override func loadView() {

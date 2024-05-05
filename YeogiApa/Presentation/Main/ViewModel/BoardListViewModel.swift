@@ -12,12 +12,14 @@ import RxCocoa
 
 final class BoardListViewModel : MainViewModelType {
     private var product_id : String
+    private var specificBoard : [String]
     private var limit : String
     var disposeBag: DisposeBag = DisposeBag()
     
-    init(product_id: String) {
+    init(product_id: String, specificBoard : [String]) {
         self.product_id = product_id
         self.limit = InquiryRequest.InquiryRequestDefault.maxLimit
+        self.specificBoard = specificBoard
     }
     
     struct Input {
@@ -45,7 +47,8 @@ final class BoardListViewModel : MainViewModelType {
                 
                 switch result {
                 case .success(let value):
-                    postData.accept([BoardListDataSection(items: value.postList)])
+                    let productId = owner.specificBoard.isEmpty ? value.postList : owner.specificBoard
+                    postData.accept([BoardListDataSection(items: productId)])
                 case .failure(let error):
                     print(error)
                 }

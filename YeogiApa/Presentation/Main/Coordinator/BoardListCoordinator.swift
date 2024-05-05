@@ -48,7 +48,7 @@ extension BoardListCoordinator {
         var viewControllersList: Array<RxBaseViewController> = []
 
         category.forEach {
-            let vc = BoardListViewController(productId: $0.productId)
+            let vc = BoardListViewController(productId: $0.productId, specificBoard: $0.specificBoard)
             vc.parentCoordinator = self
             viewControllersList.append(vc)
         }

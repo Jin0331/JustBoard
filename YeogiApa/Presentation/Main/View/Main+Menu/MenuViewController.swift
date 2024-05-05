@@ -36,6 +36,13 @@ final class MenuViewController: BaseViewController {
        return view
     }()
     
+    private let logoutButton = UIButton().then {
+        $0.backgroundColor = .clear
+        $0.setTitle("로그아웃", for: .normal)
+        $0.setTitleColor(DesignSystem.commonColorSet.red, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 18, weight: .heavy)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,11 +53,21 @@ final class MenuViewController: BaseViewController {
         configureHierarchy()
         configureLayout()
         configureView()
+        
+        logoutButton.addTarget(self, action: #selector(resetLogined), for: .touchUpInside)
     }
     
+    @objc private func resetLogined() {
+
+        showAlert2(title: "로그아웃", text: "로그아웃 하시겠습니까? 🤔", addButtonText1: "네", addButtonText2: "아뇨") { [weak self] in
+            guard let self = self else { return }
+            NotificationCenter.default.post(name: .resetLogin, object: nil)
+            dismiss(animated: true)
+        }
+    }
     
     override func configureHierarchy() {
-        [headerTitle, menuCollectionView].forEach { view.addSubview($0)}
+        [headerTitle, menuCollectionView, logoutButton].forEach { view.addSubview($0)}
     }
     
     override func configureLayout() {
@@ -61,7 +78,13 @@ final class MenuViewController: BaseViewController {
         
         menuCollectionView.snp.makeConstraints { make in
             make.top.equalTo(headerTitle.snp.bottom).offset(20)
-            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(400)
+        }
+        
+        logoutButton.snp.makeConstraints { make in
+            make.top.equalTo(menuCollectionView.snp.bottom).offset(20)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     

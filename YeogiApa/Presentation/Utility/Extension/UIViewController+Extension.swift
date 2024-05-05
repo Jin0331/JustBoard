@@ -34,6 +34,26 @@ extension UIViewController {
         
         present(alert, animated: true)
     }
+    
+    func showAlert2(title:String ,text: String, addButtonText1: String? = nil, addButtonText2: String? = nil, Action: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: text, preferredStyle: .alert)
+        
+        if let buttonText = addButtonText2 {
+            let customAction = UIAlertAction(title: buttonText, style: .cancel) { _ in
+            }
+            alert.addAction(customAction)
+        }
+        
+        
+        if let buttonText = addButtonText1 {
+            let customAction = UIAlertAction(title: buttonText, style: .destructive) { _ in
+                Action?()
+            }
+            alert.addAction(customAction)
+        }
+        
+        present(alert, animated: true)
+    }
 }
 
 //MARK: - Present

@@ -1088,6 +1088,7 @@
 				DEVELOPMENT_TEAM = SUZFV58S8B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YeogiApa/Application/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "자게";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -1122,6 +1123,7 @@
 				DEVELOPMENT_TEAM = SUZFV58S8B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YeogiApa/Application/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "자게";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

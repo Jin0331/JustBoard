@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Alamofire
 
 final class ProfileViewModel : MainViewModelType {
     
@@ -52,23 +53,7 @@ final class ProfileViewModel : MainViewModelType {
                 return NetworkManager.shared.profile(userId: userId)
             }
             .bind(with: self) { owner, result in
-                switch result {
-                case .success(let profileResponse):
-                    let myId = UserDefaultManager.shared.userId
-                    if !owner.me {
-                        if profileResponse.followers.contains(where: { follow in
-                            follow.userID == myId!
-                        }) {
-                            followStatus.onNext(true)
-                        } else {
-                            followStatus.onNext(false)
-                        }
-                    }
-                    userProfile.onNext(profileResponse)
-
-                case .failure(let error):
-                    print(error)
-                }
+                handleProfileResponse(owner: owner, result: result)
             }
             .disposed(by: disposeBag)
         
@@ -113,23 +98,7 @@ final class ProfileViewModel : MainViewModelType {
                 return NetworkManager.shared.profile(userId: userId)
             }
             .bind(with: self) { owner, result in
-                switch result {
-                case .success(let profileResponse):
-                    let myId = UserDefaultManager.shared.userId
-                    if !owner.me {
-                        if profileResponse.followers.contains(where: { follow in
-                            follow.userID == myId!
-                        }) {
-                            followStatus.onNext(true)
-                        } else {
-                            followStatus.onNext(false)
-                        }
-                    }
-                    userProfile.onNext(profileResponse)
-
-                case .failure(let error):
-                    print(error)
-                }
+                handleProfileResponse(owner: owner, result: result)
             }
             .disposed(by: disposeBag)
         
@@ -139,25 +108,30 @@ final class ProfileViewModel : MainViewModelType {
                 return NetworkManager.shared.profile(userId: userId)
             }
             .bind(with: self) { owner, result in
-                switch result {
-                case .success(let profileResponse):
-                    let myId = UserDefaultManager.shared.userId
-                    if !owner.me {
-                        if profileResponse.followers.contains(where: { follow in
-                            follow.userID == myId!
-                        }) {
-                            followStatus.onNext(true)
-                        } else {
-                            followStatus.onNext(false)
-                        }
-                    }
-                    userProfile.onNext(profileResponse)
-
-                case .failure(let error):
-                    print(error)
-                }
+                handleProfileResponse(owner: owner, result: result)
             }
             .disposed(by: disposeBag)
+        
+        // 중복 부분 함수화
+        func handleProfileResponse(owner: ProfileViewModel, result: PrimitiveSequence<SingleTrait, Result<ProfileResponse, AFError>>.Element) {
+            switch result {
+            case .success(let profileResponse):
+                let myId = UserDefaultManager.shared.userId
+                if !owner.me {
+                    if profileResponse.followers.contains(where: { follow in
+                        follow.userID == myId!
+                    }) {
+                        followStatus.onNext(true)
+                    } else {
+                        followStatus.onNext(false)
+                    }
+                }
+                userProfile.onNext(profileResponse)
+
+            case .failure(let error):
+                print(error)
+            }
+        }
         
         return Output(
             userProfile:userProfile,
@@ -166,4 +140,6 @@ final class ProfileViewModel : MainViewModelType {
             followingCountButton: followingCountButton
         )
     }
+    
+    
 }

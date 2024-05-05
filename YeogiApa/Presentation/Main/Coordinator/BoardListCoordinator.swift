@@ -30,6 +30,18 @@ final class BoardListCoordinator : Coordinator {
 
 extension BoardListCoordinator {
     
+    func toSpecificBoard(_ item : String) {
+        let boardSpecificCoordinator = BoardSpecificCoordinator(navigationController: navigationController)
+        boardSpecificCoordinator.parentBoardListCoordinator = self
+        childCoordinators.append(boardSpecificCoordinator)
+        
+        boardSpecificCoordinator.start(productId: item,
+                                       limit: InquiryRequest.InquiryRequestDefault.limit,
+                                       bestBoard: false,
+                                       profileBoard: false
+        )
+    }
+    
     private func childViewController() -> Array<RxBaseViewController> {
         
         let category = BoardListCategory.allCases

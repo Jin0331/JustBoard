@@ -37,6 +37,14 @@ final class BoardListViewController: RxBaseViewController {
         
         let input = BoardListViewModel.Input(viewWillAppear: rx.viewWillAppear)
         
+        baseView.mainCollectionView.rx
+            .modelAndIndexSelected(String.self)
+            .bind(with: self) { owner, value in
+                owner.parentCoordinator?.toSpecificBoard(value.0)
+            }
+            .disposed(by: disposeBag)
+        
+        
         let output = viewModel.transform(input: input)
         
         output.postData

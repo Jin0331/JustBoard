@@ -38,8 +38,10 @@ struct InquiryResponse : Decodable, Hashable {
                 returnData.append($0.productID)
             }
         }
-        
-        return Array(Set(returnData))
+
+        return Array(Set(returnData)).sorted { (str1, str2) -> Bool in
+            return str1.localizedStandardCompare(str2) == .orderedAscending
+        }
     }
     
     var rankData : [PostRank] {

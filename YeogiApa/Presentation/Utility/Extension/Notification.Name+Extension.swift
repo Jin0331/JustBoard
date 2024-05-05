@@ -13,5 +13,6 @@ extension Notification.Name {
     static let boardRefresh = Notification.Name(rawValue: "boardRefresh")
     static let followRefresh = Notification.Name(rawValue: "followRefresh")
     static let goToMain = Notification.Name(rawValue: "goToMain")
+    static let goToBoard = Notification.Name(rawValue: "goToBoard")
     static let goToProfile = Notification.Name(rawValue: "goToProfile")
 }

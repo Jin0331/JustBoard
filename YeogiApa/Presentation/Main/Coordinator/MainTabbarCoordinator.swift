@@ -15,6 +15,7 @@ final class MainTabbarCoordinator : Coordinator {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         NotificationCenter.default.addObserver(self, selector: #selector(goToMain), name: .goToMain, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(goToBoard), name: .goToBoard, object: nil)
     }
     
     func start() {
@@ -25,20 +26,20 @@ final class MainTabbarCoordinator : Coordinator {
         boardCoordinator.parentCoordinator = self
         
         
-        let settingNavigationController = UINavigationController()
-        let settingCoordinator = SettingCoordinator(navigationController: settingNavigationController)
-        settingCoordinator.parentCoordinator = self
+        let boardListNavigationController = UINavigationController()
+        let boardListCoordinator = BoardListCoordinator(navigationController: boardListNavigationController)
+        boardListCoordinator.parentCoordinator = self
         
         // tabbar 설정 및 child 추가
-        tabbarController.viewControllers = [boardNavigationController, settingNavigationController]
+        tabbarController.viewControllers = [boardNavigationController, boardListNavigationController]
         navigationController.pushViewController(tabbarController, animated: true)
         navigationController.isNavigationBarHidden = true
         
         childCoordinators.append(boardCoordinator)
-        childCoordinators.append(settingCoordinator)
+        childCoordinators.append(boardListCoordinator)
         
         boardCoordinator.start()
-        settingCoordinator.start()
+        boardListCoordinator.start()
     }
     
     deinit {
@@ -61,6 +62,20 @@ extension MainTabbarCoordinator {
         
         if tabBarController.selectedIndex != 0 {
             tabBarController.selectedIndex = 0
+        } else {
+            if let navController = tabBarController.viewControllers?.first as? UINavigationController {
+                navController.popToRootViewController(animated: false)
+            }
+        }
+    }
+    
+    @objc func goToBoard(_ notification: Notification) {
+        print("gotoBoard ✅")
+        
+        guard let tabBarController = UIApplication.shared.tabbarController() as? MainTabBarController else { return }
+        
+        if tabBarController.selectedIndex != 1 {
+            tabBarController.selectedIndex = 1
         } else {
             if let navController = tabBarController.viewControllers?.first as? UINavigationController {
                 navController.popToRootViewController(animated: false)

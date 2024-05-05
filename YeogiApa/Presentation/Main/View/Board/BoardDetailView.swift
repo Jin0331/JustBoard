@@ -16,7 +16,7 @@ final class BoardDetailView: BaseView {
     private let textViewDefaultHeight : Double = 300
     
     let scrollView = UIScrollView().then {
-        $0.backgroundColor = DesignSystem.commonColorSet.gray
+        $0.backgroundColor = DesignSystem.commonColorSet.lightGray
         
         $0.isScrollEnabled = true
         $0.showsVerticalScrollIndicator = true
@@ -276,6 +276,8 @@ extension BoardDetailView : UITextViewDelegate {
         let urlList = data.filesToUrl
         let imageLocation = data.content3ToImageLocation
         
+        print(imageLocation)
+        
         if !urlList.isEmpty && !imageLocation.isEmpty {
             (0..<urlList.count).forEach { _addTextViewImage(url: urlList[$0], location: imageLocation[$0])}
         } else if !urlList.isEmpty && imageLocation.isEmpty {
@@ -296,8 +298,13 @@ extension BoardDetailView : UITextViewDelegate {
             switch result {
             case .success(let imageResult):
                 // 이미지 다운로드 성공 시 NSAttributedString을 만들어서 UITextView에 삽입
+                let newWidth = textView.bounds.width - 15
+                let scale = newWidth / imageResult.image.size.width
+                let newHeight = imageResult.image.size.height * scale
+                let resizedImage = imageResult.image.resizeImage(targetSize: CGSize(width: newWidth, height: newHeight))
+                
                 let attachment = NSTextAttachment()
-                attachment.image = imageResult.image
+                attachment.image = resizedImage
                 let imageAttributedString = NSAttributedString(attachment: attachment)
                 
                 // 원하는 위치에 이미지 삽입

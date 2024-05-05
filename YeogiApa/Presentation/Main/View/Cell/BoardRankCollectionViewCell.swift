@@ -68,16 +68,28 @@ final class BoardRankCollectionViewCell : BaseCollectionViewCell, Reusable {
     
     func updateUI(_ itemIdentifier: PostRank) {
         profileImageCircle()
-        updateUICommon(rank: itemIdentifier.boardRank, name: itemIdentifier.productId, count: itemIdentifier.count)
+        updateUICommon(rank: itemIdentifier.boardRank, name: itemIdentifier.productId, count: itemIdentifier.count, isPost: true)
     }
 
     func updateUI(_ itemIdentifier: UserRank) {
-//        profileImageCircle()
         addimage(imageUrl: itemIdentifier.profileImage)
         updateUICommon(rank: itemIdentifier.boardRank, name: itemIdentifier.nickName, count: itemIdentifier.count)
     }
 
-    private func updateUICommon(rank: Int, name: String, count: Int) {
+    private func updateUICommon(rank: Int, name: String, count: Int, isPost : Bool = false) {
+        
+        if isPost {
+            boardNameLabel.snp.removeConstraints()
+            profileImage.snp.removeConstraints()
+            profileImage.image = nil
+            
+            boardNameLabel.snp.makeConstraints { make in
+                make.centerY.equalTo(rankLabel)
+                make.leading.equalToSuperview().inset(45)
+            }
+            
+        }
+        
         rankLabel.text = "\(rank + 1)."
         rankLabel.font = rank < 3 ? .systemFont(ofSize: 18, weight: .heavy) : .systemFont(ofSize: 18, weight: .regular)
         rankLabel.textColor = rank < 3 ? DesignSystem.commonColorSet.red : DesignSystem.commonColorSet.black

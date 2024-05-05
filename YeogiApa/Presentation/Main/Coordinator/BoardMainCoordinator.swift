@@ -35,7 +35,7 @@ extension BoardMainCoordinator {
     
     func toSpecificBoard(_ item : String) {
         let boardSpecificCoordinator = BoardSpecificCoordinator(navigationController: navigationController)
-        boardSpecificCoordinator.parentCoordinator = self
+        boardSpecificCoordinator.parentBoardCoordinator = self
         childCoordinators.append(boardSpecificCoordinator)
         
         boardSpecificCoordinator.start(productId: item,

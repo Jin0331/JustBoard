@@ -30,6 +30,20 @@ struct InquiryResponse : Decodable, Hashable {
         self.next_cursor = try container.decode(String.self, forKey: .next_cursor)
     }
     
+    var postList : [String] {
+        var returnData : [String] = []
+        
+        data.forEach {
+            if $0.productID != "" {
+                returnData.append($0.productID)
+            }
+        }
+
+        return Array(Set(returnData)).sorted { (str1, str2) -> Bool in
+            return str1.localizedStandardCompare(str2) == .orderedAscending
+        }
+    }
+    
     var rankData : [PostRank] {
         var returndata : [PostRank] = []
             

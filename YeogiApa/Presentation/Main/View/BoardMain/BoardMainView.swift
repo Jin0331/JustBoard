@@ -52,8 +52,9 @@ final class BoardMainView: BaseView {
        return view
     }()
     
-    let movewToAllBoard = CompleteButton(title: "전체 실시간 게시판으로 이동 >", image: nil, fontSize: 17).then {
+    let movewToAllBoard = CompleteButton(title: "", image: nil, fontSize: 17).then {
         $0.layer.cornerRadius = 0
+        $0.backgroundColor = DesignSystem.commonColorSet.white
     }
     
     let boardRankLabel = CommonLabel(title: "실시간 게시판 Best 20", fontSize: 18)
@@ -120,8 +121,8 @@ final class BoardMainView: BaseView {
         movewToAllBoard.snp.makeConstraints { make in
             make.top.equalTo(tabmanViewController.view.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(tabmanViewController.view)
-            make.height.equalTo(50)
-            make.bottom.equalToSuperview().inset(12)
+            make.height.equalTo(10)
+            make.bottom.equalToSuperview()
         }
     }
 }

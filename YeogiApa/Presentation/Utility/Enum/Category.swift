@@ -71,6 +71,30 @@ enum FollowCategory : String, CaseIterable {
     }
 }
 
+//MARK: - BoardList
+enum BoardListCategory : String, CaseIterable {
+    case all = "전체"
+    case my = "내 게시판"
+    
+    var productId : String {
+        switch self {
+        default :
+            return ""
+        }
+    }
+    
+    var specificBoard : [String] {
+        switch self {
+        case .my:
+            return ["생활꿀팁", "아무거나올리는짤방게시판","이게시판은뭐지"]
+            
+        default:
+            return []
+        }
+    }
+}
+
+
 func getTammanCategoryList(for tabmanCategory: TabmanCategory) -> [CustomStringConvertibleEnum] {
     switch tabmanCategory {
     case .best:

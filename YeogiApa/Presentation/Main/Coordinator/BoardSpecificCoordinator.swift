@@ -11,7 +11,8 @@ import NotificationCenter
 final class BoardSpecificCoordinator : Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-    var parentCoordinator : BoardMainCoordinator?
+    var parentBoardCoordinator : BoardMainCoordinator?
+    var parentBoardListCoordinator : BoardListCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -32,7 +33,7 @@ final class BoardSpecificCoordinator : Coordinator {
     }
     
     deinit {
-        parentCoordinator?.childDidFinish(self)
+        parentBoardCoordinator?.childDidFinish(self)
     }
 }
 

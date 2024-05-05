@@ -1,6 +1,6 @@
 # 🤯 **자게 - 자유게시판**
 
-![PillItImageMerge](https://github.com/Jin0331/Pill-IT/assets/42958809/61ff75bb-22f8-4c07-8824-829048969cf0)
+![05052321358267](https://github.com/Jin0331/YeogiApa/assets/42958809/2e50659f-b471-4367-8163-3779c28d1315)
 
 
 > 출시 기간 : 2024.04.11 - 05.05 (약 3주)

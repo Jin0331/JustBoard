@@ -14,6 +14,7 @@ final class ProfileCoordinator : Coordinator {
     var boardSpecificCoordinator : BoardSpecificCoordinator?
     var boardUserCoordinator : BoardUserCoordinator?
     var boardDetailCoordinator : BoardDetailCoordinator?
+    var followCoordinator : FollowCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -40,7 +41,7 @@ extension ProfileCoordinator {
     func toFollow(_ item : ProfileResponse, _ me : Bool) {
         let followCoordinator = FollowCoordinator(navigationController: navigationController)
         followCoordinator.parentCoordinator = self
-        followCoordinator.start(userID: item.user_id, me: me)
+        followCoordinator.start(userID: item.user_id, userNickname: item.nick, me: me)
         childCoordinators.append(followCoordinator)
     }
     

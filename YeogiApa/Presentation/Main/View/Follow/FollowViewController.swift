@@ -35,6 +35,7 @@ final class FollowViewController: RxBaseViewController {
     }
     
     override func bind() {
+        
         let input = FollowViewModel.Input()
         
         let output = viewModel.transform(input: input)
@@ -49,10 +50,20 @@ final class FollowViewController: RxBaseViewController {
 extension FollowViewController {
     private func configureCollectionViewDataSource() {
         
-        dataSource = FollowRxDataSource(configureCell: { dataSource, collectionView, indexPath, item in
+        dataSource = FollowRxDataSource(configureCell: { [weak self] dataSource, collectionView, indexPath, item in
+            
+            guard let self = self else { return UICollectionViewCell()}
             
             let cell: FollowCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
             cell.updateUI(item)
+            
+            // Profile Coordinator
+            cell.profileButton.rx.tap
+                .bind(with: self) { owner, _ in
+                    owner.parentCoordinator?.toProfile(userID: item.userID, me: owner.me)
+                }
+                .disposed(by: disposeBag)
+            
             
             return cell
         })

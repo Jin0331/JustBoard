@@ -62,7 +62,11 @@ final class ProfileViewController: RxBaseViewController {
                 owner.baseView.updateFollowButton(followStatus)
             }
             .disposed(by: disposeBag)
-        
+    }
+    
+    override func configureNavigation() {
+        super.configureNavigation()
+        navigationController?.navigationBar.titleTextAttributes = nil
     }
 
     deinit {

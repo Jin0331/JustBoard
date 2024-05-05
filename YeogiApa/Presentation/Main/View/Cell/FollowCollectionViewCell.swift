@@ -12,6 +12,11 @@ import Reusable
 import Kingfisher
 
 final class FollowCollectionViewCell: BaseCollectionViewCell, Reusable {
+    
+    let profileButton = UIButton().then {
+        $0.backgroundColor = .clear
+    }
+    
     let profileImage = UIImageView().then {
         $0.contentMode = .scaleAspectFill
     }
@@ -22,7 +27,7 @@ final class FollowCollectionViewCell: BaseCollectionViewCell, Reusable {
     }
     
     override func configureHierarchy() {
-        [profileImage, author].forEach { contentView.addSubview($0)}
+        [profileButton, profileImage, author].forEach { contentView.addSubview($0)}
     }
     
     override func configureLayout() {
@@ -30,6 +35,10 @@ final class FollowCollectionViewCell: BaseCollectionViewCell, Reusable {
             make.centerY.equalTo(contentView.safeAreaLayoutGuide)
             make.leading.equalTo(contentView.safeAreaLayoutGuide).inset(20)
             make.size.equalTo(50)
+        }
+        
+        profileButton.snp.makeConstraints { make in
+            make.edges.equalTo(profileImage)
         }
         
         author.snp.makeConstraints { make in

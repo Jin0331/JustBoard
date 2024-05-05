@@ -20,14 +20,22 @@ final class FollowCoordinator : Coordinator {
         
     }
     
-    func start(userID : String, me : Bool) {
-        let vc = FollowTabmanViewController(viewControllersList: followChildViewController(userID: userID, me: me), category: FollowCategory.allCases)
+    func start(userID : String, userNickname:String, me : Bool) {
+        let vc = FollowTabmanViewController(viewControllersList: followChildViewController(userID: userID, me: me), userNickname: userNickname, category: FollowCategory.allCases)
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }
 }
 
 extension FollowCoordinator {
+    
+    func toProfile(userID : String, me : Bool) {
+        let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
+        profileCoordinator.followCoordinator = self
+        profileCoordinator.start(userID: userID, me: me)
+        childCoordinators.append(profileCoordinator)
+    }
+    
     private func followChildViewController(userID:String, me:Bool) -> Array<RxBaseViewController> {
         
         let category = FollowCategory.allCases

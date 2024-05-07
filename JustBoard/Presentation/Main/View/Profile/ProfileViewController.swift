@@ -1,6 +1,6 @@
 //
 //  ProfileViewController.swift
-//  YeogiApa
+//  JustBoard
 //
 //  Created by JinwooLee on 5/4/24.
 //

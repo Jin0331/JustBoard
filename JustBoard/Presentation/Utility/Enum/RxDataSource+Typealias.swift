@@ -1,6 +1,6 @@
 //
 //  RxDataSource+Typealias.swift
-//  YeogiApa
+//  JustBoard
 //
 //  Created by JinwooLee on 4/29/24.
 //

@@ -1,6 +1,6 @@
 //
 //  DiffableDataSource.swift
-//  YeogiApa
+//  JustBoard
 //
 //  Created by JinwooLee on 4/24/24.
 //

@@ -1,6 +1,6 @@
 //
 //  UserRouter.swift
-//  YeogiApa
+//  JustBoard
 //
 //  Created by JinwooLee on 4/9/24.
 //

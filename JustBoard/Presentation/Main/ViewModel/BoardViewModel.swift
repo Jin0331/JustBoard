@@ -1,6 +1,6 @@
 //
 //  BoardViewModel.swift
-//  YeogiApa
+//  JustBoard
 //
 //  Created by JinwooLee on 4/19/24.
 //

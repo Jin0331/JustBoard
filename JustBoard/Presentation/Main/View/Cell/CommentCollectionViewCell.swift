@@ -1,6 +1,6 @@
 //
 //  CommentCollectionViewCell.swift
-//  YeogiApa
+//  JustBoard
 //
 //  Created by JinwooLee on 4/25/24.
 //

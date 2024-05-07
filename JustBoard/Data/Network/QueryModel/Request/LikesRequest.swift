@@ -1,6 +1,6 @@
 //
 //  LikesRequest.swift
-//  YeogiApa
+//  JustBoard
 //
 //  Created by JinwooLee on 4/28/24.
 //

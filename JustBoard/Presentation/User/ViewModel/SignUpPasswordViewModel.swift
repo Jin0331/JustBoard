@@ -1,6 +1,6 @@
 //
 //  SignUpPasswordViewModel.swift
-//  YeogiApa
+//  JustBoard
 //
 //  Created by JinwooLee on 4/16/24.
 //

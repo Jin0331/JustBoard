@@ -1,6 +1,6 @@
 //
 //  QueryString.swift
-//  YeogiApa
+//  JustBoard
 //
 //  Created by JinwooLee on 4/23/24.
 //

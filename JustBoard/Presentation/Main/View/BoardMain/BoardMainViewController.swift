@@ -1,6 +1,6 @@
 //
 //  BoardMainViewController.swift
-//  YeogiApa
+//  JustBoard
 //
 //  Created by JinwooLee on 5/1/24.
 //

@@ -1,6 +1,6 @@
 //
 //  CompleteButton.swift
-//  YeogiApa
+//  JustBoard
 //
 //  Created by JinwooLee on 4/22/24.
 //

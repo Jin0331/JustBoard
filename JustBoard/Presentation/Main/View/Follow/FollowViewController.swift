@@ -1,6 +1,6 @@
 //
 //  FollowViewController.swift
-//  YeogiApa
+//  JustBoard
 //
 //  Created by JinwooLee on 5/5/24.
 //

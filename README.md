@@ -46,7 +46,7 @@
 
 * **디자인패턴**
 
-  	***MVVM + C***
+  	***MVVM-C***
 
 * **라이브러리** - ***Cocoapods(Dependency manager)***
 

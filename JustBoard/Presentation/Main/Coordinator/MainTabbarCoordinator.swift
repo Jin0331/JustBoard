@@ -51,10 +51,8 @@ final class MainTabbarCoordinator : Coordinator {
 }
 
 extension MainTabbarCoordinator {
-    func resetLogined(_ coordinator : BoardMainCoordinator) {
-        childCoordinators = childCoordinators.filter { $0 !== coordinator }
-        parentCoordinator?.resetLoggedIn(self)
-        print("????")
+    func resetLogined() {
+        print("MainTabbarCoordinator finish ✅")
         parentCoordinator?.finish()
     }
     

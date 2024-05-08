@@ -28,15 +28,13 @@ final class UserCoordinator : Coordinator {
     }
     
     // User Coordinator -> AppCoordinator -> Main Coordinator로 전환되는 과정
-    func didLoggedIn(_ coordinator : EmailLoginCoordinator) {
+    func didLoggedIn() {
         print(#function, "✅ UserCoordinator")
-        parentCoordinator?.didLoggedIn(self)
         parentCoordinator?.finish()
     }
     
-    func didJoined(_ coordinator : EmailLoginCoordinator) {
+    func didJoined() {
         print(#function, "✅ UserCoordinator")
-        parentCoordinator?.didJoined(self)
         parentCoordinator?.finish()
     }
     

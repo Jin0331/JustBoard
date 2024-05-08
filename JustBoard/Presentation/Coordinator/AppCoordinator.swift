@@ -43,41 +43,26 @@ final class AppCoordinator: Coordinator {
         coordinator.start()
         childCoordinators.append(coordinator)
     }
-    
-    //MARK: - child remove 및 UserCoordinator -> MainTabbarCoordinator
-    func didLoggedIn(_ coordinator: UserCoordinator) {
-        print(#function, "✅ AppCoordinator")
-        childCoordinators = childCoordinators.filter { $0 !== coordinator }
-        showMainViewController()
-    }
-    
-    func didJoined(_ coordinator: UserCoordinator) {
-        print(#function, "✅ AppCoordinator")
-        childCoordinators = childCoordinators.filter { $0 !== coordinator }
-        showMainViewController()
-    }
-    
-    func resetLoggedIn(_ coordinator: MainTabbarCoordinator) {
-        print(#function, "✅ AppCoordinator")
-        childCoordinators = childCoordinators.filter { $0 !== coordinator }
-        showLoginViewController(isReset: true)
-    }
 }
 
 extension AppCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
         childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
 
+        print("hhh")
+        
         switch childCoordinator.type {
         case .tab:
+            print("showLoginViewController")
             navigationController.viewControllers.removeAll()
-            print("???? 왜 안되ㅚㅚㅚ")
-            showLoginViewController()
+            showLoginViewController(isReset: true)
         case .login:
             navigationController.viewControllers.removeAll()
+            print("showMainViewController")
             showMainViewController()
         default:
-            print("???")
+            navigationController.viewControllers.removeAll()
+            print("????")
             break
         }
     }

@@ -8,9 +8,11 @@
 import UIKit
 
 final class BoardListCoordinator : Coordinator {
+    weak var finishDelegate: CoordinatorFinishDelegate?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var parentCoordinator : MainTabbarCoordinator?
+    var type: CoordinatorType { .tab }
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

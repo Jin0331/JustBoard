@@ -9,7 +9,9 @@ import UIKit
 import NotificationCenter
 
 final class BoardMainCoordinator : Coordinator {
+    weak var finishDelegate: CoordinatorFinishDelegate?
     var childCoordinators: [Coordinator] = []
+    var type: CoordinatorType { .tab }
     var navigationController: UINavigationController
     var parentCoordinator : MainTabbarCoordinator?
     
@@ -27,7 +29,6 @@ final class BoardMainCoordinator : Coordinator {
     
     deinit {
         print(#function, "- BoardCoordinator ✅")
-        parentCoordinator?.childDidFinish(self)
     }
 }
 
@@ -70,7 +71,7 @@ extension BoardMainCoordinator {
     @objc func resetLogined(_ notification: Notification) {
         print("토큰초기화됨 ✅")
         parentCoordinator?.resetLogined(self)
-        parentCoordinator?.childDidFinish(self)
+        parentCoordinator?.finish()
     }
 }
 

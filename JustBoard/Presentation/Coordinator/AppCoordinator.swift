@@ -9,8 +9,10 @@ import Foundation
 import UIKit
 
 final class AppCoordinator: Coordinator {
+    weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
+    var type: CoordinatorType { .app }
     
     var isLoggedIn : Bool = UserDefaultManager.shared.isLogined
     
@@ -28,7 +30,8 @@ final class AppCoordinator: Coordinator {
     
     private func showLoginViewController(isReset : Bool? = nil) {
         let coordinator = UserCoordinator(navigationController: navigationController, isReset: isReset)
-        coordinator.delegate = self
+        coordinator.parentCoordinator = self
+        coordinator.finishDelegate = self
         coordinator.start()
         childCoordinators.append(coordinator)
     }
@@ -36,6 +39,7 @@ final class AppCoordinator: Coordinator {
     private func showMainViewController() {
         let coordinator = MainTabbarCoordinator(navigationController: navigationController)
         coordinator.parentCoordinator = self
+        coordinator.finishDelegate = self
         coordinator.start()
         childCoordinators.append(coordinator)
     }
@@ -57,5 +61,24 @@ final class AppCoordinator: Coordinator {
         print(#function, "✅ AppCoordinator")
         childCoordinators = childCoordinators.filter { $0 !== coordinator }
         showLoginViewController(isReset: true)
+    }
+}
+
+extension AppCoordinator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
+
+        switch childCoordinator.type {
+        case .tab:
+            navigationController.viewControllers.removeAll()
+            print("???? 왜 안되ㅚㅚㅚ")
+            showLoginViewController()
+        case .login:
+            navigationController.viewControllers.removeAll()
+            showMainViewController()
+        default:
+            print("???")
+            break
+        }
     }
 }

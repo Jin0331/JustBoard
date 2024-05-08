@@ -8,6 +8,7 @@
 import UIKit
 
 final class ProfileCoordinator : Coordinator {
+    weak var finishDelegate: CoordinatorFinishDelegate?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var boardMainCoordinator : BoardMainCoordinator?
@@ -15,6 +16,7 @@ final class ProfileCoordinator : Coordinator {
     var boardUserCoordinator : BoardUserCoordinator?
     var boardDetailCoordinator : BoardDetailCoordinator?
     var followCoordinator : FollowCoordinator?
+    var type: CoordinatorType { .tab }
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

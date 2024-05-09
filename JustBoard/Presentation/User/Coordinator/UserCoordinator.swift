@@ -9,10 +9,12 @@ import Foundation
 import UIKit
 
 final class UserCoordinator : Coordinator {
+    weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var isReset : Bool?
-    var delegate : AppCoordinator?
+    var parentCoordinator : AppCoordinator?
+    var type: CoordinatorType { .login }
     
     init(navigationController: UINavigationController, isReset: Bool? = nil) {
         self.navigationController = navigationController
@@ -26,16 +28,14 @@ final class UserCoordinator : Coordinator {
     }
     
     // User Coordinator -> AppCoordinator -> Main Coordinator로 전환되는 과정
-    func didLoggedIn(_ coordinator : EmailLoginCoordinator) {
+    func didLoggedIn() {
         print(#function, "✅ UserCoordinator")
-        childCoordinators = childCoordinators.filter { $0 !== coordinator }
-        delegate?.didLoggedIn(self)
+        parentCoordinator?.finish()
     }
     
-    func didJoined(_ coordinator : EmailLoginCoordinator) {
+    func didJoined() {
         print(#function, "✅ UserCoordinator")
-        childCoordinators = childCoordinators.filter { $0 !== coordinator }
-        delegate?.didJoined(self)
+        parentCoordinator?.finish()
     }
     
     // UserCoordinator의 하위 VC

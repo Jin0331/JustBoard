@@ -9,8 +9,10 @@ import Foundation
 import UIKit
 
 final class AppCoordinator: Coordinator {
+    weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
+    var type: CoordinatorType { .app }
     
     var isLoggedIn : Bool = UserDefaultManager.shared.isLogined
     
@@ -28,7 +30,8 @@ final class AppCoordinator: Coordinator {
     
     private func showLoginViewController(isReset : Bool? = nil) {
         let coordinator = UserCoordinator(navigationController: navigationController, isReset: isReset)
-        coordinator.delegate = self
+        coordinator.parentCoordinator = self
+        coordinator.finishDelegate = self
         coordinator.start()
         childCoordinators.append(coordinator)
     }
@@ -36,26 +39,31 @@ final class AppCoordinator: Coordinator {
     private func showMainViewController() {
         let coordinator = MainTabbarCoordinator(navigationController: navigationController)
         coordinator.parentCoordinator = self
+        coordinator.finishDelegate = self
         coordinator.start()
         childCoordinators.append(coordinator)
     }
-    
-    //MARK: - child remove 및 UserCoordinator -> MainTabbarCoordinator
-    func didLoggedIn(_ coordinator: UserCoordinator) {
-        print(#function, "✅ AppCoordinator")
-        childCoordinators = childCoordinators.filter { $0 !== coordinator }
-        showMainViewController()
-    }
-    
-    func didJoined(_ coordinator: UserCoordinator) {
-        print(#function, "✅ AppCoordinator")
-        childCoordinators = childCoordinators.filter { $0 !== coordinator }
-        showMainViewController()
-    }
-    
-    func resetLoggedIn(_ coordinator: MainTabbarCoordinator) {
-        print(#function, "✅ AppCoordinator")
-        childCoordinators = childCoordinators.filter { $0 !== coordinator }
-        showLoginViewController(isReset: true)
+}
+
+extension AppCoordinator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
+
+        print("hhh")
+        
+        switch childCoordinator.type {
+        case .tab:
+            print("showLoginViewController")
+            navigationController.viewControllers.removeAll()
+            showLoginViewController(isReset: true)
+        case .login:
+            navigationController.viewControllers.removeAll()
+            print("showMainViewController")
+            showMainViewController()
+        default:
+            navigationController.viewControllers.removeAll()
+            print("????")
+            break
+        }
     }
 }

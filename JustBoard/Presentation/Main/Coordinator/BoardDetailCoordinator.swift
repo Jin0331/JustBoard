@@ -8,7 +8,9 @@
 import UIKit
 
 final class BoardDetailCoordinator : Coordinator {
+    weak var finishDelegate: CoordinatorFinishDelegate?
     var childCoordinators: [Coordinator] = []
+    var type: CoordinatorType { .tab }
     var navigationController: UINavigationController
     var parentProfileCoordinator : ProfileCoordinator?
     var parentMainBoardCoordinator : BoardMainCoordinator?
@@ -29,8 +31,6 @@ final class BoardDetailCoordinator : Coordinator {
     
     deinit {
         print(#function, "- BoardDetailCoordinator ✅")
-        parentMainBoardCoordinator?.childDidFinish(self)
-        parentSpecificBoardCoordinator?.childDidFinish(self)
     }
 }
 

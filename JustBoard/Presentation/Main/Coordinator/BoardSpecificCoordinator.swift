@@ -9,10 +9,12 @@ import UIKit
 import NotificationCenter
 
 final class BoardSpecificCoordinator : Coordinator {
+    weak var finishDelegate: CoordinatorFinishDelegate?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var parentBoardCoordinator : BoardMainCoordinator?
     var parentBoardListCoordinator : BoardListCoordinator?
+    var type: CoordinatorType { .tab }
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -33,7 +35,7 @@ final class BoardSpecificCoordinator : Coordinator {
     }
     
     deinit {
-        parentBoardCoordinator?.childDidFinish(self)
+        print(#function, "BoardSpecificCoordinator ✅")
     }
 }
 

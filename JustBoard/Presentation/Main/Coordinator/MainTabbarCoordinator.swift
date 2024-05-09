@@ -8,8 +8,10 @@
 import UIKit
 
 final class MainTabbarCoordinator : Coordinator {
+    weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
+    var type: CoordinatorType { .tab }
     var parentCoordinator : AppCoordinator?
     
     init(navigationController: UINavigationController) {
@@ -49,10 +51,9 @@ final class MainTabbarCoordinator : Coordinator {
 }
 
 extension MainTabbarCoordinator {
-    func resetLogined(_ coordinator : BoardMainCoordinator) {
-        childCoordinators = childCoordinators.filter { $0 !== coordinator }
-        parentCoordinator?.resetLoggedIn(self)
-        parentCoordinator?.childDidFinish(self)
+    func resetLogined() {
+        print("MainTabbarCoordinator finish ✅")
+        parentCoordinator?.finish()
     }
     
     @objc func goToMain(_ notification: Notification) {

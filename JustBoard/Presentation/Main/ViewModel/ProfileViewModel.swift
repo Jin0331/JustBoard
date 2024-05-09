@@ -23,12 +23,15 @@ final class ProfileViewModel : MainViewModelType {
     
     struct Input {
         let viewWillAppear : ControlEvent<Bool>
+        let profileEditButton : ControlEvent<Void>
         let followButton : ControlEvent<Void>
         let followerCountButton : ControlEvent<Void>
         let followingCountButton : ControlEvent<Void>
     }
     
     struct Output {
+        let viewWillAppear : ControlEvent<Bool>
+        let profileEditButton : PublishSubject<ProfileResponse>
         let userProfile : PublishSubject<ProfileResponse>
         let followStatus : BehaviorSubject<Bool>
         let followerCountButton : PublishSubject<ProfileResponse>
@@ -38,6 +41,7 @@ final class ProfileViewModel : MainViewModelType {
     func transform(input: Input) -> Output {
         
         let userProfile = PublishSubject<ProfileResponse>()
+        let profileEdit = PublishSubject<ProfileResponse>()
         let followStatus = BehaviorSubject<Bool>(value: false)
         let followerCountButton = PublishSubject<ProfileResponse>()
         let followingCountButton = PublishSubject<ProfileResponse>()
@@ -46,6 +50,13 @@ final class ProfileViewModel : MainViewModelType {
             .bind(with: self) { owner, _ in
                 NotificationCenter.default.post(name: .boardRefresh, object: nil)
             }
+            .disposed(by: disposeBag)
+            
+        input.profileEditButton
+            .withLatestFrom(userProfile)
+            .bind(with: self, onNext: { owner, profileResponse in
+                profileEdit.onNext(profileResponse)
+            })
             .disposed(by: disposeBag)
         
         userID
@@ -134,6 +145,8 @@ final class ProfileViewModel : MainViewModelType {
         }
         
         return Output(
+            viewWillAppear : input.viewWillAppear,
+            profileEditButton: profileEdit,
             userProfile:userProfile,
             followStatus: followStatus,
             followerCountButton: followerCountButton,

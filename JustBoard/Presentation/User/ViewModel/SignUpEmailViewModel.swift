@@ -42,6 +42,7 @@ class SignUpEmailViewModel : UserViewModelType {
             .withLatestFrom(input.email)
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .flatMapLatest { email in
+                print(email)
                 return NetworkManager.shared.validationEmail(query: EmailValidationRequest(email: email))
             }
             .subscribe(with: self) { owner, result in
@@ -49,7 +50,8 @@ class SignUpEmailViewModel : UserViewModelType {
                 case .success(let email):
                     print("email 중복 없음  ✅")
                     validEmail.onNext(email)
-                case .failure:
+                case .failure(let error):
+                    print(error)
                     print("email 중복 ❗️")
                     nextFailed.onNext(true)
                 }

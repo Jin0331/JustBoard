@@ -24,6 +24,7 @@ final class UserCoordinator : Coordinator {
     func start() {
         let vc = SignInUpViewController(isReset: isReset) // child root view controller
         vc.parentCoordinator = self
+        self.navigationController.isNavigationBarHidden = false
         self.navigationController.viewControllers = [vc]
     }
     

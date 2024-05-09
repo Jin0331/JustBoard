@@ -33,6 +33,12 @@ final class ProfileCoordinator : Coordinator {
 
 extension ProfileCoordinator {
     
+    func toProfileEdit(_ profileResponse : ProfileResponse) {
+        let vc = ProfileEditViewController(meProfileResponse: profileResponse)
+        vc.parentCoordinator = self
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
     func toDetail(_ item : PostResponse) {
         let boardDetailCoordinator = BoardDetailCoordinator(navigationController: navigationController)
         boardDetailCoordinator.parentProfileCoordinator = self

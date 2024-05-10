@@ -30,7 +30,7 @@ final class MainTabBarController: UITabBarController {
     private func configureNavigation() {
         // back button
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil) // title 부분 수정
-        backBarButtonItem.tintColor = .black
+        backBarButtonItem.tintColor = DesignSystem.commonColorSet.black
         navigationItem.backBarButtonItem = backBarButtonItem
     }
 }

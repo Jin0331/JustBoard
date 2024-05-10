@@ -14,6 +14,7 @@ final class EmailLoginView : BaseView {
     private let headerTextLabel = UILabel().then {
         $0.text = "이메일로 로그인하기 😎"
         $0.font = DesignSystem.mainFont.customFontHeavy(size: 30)
+        $0.textColor = DesignSystem.commonColorSet.black
     }
     let userIdTextfield = SignTextField(placeholderText: "이메일")
     let userPasswordTextfield = SignTextField(placeholderText: "비밀번호").then { $0.isSecureTextEntry = true }

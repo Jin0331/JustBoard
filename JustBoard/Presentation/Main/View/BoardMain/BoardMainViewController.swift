@@ -118,7 +118,7 @@ extension BoardMainViewController : MenuViewControllerDelegate {
     private func attachSideMenuVC() {
         // left button
         let menuBarButtonItem = UIBarButtonItem(image: DesignSystem.sfSymbol.list?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(menuBarButtonItemTapped)).then {
-            $0.tintColor = DesignSystem.commonColorSet.lightBlack
+            $0.tintColor = DesignSystem.commonColorSet.black
         }
         navigationItem.setRightBarButton(menuBarButtonItem, animated: true)
     }

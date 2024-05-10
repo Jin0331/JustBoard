@@ -17,6 +17,7 @@ final class SignUpEmailViewController: RxBaseViewController {
     private let headerTextLabel = UILabel().then {
         $0.text = "이메일을 입력해주세요 😎"
         $0.font = DesignSystem.mainFont.customFontHeavy(size: 30)
+        $0.textColor = DesignSystem.commonColorSet.black
     }
     private let headerSubTextLabel = UILabel().then {
         $0.text = "로그인 시 사용할 이메일을 입력해주세요"

@@ -93,6 +93,9 @@ final class BoardViewController: RxBaseViewController {
         super.configureNavigation()
         navigationController?.navigationBar.titleTextAttributes = nil
         navigationItem.title = productId + " 게시판"
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: DesignSystem.commonColorSet.black
+        ]
     }
     
     deinit {

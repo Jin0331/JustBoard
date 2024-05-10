@@ -102,7 +102,9 @@ final class BoardDetailViewController: RxBaseViewController {
     
     override func configureNavigation() {
         super.configureNavigation()
-//        navigationItem.rightBarButtonItem = nil
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: DesignSystem.commonColorSet.black
+        ]
     }
     
     deinit {

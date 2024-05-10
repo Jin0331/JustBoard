@@ -43,7 +43,6 @@ final class ProfileView: BaseView {
         $0.titleLabel?.font = DesignSystem.mainFont.customFontHeavy(size: 17)
         $0.titleLabel?.numberOfLines = 2
         $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
-        $0.backgroundColor = .clear
         $0.titleLabel?.textAlignment = .center
     }
     
@@ -52,14 +51,12 @@ final class ProfileView: BaseView {
         $0.titleLabel?.numberOfLines = 2
         $0.titleLabel?.textAlignment = .center
         $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
-        $0.backgroundColor = .clear
     }
     
     let followingCountButton = UIButton().then {
         $0.titleLabel?.font = DesignSystem.mainFont.customFontHeavy(size: 17)
         $0.titleLabel?.numberOfLines = 2
         $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
-        $0.backgroundColor = .clear
         $0.titleLabel?.textAlignment = .center
     }
     

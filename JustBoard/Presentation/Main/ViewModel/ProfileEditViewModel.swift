@@ -23,23 +23,37 @@ final class ProfileEditViewModel : MainViewModelType {
         let addedImage : Observable<Data> // files
         let nickname : ControlProperty<String>
         let completeButton : PublishSubject<Void>
+        let withdrawButton : PublishSubject<Void>
     }
     
     struct Output {
         let currentProfileResponse : Observable<ProfileResponse>
         let editComplete : PublishSubject<Void>
-        let editFail : PublishSubject<Void>
+        let withdrawComplete : PublishSubject<Void>
     }
     
     func transform(input: Input) -> Output {
         
         let nicknameWithImage = Observable.combineLatest(input.nickname, input.addedImage)
         let editComplete = PublishSubject<Void>()
-        let editFail = PublishSubject<Void>()
-        
-        
+        let withdrawComplete = PublishSubject<Void>()
+
+        input.withdrawButton
+            .flatMap {
+                return NetworkManager.shared.withdraw()
+            }
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let response):
+                    print(response)
+                    withdrawComplete.onNext(())
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .disposed(by: disposeBag)
+
         input.completeButton
-            .debug()
             .withLatestFrom(nicknameWithImage)
             .map {
                 let nick = $0.isEmpty ? UserDefaultManager.shared.nick! : $0
@@ -56,7 +70,6 @@ final class ProfileEditViewModel : MainViewModelType {
                     editComplete.onNext(())
                 case .failure(let error):
                     print(error)
-                    editFail.onNext(())
                 }
             }
             .disposed(by: disposeBag)
@@ -65,7 +78,7 @@ final class ProfileEditViewModel : MainViewModelType {
             currentProfileResponse: input.viewWillAppear
             .withLatestFrom(profileResponse),
             editComplete: editComplete,
-            editFail: editFail
+            withdrawComplete: withdrawComplete
         )
                       
     }

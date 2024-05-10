@@ -29,14 +29,24 @@ final class ProfileEditViewController: RxBaseViewController {
     override func bind() {
         
         let completeButton = PublishSubject<Void>()
+        let withdrawButton = PublishSubject<Void>()
         
         baseView.editButton.rx.tap
             .bind(with: self) { owner, _ in
-                owner.showAlert2(title: "프로필 수정", text: "프로필을 수정하시곘습니까?", addButtonText1: "네", addButtonText2: "아니요") {
+                owner.showAlert2(title: "프로필 수정", text: "프로필을 수정하시곘습니까?🤔", addButtonText1: "네", addButtonText2: "아니요") {
                     completeButton.onNext(())
                 }
             }
             .disposed(by: disposeBag)
+        
+        baseView.withdrawButton.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.showAlert2(title: "회원 탈퇴", text: "회원을 탈퇴하시겠습니까?🥲", addButtonText1: "네", addButtonText2: "아니요") {
+                    withdrawButton.onNext(())
+                }
+            }
+            .disposed(by: disposeBag)
+        
         
         // image Picker
         baseView.profileChangeBUtton.rx.tap
@@ -49,7 +59,8 @@ final class ProfileEditViewController: RxBaseViewController {
             viewWillAppear: rx.viewWillAppear,
             addedImage: seletecedImage,
             nickname: baseView.nickname.rx.text.orEmpty,
-            completeButton: completeButton
+            completeButton: completeButton,
+            withdrawButton: withdrawButton
             
         )
         
@@ -66,6 +77,13 @@ final class ProfileEditViewController: RxBaseViewController {
         output.editComplete
             .bind(with: self) { owner, _ in
                 owner.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        output.withdrawComplete
+            .bind(with: self) { owner, _ in
+                UserDefaultManager.shared.isLogined = false
+                NotificationCenter.default.post(name: .resetLogin, object: nil)
             }
             .disposed(by: disposeBag)
     }

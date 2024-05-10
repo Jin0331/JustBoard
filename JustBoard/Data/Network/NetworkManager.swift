@@ -158,6 +158,10 @@ final class NetworkManager  {
         }
     }
     
+    func withdraw() -> Single<Result<JoinResponse, AFError>> {
+        return mainMakeRequest(router: MainRouter.withdraw)
+    }
+    
     func follow(userId: String) -> Single<Result<FollowResponse, AFError>> {
         return mainMakeRequest(router: MainRouter.follow(userId: userId))
     }

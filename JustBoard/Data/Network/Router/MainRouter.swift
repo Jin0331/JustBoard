@@ -20,6 +20,7 @@ enum MainRouter {
     case meProfileEdit(query : ProfileEditRequest)
     case follow(userId : String)
     case followCancel(userId : String)
+    case withdraw
 }
 
 extension MainRouter : TargetType {
@@ -31,7 +32,7 @@ extension MainRouter : TargetType {
         switch self {
         case .write, .files, .comment, .likes, .follow:
             return .post
-        case .inquiry, .specificInquiry, .meProfile, .otherProfile:
+        case .inquiry, .specificInquiry, .meProfile, .otherProfile, .withdraw:
             return .get
         case .followCancel:
             return .delete
@@ -58,6 +59,8 @@ extension MainRouter : TargetType {
             return "/users/" + userId + "/profile"
         case .follow(userId: let userId), .followCancel(userId: let userId):
             return "/follow/" + userId
+        case .withdraw:
+            return "/users/withdraw"
         }
     }
     
@@ -77,7 +80,7 @@ extension MainRouter : TargetType {
                 HTTPHeader.contentType.rawValue : HTTPHeader.multipart.rawValue,
                 HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue
             ]
-        case .inquiry, .specificInquiry, .meProfile, .otherProfile, .follow, .followCancel:
+        case .inquiry, .specificInquiry, .meProfile, .otherProfile, .follow, .followCancel, .withdraw:
             return [
                 HTTPHeader.authorization.rawValue : token,
                 HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue

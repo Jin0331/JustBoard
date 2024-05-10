@@ -47,7 +47,6 @@ final class MainTabbarCoordinator : Coordinator {
     deinit {
         print(#function, "-MainTabbarCoordinator ✅")
     }
-    
 }
 
 extension MainTabbarCoordinator {

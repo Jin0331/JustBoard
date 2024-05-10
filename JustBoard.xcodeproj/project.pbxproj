@@ -27,6 +27,10 @@
 		DB208C2D2BE7867900C63962 /* BoardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB208C2C2BE7867900C63962 /* BoardListViewModel.swift */; };
 		DB208C2F2BE7871400C63962 /* BoardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB208C2E2BE7871400C63962 /* BoardListView.swift */; };
 		DB208C312BE78C2A00C63962 /* BoardListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB208C302BE78C2A00C63962 /* BoardListCollectionViewCell.swift */; };
+		DB2B190B2BEBE68900D5B687 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B190A2BEBE68900D5B687 /* ProfileEditViewController.swift */; };
+		DB2B195F2BECB4C600D5B687 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B195E2BECB4C600D5B687 /* ProfileEditView.swift */; };
+		DB2B19612BECB62B00D5B687 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B19602BECB62B00D5B687 /* ProfileEditViewModel.swift */; };
+		DB2B19642BECC1CF00D5B687 /* ProfileEditRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B19632BECC1CF00D5B687 /* ProfileEditRequest.swift */; };
 		DB410FF52BD0CFA10088679F /* BoardListTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF42BD0CFA10088679F /* BoardListTabmanViewController.swift */; };
 		DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */; };
 		DB4110052BD15B300088679F /* BoardMainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110042BD15B300088679F /* BoardMainCoordinator.swift */; };
@@ -154,6 +158,10 @@
 		DB208C2C2BE7867900C63962 /* BoardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListViewModel.swift; sourceTree = "<group>"; };
 		DB208C2E2BE7871400C63962 /* BoardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListView.swift; sourceTree = "<group>"; };
 		DB208C302BE78C2A00C63962 /* BoardListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListCollectionViewCell.swift; sourceTree = "<group>"; };
+		DB2B190A2BEBE68900D5B687 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		DB2B195E2BECB4C600D5B687 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		DB2B19602BECB62B00D5B687 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
+		DB2B19632BECC1CF00D5B687 /* ProfileEditRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditRequest.swift; sourceTree = "<group>"; };
 		DB410FF42BD0CFA10088679F /* BoardListTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListTabmanViewController.swift; sourceTree = "<group>"; };
 		DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarCoordinator.swift; sourceTree = "<group>"; };
 		DB4110042BD15B300088679F /* BoardMainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMainCoordinator.swift; sourceTree = "<group>"; };
@@ -339,6 +347,7 @@
 				DB63A4412BE6088E00882670 /* ProfileViewModel.swift */,
 				DB63A4502BE6C10900882670 /* FollowViewModel.swift */,
 				DB208C2C2BE7867900C63962 /* BoardListViewModel.swift */,
+				DB2B19602BECB62B00D5B687 /* ProfileEditViewModel.swift */,
 				DB63A4522BE766B300882670 /* _FollowButtonViewModel.swift */,
 			);
 			path = ViewModel;
@@ -393,6 +402,8 @@
 			children = (
 				DB63A43F2BE574B500882670 /* ProfileView.swift */,
 				DB743A9D2BE548E800BBAE5F /* ProfileViewController.swift */,
+				DB2B195E2BECB4C600D5B687 /* ProfileEditView.swift */,
+				DB2B190A2BEBE68900D5B687 /* ProfileEditViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -417,8 +428,9 @@
 				DB4110112BD173D60088679F /* PostRequest.swift */,
 				DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */,
 				DBB7C6612BD7B77800D3081A /* InquiryRequest.swift */,
-				DBB7C6802BDA1B8E00D3081A /* CommentRequest.swift */,
+				DB2B19632BECC1CF00D5B687 /* ProfileEditRequest.swift */,
 				DBDD8A732BDE4337002ADA34 /* LikesRequest.swift */,
+				DBB7C6802BDA1B8E00D3081A /* CommentRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -838,6 +850,7 @@
 				DBCBE3D22BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift in Sources */,
 				DBCBAA172BC7E02D006B40CA /* EmailLoginViewController.swift in Sources */,
 				DB901C742BD69531003EEDC6 /* FilesResponse.swift in Sources */,
+				DB2B19642BECC1CF00D5B687 /* ProfileEditRequest.swift in Sources */,
 				DBCBAA2F2BC86224006B40CA /* AuthManager.swift in Sources */,
 				DB204D942BD29E5D006340BE /* UITabBarController+Extension.swift in Sources */,
 				DB4110072BD15B3B0088679F /* BoardListCoordinator.swift in Sources */,
@@ -909,6 +922,8 @@
 				DB743A982BE53F0100BBAE5F /* UIApplication+Extension.swift in Sources */,
 				DBCBAA582BCD0ACC006B40CA /* SignInUpView.swift in Sources */,
 				DB63A44B2BE6B80700882670 /* FollowViewController.swift in Sources */,
+				DB2B19612BECB62B00D5B687 /* ProfileEditViewModel.swift in Sources */,
+				DB2B195F2BECB4C600D5B687 /* ProfileEditView.swift in Sources */,
 				DB901C612BD58C7C003EEDC6 /* CompleteButton.swift in Sources */,
 				DBCBE3D42BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift in Sources */,
 				DBB7C67B2BD95D0A00D3081A /* BoardDetailViewModel.swift in Sources */,
@@ -940,6 +955,7 @@
 				DBCBAA242BC7E82A006B40CA /* EmailLoginViewModel.swift in Sources */,
 				DB901C762BD6D9A7003EEDC6 /* ImageResize.swift in Sources */,
 				DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */,
+				DB2B190B2BEBE68900D5B687 /* ProfileEditViewController.swift in Sources */,
 				DBCBAA612BCD6A07006B40CA /* SignUpEmailViewModel.swift in Sources */,
 				DBDD8AFA2BE0D98F002ADA34 /* BoardMainView.swift in Sources */,
 				DB63A4512BE6C10A00882670 /* FollowViewModel.swift in Sources */,

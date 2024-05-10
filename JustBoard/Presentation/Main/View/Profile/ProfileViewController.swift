@@ -32,6 +32,7 @@ final class ProfileViewController: RxBaseViewController {
         
         let input = ProfileViewModel.Input(
             viewWillAppear: rx.viewWillAppear,
+            profileEditButton: baseView.profileEditButton.rx.tap,
             followButton: baseView.followButton.rx.tap,
             followerCountButton: baseView.followerCountButton.rx.tap,
             followingCountButton: baseView.followingCountButton.rx.tap
@@ -39,6 +40,17 @@ final class ProfileViewController: RxBaseViewController {
         
         let output = viewModel.transform(input: input)
         
+        output.viewWillAppear
+            .bind(with: self) { owner, _ in
+                owner.tabBarController?.tabBar.isHidden = false
+            }
+            .disposed(by: disposeBag)
+        
+        output.profileEditButton
+            .bind(with: self) { owner, profileResponse in
+                owner.parentCoordinator?.toProfileEdit(profileResponse)
+            }
+            .disposed(by: disposeBag)
         output.followerCountButton
             .bind(with: self) { owner, profileResponse in
                 owner.parentCoordinator?.toFollow(profileResponse, owner.me, 0)

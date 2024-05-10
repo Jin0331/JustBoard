@@ -35,7 +35,7 @@ class BaseViewController: UIViewController {
     func bind() { }
     func configureHierarchy() { }
     func configureLayout() { }
-    func configureView() {  }
+    func configureView() { }
     
     func configureNavigation() {
         // back button

@@ -29,7 +29,7 @@ final class SignInUpViewController : RxBaseViewController{
         
         print(#function, "SignInUpViewController✅")
 
-        if let isReset {
+        if let isReset, isReset == true {
             showAlert(title: "로그인 세션 만료", text: "다시 로그인 해주세요 🥲", addButtonText: "확인")
         }
     }

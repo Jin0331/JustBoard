@@ -13,7 +13,7 @@ final class CategorySelectView: BaseView {
 
     private let titleLabel = UILabel().then {
         $0.text = "🔆 분야 선택하기"
-        $0.font = .systemFont(ofSize: 28, weight: .heavy)
+        $0.font = DesignSystem.mainFont.customFontHeavy(size: 28)
     }
     
     lazy var mainCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {

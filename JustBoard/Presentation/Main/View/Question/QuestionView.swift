@@ -29,20 +29,19 @@ final class QuestionView: BaseView {
     }
 
     let titleTextField = STTextView().then {
-                
-        $0.font = .systemFont(ofSize: 25, weight: .heavy)
+        $0.font = DesignSystem.mainFont.customFontHeavy(size: 25)
         $0.placeholderVerticalAlignment = .center
         let attributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 21, weight: .bold), // Set the desired font size
+            NSAttributedString.Key.font: DesignSystem.mainFont.customFontBold(size: 21),
             NSAttributedString.Key.foregroundColor: DesignSystem.commonColorSet.gray
         ]
         $0.attributedPlaceholder = NSAttributedString(string: " 게시글의 제목을 입력해보세요", attributes: attributes)
     }
     
     let contentsTextView = STTextView().then {
-        $0.font = .systemFont(ofSize: 21, weight: .semibold)
+        $0.font = DesignSystem.mainFont.customFontSemiBold(size: 21)
         let attributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .semibold), // Set the desired font size
+            NSAttributedString.Key.font: DesignSystem.mainFont.customFontSemiBold(size: 17),
             NSAttributedString.Key.foregroundColor: DesignSystem.commonColorSet.gray
         ]
         $0.attributedPlaceholder = NSAttributedString(string: " 게시글의 본문을 작성해주세요.", attributes: attributes)
@@ -138,7 +137,7 @@ final class QuestionView: BaseView {
     }
     
     func contentsTextViewUIUpdate() {
-        contentsTextView.font = .systemFont(ofSize: 21, weight: .heavy)
+        contentsTextView.font = DesignSystem.mainFont.customFontHeavy(size: 21)
     }
     
 }

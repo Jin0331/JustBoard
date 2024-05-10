@@ -16,11 +16,11 @@ final class SignUpEmailViewController: RxBaseViewController {
     
     private let headerTextLabel = UILabel().then {
         $0.text = "이메일을 입력해주세요 😎"
-        $0.font = .systemFont(ofSize: 30, weight: .heavy)
+        $0.font = DesignSystem.mainFont.customFontHeavy(size: 30)
     }
     private let headerSubTextLabel = UILabel().then {
         $0.text = "로그인 시 사용할 이메일을 입력해주세요"
-        $0.font = .systemFont(ofSize: 15, weight: .heavy)
+        $0.font = DesignSystem.mainFont.customFontHeavy(size: 15)
         $0.textColor = DesignSystem.commonColorSet.gray
     }
     private let emailTextfield = SignTextField(placeholderText: "이메일")

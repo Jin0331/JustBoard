@@ -16,12 +16,12 @@ class LinkViewController: RxBaseViewController {
 
     private let titleLabel = UILabel().then {
         $0.text = "🔗 유튜브 링크 첨부하기"
-        $0.font = .systemFont(ofSize: 28, weight: .heavy)
+        $0.font = DesignSystem.mainFont.customFontHeavy(size: 28)
     }
     private let urlLinkTextField = UITextField().then {
-        $0.font = .systemFont(ofSize: 22, weight: .heavy)
+        $0.font = DesignSystem.mainFont.customFontHeavy(size: 22)
         let attributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22, weight: .bold), // Set the desired font size
+            NSAttributedString.Key.font: DesignSystem.mainFont.customFontBold(size: 22),
             NSAttributedString.Key.foregroundColor: DesignSystem.commonColorSet.gray
         ]
         $0.attributedPlaceholder = NSAttributedString(string: " URL 링크를 입력해주세요", attributes: attributes)

@@ -45,10 +45,10 @@ class BaseViewController: UIViewController {
     }
     
     func mainNavigationAttribute() {
-        navigationItem.title = "Bulletin Board"
+        navigationItem.title = "자게? 아니 자게!"
         navigationController?.navigationBar.titleTextAttributes = [
             .foregroundColor: UIColor.black,
-            .font: DesignSystem.mainFont.large!
+            .font: DesignSystem.mainFont.customFontHeavy(size: 25)
         ]
     }
     

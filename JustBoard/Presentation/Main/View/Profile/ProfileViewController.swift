@@ -79,6 +79,7 @@ final class ProfileViewController: RxBaseViewController {
     override func configureNavigation() {
         super.configureNavigation()
         navigationController?.navigationBar.titleTextAttributes = nil
+        navigationItem.title = "프로필 조회"
     }
 
     deinit {

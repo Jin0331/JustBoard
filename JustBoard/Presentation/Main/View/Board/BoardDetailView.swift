@@ -28,7 +28,7 @@ final class BoardDetailView: BaseView {
     }
     
     let title = UILabel().then {
-        $0.font = .systemFont(ofSize: 22, weight: .heavy)
+        $0.font = DesignSystem.mainFont.customFontHeavy(size: 22)
         $0.numberOfLines = 2
     }
     
@@ -41,12 +41,12 @@ final class BoardDetailView: BaseView {
     }
     
     let author = UILabel().then {
-        $0.font = .systemFont(ofSize: 16, weight: .bold)
+        $0.font = DesignSystem.mainFont.customFontBold(size: 16)
         $0.textColor = DesignSystem.commonColorSet.gray
     }
     
     private let createdAt = UILabel().then {
-        $0.font = .systemFont(ofSize: 16, weight: .regular)
+        $0.font =  DesignSystem.mainFont.customFontMedium(size: 16)
         $0.textColor = DesignSystem.commonColorSet.gray
         $0.textAlignment = .left
     }
@@ -58,7 +58,7 @@ final class BoardDetailView: BaseView {
     }
     
     lazy var textView = UITextView().then {
-        $0.font = .systemFont(ofSize: 18.5, weight: .bold)
+        $0.font = DesignSystem.mainFont.customFontBold(size: 18.5)
         $0.isEditable = false
         $0.delegate = self
         $0.isScrollEnabled = false // 스크롤 비활성화
@@ -96,9 +96,9 @@ final class BoardDetailView: BaseView {
     let commentCompleteButton = CompleteButton(title: "등록", image: DesignSystem.sfSymbol.comment, fontSize: 14)
     
     let commentTextField = STTextView().then {
-        $0.font = .systemFont(ofSize: 16, weight: .semibold)
+        $0.font = DesignSystem.mainFont.customFontSemiBold(size: 16)
         let attributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .semibold),
+            NSAttributedString.Key.font:DesignSystem.mainFont.customFontSemiBold(size: 16),
             NSAttributedString.Key.foregroundColor: DesignSystem.commonColorSet.gray
         ]
         $0.attributedPlaceholder = NSAttributedString(string: " 댓글을 남겨주세요.", attributes: attributes)

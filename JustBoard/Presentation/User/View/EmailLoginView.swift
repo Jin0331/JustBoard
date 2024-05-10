@@ -13,7 +13,7 @@ final class EmailLoginView : BaseView {
     
     private let headerTextLabel = UILabel().then {
         $0.text = "이메일로 로그인하기 😎"
-        $0.font = .systemFont(ofSize: 30, weight: .heavy)
+        $0.font = DesignSystem.mainFont.customFontHeavy(size: 30)
     }
     let userIdTextfield = SignTextField(placeholderText: "이메일")
     let userPasswordTextfield = SignTextField(placeholderText: "비밀번호").then { $0.isSecureTextEntry = true }
@@ -24,30 +24,16 @@ final class EmailLoginView : BaseView {
         $0.spacing = 0
     }
     
-    let findEmailButton = UIButton().then {
-        $0.setTitle("이메일 찾기", for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
-        $0.setTitleColor(DesignSystem.commonColorSet.lightBlack, for: .normal)
-        $0.backgroundColor = DesignSystem.commonColorSet.white
-    }
-    
-    let findPasswordButton = UIButton().then {
-        $0.setTitle("비밀번호 찾기", for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
-        $0.setTitleColor(DesignSystem.commonColorSet.lightBlack, for: .normal)
-        $0.backgroundColor = DesignSystem.commonColorSet.white
-    }
-    
     let signUpButton = UIButton().then {
         $0.setTitle("회원가입", for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
+        $0.titleLabel?.font = DesignSystem.mainFont.customFontSemiBold(size: 15)
         $0.setTitleColor(DesignSystem.commonColorSet.lightBlack, for: .normal)
         $0.backgroundColor = DesignSystem.commonColorSet.white
     }
     
     override func configureHierarchy() {
         [headerTextLabel, userIdTextfield, userPasswordTextfield, userLoginButton, buttonStackView].forEach { addSubview($0) }
-        [findEmailButton, findPasswordButton, signUpButton].forEach { buttonStackView.addArrangedSubview($0)}
+        [signUpButton].forEach { buttonStackView.addArrangedSubview($0)}
     }
     
     override func configureLayout() {

@@ -20,7 +20,7 @@ final class BoardListCollectionViewCell: BaseCollectionViewCell, Reusable {
     }
     
     private let boardNameLabel =  MarqueeLabel().then {
-        $0.font = .systemFont(ofSize: 18, weight: .regular)
+        $0.font = DesignSystem.mainFont.customFontMedium(size: 18)
         $0.textColor = DesignSystem.commonColorSet.black
     }
     

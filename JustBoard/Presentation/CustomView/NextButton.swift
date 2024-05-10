@@ -12,7 +12,7 @@ final class NextButton : UIButton {
     init(title : String) {
         super.init(frame: .zero)
         setTitle(title, for: .normal)
-        titleLabel?.font = .systemFont(ofSize: 20, weight: .heavy)
+        titleLabel?.font = DesignSystem.mainFont.customFontHeavy(size: 20)
         setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
         backgroundColor = DesignSystem.commonColorSet.lightBlack
         layer.cornerRadius = DesignSystem.cornerRadius.commonCornerRadius

@@ -72,7 +72,7 @@ final class BoardMainView: BaseView {
     override func configureLayout() {
         
         scrollView.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide).inset(10)
+            $0.top.equalTo(safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
@@ -83,7 +83,7 @@ final class BoardMainView: BaseView {
         }
         
         boardRankLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(10)
+            make.top.equalToSuperview()
             make.height.equalTo(40)
             make.horizontalEdges.equalToSuperview()
         }

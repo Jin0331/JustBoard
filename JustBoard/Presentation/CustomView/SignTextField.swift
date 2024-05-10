@@ -17,7 +17,7 @@ final class SignTextField : JiroTextField {
         placeholderFontScale = 1
         borderColor = DesignSystem.commonColorSet.lightBlack
         textColor = .white
-        font = .systemFont(ofSize: 20, weight: .heavy)
+        font = DesignSystem.mainFont.customFontHeavy(size: 20)
         contentVerticalAlignment = .bottom
         layer.cornerRadius = DesignSystem.cornerRadius.commonCornerRadius
     }

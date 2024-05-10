@@ -25,11 +25,10 @@ final class ProfileEditView: BaseView {
     lazy var nickname = UITextField().then {
         $0.placeholder = "닉네임을 입력해주세요"
         $0.textAlignment = .center
-        $0.font = .systemFont(ofSize: 22, weight: .heavy)
+        $0.font = DesignSystem.mainFont.customFontHeavy(size: 22)
         $0.borderStyle = .roundedRect
         $0.layer.borderColor = DesignSystem.commonColorSet.gray.cgColor
         $0.layer.cornerRadius = 10
-//        $0.delegate = self
     }
     
     let editButton = CompleteButton(title: "수정하기", image: nil, fontSize: 18)

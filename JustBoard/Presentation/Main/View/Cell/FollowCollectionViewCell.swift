@@ -22,7 +22,7 @@ final class FollowCollectionViewCell: BaseCollectionViewCell, Reusable {
     }
     
     private let author = UILabel().then {
-        $0.font = .systemFont(ofSize: 19, weight: .bold)
+        $0.font = DesignSystem.mainFont.customFontBold(size: 19)
         $0.textColor = DesignSystem.commonColorSet.black
     }
     

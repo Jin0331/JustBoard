@@ -12,7 +12,7 @@ final class CommonLabel : UILabel {
     init(title: String, fontSize: Double) {
         super.init(frame: .zero)
         text = title
-        font = .systemFont(ofSize: fontSize, weight: .heavy)
+        font = DesignSystem.mainFont.customFontHeavy(size: fontSize)
         textColor = DesignSystem.commonColorSet.white
         backgroundColor = DesignSystem.commonColorSet.lightBlack
         textAlignment = .center

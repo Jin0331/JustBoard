@@ -15,12 +15,12 @@ final class SignUpPasswordViewController: RxBaseViewController {
     
     private let headerTextLabel = UILabel().then {
         $0.text = "비밀번호를 입력해주세요 😎"
-        $0.font = .systemFont(ofSize: 30, weight: .heavy)
+        $0.font = DesignSystem.mainFont.customFontHeavy(size: 30)
     }
     private let headerSubTextLabel = UILabel().then {
         $0.text = "한 개 이상의 대/소문자 영문, 숫자, 특수문자(.@$!%*?&)를\n조합하여 8~15자리로 작성해주세요"
         $0.numberOfLines = 0
-        $0.font = .systemFont(ofSize: 15, weight: .heavy)
+        $0.font = DesignSystem.mainFont.customFontHeavy(size: 15)
         $0.textColor = DesignSystem.commonColorSet.gray
     }
     private let passwordTextfield = SignTextField(placeholderText: "비밀번호").then { $0.isSecureTextEntry = true }

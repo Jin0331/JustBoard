@@ -63,7 +63,26 @@ enum DesignSystem {
     }
     
     enum mainFont {
-        static let large = UIFont(name: "MarkerFelt-Thin", size: 28)
-        static let medium = UIFont(name: "MarkerFelt-Thin", size: 22)
+//        static let large = UIFont(name: "YANGJIN", size: 25)
+//        static let medium = UIFont(name: "YANGJIN", size: 22)
+        static let TitleLarge = UIFont(name: "Pretendard-Black", size: 25)
+        static let TitleMedium = UIFont(name: "Pretendard-Black", size: 22)
+        
+        static func customFontHeavy(size : CGFloat) -> UIFont {
+            return UIFont(name: "Pretendard-Black", size: size)!
+        }
+        
+        static func customFontBold(size : CGFloat) -> UIFont {
+            return UIFont(name: "Pretendard-ExtraBold", size: size)!
+        }
+        
+        static func customFontSemiBold(size : CGFloat) -> UIFont {
+            return UIFont(name: "Pretendard-SemiBold", size: size)!
+        }
+
+        
+        static func customFontMedium(size : CGFloat) -> UIFont {
+            return UIFont(name: "Pretendard-Medium", size: size)!
+        }
     }
 }

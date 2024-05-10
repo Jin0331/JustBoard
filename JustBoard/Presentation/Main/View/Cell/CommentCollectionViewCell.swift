@@ -11,18 +11,18 @@ import SnapKit
 
 final class CommentCollectionViewCell: BaseCollectionViewCell {
     private let author = UILabel().then {
-        $0.font = .systemFont(ofSize: 15, weight: .regular)
+        $0.font = DesignSystem.mainFont.customFontMedium(size: 15)
         $0.textColor = DesignSystem.commonColorSet.gray
     }
     
     private let main = UILabel().then {
-        $0.font = .systemFont(ofSize: 15, weight: .regular)
+        $0.font = DesignSystem.mainFont.customFontMedium(size: 15)
         $0.numberOfLines = 0
         $0.textColor = DesignSystem.commonColorSet.black
     }
     
     private let createdAt = UILabel().then {
-        $0.font = .systemFont(ofSize: 15, weight: .regular)
+        $0.font = DesignSystem.mainFont.customFontMedium(size: 15)
         $0.textColor = DesignSystem.commonColorSet.gray
     }
     

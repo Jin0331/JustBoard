@@ -13,22 +13,22 @@ import Reusable
 final class BoardCollectionViewCell: BaseCollectionViewCell, Reusable {
     
     private let titleLabel = UILabel().then {
-        $0.font = .systemFont(ofSize: 18, weight: .bold)
+        $0.font = DesignSystem.mainFont.customFontBold(size: 18)
         $0.textColor = DesignSystem.commonColorSet.black
     }
     
     private let commentCount = UILabel().then {
-        $0.font = .systemFont(ofSize: 16, weight: .semibold)
+        $0.font = DesignSystem.mainFont.customFontSemiBold(size: 17)
         $0.textColor = DesignSystem.commonColorSet.lightBlack
     }
     
     private let author = UILabel().then {
-        $0.font = .systemFont(ofSize: 15, weight: .regular)
+        $0.font = DesignSystem.mainFont.customFontMedium(size: 15)
         $0.textColor = DesignSystem.commonColorSet.gray
     }
     
     private let createdAt = UILabel().then {
-        $0.font = .systemFont(ofSize: 15, weight: .regular)
+        $0.font = DesignSystem.mainFont.customFontMedium(size: 15)
         $0.textColor = DesignSystem.commonColorSet.gray
     }
     

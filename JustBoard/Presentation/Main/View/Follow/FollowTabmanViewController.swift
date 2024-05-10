@@ -70,7 +70,7 @@ extension FollowTabmanViewController : PageboyViewControllerDataSource {
         bar.buttons.customize { (button) in
             button.tintColor = DesignSystem.commonColorSet.black
             button.selectedTintColor = DesignSystem.commonColorSet.black
-            button.font = .systemFont(ofSize: 18, weight: .heavy)
+            button.font = DesignSystem.mainFont.customFontHeavy(size: 18)
         }
     
         bar.layout.transitionStyle = .snap // Customize

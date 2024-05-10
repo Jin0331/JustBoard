@@ -14,7 +14,7 @@ import Kingfisher
 final class BoardRankCollectionViewCell : BaseCollectionViewCell, Reusable {
     
     private let rankLabel = UILabel().then {
-        $0.font = .systemFont(ofSize: 18, weight: .bold)
+        $0.font = DesignSystem.mainFont.customFontBold(size: 18)
         $0.textColor = DesignSystem.commonColorSet.black
     }
     
@@ -23,12 +23,12 @@ final class BoardRankCollectionViewCell : BaseCollectionViewCell, Reusable {
     }
     
     private let boardNameLabel = UILabel().then {
-        $0.font = .systemFont(ofSize: 18, weight: .regular)
+        $0.font = DesignSystem.mainFont.customFontMedium(size: 18)
         $0.textColor = DesignSystem.commonColorSet.black
     }
     
     private let countLabel = UILabel().then {
-        $0.font = .systemFont(ofSize: 15, weight: .bold)
+        $0.font = DesignSystem.mainFont.customFontBold(size: 15)
         $0.layer.cornerRadius = DesignSystem.cornerRadius.commonCornerRadius
         $0.clipsToBounds = true
         $0.textColor = DesignSystem.commonColorSet.white
@@ -91,14 +91,14 @@ final class BoardRankCollectionViewCell : BaseCollectionViewCell, Reusable {
         }
         
         rankLabel.text = "\(rank + 1)."
-        rankLabel.font = rank < 3 ? .systemFont(ofSize: 18, weight: .heavy) : .systemFont(ofSize: 18, weight: .regular)
+        rankLabel.font = rank < 3 ? DesignSystem.mainFont.customFontHeavy(size: 18) : DesignSystem.mainFont.customFontMedium(size: 18)
         rankLabel.textColor = rank < 3 ? DesignSystem.commonColorSet.red : DesignSystem.commonColorSet.black
         
         boardNameLabel.text = name
-        boardNameLabel.font = rank < 3 ? .systemFont(ofSize: 18, weight: .heavy) : .systemFont(ofSize: 18, weight: .regular)
+        boardNameLabel.font = rank < 3 ? DesignSystem.mainFont.customFontHeavy(size: 18) : DesignSystem.mainFont.customFontMedium(size: 18)
         
         countLabel.text = "\(count)"
-        countLabel.font = rank < 3 ? .systemFont(ofSize: 15, weight: .heavy) : .systemFont(ofSize: 15, weight: .regular)
+        countLabel.font = rank < 3 ? DesignSystem.mainFont.customFontHeavy(size: 15) : DesignSystem.mainFont.customFontMedium(size: 15)
         countLabel.backgroundColor = rank < 3 ? DesignSystem.commonColorSet.red : DesignSystem.commonColorSet.lightBlack
     }
     

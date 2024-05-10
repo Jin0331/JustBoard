@@ -17,7 +17,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     }
     
     private let menuTitle = UILabel().then {
-        $0.font = .systemFont(ofSize: 18, weight: .heavy)
+        $0.font = DesignSystem.mainFont.customFontHeavy(size: 18)
         $0.backgroundColor = .clear
         $0.textColor = DesignSystem.commonColorSet.white
     }

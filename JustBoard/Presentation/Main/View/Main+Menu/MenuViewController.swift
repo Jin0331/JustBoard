@@ -20,9 +20,9 @@ final class MenuViewController: BaseViewController {
     var sendDelegate : MenuViewControllerDelegate?
     
     private let headerTitle = UILabel().then {
-        $0.font = DesignSystem.mainFont.medium
+        $0.font = DesignSystem.mainFont.TitleMedium
         $0.backgroundColor = .clear
-        $0.text = "Bulletin Board"
+        $0.text = "자게? 아니 자게!"
         $0.textColor = DesignSystem.commonColorSet.white
         $0.textAlignment = .center
     }
@@ -40,7 +40,7 @@ final class MenuViewController: BaseViewController {
         $0.backgroundColor = .clear
         $0.setTitle("로그아웃", for: .normal)
         $0.setTitleColor(DesignSystem.commonColorSet.red, for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 18, weight: .heavy)
+        $0.titleLabel?.font = DesignSystem.mainFont.customFontHeavy(size: 18)
     }
     
     override func viewDidLoad() {

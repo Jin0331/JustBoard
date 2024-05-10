@@ -15,7 +15,7 @@ final class CompleteButton : UIButton {
         if let title {
             setTitle(" \(title)", for: .normal)
         }
-        titleLabel?.font = .systemFont(ofSize: fontSize, weight: .heavy)
+        titleLabel?.font = DesignSystem.mainFont.customFontHeavy(size: fontSize)
         setImage(image, for: .normal)
         tintColor = DesignSystem.commonColorSet.white
         setTitleColor(DesignSystem.commonColorSet.white, for: .normal)

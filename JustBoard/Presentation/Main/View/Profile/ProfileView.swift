@@ -30,7 +30,7 @@ final class ProfileView: BaseView {
     }
     
     let author = UILabel().then {
-        $0.font = .systemFont(ofSize: 22, weight: .heavy)
+        $0.font = DesignSystem.mainFont.customFontHeavy(size: 22)
         $0.textColor = DesignSystem.commonColorSet.black
     }
     
@@ -40,7 +40,7 @@ final class ProfileView: BaseView {
     }
     
     let postCountLabel = UIButton().then {
-        $0.titleLabel?.font = .systemFont(ofSize: 17, weight: .heavy)
+        $0.titleLabel?.font = DesignSystem.mainFont.customFontHeavy(size: 17)
         $0.titleLabel?.numberOfLines = 2
         $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
         $0.backgroundColor = .clear
@@ -48,7 +48,7 @@ final class ProfileView: BaseView {
     }
     
     let followerCountButton = UIButton().then {
-        $0.titleLabel?.font = .systemFont(ofSize: 17, weight: .heavy)
+        $0.titleLabel?.font = DesignSystem.mainFont.customFontHeavy(size: 17)
         $0.titleLabel?.numberOfLines = 2
         $0.titleLabel?.textAlignment = .center
         $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
@@ -56,7 +56,7 @@ final class ProfileView: BaseView {
     }
     
     let followingCountButton = UIButton().then {
-        $0.titleLabel?.font = .systemFont(ofSize: 17, weight: .heavy)
+        $0.titleLabel?.font = DesignSystem.mainFont.customFontHeavy(size: 17)
         $0.titleLabel?.numberOfLines = 2
         $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
         $0.backgroundColor = .clear

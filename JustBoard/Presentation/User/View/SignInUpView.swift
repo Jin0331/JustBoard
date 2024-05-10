@@ -14,14 +14,14 @@ class SignInUpView : BaseView {
     private let titleLabel1 = UILabel().then {
         $0.text = "자게?\n자게!"
         $0.numberOfLines = 0
-        $0.font = .systemFont(ofSize: 35, weight: .bold)
+        $0.font = DesignSystem.mainFont.customFontBold(size: 35)
         $0.textColor = DesignSystem.commonColorSet.white
     }
     
     private let titleLabel2 = UILabel().then {
         $0.text = "진짜\n그냥\n자유게시판"
         $0.numberOfLines = 0
-        $0.font = .systemFont(ofSize: 55, weight: .heavy)
+        $0.font = DesignSystem.mainFont.customFontHeavy(size: 55)
         $0.textColor = DesignSystem.commonColorSet.white
     }
     
@@ -29,7 +29,7 @@ class SignInUpView : BaseView {
 //        $0.setTitle("카카오로 시작하기", for: .normal)
 //        $0.setTitleColor(DesignSystem.commonColorSet.black, for: .normal)
 //        $0.backgroundColor = DesignSystem.buttonColorSet.yellow
-//        $0.titleLabel?.font = .systemFont(ofSize: 20, weight: .heavy)
+//        $0.titleLabel?.font = DesignSystem.mainFont.customFontHeavy(size: 20)
 //        $0.layer.cornerRadius = 12
 //        $0.setImage(UIImage(named: "kakaotalk_sharing_btn_small_ov"), for: .normal)
 //    }
@@ -38,24 +38,17 @@ class SignInUpView : BaseView {
 //        $0.setTitle(" Apple로 시작하기", for: .normal)
 //        $0.setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
 //        $0.backgroundColor = DesignSystem.buttonColorSet.black
-//        $0.titleLabel?.font = .systemFont(ofSize: 20, weight: .heavy)
+//        $0.titleLabel?.font = DesignSystem.mainFont.customFontHeavy(size: 20)
 //        $0.layer.cornerRadius = 12
 //        $0.setImage(DesignSystem.sfSymbol.appleLogo, for: .normal)
 //        $0.tintColor = DesignSystem.commonColorSet.white
-//    }
-    
-//    let emailLoginButton = UIButton().then {
-//        $0.setTitle("이메일 로그인 ", for: .normal)
-//        $0.setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
-//        $0.backgroundColor = DesignSystem.buttonColorSet.clear
-//        $0.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
 //    }
     
     let emailLoginButton = UIButton().then {
         $0.setTitle("이메일로 시작하기", for: .normal)
         $0.setTitleColor(DesignSystem.commonColorSet.white, for: .normal)
         $0.backgroundColor = DesignSystem.buttonColorSet.black
-        $0.titleLabel?.font = .systemFont(ofSize: 20, weight: .heavy)
+        $0.titleLabel?.font = DesignSystem.mainFont.customFontHeavy(size: 20)
         $0.layer.cornerRadius = 12
         $0.tintColor = DesignSystem.commonColorSet.white
     }

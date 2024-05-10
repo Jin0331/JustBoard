@@ -27,6 +27,9 @@ final class SignInUpViewController : RxBaseViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getFontName()
+        
+        
         print(#function, "SignInUpViewController✅")
 
         if let isReset, isReset == true {
@@ -59,6 +62,18 @@ final class SignInUpViewController : RxBaseViewController{
                 owner.parentCoordinator?.emailLogin()
             }
             .disposed(by: disposeBag)
+    }
+    
+    func getFontName() {
+        for family in UIFont.familyNames {
+
+            let sName: String = family as String
+            print("family: \(sName)")
+                    
+            for name in UIFont.fontNames(forFamilyName: sName) {
+                print("name: \(name as String)")
+            }
+        }
     }
     
     deinit {

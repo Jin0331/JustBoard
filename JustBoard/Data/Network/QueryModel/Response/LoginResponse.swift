@@ -29,7 +29,7 @@ struct LoginResponse: Decodable {
         self.user_id = try container.decode(String.self, forKey: .user_id)
         self.email = try container.decode(String.self, forKey: .email)
         self.nick = try container.decode(String.self, forKey: .nick)
-        self.profileImage = (try? container.decode(String.self, forKey: .profileImage)) ?? ""
+        self.profileImage = (try? container.decode(String.self, forKey: .profileImage)) ?? DesignSystem.defaultimage.defaultProfile
         self.accessToken = try container.decode(String.self, forKey: .accessToken)
         self.refreshToken = try container.decode(String.self, forKey: .refreshToken)
     }

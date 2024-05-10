@@ -22,18 +22,24 @@ final class ProfileEditViewModel : MainViewModelType {
         let viewWillAppear : ControlEvent<Bool>
         let addedImage : Observable<Data> // files
         let nickname : ControlProperty<String>
-        let completeButton : ControlEvent<Void>
+        let completeButton : PublishSubject<Void>
     }
     
     struct Output {
         let currentProfileResponse : Observable<ProfileResponse>
+        let editComplete : PublishSubject<Void>
+        let editFail : PublishSubject<Void>
     }
     
     func transform(input: Input) -> Output {
         
         let nicknameWithImage = Observable.combineLatest(input.nickname, input.addedImage)
+        let editComplete = PublishSubject<Void>()
+        let editFail = PublishSubject<Void>()
+        
         
         input.completeButton
+            .debug()
             .withLatestFrom(nicknameWithImage)
             .map {
                 let nick = $0.isEmpty ? UserDefaultManager.shared.nick! : $0
@@ -45,16 +51,21 @@ final class ProfileEditViewModel : MainViewModelType {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let profileResponse):
-                    print(profileResponse)
+                    UserDefaultManager.shared.nick = profileResponse.nick
+                    UserDefaultManager.shared.profile = profileResponse.profileImage
+                    editComplete.onNext(())
                 case .failure(let error):
                     print(error)
+                    editFail.onNext(())
                 }
             }
             .disposed(by: disposeBag)
         
         return Output(
             currentProfileResponse: input.viewWillAppear
-            .withLatestFrom(profileResponse)
+            .withLatestFrom(profileResponse),
+            editComplete: editComplete,
+            editFail: editFail
         )
                       
     }

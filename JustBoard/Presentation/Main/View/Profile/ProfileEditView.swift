@@ -29,7 +29,7 @@ final class ProfileEditView: BaseView {
         $0.borderStyle = .roundedRect
         $0.layer.borderColor = DesignSystem.commonColorSet.gray.cgColor
         $0.layer.cornerRadius = 10
-        $0.delegate = self
+//        $0.delegate = self
     }
     
     let editButton = CompleteButton(title: "수정하기", image: nil, fontSize: 18)
@@ -85,19 +85,11 @@ extension ProfileEditView {
         profileImage.image = data
     }
     
-    private func addimage(imageUrl : URL) {
-        
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.startAnimating()
-        profileImage.addSubview(indicator)
+    func addimage(imageUrl : URL) {
         
         KingfisherManager.shared
             .retrieveImage(with: imageUrl, options: [.requestModifier(AuthManager.kingfisherAuth())]) { [weak self] result in
                 guard let self = self else { return }
-                
-                indicator.stopAnimating()
-                indicator.removeFromSuperview()
-                
                 switch result {
                 case .success(let value):
                     profileImage.image = value.image
@@ -114,12 +106,5 @@ extension ProfileEditView {
             profileImage.layer.masksToBounds = true
             profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
         }
-    }
-}
-
-
-extension ProfileEditView : UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.text = nil
     }
 }

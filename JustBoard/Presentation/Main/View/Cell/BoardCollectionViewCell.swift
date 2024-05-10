@@ -22,6 +22,11 @@ final class BoardCollectionViewCell: BaseCollectionViewCell, Reusable {
         $0.textColor = DesignSystem.commonColorSet.lightBlack
     }
     
+    private let boardname = UILabel().then {
+        $0.font = DesignSystem.mainFont.customFontMedium(size: 15)
+        $0.textColor = DesignSystem.commonColorSet.gray
+    }
+    
     private let author = UILabel().then {
         $0.font = DesignSystem.mainFont.customFontMedium(size: 15)
         $0.textColor = DesignSystem.commonColorSet.gray
@@ -33,7 +38,7 @@ final class BoardCollectionViewCell: BaseCollectionViewCell, Reusable {
     }
     
     override func configureHierarchy() {
-        [titleLabel, commentCount, author, createdAt].forEach { contentView.addSubview($0) }
+        [titleLabel, commentCount, boardname, author, createdAt].forEach { contentView.addSubview($0) }
     }
     
     override func configureLayout() {
@@ -47,6 +52,9 @@ final class BoardCollectionViewCell: BaseCollectionViewCell, Reusable {
             make.centerY.equalTo(titleLabel)
             make.trailing.lessThanOrEqualToSuperview()
         }
+    }
+    
+    func updateUI(_ itemIdentifier : PostResponse) {
         
         author.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
@@ -59,12 +67,37 @@ final class BoardCollectionViewCell: BaseCollectionViewCell, Reusable {
             make.verticalEdges.equalTo(author)
             make.trailing.lessThanOrEqualToSuperview()
         }
-    }
-    
-    func updateUI(_ itemIdentifier : PostResponse) {
         
         titleLabel.text = itemIdentifier.title
         commentCount.text = itemIdentifier.comments.count > 0 ? "[" + String(itemIdentifier.comments.count) + "]" : ""
+        author.text = itemIdentifier.creator.nick
+        createdAt.text = itemIdentifier.createdAt.formatDateString()
+    }
+    
+    func updateUIBestBoard(_ itemIdentifier : PostResponse) {
+        
+        boardname.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(5)
+            make.leading.equalTo(titleLabel)
+            make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom)
+        }
+        
+        author.snp.makeConstraints { make in
+            make.top.verticalEdges.equalTo(author)
+            make.leading.equalTo(boardname.snp.trailing).offset(5)
+            make.trailing.equalTo(createdAt.snp.leading).offset(-10)
+            make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom)
+        }
+        
+        createdAt.snp.makeConstraints { make in
+            make.verticalEdges.equalTo(author)
+            make.trailing.lessThanOrEqualToSuperview()
+        }
+        
+        
+        titleLabel.text = itemIdentifier.title
+        commentCount.text = itemIdentifier.comments.count > 0 ? "[" + String(itemIdentifier.comments.count) + "]" : ""
+        boardname.text = itemIdentifier.productID
         author.text = itemIdentifier.creator.nick
         createdAt.text = itemIdentifier.createdAt.formatDateString()
     }

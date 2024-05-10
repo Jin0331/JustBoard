@@ -17,6 +17,7 @@ final class BoardViewController: RxBaseViewController {
     private let mainView : BoardView
     private let viewModel : BoardViewModel
     private let productId : String
+    private let bestBoard : Bool
     var parentPorifleCoordinator : ProfileCoordinator?
     var parentMainCoordinator : BoardMainCoordinator?
     var parentCoordinator : BoardSpecificCoordinator?
@@ -28,6 +29,7 @@ final class BoardViewController: RxBaseViewController {
     
     init(productId : String, userID : String? = nil, limit: String, bestBoard: Bool, profileBoard: Bool, bestBoardType : BestCategory? = nil, profileBoardType : ProfilePostCategory? = nil) {
         self.productId = productId
+        self.bestBoard = bestBoard
         self.mainView = BoardView(bestBoard: bestBoard, profileBoard: profileBoard)
         self.viewModel = BoardViewModel(product_id: productId,
                                         userId: userID,
@@ -107,10 +109,15 @@ final class BoardViewController: RxBaseViewController {
 extension BoardViewController {
     private func configureCollectionViewDataSource() {
         
-        dataSource = BoardRxDataSource(configureCell: { dataSource, collectionView, indexPath, item in
+        dataSource = BoardRxDataSource(configureCell: { [weak self] dataSource, collectionView, indexPath, item in
+            guard let self = self else { return UICollectionViewCell() }
             
             let cell: BoardCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-            cell.updateUI(item)
+            if bestBoard {
+                cell.updateUIBestBoard(item)
+            } else {
+                cell.updateUI(item)
+            }
             
             return cell
         })

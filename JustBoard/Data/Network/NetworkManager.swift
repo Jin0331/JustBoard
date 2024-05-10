@@ -98,9 +98,10 @@ final class NetworkManager  {
         let router = MainRouter.files(query: query, category: category)
         let url = router.baseURL.appendingPathComponent(router.path).absoluteString.removingPercentEncoding!
         let header = HTTPHeaders(router.header)
+        let method = router.method
         
         return Single<Result<FilesResponse, AFError>>.create { single in
-            AF.upload(multipartFormData: router.multipart, to: url, headers: header, interceptor: AuthManager())
+            AF.upload(multipartFormData: router.multipart, to: url, method: method, headers: header, interceptor: AuthManager())
                 .responseDecodable(of: FilesResponse.self) { response in
                     switch response.result {
                     case .success(let filesResponse):
@@ -135,6 +136,26 @@ final class NetworkManager  {
     
     func profile(userId: String) -> Single<Result<ProfileResponse, AFError>> {
         return mainMakeRequest(router: MainRouter.otherProfile(userId: userId))
+    }
+    
+    func profile(query: ProfileEditRequest) -> Single<Result<ProfileResponse, AFError>> {
+        let router = MainRouter.meProfileEdit(query: query)
+        let url = router.baseURL.appendingPathComponent(router.path).absoluteString.removingPercentEncoding!
+        let header = HTTPHeaders(router.header)
+        let method = router.method
+
+        return Single<Result<ProfileResponse, AFError>>.create { single in
+            AF.upload(multipartFormData: router.multipart, to: url, method: method, headers: header)
+                .responseDecodable(of: ProfileResponse.self) { response in
+                    switch response.result {
+                    case .success(let profileResponse):
+                        single(.success(.success(profileResponse)))
+                    case .failure(let error):
+                        single(.success(.failure(error)))
+                    }
+                }
+            return Disposables.create()
+        }
     }
     
     func follow(userId: String) -> Single<Result<FollowResponse, AFError>> {

@@ -46,6 +46,8 @@ enum DesignSystem {
         static let latest = UIImage(systemName: "clock.arrow.circlepath", withConfiguration:sfSymbolSmallConfig)
         
         static let doc = UIImage(systemName: "chart.bar.doc.horizontal", withConfiguration:sfSymbolLargeConfig)
+        
+        static let camera = UIImage(systemName: "camera.metering.partial", withConfiguration:sfSymbolLargeConfig2)
     
     }
     

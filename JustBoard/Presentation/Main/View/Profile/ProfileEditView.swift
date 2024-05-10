@@ -16,6 +16,12 @@ final class ProfileEditView: BaseView {
         $0.contentMode = .scaleAspectFill
     }
     
+    let profileChangeBUtton = UIButton().then {
+        $0.setImage(DesignSystem.sfSymbol.camera, for: .normal)
+        $0.backgroundColor = DesignSystem.commonColorSet.white
+        $0.tintColor = DesignSystem.commonColorSet.lightBlack
+    }
+    
     lazy var nickname = UITextField().then {
         $0.placeholder = "닉네임을 입력해주세요"
         $0.textAlignment = .center
@@ -32,7 +38,7 @@ final class ProfileEditView: BaseView {
     }
     
     override func configureHierarchy() {
-        [profileImage, nickname, editButton, withdrawButton].forEach { addSubview($0) }
+        [profileImage, profileChangeBUtton, nickname, editButton, withdrawButton].forEach { addSubview($0) }
     }
     
     override func configureLayout() {
@@ -40,6 +46,11 @@ final class ProfileEditView: BaseView {
             make.top.equalTo(safeAreaLayoutGuide).inset(50)
             make.centerX.equalTo(safeAreaLayoutGuide)
             make.size.equalTo(100)
+        }
+        
+        profileChangeBUtton.snp.makeConstraints { make in
+            make.bottom.trailing.equalTo(profileImage)
+            make.size.equalTo(22)
         }
         
         nickname.snp.makeConstraints { make in
@@ -65,9 +76,13 @@ final class ProfileEditView: BaseView {
 
 extension ProfileEditView {
     
-    private func updateUI(_ data : ProfileResponse) {
+    func updateUI(_ data : ProfileResponse) {
         addimage(imageUrl: data.profileImageToUrl)
         nickname.text = data.nick
+    }
+    
+    func updateProfileUI(_ data : UIImage) {
+        profileImage.image = data
     }
     
     private func addimage(imageUrl : URL) {

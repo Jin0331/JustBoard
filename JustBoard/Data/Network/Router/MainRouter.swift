@@ -17,6 +17,7 @@ enum MainRouter {
     case likes(query : LikesRequest, postId : String)
     case meProfile
     case otherProfile(userId : String)
+    case meProfileEdit(query : ProfileEditRequest)
     case follow(userId : String)
     case followCancel(userId : String)
 }
@@ -34,6 +35,8 @@ extension MainRouter : TargetType {
             return .get
         case .followCancel:
             return .delete
+        case .meProfileEdit:
+            return .put
         }
     }
     
@@ -49,7 +52,7 @@ extension MainRouter : TargetType {
             return "/posts/" + postId + "/comments"
         case .likes(query: _ , postId: let postId):
             return "/posts/" + postId + "/like"
-        case .meProfile:
+        case .meProfile, .meProfileEdit:
             return "/users/me/profile"
         case .otherProfile(userId: let userId):
             return "/users/" + userId + "/profile"
@@ -68,7 +71,7 @@ extension MainRouter : TargetType {
                 HTTPHeader.contentType.rawValue : HTTPHeader.json.rawValue,
                 HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue
             ]
-        case .files :
+        case .files, .meProfileEdit :
             return [
                 HTTPHeader.authorization.rawValue : token,
                 HTTPHeader.contentType.rawValue : HTTPHeader.multipart.rawValue,
@@ -138,6 +141,14 @@ extension MainRouter : TargetType {
                 }
                 return multiPart
             }
+        
+        case .meProfileEdit(let fileRequest):
+            let multiPart = MultipartFormData()
+            
+            multiPart.append(fileRequest.nick.data(using: .utf8)!, withName: "nick")
+            multiPart.append(fileRequest.profile, withName: "profile", fileName: fileRequest.nick + "_profile.jpeg", mimeType: "image/jpeg")
+            
+            return multiPart
             
         default: return MultipartFormData()
             

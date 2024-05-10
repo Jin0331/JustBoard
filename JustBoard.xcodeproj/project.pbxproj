@@ -42,6 +42,8 @@
 		DB2B197D2BEE716F00D5B687 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DB2B19742BEE716E00D5B687 /* Pretendard-Bold.otf */; };
 		DB2B197E2BEE716F00D5B687 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = DB2B19752BEE716F00D5B687 /* Pretendard-Thin.otf */; };
 		DB2B197F2BEE716F00D5B687 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DB2B19762BEE716F00D5B687 /* Pretendard-SemiBold.otf */; };
+		DB2B19822BEE840C00D5B687 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B19812BEE840C00D5B687 /* Util.swift */; };
+		DB2B19842BEE86AF00D5B687 /* SignUpThirdPartyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B19832BEE86AF00D5B687 /* SignUpThirdPartyViewModel.swift */; };
 		DB410FF52BD0CFA10088679F /* BoardListTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF42BD0CFA10088679F /* BoardListTabmanViewController.swift */; };
 		DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */; };
 		DB4110052BD15B300088679F /* BoardMainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110042BD15B300088679F /* BoardMainCoordinator.swift */; };
@@ -184,6 +186,9 @@
 		DB2B19742BEE716E00D5B687 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		DB2B19752BEE716F00D5B687 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		DB2B19762BEE716F00D5B687 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		DB2B19802BEE7ECF00D5B687 /* JustBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JustBoard.entitlements; sourceTree = "<group>"; };
+		DB2B19812BEE840C00D5B687 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		DB2B19832BEE86AF00D5B687 /* SignUpThirdPartyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpThirdPartyViewModel.swift; sourceTree = "<group>"; };
 		DB410FF42BD0CFA10088679F /* BoardListTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListTabmanViewController.swift; sourceTree = "<group>"; };
 		DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarCoordinator.swift; sourceTree = "<group>"; };
 		DB4110042BD15B300088679F /* BoardMainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMainCoordinator.swift; sourceTree = "<group>"; };
@@ -525,6 +530,7 @@
 		DBCBA9DE2BC7BE34006B40CA /* JustBoard */ = {
 			isa = PBXGroup;
 			children = (
+				DB2B19802BEE7ECF00D5B687 /* JustBoard.entitlements */,
 				DBCBA9F62BC7C64D006B40CA /* Presentation */,
 				DBCBA9FB2BC7CB31006B40CA /* Data */,
 				DBCBA9FC2BC7CB68006B40CA /* Application */,
@@ -591,6 +597,7 @@
 				DBCBAA602BCD6A07006B40CA /* SignUpEmailViewModel.swift */,
 				DBCBE3B62BCD87B700B6DAC5 /* SignUpPasswordViewModel.swift */,
 				DBCBE3D32BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift */,
+				DB2B19832BEE86AF00D5B687 /* SignUpThirdPartyViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -688,6 +695,7 @@
 				DBB7C6882BDAD82A00D3081A /* Formatter+Extension.swift */,
 				DBB7C6842BDA3A6B00D3081A /* CALayer+Extension.swift */,
 				DBDD8AE02BDFF97F002ADA34 /* Reactive+Extension.swift */,
+				DB2B19812BEE840C00D5B687 /* Util.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -940,6 +948,7 @@
 				DBCBAA042BC7CD32006B40CA /* BaseViewController.swift in Sources */,
 				DBDD8ADF2BDFE77A002ADA34 /* RxDataSource+Typealias.swift in Sources */,
 				DBCBAA092BC7CEE8006B40CA /* UserRouter.swift in Sources */,
+				DB2B19822BEE840C00D5B687 /* Util.swift in Sources */,
 				DBDD8AFE2BE0ED05002ADA34 /* BoardMainViewModel.swift in Sources */,
 				DBCBAA152BC7DC8C006B40CA /* JoinRequest.swift in Sources */,
 				DB204D9E2BD2DDBB006340BE /* QuestionView.swift in Sources */,
@@ -960,6 +969,7 @@
 				DBCBAA052BC7CD32006B40CA /* BaseView.swift in Sources */,
 				DB41100B2BD160F80088679F /* BoardView.swift in Sources */,
 				DBCBAA292BC839EB006B40CA /* RefreshResponse.swift in Sources */,
+				DB2B19842BEE86AF00D5B687 /* SignUpThirdPartyViewModel.swift in Sources */,
 				DB63A4492BE6B54400882670 /* FollowCoordinator.swift in Sources */,
 				DB743A9E2BE548E800BBAE5F /* ProfileViewController.swift in Sources */,
 				DBCBAA2D2BC84842006B40CA /* ProfileResponse.swift in Sources */,
@@ -1155,6 +1165,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = JustBoard/JustBoard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SUZFV58S8B;
@@ -1190,6 +1201,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = JustBoard/JustBoard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SUZFV58S8B;

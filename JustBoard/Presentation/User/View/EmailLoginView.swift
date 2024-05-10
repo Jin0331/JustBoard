@@ -24,20 +24,6 @@ final class EmailLoginView : BaseView {
         $0.spacing = 0
     }
     
-    let findEmailButton = UIButton().then {
-        $0.setTitle("이메일 찾기", for: .normal)
-        $0.titleLabel?.font = DesignSystem.mainFont.customFontSemiBold(size: 15)
-        $0.setTitleColor(DesignSystem.commonColorSet.lightBlack, for: .normal)
-        $0.backgroundColor = DesignSystem.commonColorSet.white
-    }
-    
-    let findPasswordButton = UIButton().then {
-        $0.setTitle("비밀번호 찾기", for: .normal)
-        $0.titleLabel?.font = DesignSystem.mainFont.customFontSemiBold(size: 15)
-        $0.setTitleColor(DesignSystem.commonColorSet.lightBlack, for: .normal)
-        $0.backgroundColor = DesignSystem.commonColorSet.white
-    }
-    
     let signUpButton = UIButton().then {
         $0.setTitle("회원가입", for: .normal)
         $0.titleLabel?.font = DesignSystem.mainFont.customFontSemiBold(size: 15)
@@ -47,7 +33,7 @@ final class EmailLoginView : BaseView {
     
     override func configureHierarchy() {
         [headerTextLabel, userIdTextfield, userPasswordTextfield, userLoginButton, buttonStackView].forEach { addSubview($0) }
-        [findEmailButton, findPasswordButton, signUpButton].forEach { buttonStackView.addArrangedSubview($0)}
+        [signUpButton].forEach { buttonStackView.addArrangedSubview($0)}
     }
     
     override func configureLayout() {

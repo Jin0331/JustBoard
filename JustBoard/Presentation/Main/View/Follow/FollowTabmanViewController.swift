@@ -41,6 +41,9 @@ final class FollowTabmanViewController: TabmanViewController, TMBarDataSource {
         navigationItem.backBarButtonItem = backBarButtonItem
         
         navigationItem.title = title
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: DesignSystem.commonColorSet.black
+        ]
     }
 
 }

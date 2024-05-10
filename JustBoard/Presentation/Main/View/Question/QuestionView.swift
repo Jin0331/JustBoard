@@ -12,8 +12,8 @@ import STTextView
 
 final class QuestionView: BaseView {
     
-    let completeButtonItem = CompleteButton(title: "완료하기", image: nil, fontSize: 18, disable: false).then {
-        $0.frame = CGRect(x: 0, y: 0, width: 100, height: 35)
+    let completeButtonItem = CompleteButton(title: "등록", image: nil, fontSize: 18, disable: false).then {
+        $0.frame = CGRect(x: 0, y: 0, width: 70, height: 35)
     }
     
     
@@ -30,6 +30,8 @@ final class QuestionView: BaseView {
 
     let titleTextField = STTextView().then {
         $0.font = DesignSystem.mainFont.customFontHeavy(size: 25)
+        $0.textColor = DesignSystem.commonColorSet.black
+        $0.backgroundColor = DesignSystem.commonColorSet.white
         $0.placeholderVerticalAlignment = .center
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.font: DesignSystem.mainFont.customFontBold(size: 21),
@@ -40,6 +42,8 @@ final class QuestionView: BaseView {
     
     let contentsTextView = STTextView().then {
         $0.font = DesignSystem.mainFont.customFontSemiBold(size: 21)
+        $0.textColor = DesignSystem.commonColorSet.black
+        $0.backgroundColor = DesignSystem.commonColorSet.white
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.font: DesignSystem.mainFont.customFontSemiBold(size: 17),
             NSAttributedString.Key.foregroundColor: DesignSystem.commonColorSet.gray

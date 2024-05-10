@@ -65,6 +65,9 @@ final class BoardUserViewController: RxBaseViewController {
         super.configureNavigation()
         navigationController?.navigationBar.titleTextAttributes = nil
         navigationItem.title = userProfile.userNickname + "님의 게시글"
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: DesignSystem.commonColorSet.black
+        ]
     }
     
     deinit {

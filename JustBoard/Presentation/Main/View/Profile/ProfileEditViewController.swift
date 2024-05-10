@@ -92,6 +92,9 @@ final class ProfileEditViewController: RxBaseViewController {
         super.configureNavigation()
         navigationController?.navigationBar.titleTextAttributes = nil
         navigationItem.title = "프로필 수정"
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: DesignSystem.commonColorSet.black
+        ]
     }
 }
 

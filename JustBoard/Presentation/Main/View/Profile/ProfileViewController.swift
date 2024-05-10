@@ -80,6 +80,9 @@ final class ProfileViewController: RxBaseViewController {
         super.configureNavigation()
         navigationController?.navigationBar.titleTextAttributes = nil
         navigationItem.title = "프로필 조회"
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: DesignSystem.commonColorSet.black
+        ]
     }
 
     deinit {

@@ -17,6 +17,7 @@ class SignUpNicknameWithPhoneViewController: RxBaseViewController {
     private let headerTextLabel = UILabel().then {
         $0.text = "닉네임을 입력해주세요 😎"
         $0.font = DesignSystem.mainFont.customFontHeavy(size: 30)
+        $0.textColor = DesignSystem.commonColorSet.black
     }
     private let headerSubTextLabel = UILabel().then {
         $0.text = "사용할 닉네임을 띄어쓰기 없이 4~8자 이내로 입력해주세요"

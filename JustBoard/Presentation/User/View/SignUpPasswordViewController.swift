@@ -16,6 +16,7 @@ final class SignUpPasswordViewController: RxBaseViewController {
     private let headerTextLabel = UILabel().then {
         $0.text = "비밀번호를 입력해주세요 😎"
         $0.font = DesignSystem.mainFont.customFontHeavy(size: 30)
+        $0.textColor = DesignSystem.commonColorSet.black
     }
     private let headerSubTextLabel = UILabel().then {
         $0.text = "한 개 이상의 대/소문자 영문, 숫자, 특수문자(.@$!%*?&)를\n조합하여 8~15자리로 작성해주세요"

@@ -37,15 +37,6 @@ final class QuestionViewController: RxBaseViewController {
             }
             .disposed(by: disposeBag)
         
-        // category Picker
-//        mainView.categorySelectButton.rx.tap
-//            .bind(with: self) { owner, _ in
-//                owner.addCategory() { value in
-//                    category.onNext(value)
-//                }
-//            }
-//            .disposed(by: disposeBag)
-        
         mainView.linkAddButton.rx.tap
             .bind(with: self) { owner, _ in
                 owner.addLink() { value in
@@ -97,6 +88,9 @@ final class QuestionViewController: RxBaseViewController {
         super.configureNavigation()
         navigationController?.navigationBar.titleTextAttributes = nil
         navigationItem.title = productId + " 게시판"
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: DesignSystem.commonColorSet.black
+        ]
     }
     
     override func configureView() {

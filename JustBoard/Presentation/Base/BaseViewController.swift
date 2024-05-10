@@ -47,9 +47,10 @@ class BaseViewController: UIViewController {
     func mainNavigationAttribute() {
         navigationItem.title = "자게? 아니 자게!"
         navigationController?.navigationBar.titleTextAttributes = [
-            .foregroundColor: UIColor.black,
+            .foregroundColor: DesignSystem.commonColorSet.black,
             .font: DesignSystem.mainFont.customFontHeavy(size: 25)
         ]
+        navigationController?.navigationBar.barTintColor = DesignSystem.commonColorSet.white
     }
     
     @available (*, unavailable)

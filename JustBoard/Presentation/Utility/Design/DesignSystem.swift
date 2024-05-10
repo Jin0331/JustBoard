@@ -17,7 +17,7 @@ enum DesignSystem {
         static let black = UIColor.pillBlack
         static let lightBlack = UIColor.pillLightBlack
         static let gray = UIColor.pillGray
-        static let lightGray = UIColor.systemGray6
+        static let lightGray = UIColor.pillLightGray
         static let white = UIColor.pillWhite
     }
     

@@ -29,6 +29,7 @@ final class BoardDetailView: BaseView {
     
     let title = UILabel().then {
         $0.font = DesignSystem.mainFont.customFontHeavy(size: 22)
+        $0.textColor = DesignSystem.commonColorSet.black
         $0.numberOfLines = 2
     }
     
@@ -59,6 +60,7 @@ final class BoardDetailView: BaseView {
     
     lazy var textView = UITextView().then {
         $0.font = DesignSystem.mainFont.customFontBold(size: 18.5)
+        $0.backgroundColor = DesignSystem.commonColorSet.white
         $0.isEditable = false
         $0.delegate = self
         $0.isScrollEnabled = false // 스크롤 비활성화

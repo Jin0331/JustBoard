@@ -8,7 +8,6 @@
 import UIKit
 import Then
 import SnapKit
-import NVActivityIndicatorView
 import RxDataSources
 import Reusable
 

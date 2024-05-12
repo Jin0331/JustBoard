@@ -140,18 +140,11 @@ extension ProfileView {
 
     
     private func addimage(imageUrl : URL) {
-        
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.startAnimating()
-        profileImage.addSubview(indicator)
-        
+
         KingfisherManager.shared
             .retrieveImage(with: imageUrl, options: [.requestModifier(AuthManager.kingfisherAuth())]) { [weak self] result in
                 guard let self = self else { return }
-                
-                indicator.stopAnimating()
-                indicator.removeFromSuperview()
-                
+
                 switch result {
                 case .success(let value):
                     profileImage.image = value.image

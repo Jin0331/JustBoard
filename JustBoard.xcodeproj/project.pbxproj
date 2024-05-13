@@ -44,6 +44,9 @@
 		DB2B197F2BEE716F00D5B687 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DB2B19762BEE716F00D5B687 /* Pretendard-SemiBold.otf */; };
 		DB2B19822BEE840C00D5B687 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B19812BEE840C00D5B687 /* Util.swift */; };
 		DB2B19842BEE86AF00D5B687 /* SignUpThirdPartyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B19832BEE86AF00D5B687 /* SignUpThirdPartyViewModel.swift */; };
+		DB2B19BB2BF2460B00D5B687 /* BoardRankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B19BA2BF2460B00D5B687 /* BoardRankView.swift */; };
+		DB2B19BD2BF246E400D5B687 /* BoardRankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B19BC2BF246E400D5B687 /* BoardRankViewController.swift */; };
+		DB2B19BF2BF247BD00D5B687 /* BoardRankViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B19BE2BF247BD00D5B687 /* BoardRankViewModel.swift */; };
 		DB410FF52BD0CFA10088679F /* BoardListTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF42BD0CFA10088679F /* BoardListTabmanViewController.swift */; };
 		DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */; };
 		DB4110052BD15B300088679F /* BoardMainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110042BD15B300088679F /* BoardMainCoordinator.swift */; };
@@ -62,7 +65,6 @@
 		DB63A44D2BE6B82B00882670 /* FollowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A44C2BE6B82B00882670 /* FollowView.swift */; };
 		DB63A44F2BE6B9AF00882670 /* FollowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A44E2BE6B9AF00882670 /* FollowCollectionViewCell.swift */; };
 		DB63A4512BE6C10A00882670 /* FollowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A4502BE6C10900882670 /* FollowViewModel.swift */; };
-		DB63A4532BE766B300882670 /* _FollowButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A4522BE766B300882670 /* _FollowButtonViewModel.swift */; };
 		DB743A962BE5278D00BBAE5F /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB743A952BE5278D00BBAE5F /* MenuCollectionViewCell.swift */; };
 		DB743A982BE53F0100BBAE5F /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB743A972BE53F0100BBAE5F /* UIApplication+Extension.swift */; };
 		DB743A9C2BE544FE00BBAE5F /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB743A9B2BE544FE00BBAE5F /* ProfileCoordinator.swift */; };
@@ -189,6 +191,9 @@
 		DB2B19802BEE7ECF00D5B687 /* JustBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JustBoard.entitlements; sourceTree = "<group>"; };
 		DB2B19812BEE840C00D5B687 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		DB2B19832BEE86AF00D5B687 /* SignUpThirdPartyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpThirdPartyViewModel.swift; sourceTree = "<group>"; };
+		DB2B19BA2BF2460B00D5B687 /* BoardRankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardRankView.swift; sourceTree = "<group>"; };
+		DB2B19BC2BF246E400D5B687 /* BoardRankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardRankViewController.swift; sourceTree = "<group>"; };
+		DB2B19BE2BF247BD00D5B687 /* BoardRankViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardRankViewModel.swift; sourceTree = "<group>"; };
 		DB410FF42BD0CFA10088679F /* BoardListTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListTabmanViewController.swift; sourceTree = "<group>"; };
 		DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarCoordinator.swift; sourceTree = "<group>"; };
 		DB4110042BD15B300088679F /* BoardMainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMainCoordinator.swift; sourceTree = "<group>"; };
@@ -207,7 +212,6 @@
 		DB63A44C2BE6B82B00882670 /* FollowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowView.swift; sourceTree = "<group>"; };
 		DB63A44E2BE6B9AF00882670 /* FollowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowCollectionViewCell.swift; sourceTree = "<group>"; };
 		DB63A4502BE6C10900882670 /* FollowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowViewModel.swift; sourceTree = "<group>"; };
-		DB63A4522BE766B300882670 /* _FollowButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _FollowButtonViewModel.swift; sourceTree = "<group>"; };
 		DB743A952BE5278D00BBAE5F /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		DB743A972BE53F0100BBAE5F /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		DB743A9B2BE544FE00BBAE5F /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
@@ -386,6 +390,7 @@
 			children = (
 				DBDD8AFD2BE0ED05002ADA34 /* BoardMainViewModel.swift */,
 				DB204D9B2BD2A8C9006340BE /* BoardViewModel.swift */,
+				DB2B19BE2BF247BD00D5B687 /* BoardRankViewModel.swift */,
 				DB797BB52BE3CC2600E490C3 /* BoardUserViewModel.swift */,
 				DBB7C67A2BD95D0A00D3081A /* BoardDetailViewModel.swift */,
 				DB204DA32BD422A7006340BE /* QuestionViewModel.swift */,
@@ -393,7 +398,6 @@
 				DB63A4502BE6C10900882670 /* FollowViewModel.swift */,
 				DB208C2C2BE7867900C63962 /* BoardListViewModel.swift */,
 				DB2B19602BECB62B00D5B687 /* ProfileEditViewModel.swift */,
-				DB63A4522BE766B300882670 /* _FollowButtonViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -734,6 +738,8 @@
 			children = (
 				DB41100A2BD160F80088679F /* BoardView.swift */,
 				DBB7C6742BD93F2400D3081A /* BoardViewController.swift */,
+				DB2B19BA2BF2460B00D5B687 /* BoardRankView.swift */,
+				DB2B19BC2BF246E400D5B687 /* BoardRankViewController.swift */,
 				DB797BB32BE3CB0000E490C3 /* BoardUserView.swift */,
 				DB797BB12BE3CA3A00E490C3 /* BoardUserViewController.swift */,
 				DBB7C6782BD944FC00D3081A /* BoardDetailView.swift */,
@@ -915,6 +921,7 @@
 				DB204D942BD29E5D006340BE /* UITabBarController+Extension.swift in Sources */,
 				DB4110072BD15B3B0088679F /* BoardListCoordinator.swift in Sources */,
 				DBCBAA522BCCFA71006B40CA /* AppCoordinator.swift in Sources */,
+				DB2B19BB2BF2460B00D5B687 /* BoardRankView.swift in Sources */,
 				DBCBAA222BC7E804006B40CA /* UIViewController+Extension.swift in Sources */,
 				DBCBAA0D2BC7D0B9006B40CA /* HTTPHeader.swift in Sources */,
 				DBCBAA072BC7CE79006B40CA /* DesignSystem.swift in Sources */,
@@ -962,6 +969,7 @@
 				DBCBE3D62BCE8A0700B6DAC5 /* JoinResponse.swift in Sources */,
 				DB204DA42BD422A7006340BE /* QuestionViewModel.swift in Sources */,
 				DB63A44D2BE6B82B00882670 /* FollowView.swift in Sources */,
+				DB2B19BF2BF247BD00D5B687 /* BoardRankViewModel.swift in Sources */,
 				DB4110142BD19E0A0088679F /* InquiryResponse.swift in Sources */,
 				DBB7C6772BD93F9000D3081A /* BoardDetailViewController.swift in Sources */,
 				DBCBAA502BCCFA0B006B40CA /* Protocol.swift in Sources */,
@@ -975,6 +983,7 @@
 				DBCBAA2D2BC84842006B40CA /* ProfileResponse.swift in Sources */,
 				DBCBE3D02BCE28E800B6DAC5 /* EmailLoginCoordinator.swift in Sources */,
 				DBCBAA5F2BCD61E5006B40CA /* SignTextField.swift in Sources */,
+				DB2B19BD2BF246E400D5B687 /* BoardRankViewController.swift in Sources */,
 				DB63A4422BE6088E00882670 /* ProfileViewModel.swift in Sources */,
 				DB204DA02BD2E58D006340BE /* DelimiterLine.swift in Sources */,
 				DB797BB82BE3CD7B00E490C3 /* BoardUserCoordinator.swift in Sources */,
@@ -994,7 +1003,6 @@
 				DBCBAA132BC7D900006B40CA /* LoginResponse.swift in Sources */,
 				DBCBAA5A2BCD5D05006B40CA /* SignUpEmailViewController.swift in Sources */,
 				DBDD8AE52BE01002002ADA34 /* BoardTabmanViewController.swift in Sources */,
-				DB63A4532BE766B300882670 /* _FollowButtonViewModel.swift in Sources */,
 				DBB7C66D2BD8AFAA00D3081A /* BaseCollectionViewCell.swift in Sources */,
 				DBDD8A762BDE43C3002ADA34 /* LikesResponse.swift in Sources */,
 				DB208C2D2BE7867900C63962 /* BoardListViewModel.swift in Sources */,

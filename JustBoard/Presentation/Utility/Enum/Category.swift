@@ -16,6 +16,7 @@ extension CustomStringConvertibleEnum {
 }
 enum TabmanCategory : CaseIterable {
     case best
+    case user
     case profile
 }
 
@@ -24,6 +25,19 @@ enum BestCategory : String, CaseIterable,CustomStringConvertibleEnum  {
     case commentSort = "댓글"
     case likeSort = "공감"
     case unlikeSort = "공감비율"
+    
+    var productId : String {
+        switch self {
+        default :
+            return ""
+        }
+    }
+}
+
+//MARK: - 실시간 유저 베스트 목록
+enum BestUserCategory : String, CaseIterable,CustomStringConvertibleEnum  {
+    case user = "유저"
+    case board = "게시판"
     
     var productId : String {
         switch self {
@@ -99,6 +113,8 @@ func getTammanCategoryList(for tabmanCategory: TabmanCategory) -> [CustomStringC
     switch tabmanCategory {
     case .best:
         return BestCategory.allCases
+    case .user:
+        return BestUserCategory.allCases
     case .profile:
         return ProfilePostCategory.allCases
     }

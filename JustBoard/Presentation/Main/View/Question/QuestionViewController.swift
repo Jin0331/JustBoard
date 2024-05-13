@@ -138,7 +138,6 @@ extension QuestionViewController : UIImagePickerControllerDelegate, UINavigation
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[.originalImage] as? UIImage {
-            print(pickedImage)
             seletecedImage.onNext(pickedImage)
             mainView.contentsTextViewUIUpdate()
         }

@@ -48,8 +48,6 @@ final class AppCoordinator: Coordinator {
 extension AppCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
         childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
-
-        print("hhh")
         
         switch childCoordinator.type {
         case .tab:
@@ -62,7 +60,6 @@ extension AppCoordinator: CoordinatorFinishDelegate {
             showMainViewController()
         default:
             navigationController.viewControllers.removeAll()
-            print("????")
             break
         }
     }

@@ -38,7 +38,6 @@ final class FollowViewModel : MainViewModelType {
         func updateFollowData(with response: ProfileResponse) {
             let items = follower ? response.followers : response.following
             followData.accept([FollowDataSection(items: items)])
-            print(items, follower ? "⚠️Follower" : "⚠️Following")
         }
         
         let fetchProfile = userID.flatMap { userId in

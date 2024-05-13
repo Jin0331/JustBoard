@@ -70,7 +70,6 @@ final class BoardDetailViewModel : MainViewModelType {
             .bind(with: self) { owner, data in
                 switch data {
                 case .success(let likestResponse):
-                    print(likestResponse, "✅ LikesResponse")
                     likeButtonEnable.onNext(())
                 case .failure(let error):
                     print(error, "✅ LikesResponse Error")
@@ -86,7 +85,6 @@ final class BoardDetailViewModel : MainViewModelType {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let postResponse):
-                    print(postResponse)
                     owner.updatedPostData.onNext(postResponse)
                 case .failure(let error):
                     print(error, "✅ PostResponse Error ")
@@ -116,7 +114,6 @@ final class BoardDetailViewModel : MainViewModelType {
                 switch result {
                 case .success(let commentResponse):
                     postCommentData.onNext(commentResponse)
-                    print(commentResponse, "✅ Comment Response")
                 case .failure(let error):
                     print(error, "✅ CommentResponse Error")
                 }
@@ -152,7 +149,6 @@ final class BoardDetailViewModel : MainViewModelType {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let postResponse):
-                    print(postResponse)
                     owner.updatedPostData.onNext(postResponse)
                 case .failure(let error):
                     print(error, "✅ PostResponse Error ")

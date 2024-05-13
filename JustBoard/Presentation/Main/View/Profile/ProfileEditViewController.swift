@@ -110,7 +110,7 @@ extension ProfileEditViewController : UIImagePickerControllerDelegate, UINavigat
             group.enter()
             DispatchQueue.main.async(group: group) { [weak self] in
                 guard let self = self else { return }
-                baseView.addimage(imageUrl: DesignSystem.defaultimage.defaultProfileWithURl)
+                baseView.profileImage.image = DesignSystem.defaultimage.defaultProfileImage
                 group.leave()
             }
             
@@ -119,8 +119,6 @@ extension ProfileEditViewController : UIImagePickerControllerDelegate, UINavigat
                 
                 if let image = baseView.profileImage.image {
                     seletecedImage.onNext(image.jpegData(compressionQuality: 0.8)!)
-                } else {
-                    print("뭐냐")
                 }
             }
         }

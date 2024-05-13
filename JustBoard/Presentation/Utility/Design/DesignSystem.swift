@@ -59,6 +59,7 @@ enum DesignSystem {
     
     enum defaultimage {
         static let defaultProfile = "uploads/posts/defaultProfile@3x_1714675687120.jpg"
+        static let defaultProfileImage = UIImage(named: "defaultProfile")
         static let defaultProfileWithURl = URL(string:APIKey.baseURLWithVersion() + "/" + defaultProfile)!
     }
     

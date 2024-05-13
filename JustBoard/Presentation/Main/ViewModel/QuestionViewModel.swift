@@ -98,7 +98,6 @@ final class QuestionViewModel : MainViewModelType {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let filesResponse):
-                    print(filesResponse.files, "✅ 이미지 업로드 성공")
                     uploadedFiles.onNext(filesResponse.files)
                     uploadedFilesLocation.onNext(owner.textView.getImageLocations()
                         .map { String($0) }.joined(separator: " ")) // 이미지 위치
@@ -135,10 +134,7 @@ final class QuestionViewModel : MainViewModelType {
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let writeResponse):
-                    
-                    print(writeResponse)
                     writeComplete.onNext(true)
-                    
                 case .failure(let error):
                     print(error)
                 }

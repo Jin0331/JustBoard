@@ -276,10 +276,7 @@ extension BoardDetailView : UITextViewDelegate {
     private func addTextViewImage(_ data : PostResponse) {
         //MARK: - 특정 위치에 이미지 넣기
         let urlList = data.filesToUrl
-        let imageLocation = data.content3ToImageLocation
-        
-        print(imageLocation)
-        
+        let imageLocation = data.content3ToImageLocation        
         if !urlList.isEmpty && !imageLocation.isEmpty {
             (0..<urlList.count).forEach { _addTextViewImage(url: urlList[$0], location: imageLocation[$0])}
         } else if !urlList.isEmpty && imageLocation.isEmpty {
@@ -325,9 +322,6 @@ extension BoardDetailView : UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         let sizeToFit = textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat.greatestFiniteMagnitude))
-        
-        print(sizeToFit)
-        
         if sizeToFit.height > textViewDefaultHeight {
             textView.snp.updateConstraints { make in
                 make.height.equalTo(sizeToFit)
@@ -368,8 +362,6 @@ extension BoardDetailView {
     }
     
     func collectionViewchangeLayout(itemCount: Int) {
-        
-        print("🥲 CollectionView Resize")
         let oneItemSize = 115
         let size = itemCount < 1 ? 0 : oneItemSize * itemCount
         

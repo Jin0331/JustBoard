@@ -80,7 +80,6 @@ final class BoardViewController: RxBaseViewController {
         
         output.questionButtonTap
             .drive(with: self) { owner, _ in
-                print("question Button Tap ✅", owner.productId)
                 owner.parentCoordinator?.toQuestion(owner.productId)
             }
             .disposed(by: disposeBag)

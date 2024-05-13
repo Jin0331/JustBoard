@@ -62,8 +62,6 @@ final class EmailLoginViewModel : UserViewModelType {
                     UserDefaultManager.shared.saveAllData(loginResponse: loginModel)
                     loginSuccess.onNext(true)
                 case .failure(_):
-                    UserDefaultManager.shared.isLogined = false
-                    print(UserDefaultManager.shared.isLogined, "✅✅✅✅✅✅")
                     loginFailed.onNext(true)
                 }
             }

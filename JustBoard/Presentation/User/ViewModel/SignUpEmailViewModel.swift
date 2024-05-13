@@ -42,7 +42,6 @@ class SignUpEmailViewModel : UserViewModelType {
             .withLatestFrom(input.email)
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .flatMapLatest { email in
-                print(email)
                 return NetworkManager.shared.validationEmail(query: EmailValidationRequest(email: email))
             }
             .subscribe(with: self) { owner, result in

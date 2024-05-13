@@ -135,8 +135,8 @@ final class BoardRankCollectionViewCell : BaseCollectionViewCell, Reusable {
                 case .success(let value):
                     profileImage.image = value.image
                     profileImageCircle()
-                case .failure(_):
-                    print("profile image 없음")
+                case .failure(let error):
+                    print(error)
                 }
             }
     }

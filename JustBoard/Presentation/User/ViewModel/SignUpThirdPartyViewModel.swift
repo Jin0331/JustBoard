@@ -56,7 +56,6 @@ final class SignUpThirdPartyViewModel : UserViewModelType {
                     }
                     
                     UserDefaultManager.shared.isLogined = false
-                    print(UserDefaultManager.shared.isLogined, "✅✅✅✅✅✅")
                 }
             }
             .disposed(by: disposeBag)

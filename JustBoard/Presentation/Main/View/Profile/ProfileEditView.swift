@@ -76,11 +76,13 @@ final class ProfileEditView: BaseView {
 extension ProfileEditView {
     
     func updateUI(_ data : ProfileResponse) {
+        profileImageCircle()
         addimage(imageUrl: data.profileImageToUrl)
         nickname.text = data.nick
     }
     
     func updateProfileUI(_ data : UIImage) {
+        profileImageCircle()
         profileImage.image = data
     }
     

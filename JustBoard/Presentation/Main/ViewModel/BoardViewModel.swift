@@ -85,8 +85,7 @@ final class BoardViewModel : MainViewModelType {
         
         input.prefetchItems
             .map { [weak self] items in
-                guard let self = self else { return false }                
-                print(items, "제한 ✅:", maxLimit, maxLimit > maxLimit - 5)
+                guard let self = self else { return false }
                 return items > maxLimit - 5
             }
             .bind(with: self) { owner, valid in
@@ -100,9 +99,7 @@ final class BoardViewModel : MainViewModelType {
         Observable.combineLatest(nextPageValid, nextCursor)
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .bind { page, curosr in
-                print(page, curosr, "current ❗️")
                 if page && curosr != InquiryRequest.InquiryRequestDefault.next {
-                    print(page, curosr, "nextpage ✅")
                     nextPage.onNext(curosr)
                 }
             }

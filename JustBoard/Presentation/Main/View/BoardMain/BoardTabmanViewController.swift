@@ -42,7 +42,9 @@ extension BoardTabmanViewController : PageboyViewControllerDataSource {
             return TMBarItem(title: bestCategory[index].rawValue)
         } else if let profileCategory = currentCategory as? [ProfilePostCategory] {
             return TMBarItem(title: profileCategory[index].rawValue)
-        } else  {
+        } else if let userBsetCategory = currentCategory as? [BestUserCategory] {
+            return TMBarItem(title: userBsetCategory[index].rawValue)
+        } else {
             return TMBarItem(title:"")
         }
     }

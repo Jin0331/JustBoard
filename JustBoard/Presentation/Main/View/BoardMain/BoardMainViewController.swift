@@ -15,14 +15,13 @@ final class BoardMainViewController: RxBaseViewController {
     let baseView : BoardMainView
     var parentCoordinator : BoardMainCoordinator?
     private let viewModel : BoardMainViewModel
-    private var postRankDataSource: BoardRankRxDataSource!
-    private var userRankDataSource: BoardRankRxDataSource!
-
-    init(viewControllersList : Array<RxBaseViewController>, category : TabmanCategory, productId : String, limit : String){
-        self.viewModel = BoardMainViewModel(product_id: productId, limit: limit)
+    
+    init(bestViewControllersList : Array<RxBaseViewController>, userViewControllerList : Array<RxBaseViewController>){
+        self.viewModel = BoardMainViewModel()
         
-        let tabmanVC = BoardTabmanViewController(viewControllersList: viewControllersList, category: category)
-        self.baseView = BoardMainView(tabmanViewController: tabmanVC)
+        let tabmanVC = BoardTabmanViewController(viewControllersList: bestViewControllersList, category: .best)
+        let tabmanUserVC = BoardTabmanViewController(viewControllersList: userViewControllerList, category: .user)
+        self.baseView = BoardMainView(tabmanVC: tabmanVC, tabmanUserVC:tabmanUserVC)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -34,33 +33,14 @@ final class BoardMainViewController: RxBaseViewController {
     }
     
     override func viewDidLoad() {
-        configureCollectionViewDataSource()
         attachSideMenuVC()
         super.viewDidLoad()
     }
     
     override func bind() {
         
-        let userProfileInquiry = PublishSubject<String>()
-        
-        baseView.postRankCollectionView.rx
-            .modelAndIndexSelected((postRank:PostRank, userRank:UserRank).self)
-            .bind(with: self) { owner, value in
-                owner.parentCoordinator?.toSpecificBoard(value.0.postRank.productId)
-            }
-            .disposed(by: disposeBag)
-        
-        // User Profile 조회 -> PostResponse -> transition
-        baseView.userRankCollectionView.rx
-            .modelAndIndexSelected((postRank:PostRank, userRank:UserRank).self)
-            .bind(with: self) { owner, value in
-                userProfileInquiry.onNext(value.0.userRank.userId)
-            }
-            .disposed(by: disposeBag)
-        
         let input = BoardMainViewModel.Input(
-            viewWillAppear: rx.viewWillAppear,
-            userProfileInquiry: userProfileInquiry
+            viewWillAppear: rx.viewWillAppear
         )
         
         let output = viewModel.transform(input: input)
@@ -72,43 +52,6 @@ final class BoardMainViewController: RxBaseViewController {
                 owner.mainNavigationAttribute()
             }
             .disposed(by: disposeBag)
-        
-        output.postData
-            .bind(to: baseView.postRankCollectionView.rx.items(dataSource: postRankDataSource))
-            .disposed(by: disposeBag)
-        
-        output.postData
-            .bind(to: baseView.userRankCollectionView.rx.items(dataSource: userRankDataSource))
-            .disposed(by: disposeBag)
-        
-        output.userProfile
-            .bind(with: self) { owner, userProfile in
-                owner.parentCoordinator?.toUser(userProfile)
-            }
-            .disposed(by: disposeBag)
-    }
-}
-
-//MARK: - RxDataSource CollectionView
-extension BoardMainViewController {
-    private func configureCollectionViewDataSource() {
-        
-        postRankDataSource = BoardRankRxDataSource(configureCell: { dataSource, collectionView, indexPath, item in
-            
-            let cell: BoardRankCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)            
-            cell.updateUI(item.postRank)
-            
-            return cell
-        })
-        
-        userRankDataSource = BoardRankRxDataSource(configureCell: { dataSource, collectionView, indexPath, item in
-            
-            let cell: BoardRankCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-            cell.updateUI(item.userRank)
-            
-            return cell
-        })
-        
     }
 }
 

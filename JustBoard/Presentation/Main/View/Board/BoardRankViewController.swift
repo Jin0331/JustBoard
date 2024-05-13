@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxGesture
 
 final class BoardRankViewController: RxBaseViewController {
 
@@ -45,6 +46,23 @@ final class BoardRankViewController: RxBaseViewController {
                     userProfileInquiry.onNext(value.0.userRank.userId)
                 }
                 .disposed(by: disposeBag)
+            
+            baseView.rankCollectionView.rx.longPressGesture()
+                .when(.ended)
+                .bind(with: self) { owner, sender in
+                    
+                    let point = sender.location(in: owner.baseView.rankCollectionView)
+                    if let indexPath = owner.baseView.rankCollectionView.indexPathForItem(at: point) {
+                        // get the cell at indexPath (the one you long pressed)
+                        
+                        let temp = owner.dataSource[indexPath]
+                        print(temp.userRank.userId, temp.userRank.nickName)
+                    }
+                }
+                .disposed(by: disposeBag)
+
+            
+            
         case .board:
             baseView.rankCollectionView.rx
                 .modelAndIndexSelected((postRank:PostRank, userRank:UserRank).self)

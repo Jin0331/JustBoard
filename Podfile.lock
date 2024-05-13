@@ -20,6 +20,9 @@ PODS:
     - Differentiator (~> 5.0)
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
+  - RxGesture (4.0.4):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
   - RxRelay (6.6.0):
     - RxSwift (= 6.6.0)
   - RxSwift (6.6.0)
@@ -44,6 +47,7 @@ DEPENDENCIES:
   - Reusable
   - RxCocoa (= 6.6.0)
   - RxDataSources (~> 5.0)
+  - RxGesture
   - RxSwift (= 6.6.0)
   - RxViewController
   - SideMenu (~> 6.0)
@@ -66,6 +70,7 @@ SPEC REPOS:
     - Reusable
     - RxCocoa
     - RxDataSources
+    - RxGesture
     - RxRelay
     - RxSwift
     - RxViewController
@@ -88,6 +93,7 @@ SPEC CHECKSUMS:
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
   RxCocoa: 44a80de90e25b739b5aeaae3c8c371a32e3343cc
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
+  RxGesture: f3efb47ed2d26a8082f7b660d4a59970e275a7f8
   RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
   RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
   RxViewController: 56486fa0afd629a1d6b5ba077f3b8cd9dc31b5d2
@@ -99,6 +105,6 @@ SPEC CHECKSUMS:
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   Toast-Swift: dd369e68ee529f542c65bd0d0c6c50cd743cf6f2
 
-PODFILE CHECKSUM: 9231ba0ab57e8276d061519ea273848a65fd95e8
+PODFILE CHECKSUM: bfe6a62776a66186d1eaa8147a3eb3c3c9b547d0
 
 COCOAPODS: 1.15.2

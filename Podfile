@@ -19,6 +19,7 @@ target 'JustBoard' do
   pod 'Kingfisher', '~> 7.0'
   pod 'NVActivityIndicatorView'
   pod 'RxDataSources', '~> 5.0'
+  pod 'RxGesture'
   pod 'Reusable'
   pod 'Tabman', '~> 3.2'
   pod 'SideMenu', '~> 6.0'

@@ -59,6 +59,7 @@ final class BoardDetailViewController: RxBaseViewController {
         let input = BoardDetailViewModel.Input(
             profileButton : baseView.profileButton.rx.tap,
             likeButton: baseView.likeButton.rx.tap,
+            unlikeButton: baseView.unlikeButton.rx.tap,
             commentText: baseView.commentTextField.rx.text.orEmpty,
             commentComplete: baseView.commentCompleteButton.rx.tap
         )

@@ -53,9 +53,7 @@ final class BoardMainView: BaseView {
     override func configureLayout() {
         
         scrollView.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide)
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.edges.equalTo(safeAreaLayoutGuide)
         }
         
         contentsView.snp.makeConstraints {
@@ -84,7 +82,7 @@ final class BoardMainView: BaseView {
         tabmanVC.view.snp.makeConstraints { make in
             make.top.equalTo(boardPostRankLabel.snp.bottom)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(2300)
+            make.height.equalTo(2250)
         }
         
         movewToAllBoard.snp.makeConstraints { make in

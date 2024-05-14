@@ -147,7 +147,7 @@ final class BoardViewModel : MainViewModelType {
                 case .likeSort:
                     sortedData = value.data.sorted { $0.likes.count > $1.likes.count }
                 case .unlikeSort:
-                    sortedData = value.data.sorted { calculateLikesRatio(post: $0) > calculateLikesRatio(post: $1) }
+                    sortedData = value.data.sorted { $0.likes2.count > $1.likes2.count }
                 }
                 returnData = bestBoard ? Array(sortedData[0..<maxLength]) : sortedData
                 postData.accept([BoardDataSection(items: returnData)])

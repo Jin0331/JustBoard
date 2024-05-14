@@ -134,6 +134,10 @@ final class NetworkManager  {
         return mainMakeRequest(router: MainRouter.likes(query: query, postId: postId))
     }
     
+    func unlikes(query: LikesRequest, postId: String) -> Single<Result<LikesResponse, AFError>> {
+        return mainMakeRequest(router: MainRouter.unlikes(query: query, postId: postId))
+    }
+    
     func profile(userId: String) -> Single<Result<ProfileResponse, AFError>> {
         return mainMakeRequest(router: MainRouter.otherProfile(userId: userId))
     }

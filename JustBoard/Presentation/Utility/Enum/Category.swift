@@ -24,7 +24,7 @@ enum TabmanCategory : CaseIterable {
 enum BestCategory : String, CaseIterable,CustomStringConvertibleEnum  {
     case commentSort = "댓글"
     case likeSort = "공감"
-    case unlikeSort = "공감비율"
+    case unlikeSort = "비공감"
     
     var productId : String {
         switch self {

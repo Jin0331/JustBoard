@@ -61,7 +61,6 @@ final class SignInUpViewController : RxBaseViewController{
         baseView.emailLoginButton.rx
             .tap
             .bind(with: self) { owner, _ in
-                print("hi")
                 owner.parentCoordinator?.emailLogin()
             }
             .disposed(by: disposeBag)

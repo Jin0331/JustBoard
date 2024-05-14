@@ -81,6 +81,12 @@ final class BoardDetailView: BaseView {
         $0.alignTextBelow2()
         $0.sizeToFit()
     }
+    
+    let unlikeButton = CompleteButton(title: "0", image: DesignSystem.sfSymbol.unlike, fontSize: 18).then {
+        $0.titleLabel?.numberOfLines = 0
+        $0.alignTextBelow2()
+        $0.sizeToFit()
+    }
 
     lazy var commentCollectionView : UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -121,7 +127,7 @@ final class BoardDetailView: BaseView {
         [title, profileImage, profileButton, author, createdAt, textView, buttonBgView, commentCollectionView].forEach { contentsView.addSubview($0) }
         
         buttonBgView.addSubview(buttonStackView)
-        [likeButton, commentCountButton].forEach { buttonStackView.addArrangedSubview($0)}
+        [likeButton, unlikeButton, commentCountButton].forEach { buttonStackView.addArrangedSubview($0)}
     }
     
     override func configureLayout() {
@@ -186,7 +192,7 @@ final class BoardDetailView: BaseView {
         buttonStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.height.equalTo(80)
-            make.width.equalTo(165)
+            make.width.equalTo(200)
         }
         
         commentCollectionView.snp.makeConstraints { make in
@@ -235,6 +241,7 @@ final class BoardDetailView: BaseView {
     
     func likeUpdateUI(_ data : PostResponse) {
         likeButton.setTitle(String(data.likes.count), for: .normal)
+        unlikeButton.setTitle(String(data.likes2.count), for: .normal)
     }
     
     private func addimage(imageUrl : URL) {

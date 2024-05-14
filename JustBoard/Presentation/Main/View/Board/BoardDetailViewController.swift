@@ -12,13 +12,13 @@ import RxViewController
 
 final class BoardDetailViewController: RxBaseViewController {
 
-    private let mainView = BoardDetailView()
+    private let baseView = BoardDetailView()
     private let viewModel : BoardDetailViewModel
     var parentCoordinator : BoardDetailCoordinator?
     private var datasource : BoardDetailDataSource!
     
     override func loadView() {
-        view = mainView
+        view = baseView
         tabBarController?.tabBar.isHidden = true
     }
     
@@ -27,7 +27,7 @@ final class BoardDetailViewController: RxBaseViewController {
     }
 
     override func viewDidLoad() {
-        mainView.commentCollectionView.delegate = self
+        baseView.commentCollectionView.delegate = self
         configureDataSource()
         super.viewDidLoad()
     }
@@ -37,30 +37,30 @@ final class BoardDetailViewController: RxBaseViewController {
         NotificationCenter.default.rx
             .notification(UIResponder.keyboardWillHideNotification)
             .bind(with: self) { owner, _ in
-                owner.mainView.scrollView.isScrollEnabled = true
+                owner.baseView.scrollView.isScrollEnabled = true
             }
             .disposed(by: disposeBag)
         
         NotificationCenter.default.rx
             .notification(UIResponder.keyboardWillShowNotification)
             .bind(with: self) { owner, _ in
-                owner.mainView.scrollView.isScrollEnabled = false
+                owner.baseView.scrollView.isScrollEnabled = false
             }
             .disposed(by: disposeBag)
         
-        mainView.commentCountButton.rx.tap
+        baseView.commentCountButton.rx.tap
             .bind(with: self) { owner, _ in
-                owner.mainView.commentTextField.becomeFirstResponder()
+                owner.baseView.commentTextField.becomeFirstResponder()
             }
             .disposed(by: disposeBag)
         
 
         
         let input = BoardDetailViewModel.Input(
-            profileButton : mainView.profileButton.rx.tap,
-            likeButton: mainView.likeButton.rx.tap,
-            commentText: mainView.commentTextField.rx.text.orEmpty,
-            commentComplete: mainView.commentCompleteButton.rx.tap
+            profileButton : baseView.profileButton.rx.tap,
+            likeButton: baseView.likeButton.rx.tap,
+            commentText: baseView.commentTextField.rx.text.orEmpty,
+            commentComplete: baseView.commentCompleteButton.rx.tap
         )
         
         let output = viewModel.transform(input: input)
@@ -73,21 +73,21 @@ final class BoardDetailViewController: RxBaseViewController {
         
         output.commentButtonUI
             .drive(with: self) { owner, valid in
-                owner.mainView.commentCompleteButton.isHidden = !valid
+                owner.baseView.commentCompleteButton.isHidden = !valid
             }
             .disposed(by: disposeBag)
         
         output.postData
             .bind(with: self) { owner, postData in
-                owner.mainView.updateUI(postData)
+                owner.baseView.updateUI(postData)
                 owner.updateSnapshot(postData.comments)
             }
             .disposed(by: disposeBag)
         
         output.updatedPost
             .bind(with: self) { owner, postData in
-                owner.mainView.likeUpdateUI(postData)
-                owner.mainView.commentUpdateUI(postData)
+                owner.baseView.likeUpdateUI(postData)
+                owner.baseView.commentUpdateUI(postData)
                 owner.updateSnapshot(postData.comments)
             }
             .disposed(by: disposeBag)
@@ -95,7 +95,7 @@ final class BoardDetailViewController: RxBaseViewController {
         output.commentComplete
             .drive(with: self) { owner, valid in
                 owner.view.endEditing(true)
-                owner.mainView.commentTextField.text = ""
+                owner.baseView.commentTextField.text = ""
             }
             .disposed(by: disposeBag)
     }
@@ -115,8 +115,8 @@ final class BoardDetailViewController: RxBaseViewController {
 //MARK: - Collection View 관련
 extension BoardDetailViewController : DiffableDataSource, UICollectionViewDelegate {
     func configureDataSource() {
-        let cellRegistration = mainView.boardDetailCellRegistration()
-        datasource = UICollectionViewDiffableDataSource(collectionView: mainView.commentCollectionView, cellProvider: {collectionView, indexPath, itemIdentifier in
+        let cellRegistration = baseView.boardDetailCellRegistration()
+        datasource = UICollectionViewDiffableDataSource(collectionView: baseView.commentCollectionView, cellProvider: {collectionView, indexPath, itemIdentifier in
             
             let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
             cell.updateUI(itemIdentifier)

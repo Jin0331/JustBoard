@@ -14,7 +14,7 @@ import SideMenu
 
 final class BoardViewController: RxBaseViewController {
     
-    private let mainView : BoardView
+    private let baseView : BoardView
     private let viewModel : BoardViewModel
     private let productId : String
     private let bestBoard : Bool
@@ -24,13 +24,13 @@ final class BoardViewController: RxBaseViewController {
     private var dataSource: BoardRxDataSource!
     
     override func loadView() {
-        view = mainView
+        view = baseView
     }
     
     init(productId : String, userID : String? = nil, limit: String, bestBoard: Bool, profileBoard: Bool, bestBoardType : BestCategory? = nil, profileBoardType : ProfilePostCategory? = nil) {
         self.productId = productId
         self.bestBoard = bestBoard
-        self.mainView = BoardView(bestBoard: bestBoard, profileBoard: profileBoard)
+        self.baseView = BoardView(bestBoard: bestBoard, profileBoard: profileBoard)
         self.viewModel = BoardViewModel(product_id: productId,
                                         userId: userID,
                                         limit: limit,
@@ -45,15 +45,16 @@ final class BoardViewController: RxBaseViewController {
     override func viewDidLoad() {
         configureCollectionViewDataSource()
         attachSideMenuVC()
+        baseView.mainCollectionView.delegate = self
         super.viewDidLoad()
     }
     
     override func bind() {
         
-        let prefetchItems = mainView.mainCollectionView.rx.prefetchItems
+        let prefetchItems = baseView.mainCollectionView.rx.prefetchItems
             .compactMap(\.last?.row)
         
-        mainView.mainCollectionView.rx
+        baseView.mainCollectionView.rx
             .modelAndIndexSelected(PostResponse.self)
             .bind(with: self) { owner, value in
                 owner.parentCoordinator?.toDetail(value.0)
@@ -64,7 +65,7 @@ final class BoardViewController: RxBaseViewController {
         
         let input = BoardViewModel.Input(
             viewWillAppear: rx.viewWillAppear,
-            questionButtonTap:  mainView.questionButton.rx.tap,
+            questionButtonTap:  baseView.questionButton.rx.tap,
             prefetchItems: prefetchItems
         )
         
@@ -86,7 +87,7 @@ final class BoardViewController: RxBaseViewController {
         
         
         output.postData
-            .bind(to: mainView.mainCollectionView.rx.items(dataSource: dataSource))
+            .bind(to: baseView.mainCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
     
@@ -146,5 +147,26 @@ extension BoardViewController : MenuViewControllerDelegate {
             guard let self = self else { return }
             parentCoordinator?.toProfile(userID: userID, me: me, defaultPage: 0)
         }
+    }
+}
+
+extension BoardViewController: UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        if bestBoard {
+            return configureContextMenu(index: indexPath)
+        } else {
+            return nil
+        }
+    }
+    
+    func configureContextMenu(index: IndexPath) -> UIContextMenuConfiguration {
+        let cell = dataSource[index]
+        var menuItems: [UIMenuElement] = []
+        let context = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] action -> UIMenu? in
+
+            return UIMenu(title: "유저 탐색", image: nil, identifier: nil, options: UIMenu.Options.displayInline, children: menuItems)
+        }
+        
+        return context
     }
 }

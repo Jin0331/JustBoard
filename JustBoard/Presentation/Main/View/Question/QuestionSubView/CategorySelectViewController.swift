@@ -9,13 +9,13 @@ import UIKit
 
 final class CategorySelectViewController: BaseViewController {
 
-    final let mainView = CategorySelectView()
+    final let baseView = CategorySelectView()
     var sendData : ((Category) -> Void)?
     private var dataSource : UICollectionViewDiffableDataSource<CategorySection, Category>!
     
     override func loadView() {
-        view = mainView
-        mainView.mainCollectionView.delegate = self
+        view = baseView
+        baseView.mainCollectionView.delegate = self
     }
     
     override func viewDidLoad() {
@@ -27,8 +27,8 @@ final class CategorySelectViewController: BaseViewController {
     
     private func configureDataSource() {
         
-        let cellRegistration = mainView.periodSelectCellRegistration()
-        dataSource = UICollectionViewDiffableDataSource(collectionView: mainView.mainCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        let cellRegistration = baseView.periodSelectCellRegistration()
+        dataSource = UICollectionViewDiffableDataSource(collectionView: baseView.mainCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
             
             return cell

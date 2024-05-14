@@ -14,14 +14,14 @@ import SideMenu
 
 final class BoardUserViewController: RxBaseViewController {
     
-    private let mainView = BoardUserView()
+    private let baseView = BoardUserView()
     private let viewModel : BoardUserViewModel
     private let userProfile : (userPostId:[String], userNickname:String)
     var parentCoordinator : BoardUserCoordinator?
     private var dataSource: BoardRxDataSource!
     
     override func loadView() {
-        view = mainView
+        view = baseView
     }
     
     init(userProfile : (userPostId:[String], userNickname:String) ) {
@@ -37,7 +37,7 @@ final class BoardUserViewController: RxBaseViewController {
     
     override func bind() {
         
-        mainView.mainCollectionView.rx
+        baseView.mainCollectionView.rx
             .modelAndIndexSelected(PostResponse.self)
             .bind(with: self) { owner, value in
                 owner.parentCoordinator?.toDetail(value.0)
@@ -57,7 +57,7 @@ final class BoardUserViewController: RxBaseViewController {
             .disposed(by: disposeBag)
         
         output.postData
-            .bind(to: mainView.mainCollectionView.rx.items(dataSource: dataSource))
+            .bind(to: baseView.mainCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
     

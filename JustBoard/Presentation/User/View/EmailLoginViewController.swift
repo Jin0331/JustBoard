@@ -12,12 +12,12 @@ import Alamofire
 
 final class EmailLoginViewController: RxBaseViewController {
     
-    private let mainView = EmailLoginView()
+    private let baseView = EmailLoginView()
     private let viewModel = EmailLoginViewModel()
     weak var parentCoordinator : EmailLoginCoordinator?
     
     override func loadView() {
-        view = mainView
+        view = baseView
     }
 
     override func viewDidLoad() {
@@ -26,18 +26,18 @@ final class EmailLoginViewController: RxBaseViewController {
     }
     
     override func bind() {
-        let input = EmailLoginViewModel.Input(email: mainView.userIdTextfield.rx.text.orEmpty,
-                                         password: mainView.userPasswordTextfield.rx.text.orEmpty,
-                                         loginButtonTap: mainView.userLoginButton.rx.tap,
-                                         signUpTap: mainView.signUpButton.rx.tap
+        let input = EmailLoginViewModel.Input(email: baseView.userIdTextfield.rx.text.orEmpty,
+                                         password: baseView.userPasswordTextfield.rx.text.orEmpty,
+                                         loginButtonTap: baseView.userLoginButton.rx.tap,
+                                         signUpTap: baseView.signUpButton.rx.tap
         )
         
         let output = viewModel.transform(input: input)
         
         output.loginButtonUIUpdate
             .drive(with: self) { owner, value in
-                owner.mainView.userLoginButton.isEnabled = value
-                owner.mainView.userLoginButton.alpha = value ? 1.0 : 0.5
+                owner.baseView.userLoginButton.isEnabled = value
+                owner.baseView.userLoginButton.alpha = value ? 1.0 : 0.5
             }
             .disposed(by: disposeBag)
         

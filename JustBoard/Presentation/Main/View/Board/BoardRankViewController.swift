@@ -107,7 +107,7 @@ extension BoardRankViewController: UICollectionViewDelegate{
             return nil
         }
     }
- 
+    
     func configureContextMenu(index: IndexPath) -> UIContextMenuConfiguration {
         let cell = dataSource[index]
         var menuItems: [UIMenuElement] = []
@@ -125,70 +125,4 @@ extension BoardRankViewController: UICollectionViewDelegate{
         
         return context
     }
-    
-//    func configureContextMenu(index: IndexPath) -> UIContextMenuConfiguration{
-//        
-//        let cell = dataSource[index]
-//        let context = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] action -> UIMenu? in
-//            
-//            guard let self else { return nil}
-//            let me = cell.userRank.userId == UserDefaultManager.shared.userId
-//            var follower : [String] = []
-//            var following : [String] = []
-//            
-//            let profile = UIAction(title: "프로필 조회하기", image: DesignSystem.tabbarImage.second, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
-//                self.parentCoordinator?.toProfile(userID: cell.userRank.userId, me: me, defaultPage: 0)
-//            }
-//            
-//            if !me {
-//                
-//                let group = DispatchGroup()
-//                
-//                group.enter()
-//                DispatchQueue.main.async(group: group) {
-//                    NetworkManager.shared.profileNotRx(userId: cell.userRank.userId) { result in
-//                        switch result {
-//                        case .success(let success):
-//                            success.followers.forEach {
-//                                follower.append($0.userID)
-//                            }
-//                            
-//                            success.following.forEach {
-//                                following.append($0.userID)
-//                            }
-//                        case .failure(let error):
-//                            print(error)
-//                        }
-//                    
-//                        group.leave()
-//                    }
-//                }
-//                
-//                group.notify(queue: .main) {
-//                    print(follower)
-//                }
-//                
-//                
-//                if follower.contains(UserDefaultManager.shared.userId!) {
-//                    let follow = UIAction(title: "팔로우", image: UIImage(systemName: "trash"), identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
-//                        print("팔로우할거다")
-//                    }
-//                    
-//                    return UIMenu(title: "유저 탐색", image: nil, identifier: nil, options: UIMenu.Options.displayInline, children: [profile,follow])
-//                    
-//                } else {
-//                    let follow = UIAction(title: "팔로우 취소", image: UIImage(systemName: "trash"), identifier: nil, discoverabilityTitle: nil,attributes: .destructive, state: .off) { _ in
-//                        print("팔로우 취소할거다")
-//                    }
-//                    return UIMenu(title: "유저 탐색", image: nil, identifier: nil, options: UIMenu.Options.displayInline, children: [profile,follow])
-//                }
-//                
-//            } else {
-//                return UIMenu(title: "유저 탐색", image: nil, identifier: nil, options: UIMenu.Options.displayInline, children: [profile])
-//            }
-//            
-//
-//        }
-//        return context
-//    }
 }

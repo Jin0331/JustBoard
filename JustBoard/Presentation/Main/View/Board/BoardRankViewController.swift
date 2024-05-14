@@ -115,12 +115,12 @@ extension BoardRankViewController: UICollectionViewDelegate{
             guard let self = self else { return nil }
             let me = cell.userRank.userId == UserDefaultManager.shared.userId
             
-            let profile = UIAction(title: "프로필 조회하기", image: DesignSystem.tabbarImage.second, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
+            let profile = UIAction(title: "'" + cell.userRank.nickName + "'님의 프로필 조회하기", image: DesignSystem.tabbarImage.second, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
                 self.parentCoordinator?.toProfile(userID: cell.userRank.userId, me: me, defaultPage: 0)
             }
             
             menuItems.append(profile)
-            return UIMenu(title: "유저 탐색", image: nil, identifier: nil, options: UIMenu.Options.displayInline, children: menuItems)
+            return UIMenu(title: "탐색", image: nil, identifier: nil, options: UIMenu.Options.displayInline, children: menuItems)
         }
         
         return context

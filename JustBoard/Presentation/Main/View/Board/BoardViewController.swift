@@ -163,8 +163,23 @@ extension BoardViewController: UICollectionViewDelegate{
         let cell = dataSource[index]
         var menuItems: [UIMenuElement] = []
         let context = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] action -> UIMenu? in
+            
+            guard let self = self else { return nil }
+            let me = cell.creator.userID == UserDefaultManager.shared.userId
 
-            return UIMenu(title: "유저 탐색", image: nil, identifier: nil, options: UIMenu.Options.displayInline, children: menuItems)
+            let profile = UIAction(title: "'" + cell.creator.nick + "' 프로필 조회하기", image: DesignSystem.tabbarImage.second, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
+                self.parentMainCoordinator?.toProfile(userID: cell.creator.userID, me: me, defaultPage: 0)
+            }
+            
+            menuItems.append(profile)
+            
+            let board = UIAction(title: "'" + cell.productID + "' 게시판 조회하기", image: DesignSystem.sfSymbol.doc, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
+                self.parentMainCoordinator?.toSpecificBoard(cell.productID)
+            }
+            
+            menuItems.append(board)
+            
+            return UIMenu(title: "탐색", image: nil, identifier: nil, options: UIMenu.Options.displayInline, children: menuItems)
         }
         
         return context

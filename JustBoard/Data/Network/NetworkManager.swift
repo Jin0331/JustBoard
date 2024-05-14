@@ -158,6 +158,27 @@ final class NetworkManager  {
         }
     }
     
+    func profileNotRx(userId:String, handler : @escaping (Result<ProfileResponse, AFError>) -> () ) {
+        let router = MainRouter.otherProfile(userId: userId)
+        
+        do {
+            let urlRequest = try router.asURLRequest()
+            AF.request(urlRequest, interceptor: AuthManager())
+                .validate(statusCode: 200..<300)
+                .responseDecodable(of: ProfileResponse.self) { response in
+                    switch response.result {
+                    case .success(let data):
+                        handler(.success(data))
+                    case .failure(let error):
+                        handler(.failure(error))
+                    }
+                }
+        }
+        catch {
+        }
+    }
+    
+    
     func withdraw() -> Single<Result<JoinResponse, AFError>> {
         return mainMakeRequest(router: MainRouter.withdraw)
     }

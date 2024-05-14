@@ -134,6 +134,10 @@ final class NetworkManager  {
         return mainMakeRequest(router: MainRouter.likes(query: query, postId: postId))
     }
     
+    func unlikes(query: LikesRequest, postId: String) -> Single<Result<LikesResponse, AFError>> {
+        return mainMakeRequest(router: MainRouter.unlikes(query: query, postId: postId))
+    }
+    
     func profile(userId: String) -> Single<Result<ProfileResponse, AFError>> {
         return mainMakeRequest(router: MainRouter.otherProfile(userId: userId))
     }
@@ -157,6 +161,27 @@ final class NetworkManager  {
             return Disposables.create()
         }
     }
+    
+    func profileNotRx(userId:String, handler : @escaping (Result<ProfileResponse, AFError>) -> () ) {
+        let router = MainRouter.otherProfile(userId: userId)
+        
+        do {
+            let urlRequest = try router.asURLRequest()
+            AF.request(urlRequest, interceptor: AuthManager())
+                .validate(statusCode: 200..<300)
+                .responseDecodable(of: ProfileResponse.self) { response in
+                    switch response.result {
+                    case .success(let data):
+                        handler(.success(data))
+                    case .failure(let error):
+                        handler(.failure(error))
+                    }
+                }
+        }
+        catch {
+        }
+    }
+    
     
     func withdraw() -> Single<Result<JoinResponse, AFError>> {
         return mainMakeRequest(router: MainRouter.withdraw)

@@ -11,8 +11,8 @@ import RxCocoa
 
 final class QuestionViewController: RxBaseViewController {
     
-    private let mainView = QuestionView()
-    lazy var viewModel = QuestionViewModel(textView: mainView.contentsTextView)
+    private let baseView = QuestionView()
+    lazy var viewModel = QuestionViewModel(textView: baseView.contentsTextView)
     weak var parentCoordinator : QuestionCoordinator?
     private let productId : String
     private let seletecedImage = PublishSubject<UIImage>()
@@ -22,7 +22,7 @@ final class QuestionViewController: RxBaseViewController {
     }
     
     override func loadView() {
-        view = mainView
+        view = baseView
     }
     
     
@@ -31,13 +31,13 @@ final class QuestionViewController: RxBaseViewController {
         let link = BehaviorSubject<String>(value: "")
         
         // image Picker
-        mainView.imageAddButton.rx.tap
+        baseView.imageAddButton.rx.tap
             .bind(with: self) { owner, _ in
                 owner.addImage()
             }
             .disposed(by: disposeBag)
         
-        mainView.linkAddButton.rx.tap
+        baseView.linkAddButton.rx.tap
             .bind(with: self) { owner, _ in
                 owner.addLink() { value in
                     link.onNext(value)
@@ -46,12 +46,12 @@ final class QuestionViewController: RxBaseViewController {
             .disposed(by: disposeBag)
         
         let input = QuestionViewModel.Input(
-            titleText: mainView.titleTextField.rx.text.orEmpty,
-            contentsText: mainView.contentsTextView.rx.text.orEmpty,
+            titleText: baseView.titleTextField.rx.text.orEmpty,
+            contentsText: baseView.contentsTextView.rx.text.orEmpty,
             addedImage: seletecedImage,
             addProductId: productId,
             addLink: link,
-            completeButtonTap: mainView.completeButtonItem.rx.tap
+            completeButtonTap: baseView.completeButtonItem.rx.tap
         )
         
         let output = viewModel.transform(input: input)
@@ -70,7 +70,7 @@ final class QuestionViewController: RxBaseViewController {
         
         output.writeButtonUI
             .drive(with: self) { owner, valid in
-                owner.navigationItem.rightBarButtonItem = valid ? UIBarButtonItem(customView: owner.mainView.completeButtonItem) : nil
+                owner.navigationItem.rightBarButtonItem = valid ? UIBarButtonItem(customView: owner.baseView.completeButtonItem) : nil
             }
             .disposed(by: disposeBag)
         
@@ -102,7 +102,7 @@ final class QuestionViewController: RxBaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        mainView.titleTextField.alignTextVerticallyInContainer()
+        baseView.titleTextField.alignTextVerticallyInContainer()
     }
     
     deinit {
@@ -139,7 +139,7 @@ extension QuestionViewController : UIImagePickerControllerDelegate, UINavigation
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[.originalImage] as? UIImage {
             seletecedImage.onNext(pickedImage)
-            mainView.contentsTextViewUIUpdate()
+            baseView.contentsTextViewUIUpdate()
         }
         dismiss(animated: true, completion: nil)
     }

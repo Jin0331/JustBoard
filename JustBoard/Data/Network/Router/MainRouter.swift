@@ -15,6 +15,7 @@ enum MainRouter {
     case specificInquiry(postId : String)
     case comment(query : CommentRequest, postId : String)
     case likes(query : LikesRequest, postId : String)
+    case unlikes(query : LikesRequest, postId : String)
     case meProfile
     case otherProfile(userId : String)
     case meProfileEdit(query : ProfileEditRequest)
@@ -30,7 +31,7 @@ extension MainRouter : TargetType {
     
     var method: HTTPMethod {
         switch self {
-        case .write, .files, .comment, .likes, .follow:
+        case .write, .files, .comment, .likes, .unlikes, .follow:
             return .post
         case .inquiry, .specificInquiry, .meProfile, .otherProfile, .withdraw:
             return .get
@@ -53,6 +54,8 @@ extension MainRouter : TargetType {
             return "/posts/" + postId + "/comments"
         case .likes(query: _ , postId: let postId):
             return "/posts/" + postId + "/like"
+        case .unlikes(query: _ , postId: let postId):
+            return "/posts/" + postId + "/like-2"
         case .meProfile, .meProfileEdit:
             return "/users/me/profile"
         case .otherProfile(userId: let userId):
@@ -68,7 +71,7 @@ extension MainRouter : TargetType {
         guard let token = UserDefaultManager.shared.accessToken else { return [:] }
         
         switch self {
-        case .write, .comment, .likes:
+        case .write, .comment, .likes, .unlikes:
             return [
                 HTTPHeader.authorization.rawValue : token,
                 HTTPHeader.contentType.rawValue : HTTPHeader.json.rawValue,
@@ -118,6 +121,12 @@ extension MainRouter : TargetType {
             return try? encoder.encode(query)
             
         case .likes(query: let query, postId: _):
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            
+            return try? encoder.encode(query)
+        
+        case .unlikes(query: let query, postId: _):
             let encoder = JSONEncoder()
             encoder.keyEncodingStrategy = .convertToSnakeCase
             

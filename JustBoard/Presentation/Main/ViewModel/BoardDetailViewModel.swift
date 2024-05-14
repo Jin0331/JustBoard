@@ -25,6 +25,7 @@ final class BoardDetailViewModel : MainViewModelType {
     struct Input {
         let profileButton : ControlEvent<Void>
         let likeButton: ControlEvent<Void>
+        let unlikeButton: ControlEvent<Void>
         let commentText : ControlProperty<String>
         let commentComplete : ControlEvent<Void>
     }
@@ -42,6 +43,7 @@ final class BoardDetailViewModel : MainViewModelType {
         
         let profileType = PublishSubject<(userID:String, me:Bool)>()
         let likeButtonEnable = PublishSubject<Void>()
+        let unlikeButtonEnable = PublishSubject<Void>()
         let commentButtonEnable = BehaviorSubject<Bool>(value: false)
         let commentRequestModel = PublishSubject<CommentRequest>()
         let postCommentData = PublishSubject<Comment>()
@@ -69,8 +71,29 @@ final class BoardDetailViewModel : MainViewModelType {
             }
             .bind(with: self) { owner, data in
                 switch data {
-                case .success(let likestResponse):
+                case .success(_):
                     likeButtonEnable.onNext(())
+                case .failure(let error):
+                    print(error, "✅ LikesResponse Error")
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        //MARK: - unlike
+        input.unlikeButton
+            .withLatestFrom(updatedPostData)
+            .map {
+                let myUnlike = $0.likes2.contains(UserDefaultManager.shared.userId!) ? true : false
+                return (myUnlike, $0.postID)
+            }
+            .flatMap { value in
+                let toggleLike = !value.0
+                return NetworkManager.shared.unlikes(query: LikesRequest(like_status: toggleLike), postId: value.1)
+            }
+            .bind(with: self) { owner, data in
+                switch data {
+                case .success(_):
+                    unlikeButtonEnable.onNext(())
                 case .failure(let error):
                     print(error, "✅ LikesResponse Error")
                 }
@@ -86,11 +109,29 @@ final class BoardDetailViewModel : MainViewModelType {
                 switch result {
                 case .success(let postResponse):
                     owner.updatedPostData.onNext(postResponse)
+                    NotificationCenter.default.post(name: .boardRefresh, object: nil)
                 case .failure(let error):
                     print(error, "✅ PostResponse Error ")
                 }
             }
             .disposed(by: disposeBag)
+        
+        Observable.combineLatest(unlikeButtonEnable, postData)
+            .map { $0.1.postID }
+            .flatMap {
+                NetworkManager.shared.post(postId: $0)
+            }
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let postResponse):
+                    owner.updatedPostData.onNext(postResponse)
+                    NotificationCenter.default.post(name: .boardRefresh, object: nil)
+                case .failure(let error):
+                    print(error, "✅ PostResponse Error ")
+                }
+            }
+            .disposed(by: disposeBag)
+        
         
         //MARK: - Comment 관련
         input.commentText
@@ -131,6 +172,7 @@ final class BoardDetailViewModel : MainViewModelType {
                 case .success(let postResponse):
                     owner.updatedPostData.onNext(postResponse)
                     commentComplete.onNext(true)
+                    NotificationCenter.default.post(name: .boardRefresh, object: nil)
                 case .failure(let error):
                     print(error, "✅ PostResponse Error ")
                     commentComplete.onNext(false)
@@ -155,7 +197,7 @@ final class BoardDetailViewModel : MainViewModelType {
                 }
             }
             .disposed(by: disposeBag)
-        
+
         return Output(
             profileType:profileType,
             commentButtonUI: commentButtonEnable.asDriver(onErrorJustReturn: false),

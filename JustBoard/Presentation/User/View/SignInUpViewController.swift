@@ -13,7 +13,7 @@ import AuthenticationServices
 
 final class SignInUpViewController : RxBaseViewController{
     
-    private let mainView = SignInUpView()
+    private let baseView = SignInUpView()
     private let viewModel = SignUpThirdPartyViewModel()
     private var isReset : Bool?
     private let thirdPartyEmail : PublishSubject<String>
@@ -30,7 +30,7 @@ final class SignInUpViewController : RxBaseViewController{
     }
     
     override func loadView() {
-        view = mainView
+        view = baseView
     }
     
     override func viewDidLoad() {
@@ -44,7 +44,7 @@ final class SignInUpViewController : RxBaseViewController{
     }
     
     override func bind() {
-        mainView.appleLoginButton.rx
+        baseView.appleLoginButton.rx
             .tap
             .bind(with: self) { owner, _ in
                 let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -58,10 +58,9 @@ final class SignInUpViewController : RxBaseViewController{
             }
             .disposed(by: disposeBag)
         
-        mainView.emailLoginButton.rx
+        baseView.emailLoginButton.rx
             .tap
             .bind(with: self) { owner, _ in
-                print("hi")
                 owner.parentCoordinator?.emailLogin()
             }
             .disposed(by: disposeBag)

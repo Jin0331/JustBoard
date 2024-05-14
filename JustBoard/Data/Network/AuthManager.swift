@@ -38,7 +38,6 @@ final class AuthManager : RequestInterceptor {
         }
         
         guard let accessToken = UserDefaultManager.shared.accessToken, let refreshToken = UserDefaultManager.shared.refreshToken else {
-            print( UserDefaultManager.shared.accessToken, UserDefaultManager.shared.refreshToken)
             return
         }
         

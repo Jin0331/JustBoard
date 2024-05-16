@@ -29,6 +29,9 @@
 		DB208C312BE78C2A00C63962 /* BoardListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB208C302BE78C2A00C63962 /* BoardListCollectionViewCell.swift */; };
 		DB2A78442BF5BF720086C4FA /* ChatRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A78432BF5BF720086C4FA /* ChatRouter.swift */; };
 		DB2A78462BF5C6340086C4FA /* ChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A78452BF5C6340086C4FA /* ChatRequest.swift */; };
+		DB2A784B2BF633A30086C4FA /* ChatListEquest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A784A2BF633A30086C4FA /* ChatListEquest.swift */; };
+		DB2A784D2BF634E40086C4FA /* ChatSendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A784C2BF634E40086C4FA /* ChatSendRequest.swift */; };
+		DB2A784F2BF6359D0086C4FA /* ChatSendFilesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A784E2BF6359D0086C4FA /* ChatSendFilesRequest.swift */; };
 		DB2B190B2BEBE68900D5B687 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B190A2BEBE68900D5B687 /* ProfileEditViewController.swift */; };
 		DB2B195F2BECB4C600D5B687 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B195E2BECB4C600D5B687 /* ProfileEditView.swift */; };
 		DB2B19612BECB62B00D5B687 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B19602BECB62B00D5B687 /* ProfileEditViewModel.swift */; };
@@ -177,6 +180,9 @@
 		DB208C302BE78C2A00C63962 /* BoardListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListCollectionViewCell.swift; sourceTree = "<group>"; };
 		DB2A78432BF5BF720086C4FA /* ChatRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRouter.swift; sourceTree = "<group>"; };
 		DB2A78452BF5C6340086C4FA /* ChatRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequest.swift; sourceTree = "<group>"; };
+		DB2A784A2BF633A30086C4FA /* ChatListEquest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListEquest.swift; sourceTree = "<group>"; };
+		DB2A784C2BF634E40086C4FA /* ChatSendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSendRequest.swift; sourceTree = "<group>"; };
+		DB2A784E2BF6359D0086C4FA /* ChatSendFilesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSendFilesRequest.swift; sourceTree = "<group>"; };
 		DB2B190A2BEBE68900D5B687 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		DB2B195E2BECB4C600D5B687 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		DB2B19602BECB62B00D5B687 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
@@ -360,9 +366,9 @@
 		DB2A78482BF5C6720086C4FA /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				DBB7C6612BD7B77800D3081A /* InquiryRequest.swift */,
 				DB4110112BD173D60088679F /* PostRequest.swift */,
 				DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */,
-				DBB7C6612BD7B77800D3081A /* InquiryRequest.swift */,
 				DB2B19632BECC1CF00D5B687 /* ProfileEditRequest.swift */,
 				DBDD8A732BDE4337002ADA34 /* LikesRequest.swift */,
 				DBB7C6802BDA1B8E00D3081A /* CommentRequest.swift */,
@@ -374,6 +380,9 @@
 			isa = PBXGroup;
 			children = (
 				DB2A78452BF5C6340086C4FA /* ChatRequest.swift */,
+				DB2A784A2BF633A30086C4FA /* ChatListEquest.swift */,
+				DB2A784C2BF634E40086C4FA /* ChatSendRequest.swift */,
+				DB2A784E2BF6359D0086C4FA /* ChatSendFilesRequest.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -506,8 +515,8 @@
 		DB901C712BD694E4003EEDC6 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				DB2A78482BF5C6720086C4FA /* Main */,
 				DB2A78472BF5C66C0086C4FA /* User */,
+				DB2A78482BF5C6720086C4FA /* Main */,
 				DB2A78492BF5C6770086C4FA /* Chat */,
 			);
 			path = Request;
@@ -944,6 +953,7 @@
 				DBCBAA632BCD73D9006B40CA /* EmailValidationRequest.swift in Sources */,
 				DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */,
 				DBCBE3D22BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift in Sources */,
+				DB2A784B2BF633A30086C4FA /* ChatListEquest.swift in Sources */,
 				DBCBAA172BC7E02D006B40CA /* EmailLoginViewController.swift in Sources */,
 				DB901C742BD69531003EEDC6 /* FilesResponse.swift in Sources */,
 				DB2B19642BECC1CF00D5B687 /* ProfileEditRequest.swift in Sources */,
@@ -1010,6 +1020,7 @@
 				DBCBAA292BC839EB006B40CA /* RefreshResponse.swift in Sources */,
 				DB2B19842BEE86AF00D5B687 /* SignUpThirdPartyViewModel.swift in Sources */,
 				DB63A4492BE6B54400882670 /* FollowCoordinator.swift in Sources */,
+				DB2A784F2BF6359D0086C4FA /* ChatSendFilesRequest.swift in Sources */,
 				DB743A9E2BE548E800BBAE5F /* ProfileViewController.swift in Sources */,
 				DBCBAA2D2BC84842006B40CA /* ProfileResponse.swift in Sources */,
 				DBCBE3D02BCE28E800B6DAC5 /* EmailLoginCoordinator.swift in Sources */,
@@ -1051,6 +1062,7 @@
 				DB204D9C2BD2A8C9006340BE /* BoardViewModel.swift in Sources */,
 				DBB7C6642BD7B89F00D3081A /* QueryString.swift in Sources */,
 				DB204D962BD29F0A006340BE /* MainTabBarController.swift in Sources */,
+				DB2A784D2BF634E40086C4FA /* ChatSendRequest.swift in Sources */,
 				DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */,
 				DB797BC52BE51D8B00E490C3 /* MenuViewController.swift in Sources */,
 				DBCBAA112BC7D0F0006B40CA /* TargetType.swift in Sources */,

@@ -27,6 +27,11 @@
 		DB208C2D2BE7867900C63962 /* BoardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB208C2C2BE7867900C63962 /* BoardListViewModel.swift */; };
 		DB208C2F2BE7871400C63962 /* BoardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB208C2E2BE7871400C63962 /* BoardListView.swift */; };
 		DB208C312BE78C2A00C63962 /* BoardListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB208C302BE78C2A00C63962 /* BoardListCollectionViewCell.swift */; };
+		DB2A78442BF5BF720086C4FA /* ChatRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A78432BF5BF720086C4FA /* ChatRouter.swift */; };
+		DB2A78462BF5C6340086C4FA /* ChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A78452BF5C6340086C4FA /* ChatRequest.swift */; };
+		DB2A784B2BF633A30086C4FA /* ChatListEquest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A784A2BF633A30086C4FA /* ChatListEquest.swift */; };
+		DB2A784D2BF634E40086C4FA /* ChatSendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A784C2BF634E40086C4FA /* ChatSendRequest.swift */; };
+		DB2A784F2BF6359D0086C4FA /* ChatSendFilesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A784E2BF6359D0086C4FA /* ChatSendFilesRequest.swift */; };
 		DB2B190B2BEBE68900D5B687 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B190A2BEBE68900D5B687 /* ProfileEditViewController.swift */; };
 		DB2B195F2BECB4C600D5B687 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B195E2BECB4C600D5B687 /* ProfileEditView.swift */; };
 		DB2B19612BECB62B00D5B687 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2B19602BECB62B00D5B687 /* ProfileEditViewModel.swift */; };
@@ -173,6 +178,11 @@
 		DB208C2C2BE7867900C63962 /* BoardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListViewModel.swift; sourceTree = "<group>"; };
 		DB208C2E2BE7871400C63962 /* BoardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListView.swift; sourceTree = "<group>"; };
 		DB208C302BE78C2A00C63962 /* BoardListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListCollectionViewCell.swift; sourceTree = "<group>"; };
+		DB2A78432BF5BF720086C4FA /* ChatRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRouter.swift; sourceTree = "<group>"; };
+		DB2A78452BF5C6340086C4FA /* ChatRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequest.swift; sourceTree = "<group>"; };
+		DB2A784A2BF633A30086C4FA /* ChatListEquest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListEquest.swift; sourceTree = "<group>"; };
+		DB2A784C2BF634E40086C4FA /* ChatSendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSendRequest.swift; sourceTree = "<group>"; };
+		DB2A784E2BF6359D0086C4FA /* ChatSendFilesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSendFilesRequest.swift; sourceTree = "<group>"; };
 		DB2B190A2BEBE68900D5B687 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		DB2B195E2BECB4C600D5B687 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		DB2B19602BECB62B00D5B687 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
@@ -342,6 +352,41 @@
 			path = BoardList;
 			sourceTree = "<group>";
 		};
+		DB2A78472BF5C66C0086C4FA /* User */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBAA142BC7DC8C006B40CA /* JoinRequest.swift */,
+				DBCBAA0A2BC7D0A5006B40CA /* LoginRequest.swift */,
+				DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */,
+				DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		DB2A78482BF5C6720086C4FA /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DBB7C6612BD7B77800D3081A /* InquiryRequest.swift */,
+				DB4110112BD173D60088679F /* PostRequest.swift */,
+				DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */,
+				DB2B19632BECC1CF00D5B687 /* ProfileEditRequest.swift */,
+				DBDD8A732BDE4337002ADA34 /* LikesRequest.swift */,
+				DBB7C6802BDA1B8E00D3081A /* CommentRequest.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		DB2A78492BF5C6770086C4FA /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				DB2A78452BF5C6340086C4FA /* ChatRequest.swift */,
+				DB2A784A2BF633A30086C4FA /* ChatListEquest.swift */,
+				DB2A784C2BF634E40086C4FA /* ChatSendRequest.swift */,
+				DB2A784E2BF6359D0086C4FA /* ChatSendFilesRequest.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		DB2B19692BEE6E8400D5B687 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,16 +515,9 @@
 		DB901C712BD694E4003EEDC6 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				DBCBAA142BC7DC8C006B40CA /* JoinRequest.swift */,
-				DBCBAA0A2BC7D0A5006B40CA /* LoginRequest.swift */,
-				DBCBAA2A2BC83A54006B40CA /* RefreshRequest.swift */,
-				DBCBAA622BCD73D9006B40CA /* EmailValidationRequest.swift */,
-				DB4110112BD173D60088679F /* PostRequest.swift */,
-				DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */,
-				DBB7C6612BD7B77800D3081A /* InquiryRequest.swift */,
-				DB2B19632BECC1CF00D5B687 /* ProfileEditRequest.swift */,
-				DBDD8A732BDE4337002ADA34 /* LikesRequest.swift */,
-				DBB7C6802BDA1B8E00D3081A /* CommentRequest.swift */,
+				DB2A78472BF5C66C0086C4FA /* User */,
+				DB2A78482BF5C6720086C4FA /* Main */,
+				DB2A78492BF5C6770086C4FA /* Chat */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -661,6 +699,7 @@
 			children = (
 				DBCBAA082BC7CEE8006B40CA /* UserRouter.swift */,
 				DB41100F2BD173860088679F /* MainRouter.swift */,
+				DB2A78432BF5BF720086C4FA /* ChatRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -914,6 +953,7 @@
 				DBCBAA632BCD73D9006B40CA /* EmailValidationRequest.swift in Sources */,
 				DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */,
 				DBCBE3D22BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift in Sources */,
+				DB2A784B2BF633A30086C4FA /* ChatListEquest.swift in Sources */,
 				DBCBAA172BC7E02D006B40CA /* EmailLoginViewController.swift in Sources */,
 				DB901C742BD69531003EEDC6 /* FilesResponse.swift in Sources */,
 				DB2B19642BECC1CF00D5B687 /* ProfileEditRequest.swift in Sources */,
@@ -968,6 +1008,7 @@
 				DB204D982BD2A669006340BE /* QuestionCoordinator.swift in Sources */,
 				DBCBE3D62BCE8A0700B6DAC5 /* JoinResponse.swift in Sources */,
 				DB204DA42BD422A7006340BE /* QuestionViewModel.swift in Sources */,
+				DB2A78462BF5C6340086C4FA /* ChatRequest.swift in Sources */,
 				DB63A44D2BE6B82B00882670 /* FollowView.swift in Sources */,
 				DB2B19BF2BF247BD00D5B687 /* BoardRankViewModel.swift in Sources */,
 				DB4110142BD19E0A0088679F /* InquiryResponse.swift in Sources */,
@@ -979,12 +1020,14 @@
 				DBCBAA292BC839EB006B40CA /* RefreshResponse.swift in Sources */,
 				DB2B19842BEE86AF00D5B687 /* SignUpThirdPartyViewModel.swift in Sources */,
 				DB63A4492BE6B54400882670 /* FollowCoordinator.swift in Sources */,
+				DB2A784F2BF6359D0086C4FA /* ChatSendFilesRequest.swift in Sources */,
 				DB743A9E2BE548E800BBAE5F /* ProfileViewController.swift in Sources */,
 				DBCBAA2D2BC84842006B40CA /* ProfileResponse.swift in Sources */,
 				DBCBE3D02BCE28E800B6DAC5 /* EmailLoginCoordinator.swift in Sources */,
 				DBCBAA5F2BCD61E5006B40CA /* SignTextField.swift in Sources */,
 				DB2B19BD2BF246E400D5B687 /* BoardRankViewController.swift in Sources */,
 				DB63A4422BE6088E00882670 /* ProfileViewModel.swift in Sources */,
+				DB2A78442BF5BF720086C4FA /* ChatRouter.swift in Sources */,
 				DB204DA02BD2E58D006340BE /* DelimiterLine.swift in Sources */,
 				DB797BB82BE3CD7B00E490C3 /* BoardUserCoordinator.swift in Sources */,
 				DBCBAA1F2BC7E7F2006B40CA /* ReusableID.swift in Sources */,
@@ -1019,6 +1062,7 @@
 				DB204D9C2BD2A8C9006340BE /* BoardViewModel.swift in Sources */,
 				DBB7C6642BD7B89F00D3081A /* QueryString.swift in Sources */,
 				DB204D962BD29F0A006340BE /* MainTabBarController.swift in Sources */,
+				DB2A784D2BF634E40086C4FA /* ChatSendRequest.swift in Sources */,
 				DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */,
 				DB797BC52BE51D8B00E490C3 /* MenuViewController.swift in Sources */,
 				DBCBAA112BC7D0F0006B40CA /* TargetType.swift in Sources */,

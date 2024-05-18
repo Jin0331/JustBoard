@@ -67,6 +67,13 @@ extension BoardMainCoordinator {
         childCoordinators.append(profileCoordinator)
     }
     
+    func toChatList(chatlist: MyChatResponse) {
+        let chatListCoordinaotr = ChatListCoordinator(navigationController: navigationController)
+        chatListCoordinaotr.parentBoardCoordinator = self
+        chatListCoordinaotr.start(chatlist: chatlist)
+        childCoordinators.append(chatListCoordinaotr)
+    }
+    
     
     @objc func resetLogined(_ notification: Notification) {
         print("토큰초기화됨 ✅")

@@ -39,8 +39,19 @@ final class BoardMainViewController: RxBaseViewController {
     
     override func bind() {
         
+        baseView.menuBarButtonItem.rx.tap
+            .bind(with: self) { owner, _ in
+                let containerView = MenuViewController()
+                containerView.sendDelegate = self
+                owner.present(SideMenuNavigationController(rootViewController: containerView), animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        
+        
         let input = BoardMainViewModel.Input(
-            viewWillAppear: rx.viewWillAppear
+            viewWillAppear: rx.viewWillAppear,
+            dmButtonClicked : baseView.dmBarButtonItem.rx.tap
         )
         
         let output = viewModel.transform(input: input)
@@ -52,6 +63,13 @@ final class BoardMainViewController: RxBaseViewController {
                 owner.mainNavigationAttribute()
             }
             .disposed(by: disposeBag)
+        
+        output.myChatList
+            .bind(with: self) { owner, myChatList in
+                owner.parentCoordinator?.toChatList(chatlist: myChatList)
+            }
+            .disposed(by: disposeBag)
+        
     }
 }
 
@@ -59,17 +77,7 @@ final class BoardMainViewController: RxBaseViewController {
 extension BoardMainViewController : MenuViewControllerDelegate {
     
     private func attachSideMenuVC() {
-        // left button
-        let menuBarButtonItem = UIBarButtonItem(image: DesignSystem.sfSymbol.list?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(menuBarButtonItemTapped)).then {
-            $0.tintColor = DesignSystem.commonColorSet.black
-        }
-        navigationItem.setRightBarButton(menuBarButtonItem, animated: true)
-    }
-
-    @objc private func menuBarButtonItemTapped() {
-        let containerView = MenuViewController()
-        containerView.sendDelegate = self
-        present(SideMenuNavigationController(rootViewController: containerView), animated: true)
+        navigationItem.rightBarButtonItems = [baseView.menuBarButtonItem, baseView.dmBarButtonItem]
     }
     
     func sendProfileViewController(userID: String, me: Bool) {

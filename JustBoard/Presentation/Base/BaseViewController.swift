@@ -45,11 +45,12 @@ class BaseViewController: UIViewController {
     }
     
     func mainNavigationAttribute() {
-        navigationItem.title = "자게? 아니 자게!"
-        navigationController?.navigationBar.titleTextAttributes = [
-            .foregroundColor: DesignSystem.commonColorSet.black,
-            .font: DesignSystem.mainFont.customFontHeavy(size: 25)
-        ]
+        let label = UILabel()
+        label.textColor = DesignSystem.commonColorSet.black
+        label.font = DesignSystem.mainFont.customFontHeavy(size: 25)
+        label.text = "자게? 아니 자게!"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+        
         navigationController?.navigationBar.barTintColor = DesignSystem.commonColorSet.white
     }
     

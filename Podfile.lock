@@ -28,6 +28,9 @@ PODS:
     - RxSwift (~> 6.0)
   - SideMenu (6.5.0)
   - SnapKit (5.7.1)
+  - Socket.IO-Client-Swift (16.1.0):
+    - Starscream (~> 4.0.6)
+  - Starscream (4.0.8)
   - STTextView (1.1.3)
   - Tabman (3.2.0):
     - Pageboy (~> 4.2.0)
@@ -48,6 +51,7 @@ DEPENDENCIES:
   - RxViewController
   - SideMenu (~> 6.0)
   - SnapKit (~> 5.7.0)
+  - Socket.IO-Client-Swift (~> 16.1.0)
   - STTextView
   - Tabman (~> 3.2)
   - TextFieldEffects
@@ -71,6 +75,8 @@ SPEC REPOS:
     - RxViewController
     - SideMenu
     - SnapKit
+    - Socket.IO-Client-Swift
+    - Starscream
     - STTextView
     - Tabman
     - TextFieldEffects
@@ -93,12 +99,14 @@ SPEC CHECKSUMS:
   RxViewController: 56486fa0afd629a1d6b5ba077f3b8cd9dc31b5d2
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  Socket.IO-Client-Swift: ee4b8f80a3db18dd7f32b266ddf273310609443c
+  Starscream: 19b5533ddb925208db698f0ac508a100b884a1b9
   STTextView: cb4d43949845294bd7d203f870bb50a426b65e36
   Tabman: 49f9181a2bfe5c29d002864dac2de8e0b7ea9180
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   Toast-Swift: dd369e68ee529f542c65bd0d0c6c50cd743cf6f2
 
-PODFILE CHECKSUM: 4d2e54569df5d211e983afed06bd007b43306b2f
+PODFILE CHECKSUM: ea6dae83dd6d608cf3ba3f9bba325b1f2b68f76c
 
 COCOAPODS: 1.15.2

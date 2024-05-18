@@ -61,6 +61,15 @@
 		DB4110122BD173D60088679F /* PostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110112BD173D60088679F /* PostRequest.swift */; };
 		DB4110142BD19E0A0088679F /* InquiryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110132BD19E0A0088679F /* InquiryResponse.swift */; };
 		DB4110162BD1AC720088679F /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */; };
+		DB51669E2BF8655300455F06 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51669D2BF8655300455F06 /* SocketIOManager.swift */; };
+		DB5166A02BF8689C00455F06 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51669F2BF8689C00455F06 /* ChatListViewController.swift */; };
+		DB5166A22BF8713B00455F06 /* ChatListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5166A12BF8713B00455F06 /* ChatListCoordinator.swift */; };
+		DB5166A42BF8740E00455F06 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5166A32BF8740E00455F06 /* ChatListView.swift */; };
+		DB5166A62BF8758100455F06 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5166A52BF8758100455F06 /* UIView+Extension.swift */; };
+		DB5166A82BF8802700455F06 /* ChatListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5166A72BF8802700455F06 /* ChatListRow.swift */; };
+		DB5166AD2BF8888600455F06 /* CreateChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5166AC2BF8888600455F06 /* CreateChatResponse.swift */; };
+		DB5166AF2BF88B5100455F06 /* MyChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5166AE2BF88B5100455F06 /* MyChatResponse.swift */; };
+		DB5166B12BF894A400455F06 /* _ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5166B02BF894A400455F06 /* _ChatListViewModel.swift */; };
 		DB63A4402BE574B500882670 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A43F2BE574B500882670 /* ProfileView.swift */; };
 		DB63A4422BE6088E00882670 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A4412BE6088E00882670 /* ProfileViewModel.swift */; };
 		DB63A4442BE64D4300882670 /* FollowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A4432BE64D4300882670 /* FollowResponse.swift */; };
@@ -213,6 +222,15 @@
 		DB4110112BD173D60088679F /* PostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequest.swift; sourceTree = "<group>"; };
 		DB4110132BD19E0A0088679F /* InquiryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryResponse.swift; sourceTree = "<group>"; };
 		DB4110152BD1AC720088679F /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
+		DB51669D2BF8655300455F06 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
+		DB51669F2BF8689C00455F06 /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
+		DB5166A12BF8713B00455F06 /* ChatListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCoordinator.swift; sourceTree = "<group>"; };
+		DB5166A32BF8740E00455F06 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		DB5166A52BF8758100455F06 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		DB5166A72BF8802700455F06 /* ChatListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListRow.swift; sourceTree = "<group>"; };
+		DB5166AC2BF8888600455F06 /* CreateChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChatResponse.swift; sourceTree = "<group>"; };
+		DB5166AE2BF88B5100455F06 /* MyChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatResponse.swift; sourceTree = "<group>"; };
+		DB5166B02BF894A400455F06 /* _ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _ChatListViewModel.swift; sourceTree = "<group>"; };
 		DB63A43F2BE574B500882670 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DB63A4412BE6088E00882670 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DB63A4432BE64D4300882670 /* FollowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowResponse.swift; sourceTree = "<group>"; };
@@ -425,6 +443,7 @@
 				DB743A9A2BE5424500BBAE5F /* Profile */,
 				DB63A4452BE6B39200882670 /* Follow */,
 				DB208C292BE77F7700C63962 /* BoardList */,
+				DB51669C2BF864BC00455F06 /* Chat */,
 				DBB7C6672BD8AF1F00D3081A /* Cell */,
 			);
 			path = View;
@@ -443,6 +462,7 @@
 				DB63A4502BE6C10900882670 /* FollowViewModel.swift */,
 				DB208C2C2BE7867900C63962 /* BoardListViewModel.swift */,
 				DB2B19602BECB62B00D5B687 /* ProfileEditViewModel.swift */,
+				DB5166B02BF894A400455F06 /* _ChatListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -464,12 +484,54 @@
 				DB0598AF2BE31F9300AE0973 /* BoardSpecificCoordinator.swift */,
 				DB797BB72BE3CD7B00E490C3 /* BoardUserCoordinator.swift */,
 				DB0598B12BE3456800AE0973 /* BoardDetailCoordinator.swift */,
+				DB4110062BD15B3B0088679F /* BoardListCoordinator.swift */,
 				DB204D972BD2A669006340BE /* QuestionCoordinator.swift */,
 				DB743A9B2BE544FE00BBAE5F /* ProfileCoordinator.swift */,
 				DB63A4482BE6B54400882670 /* FollowCoordinator.swift */,
-				DB4110062BD15B3B0088679F /* BoardListCoordinator.swift */,
+				DB5166A12BF8713B00455F06 /* ChatListCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		DB51669C2BF864BC00455F06 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				DB51669F2BF8689C00455F06 /* ChatListViewController.swift */,
+				DB5166A32BF8740E00455F06 /* ChatListView.swift */,
+				DB5166A72BF8802700455F06 /* ChatListRow.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		DB5166A92BF8875E00455F06 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBE3D52BCE8A0700B6DAC5 /* JoinResponse.swift */,
+				DBCBAA122BC7D900006B40CA /* LoginResponse.swift */,
+				DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		DB5166AA2BF8876A00455F06 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */,
+				DB4110132BD19E0A0088679F /* InquiryResponse.swift */,
+				DB901C732BD69531003EEDC6 /* FilesResponse.swift */,
+				DBDD8A752BDE43C3002ADA34 /* LikesResponse.swift */,
+				DB63A4432BE64D4300882670 /* FollowResponse.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		DB5166AB2BF8877700455F06 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				DB5166AC2BF8888600455F06 /* CreateChatResponse.swift */,
+				DB5166AE2BF88B5100455F06 /* MyChatResponse.swift */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		DB63A4452BE6B39200882670 /* Follow */ = {
@@ -525,14 +587,9 @@
 		DB901C722BD694E9003EEDC6 /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				DBCBE3D52BCE8A0700B6DAC5 /* JoinResponse.swift */,
-				DBCBAA122BC7D900006B40CA /* LoginResponse.swift */,
-				DBCBAA282BC839EB006B40CA /* RefreshResponse.swift */,
-				DBCBAA2C2BC84842006B40CA /* ProfileResponse.swift */,
-				DB4110132BD19E0A0088679F /* InquiryResponse.swift */,
-				DB901C732BD69531003EEDC6 /* FilesResponse.swift */,
-				DBDD8A752BDE43C3002ADA34 /* LikesResponse.swift */,
-				DB63A4432BE64D4300882670 /* FollowResponse.swift */,
+				DB5166A92BF8875E00455F06 /* User */,
+				DB5166AA2BF8876A00455F06 /* Main */,
+				DB5166AB2BF8877700455F06 /* Chat */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -587,6 +644,7 @@
 				DBCBAA102BC7D0F0006B40CA /* TargetType.swift */,
 				DBCBAA0C2BC7D0B9006B40CA /* HTTPHeader.swift */,
 				DBCBAA0E2BC7D0E1006B40CA /* NetworkManager.swift */,
+				DB51669D2BF8655300455F06 /* SocketIOManager.swift */,
 				DBCBAA2E2BC86224006B40CA /* AuthManager.swift */,
 				DBCBA9FF2BC7CCE2006B40CA /* Router */,
 				DBCBA9FE2BC7CCD8006B40CA /* QueryModel */,
@@ -739,6 +797,7 @@
 				DBB7C6842BDA3A6B00D3081A /* CALayer+Extension.swift */,
 				DBDD8AE02BDFF97F002ADA34 /* Reactive+Extension.swift */,
 				DB2B19812BEE840C00D5B687 /* Util.swift */,
+				DB5166A52BF8758100455F06 /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -950,12 +1009,14 @@
 				DB63A4472BE6B3AD00882670 /* FollowTabmanViewController.swift in Sources */,
 				DB204DEF2BD57774006340BE /* CategorySelectViewController.swift in Sources */,
 				DBDD8AE12BDFF97F002ADA34 /* Reactive+Extension.swift in Sources */,
+				DB5166A22BF8713B00455F06 /* ChatListCoordinator.swift in Sources */,
 				DBCBAA632BCD73D9006B40CA /* EmailValidationRequest.swift in Sources */,
 				DB410FF92BD0D00E0088679F /* MainTabbarCoordinator.swift in Sources */,
 				DBCBE3D22BCE5EB500B6DAC5 /* SignUpNicknameWithPhoneViewController.swift in Sources */,
 				DB2A784B2BF633A30086C4FA /* ChatListEquest.swift in Sources */,
 				DBCBAA172BC7E02D006B40CA /* EmailLoginViewController.swift in Sources */,
 				DB901C742BD69531003EEDC6 /* FilesResponse.swift in Sources */,
+				DB5166A82BF8802700455F06 /* ChatListRow.swift in Sources */,
 				DB2B19642BECC1CF00D5B687 /* ProfileEditRequest.swift in Sources */,
 				DBCBAA2F2BC86224006B40CA /* AuthManager.swift in Sources */,
 				DB204D942BD29E5D006340BE /* UITabBarController+Extension.swift in Sources */,
@@ -1001,6 +1062,7 @@
 				DB204D9E2BD2DDBB006340BE /* QuestionView.swift in Sources */,
 				DB4110102BD173860088679F /* MainRouter.swift in Sources */,
 				DBB7C6892BDAD82A00D3081A /* Formatter+Extension.swift in Sources */,
+				DB5166A62BF8758100455F06 /* UIView+Extension.swift in Sources */,
 				DB802F462BDBD78500DC670D /* UICollectionView+Extension.swift in Sources */,
 				DB204DE62BD56158006340BE /* UIImage+Extension.swift in Sources */,
 				DB208C312BE78C2A00C63962 /* BoardListCollectionViewCell.swift in Sources */,
@@ -1019,7 +1081,9 @@
 				DB41100B2BD160F80088679F /* BoardView.swift in Sources */,
 				DBCBAA292BC839EB006B40CA /* RefreshResponse.swift in Sources */,
 				DB2B19842BEE86AF00D5B687 /* SignUpThirdPartyViewModel.swift in Sources */,
+				DB5166A42BF8740E00455F06 /* ChatListView.swift in Sources */,
 				DB63A4492BE6B54400882670 /* FollowCoordinator.swift in Sources */,
+				DB51669E2BF8655300455F06 /* SocketIOManager.swift in Sources */,
 				DB2A784F2BF6359D0086C4FA /* ChatSendFilesRequest.swift in Sources */,
 				DB743A9E2BE548E800BBAE5F /* ProfileViewController.swift in Sources */,
 				DBCBAA2D2BC84842006B40CA /* ProfileResponse.swift in Sources */,
@@ -1031,6 +1095,7 @@
 				DB204DA02BD2E58D006340BE /* DelimiterLine.swift in Sources */,
 				DB797BB82BE3CD7B00E490C3 /* BoardUserCoordinator.swift in Sources */,
 				DBCBAA1F2BC7E7F2006B40CA /* ReusableID.swift in Sources */,
+				DB5166AD2BF8888600455F06 /* CreateChatResponse.swift in Sources */,
 				DBCBAA272BC82D5A006B40CA /* UserDefaultManager.swift in Sources */,
 				DBB7C67F2BDA15D000D3081A /* CommentCollectionViewCell.swift in Sources */,
 				DB743A982BE53F0100BBAE5F /* UIApplication+Extension.swift in Sources */,
@@ -1040,6 +1105,7 @@
 				DB2B195F2BECB4C600D5B687 /* ProfileEditView.swift in Sources */,
 				DB901C612BD58C7C003EEDC6 /* CompleteButton.swift in Sources */,
 				DBCBE3D42BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift in Sources */,
+				DB5166B12BF894A400455F06 /* _ChatListViewModel.swift in Sources */,
 				DBB7C67B2BD95D0A00D3081A /* BoardDetailViewModel.swift in Sources */,
 				DBB7C6622BD7B77800D3081A /* InquiryRequest.swift in Sources */,
 				DB63A44F2BE6B9AF00882670 /* FollowCollectionViewCell.swift in Sources */,
@@ -1059,6 +1125,7 @@
 				DBB7C6752BD93F2400D3081A /* BoardViewController.swift in Sources */,
 				DB743A962BE5278D00BBAE5F /* MenuCollectionViewCell.swift in Sources */,
 				DBCBE3B92BCD892500B6DAC5 /* NextButton.swift in Sources */,
+				DB5166A02BF8689C00455F06 /* ChatListViewController.swift in Sources */,
 				DB204D9C2BD2A8C9006340BE /* BoardViewModel.swift in Sources */,
 				DBB7C6642BD7B89F00D3081A /* QueryString.swift in Sources */,
 				DB204D962BD29F0A006340BE /* MainTabBarController.swift in Sources */,
@@ -1066,6 +1133,7 @@
 				DBCBAA012BC7CCFE006B40CA /* APIKey.swift in Sources */,
 				DB797BC52BE51D8B00E490C3 /* MenuViewController.swift in Sources */,
 				DBCBAA112BC7D0F0006B40CA /* TargetType.swift in Sources */,
+				DB5166AF2BF88B5100455F06 /* MyChatResponse.swift in Sources */,
 				DBCBAA242BC7E82A006B40CA /* EmailLoginViewModel.swift in Sources */,
 				DB901C762BD6D9A7003EEDC6 /* ImageResize.swift in Sources */,
 				DBCBA9E22BC7BE34006B40CA /* SceneDelegate.swift in Sources */,

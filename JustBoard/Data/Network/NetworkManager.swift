@@ -194,4 +194,9 @@ final class NetworkManager  {
     func followCancel(userId: String) -> Single<Result<FollowResponse, AFError>> {
         return mainMakeRequest(router: MainRouter.followCancel(userId: userId))
     }
+    
+    //MARK: - Chat
+    func myChatList() -> Single<Result<MyChatResponse, AFError>> {
+        return mainMakeRequest(router: ChatRouter.myList)
+    }
 }

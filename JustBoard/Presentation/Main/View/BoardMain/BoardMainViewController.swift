@@ -78,8 +78,6 @@ extension BoardMainViewController : MenuViewControllerDelegate {
     }
     
     @objc private func dmBarButtonItemTapped() {
-        
-        print(#function)
         parentCoordinator?.toChatList()
     }
     

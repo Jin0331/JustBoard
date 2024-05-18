@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class ChatListCoordinator : Coordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
@@ -19,7 +20,7 @@ final class ChatListCoordinator : Coordinator {
     }
     
     func start() {
-        let vc = ChatListViewController()
+        let vc = ChatListViewController(contentViewController: UIHostingController(rootView: ChatListView()))
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }

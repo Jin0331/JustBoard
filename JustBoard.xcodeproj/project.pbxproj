@@ -64,6 +64,8 @@
 		DB51669E2BF8655300455F06 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51669D2BF8655300455F06 /* SocketIOManager.swift */; };
 		DB5166A02BF8689C00455F06 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51669F2BF8689C00455F06 /* ChatListViewController.swift */; };
 		DB5166A22BF8713B00455F06 /* ChatListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5166A12BF8713B00455F06 /* ChatListCoordinator.swift */; };
+		DB5166A42BF8740E00455F06 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5166A32BF8740E00455F06 /* ChatListView.swift */; };
+		DB5166A62BF8758100455F06 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5166A52BF8758100455F06 /* UIView+Extension.swift */; };
 		DB63A4402BE574B500882670 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A43F2BE574B500882670 /* ProfileView.swift */; };
 		DB63A4422BE6088E00882670 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A4412BE6088E00882670 /* ProfileViewModel.swift */; };
 		DB63A4442BE64D4300882670 /* FollowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A4432BE64D4300882670 /* FollowResponse.swift */; };
@@ -219,6 +221,8 @@
 		DB51669D2BF8655300455F06 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		DB51669F2BF8689C00455F06 /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		DB5166A12BF8713B00455F06 /* ChatListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCoordinator.swift; sourceTree = "<group>"; };
+		DB5166A32BF8740E00455F06 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		DB5166A52BF8758100455F06 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		DB63A43F2BE574B500882670 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DB63A4412BE6088E00882670 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DB63A4432BE64D4300882670 /* FollowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowResponse.swift; sourceTree = "<group>"; };
@@ -484,6 +488,7 @@
 			isa = PBXGroup;
 			children = (
 				DB51669F2BF8689C00455F06 /* ChatListViewController.swift */,
+				DB5166A32BF8740E00455F06 /* ChatListView.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -756,6 +761,7 @@
 				DBB7C6842BDA3A6B00D3081A /* CALayer+Extension.swift */,
 				DBDD8AE02BDFF97F002ADA34 /* Reactive+Extension.swift */,
 				DB2B19812BEE840C00D5B687 /* Util.swift */,
+				DB5166A52BF8758100455F06 /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1019,6 +1025,7 @@
 				DB204D9E2BD2DDBB006340BE /* QuestionView.swift in Sources */,
 				DB4110102BD173860088679F /* MainRouter.swift in Sources */,
 				DBB7C6892BDAD82A00D3081A /* Formatter+Extension.swift in Sources */,
+				DB5166A62BF8758100455F06 /* UIView+Extension.swift in Sources */,
 				DB802F462BDBD78500DC670D /* UICollectionView+Extension.swift in Sources */,
 				DB204DE62BD56158006340BE /* UIImage+Extension.swift in Sources */,
 				DB208C312BE78C2A00C63962 /* BoardListCollectionViewCell.swift in Sources */,
@@ -1037,6 +1044,7 @@
 				DB41100B2BD160F80088679F /* BoardView.swift in Sources */,
 				DBCBAA292BC839EB006B40CA /* RefreshResponse.swift in Sources */,
 				DB2B19842BEE86AF00D5B687 /* SignUpThirdPartyViewModel.swift in Sources */,
+				DB5166A42BF8740E00455F06 /* ChatListView.swift in Sources */,
 				DB63A4492BE6B54400882670 /* FollowCoordinator.swift in Sources */,
 				DB51669E2BF8655300455F06 /* SocketIOManager.swift in Sources */,
 				DB2A784F2BF6359D0086C4FA /* ChatSendFilesRequest.swift in Sources */,

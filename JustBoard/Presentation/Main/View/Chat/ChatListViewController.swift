@@ -6,15 +6,34 @@
 //
 
 import UIKit
+import SwiftUI
+import SnapKit
 
 class ChatListViewController: RxBaseViewController {
     var parentCoordinator : ChatListCoordinator?
+    let contentViewController : UIHostingController<ChatListView>
+    
+    init(contentViewController: UIHostingController<ChatListView>) {
+        self.contentViewController = contentViewController
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func configureView() {
-        view.backgroundColor = .red
+    override func configureHierarchy() {
+        view.addSubview(contentViewController.view)
     }
+    
+    override func configureLayout() {
+        contentViewController.view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    override func configureView() {
+        super.configureView()
+        view.backgroundColor = DesignSystem.commonColorSet.white
+    }
+    
 }

@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct ChatListView: View {
+    
+    @ObservedObject private var viewModel : ChatListViewModel
+    
+    init(chatList: MyChatResponse) {
+        self.viewModel = ChatListViewModel(chatList: chatList)
+    }
+    
     var body: some View {
         VStack() {
             Text("메세지")
@@ -17,16 +24,15 @@ struct ChatListView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             List {
-                ForEach(0..<50) { _ in
-                    ChatListRow()
+                ForEach(viewModel.output.data) { chat in
+                    ChatListRow(chat: chat)
                         .listRowSeparator(.hidden)
                 }
             }
             .listStyle(.plain)
         }
+        .task {
+            viewModel.action(.viewOnAppear)
+        }
     }
-}
-
-#Preview {
-    ChatListView()
 }

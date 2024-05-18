@@ -69,6 +69,7 @@
 		DB5166A82BF8802700455F06 /* ChatListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5166A72BF8802700455F06 /* ChatListRow.swift */; };
 		DB5166AD2BF8888600455F06 /* CreateChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5166AC2BF8888600455F06 /* CreateChatResponse.swift */; };
 		DB5166AF2BF88B5100455F06 /* MyChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5166AE2BF88B5100455F06 /* MyChatResponse.swift */; };
+		DB5166B12BF894A400455F06 /* _ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5166B02BF894A400455F06 /* _ChatListViewModel.swift */; };
 		DB63A4402BE574B500882670 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A43F2BE574B500882670 /* ProfileView.swift */; };
 		DB63A4422BE6088E00882670 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A4412BE6088E00882670 /* ProfileViewModel.swift */; };
 		DB63A4442BE64D4300882670 /* FollowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63A4432BE64D4300882670 /* FollowResponse.swift */; };
@@ -229,6 +230,7 @@
 		DB5166A72BF8802700455F06 /* ChatListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListRow.swift; sourceTree = "<group>"; };
 		DB5166AC2BF8888600455F06 /* CreateChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChatResponse.swift; sourceTree = "<group>"; };
 		DB5166AE2BF88B5100455F06 /* MyChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatResponse.swift; sourceTree = "<group>"; };
+		DB5166B02BF894A400455F06 /* _ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _ChatListViewModel.swift; sourceTree = "<group>"; };
 		DB63A43F2BE574B500882670 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DB63A4412BE6088E00882670 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DB63A4432BE64D4300882670 /* FollowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowResponse.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 				DB63A4502BE6C10900882670 /* FollowViewModel.swift */,
 				DB208C2C2BE7867900C63962 /* BoardListViewModel.swift */,
 				DB2B19602BECB62B00D5B687 /* ProfileEditViewModel.swift */,
+				DB5166B02BF894A400455F06 /* _ChatListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1102,6 +1105,7 @@
 				DB2B195F2BECB4C600D5B687 /* ProfileEditView.swift in Sources */,
 				DB901C612BD58C7C003EEDC6 /* CompleteButton.swift in Sources */,
 				DBCBE3D42BCE6DB700B6DAC5 /* SignUpNicknameWithPhoneViewModel.swift in Sources */,
+				DB5166B12BF894A400455F06 /* _ChatListViewModel.swift in Sources */,
 				DBB7C67B2BD95D0A00D3081A /* BoardDetailViewModel.swift in Sources */,
 				DBB7C6622BD7B77800D3081A /* InquiryRequest.swift in Sources */,
 				DB63A44F2BE6B9AF00882670 /* FollowCollectionViewCell.swift in Sources */,

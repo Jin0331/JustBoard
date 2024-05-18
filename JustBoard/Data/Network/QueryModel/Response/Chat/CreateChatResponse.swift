@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct ChatResponse: Decodable {
+struct ChatResponse: Decodable, Identifiable {
+    var id = UUID()
     let roomID, createdAt, updatedAt: String
     let participants: [Sender]
     let lastChat: LastChat?

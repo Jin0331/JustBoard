@@ -19,8 +19,10 @@ final class ChatListCoordinator : Coordinator {
         self.navigationController = navigationController
     }
     
-    func start() {
-        let vc = ChatListViewController(contentViewController: UIHostingController(rootView: ChatListView()))
+    func start() { }
+    
+    func start(chatlist : MyChatResponse) {
+        let vc = ChatListViewController(contentViewController: UIHostingController(rootView: ChatListView(chatList: chatlist)))
         vc.parentCoordinator = self
         self.navigationController.pushViewController(vc, animated: true)
     }

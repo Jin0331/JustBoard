@@ -67,10 +67,10 @@ extension BoardMainCoordinator {
         childCoordinators.append(profileCoordinator)
     }
     
-    func toChatList() {
+    func toChatList(chatlist: MyChatResponse) {
         let chatListCoordinaotr = ChatListCoordinator(navigationController: navigationController)
         chatListCoordinaotr.parentBoardCoordinator = self
-        chatListCoordinaotr.start()
+        chatListCoordinaotr.start(chatlist: chatlist)
         childCoordinators.append(chatListCoordinaotr)
     }
     

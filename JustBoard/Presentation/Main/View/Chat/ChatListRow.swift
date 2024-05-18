@@ -11,6 +11,8 @@ import Kingfisher
 struct ChatListRow: View {
     
     let url = "https://picsum.photos/id/237/200/300"
+    let chat : ChatResponse
+    
     
     var body: some View {
         
@@ -19,22 +21,25 @@ struct ChatListRow: View {
                 .resizable()
                 .frame(width: 60, height: 60) //resize
                 .clipShape(.circle)
-            VStack(alignment:.leading) {
-                Text("양기웅")
+            VStack(alignment:.leading, spacing: 5) {
+                Text(chat.participants[1].nick)
                     .bold()
-                Text("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ")
-                    .lineLimit(0)
+                    .font(.title3)
+                
+                if let lastChat = chat.lastChat {
+                    Text(lastChat.content)
+                        .lineLimit(0)
+                }
             }
             Spacer()
             Text("24.01.01")
-                .font(.caption)
+                .font(.subheadline)
                 .bold()
-            Spacer()
         }
         
     }
 }
 
-#Preview {
-    ChatListRow()
-}
+//#Preview {
+//    ChatListRow()
+//}

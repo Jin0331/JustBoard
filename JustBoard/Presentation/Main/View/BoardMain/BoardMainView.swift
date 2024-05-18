@@ -17,6 +17,14 @@ final class BoardMainView: BaseView {
     let tabmanVC : TabmanViewController
     let tabmanUserVC : TabmanViewController
     
+    let menuBarButtonItem = UIBarButtonItem(image: DesignSystem.sfSymbol.list?.withRenderingMode(.alwaysOriginal)).then {
+        $0.tintColor = DesignSystem.commonColorSet.black
+    }
+    
+    let dmBarButtonItem = UIBarButtonItem(image: DesignSystem.sfSymbol.dm?.withRenderingMode(.alwaysOriginal)).then {
+        $0.tintColor = DesignSystem.commonColorSet.black
+    }
+    
     init(tabmanVC: TabmanViewController, tabmanUserVC: TabmanViewController) {
         self.tabmanVC = tabmanVC
         self.tabmanUserVC = tabmanUserVC

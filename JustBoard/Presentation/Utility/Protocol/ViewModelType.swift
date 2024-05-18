@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Combine
 
 protocol ViewModelType {
     var disposeBag : DisposeBag { get }
@@ -15,6 +16,20 @@ protocol ViewModelType {
     associatedtype Output
     func transform(input : Input) -> Output
 }
+
+
+protocol CombineViewModelType : AnyObject, ObservableObject {
+    associatedtype Input
+    associatedtype Output
+    
+    var cancellables : Set<AnyCancellable> {get set}
+    
+    var input : Input {get set}
+    var output : Output {get set}
+    
+    func transform()
+}
+
 
 //MARK: - User에서 사용되는 ViewModel 타입
 protocol UserViewModelType : ViewModelType {

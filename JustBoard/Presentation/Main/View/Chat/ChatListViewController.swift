@@ -8,6 +8,8 @@
 import UIKit
 import SwiftUI
 import SnapKit
+import RxSwift
+import RxViewController
 
 class ChatListViewController: RxBaseViewController {
     var parentCoordinator : ChatListCoordinator?
@@ -15,6 +17,22 @@ class ChatListViewController: RxBaseViewController {
     
     init(contentViewController: UIHostingController<ChatListView>) {
         self.contentViewController = contentViewController
+    }
+    
+    override func bind() {
+        rx.viewWillAppear
+            .flatMap { _ in
+                return NetworkManager.shared.myChatList()
+            }
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let myChatResponse):
+                    dump(myChatResponse)
+                case .failure(_):
+                    print("error")
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     override func configureHierarchy() {

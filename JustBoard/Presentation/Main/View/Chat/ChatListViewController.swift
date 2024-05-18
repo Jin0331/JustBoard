@@ -8,5 +8,13 @@
 import UIKit
 
 class ChatListViewController: RxBaseViewController {
-
+    var parentCoordinator : ChatListCoordinator?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func configureView() {
+        view.backgroundColor = .red
+    }
 }

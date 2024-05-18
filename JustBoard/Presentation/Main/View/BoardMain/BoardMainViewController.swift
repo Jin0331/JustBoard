@@ -78,9 +78,9 @@ extension BoardMainViewController : MenuViewControllerDelegate {
     }
     
     @objc private func dmBarButtonItemTapped() {
-        let containerView = MenuViewController()
-        containerView.sendDelegate = self
-        present(SideMenuNavigationController(rootViewController: containerView), animated: true)
+        
+        print(#function)
+        parentCoordinator?.toChatList()
     }
     
     func sendProfileViewController(userID: String, me: Bool) {

@@ -9,12 +9,21 @@ import SwiftUI
 
 struct ChatListView: View {
     var body: some View {
-        VStack {
-            Text("Chat list")
-                .frame(maxWidth: .infinity)
-            Spacer()
+        VStack() {
+            Text("메세지")
+                .bold()
+                .font(.title2)
+                .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            List {
+                ForEach(0..<50) { _ in
+                    ChatListRow()
+                        .listRowSeparator(.hidden)
+                }
+            }
+            .listStyle(.plain)
         }
-        .background(.red)
     }
 }
 

@@ -17,17 +17,13 @@ class ChatListViewController: RxBaseViewController {
         self.contentViewController = contentViewController
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func configureHierarchy() {
         view.addSubview(contentViewController.view)
     }
     
     override func configureLayout() {
         contentViewController.view.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     

@@ -63,10 +63,21 @@ extension BoardMainViewController : MenuViewControllerDelegate {
         let menuBarButtonItem = UIBarButtonItem(image: DesignSystem.sfSymbol.list?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(menuBarButtonItemTapped)).then {
             $0.tintColor = DesignSystem.commonColorSet.black
         }
-        navigationItem.setRightBarButton(menuBarButtonItem, animated: true)
+
+        let dmBarButtonItem = UIBarButtonItem(image: DesignSystem.sfSymbol.dm?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(dmBarButtonItemTapped)).then {
+            $0.tintColor = DesignSystem.commonColorSet.black
+        }
+        
+        navigationItem.rightBarButtonItems = [menuBarButtonItem, dmBarButtonItem]
     }
 
     @objc private func menuBarButtonItemTapped() {
+        let containerView = MenuViewController()
+        containerView.sendDelegate = self
+        present(SideMenuNavigationController(rootViewController: containerView), animated: true)
+    }
+    
+    @objc private func dmBarButtonItemTapped() {
         let containerView = MenuViewController()
         containerView.sendDelegate = self
         present(SideMenuNavigationController(rootViewController: containerView), animated: true)

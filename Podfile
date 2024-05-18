@@ -23,6 +23,7 @@ target 'JustBoard' do
   pod 'Tabman', '~> 3.2'
   pod 'SideMenu', '~> 6.0'
   pod 'MarqueeLabel'
+  pod 'Socket.IO-Client-Swift', '~> 16.1.0'
 end
 
 post_install do |installer|

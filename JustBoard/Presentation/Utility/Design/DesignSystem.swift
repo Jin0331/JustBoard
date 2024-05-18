@@ -42,6 +42,7 @@ enum DesignSystem {
         
         // Menu
         static let list = UIImage(systemName: "list.dash", withConfiguration:sfSymbolLargeConfig)
+        static let dm = UIImage(systemName: "paperplane", withConfiguration:sfSymbolLargeConfig)
         static let home = UIImage(systemName: "house", withConfiguration:sfSymbolSmallConfig)
         static let profile = UIImage(systemName: "person.crop.circle", withConfiguration:sfSymbolSmallConfig)
         static let latest = UIImage(systemName: "clock.arrow.circlepath", withConfiguration:sfSymbolSmallConfig)
@@ -59,7 +60,8 @@ enum DesignSystem {
     }
     
     enum defaultimage {
-        static let defaultProfile = "uploads/posts/defaultProfile@3x_1714675687120.jpg"
+        static let defaultProfile = "uploads/posts/defaultProfile@3x_1715865037034.jpg"
+//        static let defaultProfile = "uploads/posts/defaultProfile@3x_1714675687120.jpg" // 31222
         static let defaultProfileImage = UIImage(named: "defaultProfile")
         static let defaultProfileWithURl = URL(string:APIKey.baseURLWithVersion() + "/" + defaultProfile)!
     }

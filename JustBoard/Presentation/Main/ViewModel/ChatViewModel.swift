@@ -54,7 +54,7 @@ extension ChatViewModel {
         
         input.viewOnAppear
             .combineLatest(receivedChatData)
-            .map { return $1}
+            .map { return $1 }
             .sink { [weak self] chat in
                 guard let self = self else { return }
                 output.message.append(chat)
@@ -62,10 +62,21 @@ extension ChatViewModel {
             .store(in: &cancellables)
         
         input.sendMessage
-            .sink { newMessage in
-                print(newMessage, "받은 메세지✅")
+            .map {
+                return NetworkManager.shared.sendMessage(query: ChatSendRequest(content: $0, files: []), roomId: self.chat.roomID)
+            }
+            .switchToLatest()
+            .sink { result in
+                switch result {
+                case .finished:
+                    print("receive")
+                case .failure(let error):
+                    print("error ❗️", error)
+                }
+            } receiveValue: { chat in
+                print(chat)
             }
             .store(in: &cancellables)
-        
+
     }
 }

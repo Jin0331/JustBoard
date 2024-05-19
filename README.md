@@ -36,6 +36,8 @@
 * **실시간 게시판 / 유저 / 게시글 순위 조회**
   * 사용자의 활동 기반의 실시간 순위 파악
 
+* **실시간 채팅**
+  * 사용자간 실시간 1:1 채팅
 
 <br>
 
@@ -43,7 +45,7 @@
 
 * **프레임워크**
 
-  	***UIKit***
+  	***UIKit, SwiftUI***
 
 * **디자인패턴**
 
@@ -52,6 +54,12 @@
 * **라이브러리** - ***Cocoapods(Dependency manager)***
 
   ***RxSwift + RxCocoa +  RxDataSources*** - 반응형 UI 구성
+
+  ***Combine***
+
+  ***SocketIO***
+
+  ***Realm***
 
   ***Alamofire, Kinfisher*** - URLRequestConvertible 중심의 Router Pattern 적용 API 통신 및 RequestInterceptor를 통한 JWT 갱신
 

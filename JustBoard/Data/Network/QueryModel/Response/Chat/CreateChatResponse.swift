@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChatResponse: Decodable, Identifiable {
+struct ChatResponse: Decodable, Identifiable, Hashable {
     var id = UUID()
     let roomID, createdAt, updatedAt: String
     let participants: [Sender]
@@ -16,6 +16,14 @@ struct ChatResponse: Decodable, Identifiable {
     enum CodingKeys: String, CodingKey {
         case roomID = "room_id"
         case createdAt, updatedAt, participants, lastChat
+    }
+    
+    static func == (lhs: ChatResponse, rhs: ChatResponse) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 

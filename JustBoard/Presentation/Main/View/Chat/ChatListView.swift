@@ -16,23 +16,33 @@ struct ChatListView: View {
     }
     
     var body: some View {
-        VStack() {
-            Text("메세지")
-                .bold()
-                .font(.title2)
-                .padding()
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            List {
-                ForEach(viewModel.output.data) { chat in
-                    ChatListRow(chat: chat)
-                        .listRowSeparator(.hidden)
+        
+        NavigationStack {
+            VStack() {
+                Text("메세지")
+                    .bold()
+                    .font(.title2)
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                List {
+                    ForEach(viewModel.output.data) { chat in
+                        NavigationLink(value :chat) {
+                            ChatListRow(chat: chat)
+                                .listRowSeparator(.hidden)
+                        }
+                    }
                 }
+                .listStyle(.plain)
+                // value 값에 따라 모든 네비게이션의 다음 뷰 지정
+                .navigationDestination(for: ChatResponse.self, destination: { chat in
+                    ChatView(roomId: chat.roomID)
+                })
             }
-            .listStyle(.plain)
         }
+
         .task {
             viewModel.action(.viewOnAppear)
         }
     }
 }
+

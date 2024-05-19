@@ -10,6 +10,7 @@
 		323F2BDB410B7B9B5A6D6574 /* Pods_JustBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFDCECDD99415B51515857C6 /* Pods_JustBoard.framework */; };
 		DB0598B02BE31F9300AE0973 /* BoardSpecificCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0598AF2BE31F9300AE0973 /* BoardSpecificCoordinator.swift */; };
 		DB0598B22BE3456800AE0973 /* BoardDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0598B12BE3456800AE0973 /* BoardDetailCoordinator.swift */; };
+		DB07BA242BF8AE8000371705 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB07BA232BF8AE8000371705 /* ChatView.swift */; };
 		DB204D942BD29E5D006340BE /* UITabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D932BD29E5D006340BE /* UITabBarController+Extension.swift */; };
 		DB204D962BD29F0A006340BE /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D952BD29F0A006340BE /* MainTabBarController.swift */; };
 		DB204D982BD2A669006340BE /* QuestionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB204D972BD2A669006340BE /* QuestionCoordinator.swift */; };
@@ -170,6 +171,7 @@
 		CE70E4E40DA521BFE3917A88 /* Pods-YeogiApa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeogiApa.release.xcconfig"; path = "Target Support Files/Pods-YeogiApa/Pods-YeogiApa.release.xcconfig"; sourceTree = "<group>"; };
 		DB0598AF2BE31F9300AE0973 /* BoardSpecificCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSpecificCoordinator.swift; sourceTree = "<group>"; };
 		DB0598B12BE3456800AE0973 /* BoardDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailCoordinator.swift; sourceTree = "<group>"; };
+		DB07BA232BF8AE8000371705 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		DB204D932BD29E5D006340BE /* UITabBarController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extension.swift"; sourceTree = "<group>"; };
 		DB204D952BD29F0A006340BE /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		DB204D972BD2A669006340BE /* QuestionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCoordinator.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 			children = (
 				DB51669F2BF8689C00455F06 /* ChatListViewController.swift */,
 				DB5166A32BF8740E00455F06 /* ChatListView.swift */,
+				DB07BA232BF8AE8000371705 /* ChatView.swift */,
 				DB5166A72BF8802700455F06 /* ChatListRow.swift */,
 			);
 			path = Chat;
@@ -1085,6 +1088,7 @@
 				DB63A4492BE6B54400882670 /* FollowCoordinator.swift in Sources */,
 				DB51669E2BF8655300455F06 /* SocketIOManager.swift in Sources */,
 				DB2A784F2BF6359D0086C4FA /* ChatSendFilesRequest.swift in Sources */,
+				DB07BA242BF8AE8000371705 /* ChatView.swift in Sources */,
 				DB743A9E2BE548E800BBAE5F /* ProfileViewController.swift in Sources */,
 				DBCBAA2D2BC84842006B40CA /* ProfileResponse.swift in Sources */,
 				DBCBE3D02BCE28E800B6DAC5 /* EmailLoginCoordinator.swift in Sources */,

@@ -10,19 +10,15 @@ import SocketIO
 import Combine
 
 final class SocketIOManager {
-    static let shared = SocketIOManager()
-    
     var manager : SocketManager!
     var socket : SocketIOClient!
-    
     let baseURL = URL(string: APIKey.baseURLWithVersion())!
-    let roomID = "/chats-664601e52b0224d656149cb1"
+    lazy var receivedChatData = PassthroughSubject<LastChat, Never>()
+    var roomID : String
     
-    var receivedChatData = PassthroughSubject<LastChat, Never>()
-    
-    private init () {
+    init(roomID : String) {
         
-        print(#function, "init")
+        self.roomID = roomID
         
         manager = SocketManager(socketURL: baseURL, config: [.log(true), .compress])
         socket = manager.socket(forNamespace: roomID)
@@ -36,14 +32,16 @@ final class SocketIOManager {
         }
         
         // [Any] > Data > Struct
-        socket.on("chat") { dataArray, ack in
+        socket.on("chat") { [weak self] dataArray, ack in
+            guard let self = self else { return }
+            
             if let data = dataArray.first {
                 
                 do {
                     let result = try JSONSerialization.data(withJSONObject: data)
                     let decodedData = try JSONDecoder().decode(LastChat.self, from: result)
                     
-                    self.receivedChatData.send(decodedData)
+                    receivedChatData.send(decodedData)
                     
                 } catch {
                     print(error)

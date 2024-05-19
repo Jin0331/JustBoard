@@ -28,14 +28,14 @@ struct ChatListView: View {
                     ForEach(viewModel.output.data) { chat in
                         NavigationLink(value :chat) {
                             ChatListRow(chat: chat)
-                                .listRowSeparator(.hidden)
                         }
+                        .listRowSeparator(.hidden)
                     }
                 }
                 .listStyle(.plain)
                 // value 값에 따라 모든 네비게이션의 다음 뷰 지정
                 .navigationDestination(for: ChatResponse.self, destination: { chat in
-                    ChatView(roomId: chat.roomID)
+                    ChatView(chat: chat)
                 })
             }
         }

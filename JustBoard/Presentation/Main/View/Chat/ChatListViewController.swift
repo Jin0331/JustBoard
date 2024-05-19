@@ -33,7 +33,7 @@ final class ChatListViewController: RxBaseViewController {
     }
     
     override func configureNavigation() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
+//        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
 }

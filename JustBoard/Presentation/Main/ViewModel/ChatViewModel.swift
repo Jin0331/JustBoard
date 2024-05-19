@@ -10,12 +10,14 @@ import Combine
 
 // SockerIOManager > ReceivedChatData > subscribe > view
 final class ChatViewModel : CombineViewModelType {
-    var cancellable = Set<AnyCancellable>()
+    var cancellables = Set<AnyCancellable>()
     
     let chat : ChatResponse
+    let receivedChatData : PassthroughSubject<LastChat, Never>
     
-    init(chat : ChatResponse) {
+    init(chat : ChatResponse, receivedChatData: PassthroughSubject<LastChat, Never>) {
         self.chat = chat
+        self.receivedChatData = receivedChatData
         transform()
     }
     
@@ -40,32 +42,19 @@ extension ChatViewModel {
     }
     
     struct Output {
-        var message : [ChatResponse] = []
+        var message : [LastChat] = []
     }
     
     func transform() {
         
         input.viewOnAppear
-            .combineLatest(SocketIOManager.shared.receivedChatData)
+            .combineLatest(receivedChatData)
             .map { return $1}
-            .sink { chat in
+            .sink { [weak self] chat in
+                guard let self = self else { return }
                 output.message.append(chat)
             }
+            .store(in: &cancellables)
         
     }
 }
-
-
-/*
- var cancellable = Set<AnyCancellable>()
- 
- @Published var message : [RealChat] = []
- 
- init() {
-     SocketIOManager.shared.receivedChatData
-         .sink { chat in
-             self.message.append(chat)
-         }
-         .store(in: &cancellable)
- }
- */

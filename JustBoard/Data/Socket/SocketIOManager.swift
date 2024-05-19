@@ -10,18 +10,18 @@ import SocketIO
 import Combine
 
 final class SocketIOManager {
-    var manager : SocketManager!
-    var socket : SocketIOClient!
+    var manager : SocketManager
+    var socket : SocketIOClient
     let baseURL = URL(string: APIKey.baseURLWithVersion())!
-    lazy var receivedChatData = PassthroughSubject<LastChat, Never>()
+    var receivedChatData = PassthroughSubject<LastChat, Never>()
     var roomID : String
     
     init(roomID : String) {
         
-        self.roomID = roomID
+        self.roomID = "/chats-" + roomID
         
         manager = SocketManager(socketURL: baseURL, config: [.log(true), .compress])
-        socket = manager.socket(forNamespace: roomID)
+        socket = manager.socket(forNamespace: self.roomID)
         
         socket.on(clientEvent: .connect) { data, ack in
             print("socket connected", data, ack)
@@ -47,9 +47,6 @@ final class SocketIOManager {
                     print(error)
                 }
             }
-            
-            
-            
         }
     }
     

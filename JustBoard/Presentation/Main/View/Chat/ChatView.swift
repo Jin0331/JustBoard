@@ -10,6 +10,7 @@ import SwiftUI
 struct ChatView: View {
     
     @ObservedObject private var viewModel : ChatViewModel
+    @State private var newMessage = ""
     private var socketManager : SocketIOManager
     
     init(chat: ChatResponse) {
@@ -21,7 +22,6 @@ struct ChatView: View {
     var body: some View {
         VStack { // ScrollView, GeometryReader
                  // SwiftUit List Scroll Bottom
-            
             List(viewModel.output.message, id: \.self) { chat in
                 Text(chat.content)
                     .padding()
@@ -31,10 +31,22 @@ struct ChatView: View {
             Button("소켓 해제") {
                 socketManager.leaveConnection()
             }
+            
+            HStack {
+                TextField("메세지를 입력해주세요", text: $newMessage)
+                    .padding()
+                Button(action: {
+                    viewModel.action(.sendMessage(message: newMessage))
+                }, label: {
+                    Image(systemName: "paperplane")
+                })
+                .padding()
+            }
+            
         }
         .task {
             socketManager.establishConnection()
-            viewModel.input.viewOnAppear.send(())
+            viewModel.action(.viewOnAppear)
         }
     }
 }

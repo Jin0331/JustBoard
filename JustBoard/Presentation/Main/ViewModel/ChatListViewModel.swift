@@ -31,7 +31,6 @@ final class ChatListViewModel : CombineViewModelType {
     }
     
     var input = Input()
-    
     @Published var output = Output()
 }
 

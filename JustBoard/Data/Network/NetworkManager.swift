@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import Combine
 import Alamofire
 
 final class NetworkManager  {
@@ -60,6 +61,20 @@ final class NetworkManager  {
             return Disposables.create()
         }
     }
+    
+    private func mainMakeRequestCombine<T:Decodable>(router: URLRequestConvertible) -> AnyPublisher<T, AFError> {
+        
+        let urlRequest = try! router.asURLRequest()
+        return AF.request(urlRequest, interceptor: AuthManager())
+            .validate(statusCode: 200..<300)
+            .publishDecodable(type: T.self)
+            .value()
+            .mapError { (afError : AFError) in
+                return afError
+            }
+            .eraseToAnyPublisher()
+    }
+    
     
     //MARK: - User
     func createJoin(query: JoinRequest) -> Single<Result<JoinResponse, AFError>> {
@@ -198,5 +213,9 @@ final class NetworkManager  {
     //MARK: - Chat
     func myChatList() -> Single<Result<MyChatResponse, AFError>> {
         return mainMakeRequest(router: ChatRouter.myList)
+    }
+    
+    func sendMessage(query : ChatSendRequest, roomId: String) -> AnyPublisher<LastChat, AFError> {
+        return mainMakeRequestCombine(router: ChatRouter.send(query: query, roomId: roomId))
     }
 }

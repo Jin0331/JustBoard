@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChatResponse: Decodable, Identifiable {
+struct ChatResponse: Decodable, Identifiable, Hashable {
     var id = UUID()
     let roomID, createdAt, updatedAt: String
     let participants: [Sender]
@@ -17,10 +17,19 @@ struct ChatResponse: Decodable, Identifiable {
         case roomID = "room_id"
         case createdAt, updatedAt, participants, lastChat
     }
+    
+    static func == (lhs: ChatResponse, rhs: ChatResponse) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
 
 // MARK: - LastChat
-struct LastChat: Decodable {
+struct LastChat: Decodable, Hashable {
+    var id = UUID()
     let chatID, roomID, content, createdAt: String
     let sender: Sender
     let files: [String]
@@ -39,6 +48,14 @@ struct LastChat: Decodable {
         self.createdAt = try container.decode(String.self, forKey: .createdAt)
         self.sender = try container.decode(Sender.self, forKey: .sender)
         self.files = (try? container.decode([String].self, forKey: .files)) ?? []
+    }
+    
+    static func == (lhs: LastChat, rhs: LastChat) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 

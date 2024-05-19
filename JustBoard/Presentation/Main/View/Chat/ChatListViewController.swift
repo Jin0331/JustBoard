@@ -32,4 +32,8 @@ final class ChatListViewController: RxBaseViewController {
         view.backgroundColor = DesignSystem.commonColorSet.white
     }
     
+    override func configureNavigation() {
+//        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
 }

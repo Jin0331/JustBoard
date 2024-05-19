@@ -13,9 +13,7 @@ struct ChatListRow: View {
     let url = "https://picsum.photos/id/237/200/300"
     let chat : ChatResponse
     
-    
     var body: some View {
-        
         HStack {
             KFImage.url(URL(string: url)!)
                 .resizable()
@@ -32,14 +30,10 @@ struct ChatListRow: View {
                 }
             }
             Spacer()
-            Text("24.01.01")
+            Text(chat.updatedAt)
                 .font(.subheadline)
                 .bold()
         }
         
     }
 }
-
-//#Preview {
-//    ChatListRow()
-//}

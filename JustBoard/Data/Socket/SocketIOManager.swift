@@ -9,21 +9,16 @@ import Foundation
 import SocketIO
 import Combine
 
-struct RealChat : Decodable, Hashable {
-    let content : String
-    let createdAt: String
-}
-
 final class SocketIOManager {
     static let shared = SocketIOManager()
     
     var manager : SocketManager!
     var socket : SocketIOClient!
     
-    let baseURL = URL(string: "http://lslp.sesac.kr:8244/v1")!
+    let baseURL = URL(string: APIKey.baseURLWithVersion())!
     let roomID = "/chats-664601e52b0224d656149cb1"
     
-    var receivedChatData = PassthroughSubject<RealChat, Never>()
+    var receivedChatData = PassthroughSubject<LastChat, Never>()
     
     private init () {
         
@@ -46,7 +41,7 @@ final class SocketIOManager {
                 
                 do {
                     let result = try JSONSerialization.data(withJSONObject: data)
-                    let decodedData = try JSONDecoder().decode(RealChat.self, from: result)
+                    let decodedData = try JSONDecoder().decode(LastChat.self, from: result)
                     
                     self.receivedChatData.send(decodedData)
                     

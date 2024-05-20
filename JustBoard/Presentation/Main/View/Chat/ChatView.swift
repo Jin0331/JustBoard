@@ -13,7 +13,6 @@ struct ChatView: View {
     @ObservedObject private var viewModel : ChatViewModel
     @ObservedResults(Chat.self, sortDescriptor: SortDescriptor(keyPath: "createdAt", ascending: true)) var chatTable
     @State private var newMessage = ""
-    @State var scrollBottom = false
     
     init(chat: ChatResponse) {
         self.viewModel = ChatViewModel(chat: chat)
@@ -46,16 +45,13 @@ struct ChatView: View {
                 }
                 
             }
-            .onChange(of: scrollBottom) { newValue in
+            .onChange(of: viewModel.output.scrollToBottom) { newValue in
                 if newValue == true  {
-                    DispatchQueue.main.async {
-                        proxy.scrollTo("BOTTOM_ID", anchor: .bottom)
-                    }
-                    scrollBottom = false
+                    DispatchQueue.main.async { proxy.scrollTo("BOTTOM_ID", anchor: .bottom) }
+                    viewModel.action(.scrollToBottom)
                 }
             }
             .onAppear {
-                DispatchQueue.main.async { self.scrollBottom = true }
                 viewModel.action(.viewOnAppear)
                 viewModel.action(.socketConnection)
                 viewModel.action(.socketDataReceive)

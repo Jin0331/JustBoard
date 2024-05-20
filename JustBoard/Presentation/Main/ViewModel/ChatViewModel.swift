@@ -32,6 +32,7 @@ final class ChatViewModel : CombineViewModelType {
         case socketDisconnection
         case socketDataReceive
         case sendMessage(message : String)
+        case scrollToBottom
     }
     
     func action(_ action : Action) {
@@ -47,6 +48,9 @@ final class ChatViewModel : CombineViewModelType {
             input.socketDataReceive.send(())
         case .sendMessage(message: let message):
             input.sendMessage.send(message)
+        case .scrollToBottom:
+            input.scrollToBottom.send(())
+            
         }
             
     }
@@ -60,9 +64,12 @@ extension ChatViewModel {
         var viewOnAppear = PassthroughSubject<Void, Never>()
         var socketDataReceive = PassthroughSubject<Void, Never>()
         var sendMessage = PassthroughSubject<String, Never>()
+        var scrollToBottom = PassthroughSubject<Void, Never>()
     }
     
-    struct Output { }
+    struct Output {
+        var scrollToBottom : Bool = false
+    }
     
     func transform() {
         
@@ -83,7 +90,9 @@ extension ChatViewModel {
                 case .failure(let error):
                     print("error ❗️", error)
                 }
-            } receiveValue: { (chatList : ChatListResponse) in
+            } receiveValue: { [weak self] (chatList : ChatListResponse) in
+                
+                guard let self = self else { return }
                 
                 if !chatList.data.isEmpty {
                     chatList.data.forEach { [weak self] chat in
@@ -93,6 +102,7 @@ extension ChatViewModel {
                 } else {
                     print("최신 채팅 없음 ✅")
                 }
+                output.scrollToBottom = true
             }
             .store(in: &cancellables)
         
@@ -122,9 +132,16 @@ extension ChatViewModel {
                     print("error ❗️", error)
                 }
             } receiveValue: {[weak self] _ in
-//                guard let self = self else { return }
+                guard let self = self else { return }
+                output.scrollToBottom = true
             }
             .store(in: &cancellables)
-
+        
+        input.scrollToBottom
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                output.scrollToBottom = false
+            }
+            .store(in: &cancellables)
     }
 }

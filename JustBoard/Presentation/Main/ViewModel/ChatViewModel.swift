@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import RealmSwift
 
+
 // SockerIOManager > ReceivedChatData > subscribe > view
 final class ChatViewModel : CombineViewModelType {
     var cancellables = Set<AnyCancellable>()
@@ -121,7 +122,7 @@ extension ChatViewModel {
                     print("error ❗️", error)
                 }
             } receiveValue: {[weak self] _ in
-                guard let self = self else { return }
+//                guard let self = self else { return }
             }
             .store(in: &cancellables)
 

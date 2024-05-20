@@ -13,41 +13,71 @@ struct ChatView: View {
     @ObservedObject private var viewModel : ChatViewModel
     @ObservedResults(Chat.self, sortDescriptor: SortDescriptor(keyPath: "createdAt", ascending: true)) var chatTable
     @State private var newMessage = ""
+    @State var scrollBottom = false
     
     init(chat: ChatResponse) {
         self.viewModel = ChatViewModel(chat: chat)
     }
     
     var body: some View {
-        VStack { // ScrollView, GeometryReader
-                 // SwiftUit List Scroll Bottom
-            List(chatTable) { chat in
+        ScrollViewReader { proxy in
+            VStack { // ScrollView, GeometryReader
+                // SwiftUit List Scroll Bottom
+                List(chatTable) { chat in
+                    
+                    let isMe = UserDefaultManager.shared.userId! == chat.userID ? true : false
+                    ChatRow(chat: chat, isMe: isMe)
+                        .listRowSeparator(.hidden)
+                        .id(chat._id)
+                    
+                    if chat._id == chatTable.last?._id { emptyView() }
+                }
+                .listStyle(.plain)
                 
-                let isMe = UserDefaultManager.shared.userId! == chat.userID ? true : false
-                ChatRow(chat: chat, isMe: isMe)
-                    .listRowSeparator(.hidden)
-            }
-            .listStyle(.plain)
-            
-            HStack {
-                TextField("메세지를 입력해주세요", text: $newMessage)
+                HStack {
+                    TextField("메세지를 입력해주세요", text: $newMessage)
+                        .padding()
+                    Button(action: {
+                        viewModel.action(.sendMessage(message: newMessage))
+                    }, label: {
+                        Image(systemName: "paperplane")
+                    })
                     .padding()
-                Button(action: {
-                    viewModel.action(.sendMessage(message: newMessage))
-                }, label: {
-                    Image(systemName: "paperplane")
-                })
-                .padding()
+                }
+                
             }
-            
+            .onChange(of: scrollBottom) { newValue in
+                if newValue == true  {
+                    DispatchQueue.main.async {
+                        proxy.scrollTo("BOTTOM_ID", anchor: .bottom)
+                    }
+                    scrollBottom = false
+                }
+            }
+            .onAppear {
+                DispatchQueue.main.async { self.scrollBottom = true }
+                viewModel.action(.viewOnAppear)
+                viewModel.action(.socketConnection)
+                viewModel.action(.socketDataReceive)
+            }
+            .onDisappear {
+                viewModel.action(.socketDisconnection)
+            }
         }
-        .onAppear {
-            viewModel.action(.viewOnAppear)
-            viewModel.action(.socketConnection)
-            viewModel.action(.socketDataReceive)
+        
+    }
+}
+
+extension ChatView {
+    fileprivate func emptyView() -> some View {
+        return VStack {
+            Text("")
         }
-        .onDisappear {
-            viewModel.action(.socketDisconnection)
-        }
+        .padding(.top, 0)
+        .padding(.bottom, 0)
+        .frame(height: 0.0)
+        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+        .listRowSeparator(.hidden)
+        .id("BOTTOM_ID")
     }
 }

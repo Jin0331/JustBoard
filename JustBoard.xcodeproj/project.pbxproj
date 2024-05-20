@@ -494,18 +494,11 @@
 		DB410FF72BD0CFF60088679F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				DBDD8AFD2BE0ED05002ADA34 /* BoardMainViewModel.swift */,
-				DB204D9B2BD2A8C9006340BE /* BoardViewModel.swift */,
-				DB2B19BE2BF247BD00D5B687 /* BoardRankViewModel.swift */,
-				DB797BB52BE3CC2600E490C3 /* BoardUserViewModel.swift */,
-				DBB7C67A2BD95D0A00D3081A /* BoardDetailViewModel.swift */,
-				DB204DA32BD422A7006340BE /* QuestionViewModel.swift */,
-				DB63A4412BE6088E00882670 /* ProfileViewModel.swift */,
-				DB63A4502BE6C10900882670 /* FollowViewModel.swift */,
-				DB208C2C2BE7867900C63962 /* BoardListViewModel.swift */,
-				DB2B19602BECB62B00D5B687 /* ProfileEditViewModel.swift */,
-				DB5166B02BF894A400455F06 /* ChatListViewModel.swift */,
-				DB07BA252BFA387D00371705 /* ChatViewModel.swift */,
+				DB8E15BD2BFBCD0D009DB692 /* Chat */,
+				DB8E15BC2BFBCD06009DB692 /* Question */,
+				DB8E15BB2BFBCCF7009DB692 /* Follow */,
+				DB8E15BA2BFBCCE7009DB692 /* Profile */,
+				DB8E15B92BFBCCC5009DB692 /* Board */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -523,16 +516,11 @@
 			isa = PBXGroup;
 			children = (
 				DB410FF82BD0D00E0088679F /* MainTabbarCoordinator.swift */,
-				DB4110042BD15B300088679F /* BoardMainCoordinator.swift */,
-				DB0598AF2BE31F9300AE0973 /* BoardSpecificCoordinator.swift */,
-				DB797BB72BE3CD7B00E490C3 /* BoardUserCoordinator.swift */,
-				DB0598B12BE3456800AE0973 /* BoardDetailCoordinator.swift */,
-				DB4110062BD15B3B0088679F /* BoardListCoordinator.swift */,
-				DB204D972BD2A669006340BE /* QuestionCoordinator.swift */,
-				DB743A9B2BE544FE00BBAE5F /* ProfileCoordinator.swift */,
-				DB63A4482BE6B54400882670 /* FollowCoordinator.swift */,
-				DB5166A12BF8713B00455F06 /* ChatListCoordinator.swift */,
-				DB8E15B72BFBC5CE009DB692 /* ChatCoordinator.swift */,
+				DB8E15C22BFBCD68009DB692 /* Chat */,
+				DB8E15C12BFBCD5F009DB692 /* Question */,
+				DB8E15C02BFBCD54009DB692 /* Follow */,
+				DB8E15BF2BFBCD3E009DB692 /* Profile */,
+				DB8E15BE2BFBCD2E009DB692 /* Board */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -609,6 +597,98 @@
 				DB2B190A2BEBE68900D5B687 /* ProfileEditViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		DB8E15B92BFBCCC5009DB692 /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				DB208C2C2BE7867900C63962 /* BoardListViewModel.swift */,
+				DBDD8AFD2BE0ED05002ADA34 /* BoardMainViewModel.swift */,
+				DB204D9B2BD2A8C9006340BE /* BoardViewModel.swift */,
+				DB2B19BE2BF247BD00D5B687 /* BoardRankViewModel.swift */,
+				DB797BB52BE3CC2600E490C3 /* BoardUserViewModel.swift */,
+				DBB7C67A2BD95D0A00D3081A /* BoardDetailViewModel.swift */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
+		DB8E15BA2BFBCCE7009DB692 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DB63A4412BE6088E00882670 /* ProfileViewModel.swift */,
+				DB2B19602BECB62B00D5B687 /* ProfileEditViewModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		DB8E15BB2BFBCCF7009DB692 /* Follow */ = {
+			isa = PBXGroup;
+			children = (
+				DB63A4502BE6C10900882670 /* FollowViewModel.swift */,
+			);
+			path = Follow;
+			sourceTree = "<group>";
+		};
+		DB8E15BC2BFBCD06009DB692 /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				DB204DA32BD422A7006340BE /* QuestionViewModel.swift */,
+			);
+			path = Question;
+			sourceTree = "<group>";
+		};
+		DB8E15BD2BFBCD0D009DB692 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				DB5166B02BF894A400455F06 /* ChatListViewModel.swift */,
+				DB07BA252BFA387D00371705 /* ChatViewModel.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		DB8E15BE2BFBCD2E009DB692 /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				DB4110042BD15B300088679F /* BoardMainCoordinator.swift */,
+				DB0598AF2BE31F9300AE0973 /* BoardSpecificCoordinator.swift */,
+				DB797BB72BE3CD7B00E490C3 /* BoardUserCoordinator.swift */,
+				DB0598B12BE3456800AE0973 /* BoardDetailCoordinator.swift */,
+				DB4110062BD15B3B0088679F /* BoardListCoordinator.swift */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
+		DB8E15BF2BFBCD3E009DB692 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DB743A9B2BE544FE00BBAE5F /* ProfileCoordinator.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		DB8E15C02BFBCD54009DB692 /* Follow */ = {
+			isa = PBXGroup;
+			children = (
+				DB63A4482BE6B54400882670 /* FollowCoordinator.swift */,
+			);
+			path = Follow;
+			sourceTree = "<group>";
+		};
+		DB8E15C12BFBCD5F009DB692 /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				DB204D972BD2A669006340BE /* QuestionCoordinator.swift */,
+			);
+			path = Question;
+			sourceTree = "<group>";
+		};
+		DB8E15C22BFBCD68009DB692 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				DB5166A12BF8713B00455F06 /* ChatListCoordinator.swift */,
+				DB8E15B72BFBC5CE009DB692 /* ChatCoordinator.swift */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		DB901C5D2BD58312003EEDC6 /* QuestionSubView */ = {

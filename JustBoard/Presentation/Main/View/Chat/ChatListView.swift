@@ -10,36 +10,30 @@ import SwiftUI
 struct ChatListView: View {
     
     @ObservedObject private var viewModel : ChatListViewModel
-    
+    var parentCoordinator : ChatListCoordinator?
     init(chatList: MyChatResponse) {
         self.viewModel = ChatListViewModel(chatList: chatList)
     }
     
     var body: some View {
-        
-        NavigationStack {
-            VStack() {
-                Text("메세지")
-                    .bold()
-                    .font(.title2)
-                    .padding()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                List {
-                    ForEach(viewModel.output.data) { chat in
-                        NavigationLink(value :chat) {
-                            ChatListRow(chat: chat)
+        VStack() {
+            Text("메세지")
+                .bold()
+                .font(.title2)
+                .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
+            List {
+                ForEach(viewModel.output.data) { chat in
+                    ChatListRow(chat: chat)
+                        .onTapGesture {
+                            parentCoordinator?.toChat(chat: chat)
                         }
-                        .listRowSeparator(.hidden)
-                    }
                 }
-                .listStyle(.plain)
-                // value 값에 따라 모든 네비게이션의 다음 뷰 지정
-                .navigationDestination(for: ChatResponse.self, destination: { chat in
-                    ChatView(chat: chat)
-                })
+                .listRowSeparator(.hidden)
             }
+            .listStyle(.plain)
         }
-
+        
         .task {
             viewModel.action(.viewOnAppear)
         }

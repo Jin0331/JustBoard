@@ -44,7 +44,7 @@ final class ProfileEditViewModel : MainViewModelType {
             }
             .bind(with: self) { owner, result in
                 switch result {
-                case .success(let response):
+                case .success(_):
                     withdrawComplete.onNext(())
                 case .failure(let error):
                     print(error)

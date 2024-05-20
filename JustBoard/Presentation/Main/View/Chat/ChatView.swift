@@ -6,47 +6,76 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct ChatView: View {
     
     @ObservedObject private var viewModel : ChatViewModel
+    @ObservedResults(Chat.self, sortDescriptor: SortDescriptor(keyPath: "createdAt", ascending: true)) var chatTable
     @State private var newMessage = ""
-    private var socketManager : SocketIOManager
+    var parentCoordinator : ChatCoordinator?
     
     init(chat: ChatResponse) {
-        self.socketManager = SocketIOManager(roomID: chat.roomID)
-        self.viewModel = ChatViewModel(chat: chat, 
-                                       receivedChatData : socketManager.receivedChatData)
+        self.viewModel = ChatViewModel(chat: chat)
     }
     
     var body: some View {
-        VStack { // ScrollView, GeometryReader
-                 // SwiftUit List Scroll Bottom
-            List(viewModel.output.message, id: \.self) { chat in
-                Text(chat.content)
+        ScrollViewReader { proxy in
+            VStack { // ScrollView, GeometryReader
+                // SwiftUit List Scroll Bottom
+                List(chatTable) { chat in
+                    
+                    let isMe = UserDefaultManager.shared.userId! == chat.userID ? true : false
+                    ChatRow(chat: chat, isMe: isMe)
+                        .listRowSeparator(.hidden)
+                        .id(chat._id)
+                    
+                    if chat._id == chatTable.last?._id { emptyView() }
+                }
+                .listStyle(.plain)
+                
+                HStack {
+                    TextField("메세지를 입력해주세요", text: $newMessage)
+                        .padding()
+                    Button(action: {
+                        viewModel.action(.sendMessage(message: newMessage))
+                    }, label: {
+                        Image(systemName: "paperplane")
+                            .foregroundStyle(DesignSystem.swiftUIColorSet.lightBlack)
+                    })
                     .padding()
-                    .background(Color.gray.opacity(0.5))
+                }
+                
             }
-            
-            Button("소켓 해제") {
-                socketManager.leaveConnection()
+            .onChange(of: viewModel.output.scrollToBottom) { newValue in
+                if newValue == true  {
+                    DispatchQueue.main.async { proxy.scrollTo("BOTTOM_ID", anchor: .bottom) }
+                    viewModel.action(.scrollToBottom)
+                }
             }
-            
-            HStack {
-                TextField("메세지를 입력해주세요", text: $newMessage)
-                    .padding()
-                Button(action: {
-                    viewModel.action(.sendMessage(message: newMessage))
-                }, label: {
-                    Image(systemName: "paperplane")
-                })
-                .padding()
+            .onAppear {
+                viewModel.action(.viewOnAppear)
+                viewModel.action(.socketConnection)
+                viewModel.action(.socketDataReceive)
             }
-            
+            .onDisappear {
+                viewModel.action(.socketDisconnection)
+            }
         }
-        .task {
-            socketManager.establishConnection()
-            viewModel.action(.viewOnAppear)
+        
+    }
+}
+
+extension ChatView {
+    fileprivate func emptyView() -> some View {
+        return VStack {
+            Text("")
         }
+        .padding(.top, 0)
+        .padding(.bottom, 0)
+        .frame(height: 0.0)
+        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+        .listRowSeparator(.hidden)
+        .id("BOTTOM_ID")
     }
 }

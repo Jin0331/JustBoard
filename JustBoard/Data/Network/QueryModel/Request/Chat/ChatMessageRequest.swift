@@ -1,5 +1,5 @@
 //
-//  ChatListEquest.swift
+//  ChatMessageRequest.swift
 //  JustBoard
 //
 //  Created by JinwooLee on 5/16/24.
@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct ChatListEquest {
+struct ChatMessageRequest : Encodable {
     let cursor_date : String
 }

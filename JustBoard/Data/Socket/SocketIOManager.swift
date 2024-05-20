@@ -20,9 +20,11 @@ final class SocketIOManager {
         
         self.roomID = "/chats-" + roomID
         
-        manager = SocketManager(socketURL: baseURL, config: [.log(true), .compress])
+        manager = SocketManager(socketURL: baseURL, config: [.log(false), .compress])
         socket = manager.socket(forNamespace: self.roomID)
-        
+    }
+    
+    func receiveData() {
         socket.on(clientEvent: .connect) { data, ack in
             print("socket connected", data, ack)
         }
@@ -49,6 +51,7 @@ final class SocketIOManager {
             }
         }
     }
+    
     
     func establishConnection() {
         socket.connect()

@@ -8,6 +8,11 @@ PODS:
     - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
   - Pageboy (4.2.0)
+  - Realm (10.45.3):
+    - Realm/Headers (= 10.45.3)
+  - Realm/Headers (10.45.3)
+  - RealmSwift (10.45.3):
+    - Realm (= 10.45.3)
   - Reusable (4.1.2):
     - Reusable/Storyboard (= 4.1.2)
     - Reusable/View (= 4.1.2)
@@ -44,6 +49,7 @@ DEPENDENCIES:
   - Kingfisher (~> 7.0)
   - MarqueeLabel
   - NVActivityIndicatorView
+  - RealmSwift (~> 10.45.0)
   - Reusable
   - RxCocoa (= 6.6.0)
   - RxDataSources (~> 5.0)
@@ -67,6 +73,8 @@ SPEC REPOS:
     - MarqueeLabel
     - NVActivityIndicatorView
     - Pageboy
+    - Realm
+    - RealmSwift
     - Reusable
     - RxCocoa
     - RxDataSources
@@ -91,6 +99,8 @@ SPEC CHECKSUMS:
   MarqueeLabel: 4b46d196abd253448e830cbd976f9eacc3af0849
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   Pageboy: 7f7886f61c76633df635861bf7839caf2cabdb3e
+  Realm: b277b843c7505c1e30e3a70322a24a09283e62bb
+  RealmSwift: f6690053e81733801e6619eb5b39993ab76f7050
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
   RxCocoa: 44a80de90e25b739b5aeaae3c8c371a32e3343cc
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
@@ -107,6 +117,6 @@ SPEC CHECKSUMS:
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   Toast-Swift: dd369e68ee529f542c65bd0d0c6c50cd743cf6f2
 
-PODFILE CHECKSUM: ea6dae83dd6d608cf3ba3f9bba325b1f2b68f76c
+PODFILE CHECKSUM: aad32ba871771be7541b503d1128c9fe3e112795
 
 COCOAPODS: 1.15.2

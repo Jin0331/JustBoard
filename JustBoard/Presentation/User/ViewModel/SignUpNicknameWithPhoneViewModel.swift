@@ -67,7 +67,7 @@ class SignUpNicknameWithPhoneViewModel : UserViewModelType {
             }
             .subscribe(with: self) { owner, result in
                 switch result {
-                case .success(let joinResponse):
+                case .success(_):
                     completeJoined.onNext(())
                 case .failure(let error):
                     print(error)

@@ -11,7 +11,7 @@ import Alamofire
 enum ChatRouter {
     case create(query : ChatRequest)
     case myList
-    case list(query : ChatListEquest, roomId : String)
+    case messageList(query : ChatMessageRequest, roomId : String)
     case send(query : ChatSendRequest, roomId : String)
     case sendFiles(query : ChatSendFilesRequest, roomId : String)
 }
@@ -25,7 +25,7 @@ extension ChatRouter : TargetType {
         switch self {
         case .create, .send, .sendFiles :
             return .post
-        case .myList, .list:
+        case .myList, .messageList:
             return .get
         }
     }
@@ -34,7 +34,7 @@ extension ChatRouter : TargetType {
         switch self {
         case .create, .myList:
             return "/chats"
-        case .list(query: _, roomId: let roomId), .send(query: _, roomId: let roomId):
+        case .messageList(query: _, roomId: let roomId), .send(query: _, roomId: let roomId):
             return "/chats/" + roomId
         case .sendFiles(query: _, roomId: let roomId):
             return "/chats/" + roomId + "/files"
@@ -51,7 +51,7 @@ extension ChatRouter : TargetType {
                 HTTPHeader.contentType.rawValue : HTTPHeader.json.rawValue,
                 HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue
             ]
-        case .myList, .list:
+        case .myList, .messageList:
             return [
                 HTTPHeader.authorization.rawValue : token,
                 HTTPHeader.sesacKey.rawValue : APIKey.secretKey.rawValue
@@ -67,8 +67,8 @@ extension ChatRouter : TargetType {
     
     var parameter: Parameters? {
         switch self {
-        case .list(query: let query, roomId: _):
-            return [QueryString.chatCursor.rawValue : query]
+        case .messageList(query: let query, roomId: _):
+            return [QueryString.chatCursor.rawValue : query.cursor_date]
         default :
             return nil
         }

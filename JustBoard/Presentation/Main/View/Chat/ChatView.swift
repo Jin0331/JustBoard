@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct ChatView: View {
     
     @ObservedObject private var viewModel : ChatViewModel
+    @ObservedResults(Chat.self) var chatTable
     @State private var newMessage = ""
-    
     
     init(chat: ChatResponse) {
         self.viewModel = ChatViewModel(chat: chat)
@@ -20,7 +21,7 @@ struct ChatView: View {
     var body: some View {
         VStack { // ScrollView, GeometryReader
                  // SwiftUit List Scroll Bottom
-            List(viewModel.output.message, id: \.self) { chat in
+            List(chatTable) { chat in
                 Text(chat.content)
                     .padding()
                     .background(Color.gray.opacity(0.5))
@@ -37,7 +38,8 @@ struct ChatView: View {
             }
             
         }
-        .task {
+        .onAppear {
+            viewModel.action(.viewOnAppear)
             viewModel.action(.socketConnection)
             viewModel.action(.socketDataReceive)
         }

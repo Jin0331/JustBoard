@@ -8,6 +8,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import Kingfisher
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.resignOnTouchOutside = true
         
         IQKeyboardManager.shared.disabledDistanceHandlingClasses = [BoardDetailViewController.self, ChatListViewController.self]
+        
+        //MARK: - Realm
+        print(Realm.Configuration().fileURL)
         
         return true
     }

@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-    func toDate(dateFormat format : String) -> Date? { //"yyyy-MM-dd HH:mm:ss Z"
+    func toDate(dateFormat format : String) -> Date? { // "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", 2024-05-20T02:40:47.476Z
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         dateFormatter.timeZone = TimeZone.autoupdatingCurrent

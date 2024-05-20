@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import RealmSwift
 
 // SockerIOManager > ReceivedChatData > subscribe > view
 final class ChatViewModel : CombineViewModelType {
@@ -15,6 +16,7 @@ final class ChatViewModel : CombineViewModelType {
     private let chat : ChatResponse
     private var socketManager : SocketIOManager
     private let receivedChatData : PassthroughSubject<LastChat, Never>
+    @ObservedResults(Chat.self, sortDescriptor: SortDescriptor(keyPath: "createdAt", ascending: true)) var chatTable
     
     init(chat : ChatResponse) {
         self.chat = chat
@@ -24,6 +26,7 @@ final class ChatViewModel : CombineViewModelType {
     }
     
     enum Action {
+        case viewOnAppear
         case socketConnection
         case socketDisconnection
         case socketDataReceive
@@ -32,6 +35,8 @@ final class ChatViewModel : CombineViewModelType {
     
     func action(_ action : Action) {
         switch action {
+        case .viewOnAppear:
+            input.viewOnAppear.send(())
         case .socketConnection:
             socketManager.establishConnection()
             socketManager.receiveData()
@@ -51,23 +56,44 @@ final class ChatViewModel : CombineViewModelType {
 
 extension ChatViewModel {
     struct Input {
+        var viewOnAppear = PassthroughSubject<Void, Never>()
         var socketDataReceive = PassthroughSubject<Void, Never>()
         var sendMessage = PassthroughSubject<String, Never>()
     }
     
-    struct Output {
-        var message : [LastChat] = []
-    }
+    struct Output { }
     
     func transform() {
         
-        // 초기 데이터 불러오기
-        input.socketDataReceive // 이름 변경 필요, viewOnAppear 시점이 아닌, DB 조회 -> 가장 마지막 cursor(Date) -> 서버 조회 -> 새로운 데이터가 있다면 갱신 없으면 그냥 -> Socker 연결 순으로 되어야 함
+        // 채팅내역 조회 -> Realm Table에서 가장 마지막 날짜 cursor
+        input.viewOnAppear
+            .map {
+                print(self.chatTable.last?.createdAt, "🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲")
+                return NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: ""), roomId: self.chat.roomID)
+            }
+            .switchToLatest()
+            .sink { result in
+                switch result {
+                case .finished:
+                    print("finished")
+                case .failure(let error):
+                    print("error ❗️", error)
+                }
+            } receiveValue: { chatList in
+                print(chatList)
+            }
+            .store(in: &cancellables)
+
+        
+        
+        input.socketDataReceive
             .combineLatest(receivedChatData) // 소켓이 연결되고 실시간 채팅값을 가져오는 부분
             .map { return $1 }
             .sink { [weak self] chat in
                 guard let self = self else { return }
-                output.message.append(chat)
+                
+                $chatTable.append(Chat(roomID: chat.roomID, chatID: chat.chatID, userID: chat.sender.userID, nick: chat.sender.nick, profile: chat.sender.profileImage, content: chat.content, createAt: chat.createdAt.toDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")!))
+                
             }
             .store(in: &cancellables)
         
@@ -80,13 +106,12 @@ extension ChatViewModel {
             .sink { result in
                 switch result {
                 case .finished:
-                    print("receive")
+                    print("finished")
                 case .failure(let error):
                     print("error ❗️", error)
                 }
-            } receiveValue: {[weak self] chat in
+            } receiveValue: {[weak self] _ in
                 guard let self = self else { return }
-//                output.message.append(chat) // 어차피 소켓에서 실시간 채팅이 되므로, 해당부분에서 Realm에 데이터를 저장하여야 할 듯
             }
             .store(in: &cancellables)
 

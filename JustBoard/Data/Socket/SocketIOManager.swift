@@ -20,7 +20,7 @@ final class SocketIOManager {
         
         self.roomID = "/chats-" + roomID
         
-        manager = SocketManager(socketURL: baseURL, config: [.log(true), .compress])
+        manager = SocketManager(socketURL: baseURL, config: [.log(false), .compress])
         socket = manager.socket(forNamespace: self.roomID)
     }
     

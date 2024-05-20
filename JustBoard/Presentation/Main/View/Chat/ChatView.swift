@@ -22,10 +22,13 @@ struct ChatView: View {
         VStack { // ScrollView, GeometryReader
                  // SwiftUit List Scroll Bottom
             List(chatTable) { chat in
-                Text(chat.content)
-                    .padding()
-                    .background(Color.gray.opacity(0.5))
+                
+                let isMe = UserDefaultManager.shared.userId! == chat.userID ? true : false
+                ChatRow(chat: chat, isMe: isMe)
+                    .listRowSeparator(.hidden)
             }
+            .listStyle(.plain)
+            
             HStack {
                 TextField("메세지를 입력해주세요", text: $newMessage)
                     .padding()

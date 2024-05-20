@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 enum DesignSystem {
     enum cornerRadius {
@@ -19,6 +20,14 @@ enum DesignSystem {
         static let gray = UIColor.pillGray
         static let lightGray = UIColor.pillLightGray
         static let white = UIColor.pillWhite
+    }
+    
+    enum swiftUIColorSet {
+        static let black = Color("pillBlack")
+        static let lightBlack = Color("pillLightBlack")
+        static let white = Color("pillWhite")
+        static let gray = Color("pillGray")
+        static let lightGray = Color("pillLightGray")
     }
     
     enum buttonColorSet {

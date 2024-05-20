@@ -68,8 +68,11 @@ extension ChatViewModel {
         // 채팅내역 조회 -> Realm Table에서 가장 마지막 날짜 cursor
         input.viewOnAppear
             .map {
-                print(self.chatTable.last?.createdAt, "🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲")
-                return NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: ""), roomId: self.chat.roomID)
+                if let cursurDate = self.chatTable.last?.createdAt.toString(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") {
+                    return NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: cursurDate), roomId: self.chat.roomID)
+                } else {
+                    return NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: ""), roomId: self.chat.roomID)
+                }
             }
             .switchToLatest()
             .sink { result in
@@ -79,11 +82,18 @@ extension ChatViewModel {
                 case .failure(let error):
                     print("error ❗️", error)
                 }
-            } receiveValue: { chatList in
-                print(chatList)
+            } receiveValue: { (chatList : ChatListResponse) in
+                
+                if !chatList.data.isEmpty {
+                    chatList.data.forEach { [weak self] chat in
+                        guard let self = self else { return }
+                        $chatTable.append(Chat(roomID: chat.roomID, chatID: chat.chatID, userID: chat.sender.userID, nick: chat.sender.nick, profile: chat.sender.profileImage, content: chat.content, createAt: chat.createdAt.toDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")!))
+                    }
+                } else {
+                    print("최신 채팅 없음 ✅")
+                }
             }
             .store(in: &cancellables)
-
         
         
         input.socketDataReceive

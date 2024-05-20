@@ -11,7 +11,7 @@ import RealmSwift
 struct ChatView: View {
     
     @ObservedObject private var viewModel : ChatViewModel
-    @ObservedResults(Chat.self) var chatTable
+    @ObservedResults(Chat.self, sortDescriptor: SortDescriptor(keyPath: "createdAt", ascending: true)) var chatTable
     @State private var newMessage = ""
     
     init(chat: ChatResponse) {

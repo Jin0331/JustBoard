@@ -25,7 +25,7 @@ extension String {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         
         if let date = dateFormatter.date(from: self) {
-            let today = Date()
+            _ = Date()
             let calendar = Calendar.current
             
             if calendar.isDateInToday(date) {
@@ -38,5 +38,19 @@ extension String {
         }
         
         return ""
+    }
+}
+
+extension Date {
+    func toString( dateFormat format: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.locale = Locale.current
+        
+        let current = Calendar.current
+        
+//        return current.isDateInToday(self) ? dateFormatter.string(from: self)  + " (오늘)" : dateFormatter.string(from: self)
+        return dateFormatter.string(from: self)
     }
 }

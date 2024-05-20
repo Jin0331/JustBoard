@@ -24,6 +24,7 @@ target 'JustBoard' do
   pod 'SideMenu', '~> 6.0'
   pod 'MarqueeLabel'
   pod 'Socket.IO-Client-Swift', '~> 16.1.0'
+  pod 'RealmSwift', '~> 10.45.0'
 end
 
 post_install do |installer|

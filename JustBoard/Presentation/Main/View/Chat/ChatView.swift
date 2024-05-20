@@ -11,12 +11,10 @@ struct ChatView: View {
     
     @ObservedObject private var viewModel : ChatViewModel
     @State private var newMessage = ""
-    private var socketManager : SocketIOManager
+    
     
     init(chat: ChatResponse) {
-        self.socketManager = SocketIOManager(roomID: chat.roomID)
-        self.viewModel = ChatViewModel(chat: chat, 
-                                       receivedChatData : socketManager.receivedChatData)
+        self.viewModel = ChatViewModel(chat: chat)
     }
     
     var body: some View {
@@ -27,11 +25,6 @@ struct ChatView: View {
                     .padding()
                     .background(Color.gray.opacity(0.5))
             }
-            
-            Button("소켓 해제") {
-                socketManager.leaveConnection()
-            }
-            
             HStack {
                 TextField("메세지를 입력해주세요", text: $newMessage)
                     .padding()
@@ -45,8 +38,11 @@ struct ChatView: View {
             
         }
         .task {
-            socketManager.establishConnection()
-            viewModel.action(.viewOnAppear)
+            viewModel.action(.socketConnection)
+            viewModel.action(.socketDataReceive)
+        }
+        .onDisappear {
+            viewModel.action(.socketDisconnection)
         }
     }
 }

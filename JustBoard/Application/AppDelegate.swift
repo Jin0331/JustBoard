@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.resignOnTouchOutside = true
         
-        IQKeyboardManager.shared.disabledDistanceHandlingClasses = [BoardDetailViewController.self]
+        IQKeyboardManager.shared.disabledDistanceHandlingClasses = [BoardDetailViewController.self, ChatListViewController.self]
         
         return true
     }

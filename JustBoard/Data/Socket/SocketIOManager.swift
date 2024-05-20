@@ -22,7 +22,9 @@ final class SocketIOManager {
         
         manager = SocketManager(socketURL: baseURL, config: [.log(true), .compress])
         socket = manager.socket(forNamespace: self.roomID)
-        
+    }
+    
+    func receiveData() {
         socket.on(clientEvent: .connect) { data, ack in
             print("socket connected", data, ack)
         }
@@ -49,6 +51,7 @@ final class SocketIOManager {
             }
         }
     }
+    
     
     func establishConnection() {
         socket.connect()

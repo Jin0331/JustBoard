@@ -19,9 +19,9 @@ struct ChatRow: View {
             if isMe {
                 Spacer()
             } else {
-                let url = "https://picsum.photos/id/237/200/300"
-                KFImage.url(URL(string: url)!)
+                KFImage.url(chat.profileImageToUrl)
                     .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 40, height: 40) //resize
                     .clipShape(.circle)
             }

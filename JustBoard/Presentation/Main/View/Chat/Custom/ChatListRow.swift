@@ -9,22 +9,24 @@ import SwiftUI
 import Kingfisher
 
 struct ChatListRow: View {
-    
-    let url = "https://picsum.photos/id/237/200/300"
     let chat : ChatResponse
     
     var body: some View {
         HStack {
-            KFImage.url(URL(string: url)!)
+            
+            let myId = UserDefaultManager.shared.userId
+            // oppenet profile
+            let opponentProfile = chat.participants[0].userID == myId ? chat.participants[1].profileImageToUrl : chat.participants[0].profileImageToUrl
+            let opponentNickname = chat.participants[0].userID == myId ? chat.participants[1].nick : chat.participants[0].nick
+            
+            KFImage.url(opponentProfile)
+                .requestModifier(AuthManager.kingfisherAuth())
                 .resizable()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: 60, height: 60) //resize
                 .clipShape(.circle)
             VStack(alignment:.leading, spacing: 5) {
-                
-                let myId = UserDefaultManager.shared.userId
-                let oppentNickname = chat.participants[0].userID == myId ? chat.participants[1].nick : chat.participants[0].nick
-                
-                Text(oppentNickname)
+                Text(opponentNickname)
                     .bold()
                     .font(.title3)
                 

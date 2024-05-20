@@ -13,6 +13,7 @@ struct ChatView: View {
     @ObservedObject private var viewModel : ChatViewModel
     @ObservedResults(Chat.self, sortDescriptor: SortDescriptor(keyPath: "createdAt", ascending: true)) var chatTable
     @State private var newMessage = ""
+    var parentCoordinator : ChatCoordinator?
     
     init(chat: ChatResponse) {
         self.viewModel = ChatViewModel(chat: chat)
@@ -40,6 +41,7 @@ struct ChatView: View {
                         viewModel.action(.sendMessage(message: newMessage))
                     }, label: {
                         Image(systemName: "paperplane")
+                            .foregroundStyle(DesignSystem.swiftUIColorSet.lightBlack)
                     })
                     .padding()
                 }

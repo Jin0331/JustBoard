@@ -115,6 +115,8 @@ extension ChatViewModel {
                 
                 $chatTable.append(Chat(roomID: chat.roomID, chatID: chat.chatID, userID: chat.sender.userID, nick: chat.sender.nick, profile: chat.sender.profileImage, content: chat.content, createAt: chat.createdAt.toDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")!))
                 
+                output.scrollToBottom = true
+                
             }
             .store(in: &cancellables)
         

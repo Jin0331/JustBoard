@@ -22,9 +22,19 @@ final class ChatListCoordinator : Coordinator {
     func start() { }
     
     func start(chatlist : MyChatResponse) {
-        let vc = ChatListViewController(contentViewController: UIHostingController(rootView: ChatListView(chatList: chatlist)))
-        vc.parentCoordinator = self
+        
+        var childView = ChatListView(chatList: chatlist)
+        childView.parentCoordinator = self
+        let vc = ChatListViewController(contentViewController: UIHostingController(rootView: childView))
         self.navigationController.pushViewController(vc, animated: true)
     }
-    
+}
+
+extension ChatListCoordinator {
+    func toChat(chat : ChatResponse) {
+        let chatCoordinator = ChatCoordinator(navigationController: navigationController)
+        chatCoordinator.parentChatListCoordinator = self
+        chatCoordinator.start(chat: chat)
+        childCoordinators.append(chatCoordinator)
+    }
 }

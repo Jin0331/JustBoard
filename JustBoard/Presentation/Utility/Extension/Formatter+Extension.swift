@@ -47,10 +47,9 @@ extension Date {
         dateFormatter.dateFormat = format
         dateFormatter.timeZone = TimeZone.autoupdatingCurrent
         dateFormatter.locale = Locale.current
-        
-        let current = Calendar.current
-        
+//        let current = Calendar.current
 //        return current.isDateInToday(self) ? dateFormatter.string(from: self)  + " (오늘)" : dateFormatter.string(from: self)
+        
         return dateFormatter.string(from: self)
     }
 }

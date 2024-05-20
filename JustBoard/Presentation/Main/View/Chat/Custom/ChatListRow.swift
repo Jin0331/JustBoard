@@ -20,7 +20,11 @@ struct ChatListRow: View {
                 .frame(width: 60, height: 60) //resize
                 .clipShape(.circle)
             VStack(alignment:.leading, spacing: 5) {
-                Text(chat.participants[1].nick)
+                
+                let myId = UserDefaultManager.shared.userId
+                let oppentNickname = chat.participants[0].userID == myId ? chat.participants[1].nick : chat.participants[0].nick
+                
+                Text(oppentNickname)
                     .bold()
                     .font(.title3)
                 
@@ -30,7 +34,8 @@ struct ChatListRow: View {
                 }
             }
             Spacer()
-            Text(chat.updatedAt)
+            Text(chat.updatedAt.toDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")!
+                .toString(dateFormat: "yy.MM.dd HH:mm"))
                 .font(.subheadline)
                 .bold()
         }

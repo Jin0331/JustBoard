@@ -1,19 +1,21 @@
 //
-//  ChatListViewController.swift
+//  ChatViewController.swift
 //  JustBoard
 //
-//  Created by JinwooLee on 5/18/24.
+//  Created by JinwooLee on 5/21/24.
 //
 
 import UIKit
 import SwiftUI
 import SnapKit
 
-final class ChatListViewController: RxBaseViewController {
-    let contentViewController : UIHostingController<ChatListView>
+final class ChatViewController: RxBaseViewController {
+    let contentViewController : UIHostingController<ChatView>
+    let navigationTitle : String
     
-    init(contentViewController: UIHostingController<ChatListView>) {
+    init(contentViewController: UIHostingController<ChatView>, navigationTitle : String) {
         self.contentViewController = contentViewController
+        self.navigationTitle = navigationTitle
     }
     
     override func configureHierarchy() {
@@ -30,5 +32,9 @@ final class ChatListViewController: RxBaseViewController {
         super.configureView()
         view.backgroundColor = DesignSystem.commonColorSet.white
         tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func configureNavigation() {
+        navigationItem.title = navigationTitle
     }
 }

@@ -37,6 +37,7 @@ final class ProfileViewModel : MainViewModelType {
         let followStatus : BehaviorSubject<Bool>
         let followerCountButton : PublishSubject<ProfileResponse>
         let followingCountButton : PublishSubject<ProfileResponse>
+        let chatResponse : PublishSubject<ChatResponse>
     }
     
     func transform(input: Input) -> Output {
@@ -46,6 +47,7 @@ final class ProfileViewModel : MainViewModelType {
         let followStatus = BehaviorSubject<Bool>(value: false)
         let followerCountButton = PublishSubject<ProfileResponse>()
         let followingCountButton = PublishSubject<ProfileResponse>()
+        let chatResponse = PublishSubject<ChatResponse>()
         
         input.viewWillAppear
             .bind(with: self) { owner, _ in
@@ -93,6 +95,7 @@ final class ProfileViewModel : MainViewModelType {
             .disposed(by: disposeBag)
         
         //MARK: - DM Button
+        
         input.dmButton
             .withLatestFrom(userID)
             .flatMap { userID in
@@ -101,7 +104,7 @@ final class ProfileViewModel : MainViewModelType {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let response):
-                    print(response)
+                    chatResponse.onNext(response)
                 case .failure(let error):
                     print(error)
                 }
@@ -168,7 +171,8 @@ final class ProfileViewModel : MainViewModelType {
             userProfile:userProfile,
             followStatus: followStatus,
             followerCountButton: followerCountButton,
-            followingCountButton: followingCountButton
+            followingCountButton: followingCountButton,
+            chatResponse: chatResponse
         )
     }
     

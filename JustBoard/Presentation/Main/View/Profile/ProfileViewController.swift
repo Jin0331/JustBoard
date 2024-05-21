@@ -52,6 +52,13 @@ final class ProfileViewController: RxBaseViewController {
                 owner.parentCoordinator?.toProfileEdit(profileResponse)
             }
             .disposed(by: disposeBag)
+        
+        output.chatResponse
+            .bind(with: self) { owner, chatResponse in
+                owner.parentCoordinator?.toChat(chat: chatResponse)
+            }
+            .disposed(by: disposeBag)
+        
         output.followerCountButton
             .bind(with: self) { owner, profileResponse in
                 owner.parentCoordinator?.toFollow(profileResponse, owner.me, 0)

@@ -34,6 +34,7 @@ final class ProfileViewController: RxBaseViewController {
             viewWillAppear: rx.viewWillAppear,
             profileEditButton: baseView.profileEditButton.rx.tap,
             followButton: baseView.followButton.rx.tap,
+            dmButton: baseView.dmButton.rx.tap,
             followerCountButton: baseView.followerCountButton.rx.tap,
             followingCountButton: baseView.followingCountButton.rx.tap
         )

@@ -25,6 +25,7 @@ final class ProfileViewModel : MainViewModelType {
         let viewWillAppear : ControlEvent<Bool>
         let profileEditButton : ControlEvent<Void>
         let followButton : ControlEvent<Void>
+        let dmButton : ControlEvent<Void>
         let followerCountButton : ControlEvent<Void>
         let followingCountButton : ControlEvent<Void>
     }
@@ -90,6 +91,23 @@ final class ProfileViewModel : MainViewModelType {
                 }
             }
             .disposed(by: disposeBag)
+        
+        //MARK: - DM Button
+        input.dmButton
+            .withLatestFrom(userID)
+            .flatMap { userID in
+                return NetworkManager.shared.createChat(query: ChatRequest(opponent_id: userID))
+            }
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let response):
+                    print(response)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .disposed(by: disposeBag)
+        
         
         // Follow 화면전환
         input.followerCountButton

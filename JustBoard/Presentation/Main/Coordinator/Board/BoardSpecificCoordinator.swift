@@ -76,4 +76,11 @@ extension BoardSpecificCoordinator {
         profileCoordinator.start(userID: userID, me: me, defaultPage: defaultPage)
         childCoordinators.append(profileCoordinator)
     }
+    
+    func toChat(chat : ChatResponse) {
+        let chatCoordinator = ChatCoordinator(navigationController: navigationController)
+        chatCoordinator.parentBoardSpecificCoordinator = self
+        chatCoordinator.start(chat: chat)
+        childCoordinators.append(chatCoordinator)
+    }
 }

@@ -17,6 +17,7 @@ struct ChatView: View {
     
     init(chat: ChatResponse) {
         self.viewModel = ChatViewModel(chat: chat)
+        _chatTable.filter = NSPredicate(format: "roomID == %@", chat.roomID)
     }
     
     var body: some View {

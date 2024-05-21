@@ -152,11 +152,8 @@ extension BoardViewController : MenuViewControllerDelegate {
 
 extension BoardViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        if bestBoard {
-            return configureContextMenu(index: indexPath)
-        } else {
-            return nil
-        }
+
+        return configureContextMenu(index: indexPath)
     }
     
     func configureContextMenu(index: IndexPath) -> UIContextMenuConfiguration {
@@ -168,16 +165,29 @@ extension BoardViewController: UICollectionViewDelegate{
             let me = cell.creator.userID == UserDefaultManager.shared.userId
 
             let profile = UIAction(title: "'" + cell.creator.nick + "' 프로필 조회하기", image: DesignSystem.tabbarImage.second, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
+                self.parentCoordinator?.toProfile(userID: cell.creator.userID, me: me, defaultPage: 0)
                 self.parentMainCoordinator?.toProfile(userID: cell.creator.userID, me: me, defaultPage: 0)
             }
             
             menuItems.append(profile)
             
-            let board = UIAction(title: "'" + cell.productID + "' 게시판 조회하기", image: DesignSystem.sfSymbol.doc, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
-                self.parentMainCoordinator?.toSpecificBoard(cell.productID)
+            let dm = UIAction(title: "'" + cell.creator.nick + "'님과 대화하기", image: DesignSystem.sfSymbol.dm, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
+                
+                NetworkManager.shared.createChatCompletion(query: ChatRequest(opponent_id: cell.creator.userID)) { chat in
+                    self.parentCoordinator?.toChat(chat: chat)
+                    self.parentMainCoordinator?.toChat(chat: chat)
+                }
             }
             
-            menuItems.append(board)
+            menuItems.append(dm)
+            
+            if bestBoard {
+                let board = UIAction(title: "'" + cell.productID + "' 게시판 조회하기", image: DesignSystem.sfSymbol.doc, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
+                    self.parentMainCoordinator?.toSpecificBoard(cell.productID)
+                }
+                
+                menuItems.append(board)
+            }
             
             return UIMenu(title: "탐색", image: nil, identifier: nil, options: UIMenu.Options.displayInline, children: menuItems)
         }

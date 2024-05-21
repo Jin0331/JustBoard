@@ -75,6 +75,26 @@ final class NetworkManager  {
             .eraseToAnyPublisher()
     }
     
+    private func mainMakeRequestCompletion<T:Decodable>(router: URLRequestConvertible, completion : @escaping (Result<T, AFError>) -> Void) {
+    
+        do {
+            let urlRequest = try router.asURLRequest()
+            
+            AF.request(urlRequest, interceptor: AuthManager())
+                .validate(statusCode: 200..<300)
+                .responseDecodable(of: T.self) { response in
+                    switch response.result {
+                    case .success(let data):
+                        completion(.success(data))
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
+        } catch {
+            completion(.failure(error as! AFError))
+        }
+    }
+    
     
     //MARK: - User
     func createJoin(query: JoinRequest) -> Single<Result<JoinResponse, AFError>> {
@@ -213,6 +233,17 @@ final class NetworkManager  {
     //MARK: - Chat
     func createChat(query : ChatRequest) -> Single<Result<ChatResponse, AFError>> {
         return mainMakeRequest(router: ChatRouter.create(query: query))
+    }
+    
+    func createChatCompletion(query : ChatRequest, completion : @escaping ((ChatResponse) -> Void)){
+        mainMakeRequestCompletion(router: ChatRouter.create(query: query)) { (result: Result<ChatResponse, AFError>) in
+            switch result {
+            case .success(let chatResponse):
+                completion(chatResponse)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     func myChatList() -> Single<Result<MyChatResponse, AFError>> {

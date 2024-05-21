@@ -119,7 +119,16 @@ extension BoardRankViewController: UICollectionViewDelegate{
                 self.parentCoordinator?.toProfile(userID: cell.userRank.userId, me: me, defaultPage: 0)
             }
             
+            let dm = UIAction(title: "'" + cell.userRank.nickName + "'님과 대화하기", image: DesignSystem.sfSymbol.dm, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
+                
+                NetworkManager.shared.createChatCompletion(query: ChatRequest(opponent_id: cell.userRank.userId)) { chat in
+                    self.parentCoordinator?.toChat(chat: chat)
+                }
+            }
+            
             menuItems.append(profile)
+            menuItems.append(dm)
+            
             return UIMenu(title: "탐색", image: nil, identifier: nil, options: UIMenu.Options.displayInline, children: menuItems)
         }
         

@@ -84,6 +84,13 @@ extension BoardMainCoordinator {
 
 extension BoardMainCoordinator {
     
+    func toChat(chat : ChatResponse) {
+        let chatCoordinator = ChatCoordinator(navigationController: navigationController)
+        chatCoordinator.parentMainCoordinator = self
+        chatCoordinator.start(chat: chat)
+        childCoordinators.append(chatCoordinator)
+    }
+    
     private func boardChildViewController() -> Array<RxBaseViewController> {
         
         let category = BestCategory.allCases

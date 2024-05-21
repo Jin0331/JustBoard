@@ -53,6 +53,13 @@ extension ProfileCoordinator {
         childCoordinators.append(followCoordinator)
     }
     
+    func toChat(chat : ChatResponse) {
+        let chatCoordinator = ChatCoordinator(navigationController: navigationController)
+        chatCoordinator.parentProfileCoordinator = self
+        chatCoordinator.start(chat: chat)
+        childCoordinators.append(chatCoordinator)
+    }
+    
     private func profileChildViewController(userId : String) -> Array<RxBaseViewController> {
         
         let category = ProfilePostCategory.allCases

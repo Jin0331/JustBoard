@@ -13,6 +13,7 @@ final class ChatCoordinator : Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var parentChatListCoordinator : ChatListCoordinator?
+    var parentProfileCoordinator : ProfileCoordinator?
     var type: CoordinatorType { .tab }
     
     init(navigationController: UINavigationController) {

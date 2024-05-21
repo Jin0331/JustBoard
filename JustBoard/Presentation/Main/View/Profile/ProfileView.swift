@@ -63,9 +63,10 @@ final class ProfileView: BaseView {
     
     let profileEditButton = CompleteButton(title: "프로필 수정", image: nil, fontSize: 16, disable: false)
     let followButton = CompleteButton(title: "팔로우", image: nil, fontSize: 16, disable: false)
+    let dmButton = CompleteButton(title: "메세지", image: nil, fontSize: 16, disable: false)
     
     override func configureHierarchy() {
-        [profileImage, author, profileEditButton, countStackView, followButton, tabmanViewController.view].forEach { addSubview($0)}
+        [profileImage, author, profileEditButton, countStackView, followButton, dmButton, tabmanViewController.view].forEach { addSubview($0)}
         
         [postCountLabel, followerCountButton, followingCountButton].forEach { countStackView.addArrangedSubview($0) }
     }
@@ -102,6 +103,12 @@ final class ProfileView: BaseView {
                 make.leading.equalTo(profileImage.snp.trailing).offset(10)
                 make.height.equalTo(40)
                 make.width.equalTo(90)
+            }
+            
+            dmButton.snp.makeConstraints { make in
+                make.centerY.equalTo(followButton)
+                make.leading.equalTo(followButton.snp.trailing).offset(10)
+                make.size.equalTo(followButton)
             }
         }
         

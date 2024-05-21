@@ -34,6 +34,7 @@ final class ProfileViewController: RxBaseViewController {
             viewWillAppear: rx.viewWillAppear,
             profileEditButton: baseView.profileEditButton.rx.tap,
             followButton: baseView.followButton.rx.tap,
+            dmButton: baseView.dmButton.rx.tap,
             followerCountButton: baseView.followerCountButton.rx.tap,
             followingCountButton: baseView.followingCountButton.rx.tap
         )
@@ -51,6 +52,13 @@ final class ProfileViewController: RxBaseViewController {
                 owner.parentCoordinator?.toProfileEdit(profileResponse)
             }
             .disposed(by: disposeBag)
+        
+        output.chatResponse
+            .bind(with: self) { owner, chatResponse in
+                owner.parentCoordinator?.toChat(chat: chatResponse)
+            }
+            .disposed(by: disposeBag)
+        
         output.followerCountButton
             .bind(with: self) { owner, profileResponse in
                 owner.parentCoordinator?.toFollow(profileResponse, owner.me, 0)

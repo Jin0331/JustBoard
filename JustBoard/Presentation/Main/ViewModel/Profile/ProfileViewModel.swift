@@ -25,6 +25,7 @@ final class ProfileViewModel : MainViewModelType {
         let viewWillAppear : ControlEvent<Bool>
         let profileEditButton : ControlEvent<Void>
         let followButton : ControlEvent<Void>
+        let dmButton : ControlEvent<Void>
         let followerCountButton : ControlEvent<Void>
         let followingCountButton : ControlEvent<Void>
     }
@@ -36,6 +37,7 @@ final class ProfileViewModel : MainViewModelType {
         let followStatus : BehaviorSubject<Bool>
         let followerCountButton : PublishSubject<ProfileResponse>
         let followingCountButton : PublishSubject<ProfileResponse>
+        let chatResponse : PublishSubject<ChatResponse>
     }
     
     func transform(input: Input) -> Output {
@@ -45,6 +47,7 @@ final class ProfileViewModel : MainViewModelType {
         let followStatus = BehaviorSubject<Bool>(value: false)
         let followerCountButton = PublishSubject<ProfileResponse>()
         let followingCountButton = PublishSubject<ProfileResponse>()
+        let chatResponse = PublishSubject<ChatResponse>()
         
         input.viewWillAppear
             .bind(with: self) { owner, _ in
@@ -90,6 +93,24 @@ final class ProfileViewModel : MainViewModelType {
                 }
             }
             .disposed(by: disposeBag)
+        
+        //MARK: - DM Button
+        
+        input.dmButton
+            .withLatestFrom(userID)
+            .flatMap { userID in
+                return NetworkManager.shared.createChat(query: ChatRequest(opponent_id: userID))
+            }
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let response):
+                    chatResponse.onNext(response)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .disposed(by: disposeBag)
+        
         
         // Follow 화면전환
         input.followerCountButton
@@ -150,7 +171,8 @@ final class ProfileViewModel : MainViewModelType {
             userProfile:userProfile,
             followStatus: followStatus,
             followerCountButton: followerCountButton,
-            followingCountButton: followingCountButton
+            followingCountButton: followingCountButton,
+            chatResponse: chatResponse
         )
     }
     

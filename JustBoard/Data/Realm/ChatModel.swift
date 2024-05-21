@@ -28,4 +28,8 @@ final class Chat : Object, ObjectKeyIdentifiable {
         self.content = content
         self.createdAt = createAt
     }
+    
+    var profileImageToUrl : URL {
+        return URL(string: APIKey.baseURLWithVersion() + "/" + profile)!
+    }
 }

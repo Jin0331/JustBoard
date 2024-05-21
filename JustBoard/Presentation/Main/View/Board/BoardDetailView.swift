@@ -16,8 +16,7 @@ final class BoardDetailView: BaseView {
     private let textViewDefaultHeight : Double = 300
     
     let scrollView = UIScrollView().then {
-        $0.backgroundColor = DesignSystem.commonColorSet.lightGray
-        
+        $0.backgroundColor = DesignSystem.commonColorSet.white
         $0.isScrollEnabled = true
         $0.showsVerticalScrollIndicator = true
         $0.bounces = false
@@ -160,19 +159,16 @@ final class BoardDetailView: BaseView {
         
         author.snp.makeConstraints { make in
             make.top.equalTo(profileImage)
-//            make.centerY.equalTo(profileImage)
             make.height.equalTo(30)
             make.width.lessThanOrEqualTo(120)
             make.leading.equalTo(profileImage.snp.trailing).offset(10)
         }
         
         createdAt.snp.makeConstraints { make in
-//            make.centerY.equalTo(author)
             make.bottom.equalTo(profileImage)
             make.height.equalTo(author)
             make.width.equalTo(130)
             make.leading.equalTo(author)
-//            make.leading.equalTo(author.snp.trailing).offset(10)
         }
         
         textView.snp.makeConstraints { make in
@@ -230,8 +226,6 @@ final class BoardDetailView: BaseView {
         addTextViewImage(data)
         
         addimage(imageUrl: data.creator.profileImageToUrl)
-        
-//        collectionViewchangeLayout(itemCount: data.comments.count)
     }
     
     func commentUpdateUI(_ data : PostResponse) {

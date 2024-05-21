@@ -144,4 +144,8 @@ final class QuestionView: BaseView {
         contentsTextView.font = DesignSystem.mainFont.customFontHeavy(size: 21)
     }
     
+    override func configureView() {
+        backgroundColor = DesignSystem.commonColorSet.white
+    }
+    
 }

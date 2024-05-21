@@ -75,4 +75,8 @@ struct Sender: Decodable {
         self.nick = try container.decode(String.self, forKey: .nick)
         self.profileImage = (try? container.decode(String.self, forKey: .profileImage)) ?? DesignSystem.defaultimage.defaultProfile
     }
+    
+    var profileImageToUrl : URL {
+        return URL(string: APIKey.baseURLWithVersion() + "/" + profileImage)!
+    }
 }

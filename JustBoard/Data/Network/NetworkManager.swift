@@ -211,6 +211,10 @@ final class NetworkManager  {
     }
     
     //MARK: - Chat
+    func createChat(query : ChatRequest) -> Single<Result<ChatResponse, AFError>> {
+        return mainMakeRequest(router: ChatRouter.create(query: query))
+    }
+    
     func myChatList() -> Single<Result<MyChatResponse, AFError>> {
         return mainMakeRequest(router: ChatRouter.myList)
     }

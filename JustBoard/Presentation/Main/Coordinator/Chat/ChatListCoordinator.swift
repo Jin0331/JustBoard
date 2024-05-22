@@ -37,4 +37,11 @@ extension ChatListCoordinator {
         chatCoordinator.start(chat: chat)
         childCoordinators.append(chatCoordinator)
     }
+    
+    func toProfile(userID : String, me : Bool, defaultPage : Int) {
+        let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
+        profileCoordinator.chatListCoordinator = self
+        profileCoordinator.start(userID: userID, me: me, defaultPage: defaultPage)
+        childCoordinators.append(profileCoordinator)
+    }
 }

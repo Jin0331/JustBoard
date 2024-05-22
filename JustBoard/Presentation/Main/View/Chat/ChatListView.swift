@@ -29,11 +29,22 @@ struct ChatListView: View {
                 let chatResponse = ChatResponse(from: chat)
                 
                 if let _ = chatResponse.lastChat {
+                    let myId = UserDefaultManager.shared.userId
+                    let opponentNickname = chat.participants[0].userID == myId ? chat.participants[1].nick : chat.participants[0].nick
+                    let opponentUserId = chat.participants[0].userID == myId ? chat.participants[1].userID : myId
                     ChatListRow(chat: chatResponse, isNew: chat.isNew)
                         .onTapGesture {
                             viewModel.action(.isNew(roomID: chat.roomID))
                             parentCoordinator?.toChat(chat: chatResponse)
                         }
+                        .contextMenu {
+                            Button {
+                                parentCoordinator?.toProfile(userID: opponentUserId!, me: false, defaultPage: 0)
+                            } label: {
+                                Label("'" + opponentNickname + "'님의 프로필 조회하기", systemImage: "person")
+                            }
+                        }
+                        
                         .listRowSeparator(.hidden)
                 }
 

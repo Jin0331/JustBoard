@@ -16,6 +16,7 @@ final class ProfileCoordinator : Coordinator {
     var boardUserCoordinator : BoardUserCoordinator?
     var boardDetailCoordinator : BoardDetailCoordinator?
     var followCoordinator : FollowCoordinator?
+    var chatListCoordinator : ChatListCoordinator?
     var type: CoordinatorType { .tab }
     
     init(navigationController: UINavigationController) {

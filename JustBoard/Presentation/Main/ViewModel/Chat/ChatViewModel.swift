@@ -34,6 +34,7 @@ final class ChatViewModel : CombineViewModelType {
         case socketDataReceive
         case sendMessage(message : String)
         case scrollToBottom
+        case scrollToBottomDispose
     }
     
     func action(_ action : Action) {
@@ -51,6 +52,8 @@ final class ChatViewModel : CombineViewModelType {
             input.sendMessage.send(message)
         case .scrollToBottom:
             input.scrollToBottom.send(())
+        case .scrollToBottomDispose:
+            input.scrollToBottomDispose.send(())
             
         }
             
@@ -66,6 +69,7 @@ extension ChatViewModel {
         var socketDataReceive = PassthroughSubject<Void, Never>()
         var sendMessage = PassthroughSubject<String, Never>()
         var scrollToBottom = PassthroughSubject<Void, Never>()
+        var scrollToBottomDispose = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -73,13 +77,9 @@ extension ChatViewModel {
     }
     
     func transform() {
-        
-        // 채팅내역 조회 -> Realm Table에서 가장 마지막 날짜 cursor
-        // realm에 해당 데이터가 없다면 다시 새로 업데이트해야됨
         input.viewOnAppear
             .map {
                 if let cursurDate = self.chatTable.last?.createdAt.toString() {
-                    print(self.realmRepository.isExistChat(roomID: self.chat.roomID))
                     return self.realmRepository.isExistChat(roomID: self.chat.roomID) ? NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: cursurDate), roomId: self.chat.roomID) : NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: ""), roomId: self.chat.roomID)
                 } else {
                     return NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: ""), roomId: self.chat.roomID)
@@ -105,7 +105,6 @@ extension ChatViewModel {
                 } else {
                     print("최신 채팅 없음 ✅")
                 }
-//                output.scrollToBottom = true
             }
             .store(in: &cancellables)
         
@@ -143,6 +142,13 @@ extension ChatViewModel {
             .store(in: &cancellables)
         
         input.scrollToBottom
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                output.scrollToBottom = true
+            }
+            .store(in: &cancellables)
+        
+        input.scrollToBottomDispose
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 output.scrollToBottom = false

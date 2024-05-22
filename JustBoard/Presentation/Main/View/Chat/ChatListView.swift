@@ -54,9 +54,6 @@ struct ChatListView: View {
         }
         
         .onAppear {
-            
-            print("hihi")
-            
             viewModel.action(.viewOnAppear)
         }
     }

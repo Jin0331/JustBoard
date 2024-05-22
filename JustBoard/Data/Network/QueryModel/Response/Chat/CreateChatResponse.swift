@@ -80,3 +80,33 @@ struct Sender: Decodable {
         return URL(string: APIKey.baseURLWithVersion() + "/" + profileImage)!
     }
 }
+
+extension ChatResponse {
+    init(from realmChatResponse: RealmChatResponse) {
+        roomID = realmChatResponse.roomID
+        createdAt = realmChatResponse.createdAt
+        updatedAt = realmChatResponse.updatedAt
+        participants = realmChatResponse.participants.map { Sender(from: $0) }
+        lastChat = realmChatResponse.lastChat.map { LastChat(from: $0) }
+    }
+}
+
+extension Sender {
+    init(from realmSender: RealmSender) {
+        userID = realmSender.userID
+        nick = realmSender.nick
+        profileImage = realmSender.profileImage
+    }
+}
+
+extension LastChat {
+    init(from realmLastChat: RealmLastChat) {
+        id = UUID(uuidString: realmLastChat._id.stringValue)!
+        chatID = realmLastChat.chatID
+        roomID = realmLastChat.roomID
+        content = realmLastChat.content
+        createdAt = realmLastChat.createdAt
+        sender = Sender(from: realmLastChat.sender!)
+        files = Array(realmLastChat.files)
+    }
+}

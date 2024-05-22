@@ -250,6 +250,10 @@ final class NetworkManager  {
         return mainMakeRequest(router: ChatRouter.myList)
     }
     
+    func myChatList() -> AnyPublisher<MyChatResponse, AFError> {
+        return mainMakeRequestCombine(router: ChatRouter.myList)
+    }
+    
     func chatList(query : ChatMessageRequest, roomId : String) -> AnyPublisher<ChatListResponse, AFError> {
         return mainMakeRequestCombine(router: ChatRouter.messageList(query: query, roomId: roomId))
     }

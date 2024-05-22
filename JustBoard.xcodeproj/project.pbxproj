@@ -98,6 +98,7 @@
 		DB802F482BDE31EF00DC670D /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB802F472BDE31EF00DC670D /* UIButton+Extension.swift */; };
 		DB8E15B62BFBC56A009DB692 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E15B52BFBC56A009DB692 /* ChatViewController.swift */; };
 		DB8E15B82BFBC5CE009DB692 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E15B72BFBC5CE009DB692 /* ChatCoordinator.swift */; };
+		DB8E15C42BFC979C009DB692 /* ChatListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E15C32BFC979C009DB692 /* ChatListModel.swift */; };
 		DB901C5F2BD5835F003EEDC6 /* LinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C5E2BD5835F003EEDC6 /* LinkViewController.swift */; };
 		DB901C612BD58C7C003EEDC6 /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C602BD58C7C003EEDC6 /* CompleteButton.swift */; };
 		DB901C702BD694DC003EEDC6 /* FilesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */; };
@@ -267,6 +268,7 @@
 		DB802F472BDE31EF00DC670D /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		DB8E15B52BFBC56A009DB692 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		DB8E15B72BFBC5CE009DB692 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
+		DB8E15C32BFC979C009DB692 /* ChatListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListModel.swift; sourceTree = "<group>"; };
 		DB901C5E2BD5835F003EEDC6 /* LinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkViewController.swift; sourceTree = "<group>"; };
 		DB901C602BD58C7C003EEDC6 /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
 		DB901C6F2BD694DC003EEDC6 /* FilesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesRequest.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 			children = (
 				DB07BA2C2BFAF21B00371705 /* ChatRepository.swift */,
 				DB07BA2E2BFAF52800371705 /* ChatModel.swift */,
+				DB8E15C32BFC979C009DB692 /* ChatListModel.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -1166,6 +1169,7 @@
 				DBCBAA192BC7E106006B40CA /* EmailLoginView.swift in Sources */,
 				DB204DE82BD57525006340BE /* CategorySelectView.swift in Sources */,
 				DBCBAA0F2BC7D0E1006B40CA /* NetworkManager.swift in Sources */,
+				DB8E15C42BFC979C009DB692 /* ChatListModel.swift in Sources */,
 				DB797BB42BE3CB0000E490C3 /* BoardUserView.swift in Sources */,
 				DB0598B22BE3456800AE0973 /* BoardDetailCoordinator.swift in Sources */,
 				DB797BB22BE3CA3A00E490C3 /* BoardUserViewController.swift in Sources */,

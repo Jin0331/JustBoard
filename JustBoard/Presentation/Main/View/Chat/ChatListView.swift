@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct ChatListView: View {
     
     @ObservedObject private var viewModel : ChatListViewModel
+    @ObservedResults(RealmChatResponse.self) var chatListTable
+    
     var parentCoordinator : ChatListCoordinator?
     init(chatList: MyChatResponse) {
         self.viewModel = ChatListViewModel(chatList: chatList)
@@ -22,18 +25,15 @@ struct ChatListView: View {
                 .font(.title2)
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
-            List {
-                ForEach(viewModel.output.data) { chat in
-                    ChatListRow(chat: chat)
-                        .onTapGesture {
-                            parentCoordinator?.toChat(chat: chat)
-                        }
-                }
-                .listRowSeparator(.hidden)
+            List(chatListTable) { chat in
+
+                let chatResponse = ChatResponse(from: chat)
+                ChatListRow(chat: chatResponse)
+                    .onTapGesture {
+                        parentCoordinator?.toChat(chat: chatResponse)
+                    }
             }
-            .listStyle(.plain)
         }
-        
         .task {
             viewModel.action(.viewOnAppear)
         }

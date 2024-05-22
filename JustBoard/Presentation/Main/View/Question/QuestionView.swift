@@ -135,7 +135,7 @@ final class QuestionView: BaseView {
         contentsTextView.snp.makeConstraints { make in
             make.top.equalTo(stackBackgroundView.snp.bottom)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(UIScreen.main.bounds.height / 2)
+            make.height.equalTo(UIScreen.main.bounds.height / 2.5)
             make.bottom.equalToSuperview()
         }
     }

@@ -105,7 +105,7 @@ extension ChatViewModel {
                 } else {
                     print("최신 채팅 없음 ✅")
                 }
-                output.scrollToBottom = true
+//                output.scrollToBottom = true
             }
             .store(in: &cancellables)
         

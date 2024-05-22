@@ -39,13 +39,25 @@ struct ChatView: View {
                         if chat._id == chatTable.last?._id { emptyView() }
                     }
                     .listStyle(.plain)
+                    .onChange(of: viewModel.output.scrollToBottom) { newValue in
+                        if newValue == true  {
+                            DispatchQueue.main.async {
+                                withAnimation {
+                                    proxy.scrollTo("BOTTOM_ID", anchor: .bottom)
+                                }
+                            }
+                            viewModel.action(.scrollToBottom)
+                        }
+                    }
                 }
                 
                 HStack {
                     TextField("메세지를 입력해주세요", text: $newMessage)
                         .padding()
+                        .lineLimit(2)
                     Button(action: {
                         viewModel.action(.sendMessage(message: newMessage))
+                        newMessage = ""
                     }, label: {
                         DesignSystem.sfSymbolSwiftUI.send
                             .foregroundStyle(DesignSystem.swiftUIColorSet.lightBlack)
@@ -53,14 +65,10 @@ struct ChatView: View {
                     .padding()
                 }
             }
-            .onChange(of: viewModel.output.scrollToBottom) { newValue in
-                if newValue == true  {
-                    DispatchQueue.main.async { proxy.scrollTo("BOTTOM_ID", anchor: .bottom) }
-                    viewModel.action(.scrollToBottom)
-                }
-            }
+
             .onAppear {
                 viewModel.action(.viewOnAppear)
+//                viewModel.action(.scrollToBottom)
                 viewModel.action(.socketConnection)
                 viewModel.action(.socketDataReceive)
             }

@@ -46,7 +46,7 @@ struct ChatView: View {
                                     proxy.scrollTo("BOTTOM_ID", anchor: .bottom)
                                 }
                             }
-                            viewModel.action(.scrollToBottom)
+                            viewModel.action(.scrollToBottomDispose)
                         }
                     }
                 }
@@ -65,10 +65,12 @@ struct ChatView: View {
                     .padding()
                 }
             }
+            .onTapGesture {
+                viewModel.action(.scrollToBottom)
+            }
 
             .onAppear {
                 viewModel.action(.viewOnAppear)
-//                viewModel.action(.scrollToBottom)
                 viewModel.action(.socketConnection)
                 viewModel.action(.socketDataReceive)
             }

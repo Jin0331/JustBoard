@@ -14,6 +14,7 @@ final class RealmChatResponse: Object, ObjectKeyIdentifiable {
     @Persisted var updatedAt: Date
     @Persisted var participants : List<RealmSender>
     @Persisted var lastChat: RealmLastChat?
+    @Persisted var isNew: Bool = false
 }
 
 final class RealmLastChat: EmbeddedObject, ObjectKeyIdentifiable {

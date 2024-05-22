@@ -27,11 +27,16 @@ struct ChatListView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             List(chatListTable) { chat in
                 let chatResponse = ChatResponse(from: chat)
-                ChatListRow(chat: chatResponse)
-                    .onTapGesture {
-                        parentCoordinator?.toChat(chat: chatResponse)
-                    }                
-                    .listRowSeparator(.hidden)
+                
+                if let _ = chatResponse.lastChat {
+                    ChatListRow(chat: chatResponse, isNew: chat.isNew)
+                        .onTapGesture {
+                            viewModel.action(.isNew(roomID: chat.roomID))
+                            parentCoordinator?.toChat(chat: chatResponse)
+                        }
+                        .listRowSeparator(.hidden)
+                }
+
             }
             .listStyle(.plain)
             

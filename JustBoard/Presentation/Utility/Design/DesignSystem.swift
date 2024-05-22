@@ -23,6 +23,7 @@ enum DesignSystem {
     }
     
     enum swiftUIColorSet {
+        static let blue = Color.blue
         static let black = Color("pillBlack")
         static let lightBlack = Color("pillLightBlack")
         static let white = Color("pillWhite")
@@ -59,7 +60,11 @@ enum DesignSystem {
         static let doc = UIImage(systemName: "chart.bar.doc.horizontal", withConfiguration:sfSymbolLargeConfig)
         
         static let camera = UIImage(systemName: "camera.metering.partial", withConfiguration:sfSymbolLargeConfig2)
+    }
     
+    enum sfSymbolSwiftUI {
+        static let send = Image(systemName: "paperplane")
+        static let new = Image(systemName: "moonphase.new.moon")
     }
     
     enum tabbarImage {
@@ -76,8 +81,6 @@ enum DesignSystem {
     }
     
     enum mainFont {
-//        static let large = UIFont(name: "YANGJIN", size: 25)
-//        static let medium = UIFont(name: "YANGJIN", size: 22)
         static let TitleLarge = UIFont(name: "Pretendard-Black", size: 25)
         static let TitleMedium = UIFont(name: "Pretendard-Black", size: 22)
         

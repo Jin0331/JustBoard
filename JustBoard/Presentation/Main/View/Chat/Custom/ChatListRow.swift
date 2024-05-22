@@ -10,6 +10,7 @@ import Kingfisher
 
 struct ChatListRow: View {
     let chat : ChatResponse
+    let isNew : Bool
     
     var body: some View {
         HStack {
@@ -36,10 +37,19 @@ struct ChatListRow: View {
                 }
             }
             Spacer()
-            Text(chat.updatedAt.toDate()!
-                .toString(dateFormat: "yy.MM.dd HH:mm"))
-                .font(.subheadline)
-                .bold()
+            // 오늘 인 경우 HH:mm, 오닐 아닐 경우 일자만
+            VStack (alignment : .center, spacing: 10) {
+                Text(chat.updatedAt.toDate()!
+                    .toString(dateFormat: "HH:mm"))
+                    .font(.subheadline)
+                    .bold()
+                if isNew {
+                    DesignSystem.sfSymbolSwiftUI.new
+                        .resizable()
+                        .frame(width: 10, height: 10)
+                        .foregroundColor(DesignSystem.swiftUIColorSet.blue)
+                }
+            }
         }
         
     }

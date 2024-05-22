@@ -47,7 +47,7 @@ struct ChatView: View {
                     Button(action: {
                         viewModel.action(.sendMessage(message: newMessage))
                     }, label: {
-                        Image(systemName: "paperplane")
+                        DesignSystem.sfSymbolSwiftUI.send
                             .foregroundStyle(DesignSystem.swiftUIColorSet.lightBlack)
                     })
                     .padding()

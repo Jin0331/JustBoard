@@ -24,12 +24,16 @@ final class ChatListViewModel : CombineViewModelType {
     
     enum Action {
         case viewOnAppear
+        case isNew(roomID:String)
     }
     
     func action(_ action : Action) {
         switch action {
         case .viewOnAppear:
             input.viewOnAppear.send(())
+        case .isNew(roomID : let roomID):
+            input.isNew.send(roomID)
+            
         }
     }
     
@@ -40,11 +44,22 @@ final class ChatListViewModel : CombineViewModelType {
 extension ChatListViewModel {
     struct Input {
         var viewOnAppear = PassthroughSubject<Void, Never>()
+        var isNew = PassthroughSubject<String, Never>()
     }
     
     struct Output { }
     
     func transform() {
+        /*
+         1. 서버, 로컬 둘다 X
+         2. 서버 O, 로컬 X -> 확인 안 한 것으로 간주하고
+          -> 1) 내가 마지막으로 보낸 경우 isNew = false
+             2) 상대방이 마지막으로 보낸 경우 isNew = true
+         3. 서버 O, 로컬 O ->
+         -> 1) 내가 마지막으로 보낸 경우 isNew = false
+            2) 상대방이 마지막으로 보낸 경우 isNew = true
+         */
+        
         input.viewOnAppear
             .map {
                 return NetworkManager.shared.myChatList()
@@ -62,10 +77,33 @@ extension ChatListViewModel {
                 
                 chatResponse.data.forEach { [weak self] chat in
                     guard let self = self else { return }
-
-                    realmRepository.upsertChatList(chatResponse: chat)
+                    let myId = UserDefaultManager.shared.userId!
+                    // 3 서버 O, 로컬 O
+                    if let serverLastChat = chat.lastChat, let localLastChat = realmRepository.fetchChatList(roomID: chat.roomID)?.lastChat {
+                        if serverLastChat.createdAt.toDate()! > localLastChat.createdAt && serverLastChat.sender.userID != myId {
+                            realmRepository.upsertChatListWithIsNewTrue(chatResponse: chat)
+                        } else {
+                            realmRepository.upsertChatList(chatResponse: chat)
+                        }
+                    // 2 서버 o 로컬 x
+                    } else if let serverLastChat = chat.lastChat {
+                        if serverLastChat.sender.userID != myId {
+                            realmRepository.upsertChatListWithIsNewTrue(chatResponse: chat)
+                        } else {
+                            realmRepository.upsertChatList(chatResponse: chat)
+                        }
+                    } else {
+                        realmRepository.upsertChatList(chatResponse: chat)
+                    }
                 }
                 
+            }
+            .store(in: &cancellables)
+        
+        input.isNew
+            .sink { [weak self] roomID in
+                guard let self = self else { return }
+                realmRepository.fetchIsNewToFalse(roomID: roomID)
             }
             .store(in: &cancellables)
     }

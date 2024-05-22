@@ -11,8 +11,7 @@ extension String {
     func toDate(dateFormat format : String) -> Date? { // "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", 2024-05-20T02:40:47.476Z
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
-        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
-        dateFormatter.locale = Locale.current
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
         if let date = dateFormatter.date(from: self) {
             return date
         } else {
@@ -23,8 +22,7 @@ extension String {
     func toDate() -> Date? { // "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", 2024-05-20T02:40:47.476Z
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
-        dateFormatter.locale = Locale.current
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
         if let date = dateFormatter.date(from: self) {
             return date
         } else {
@@ -54,9 +52,24 @@ extension String {
 }
 
 extension Date {
-    func toString( dateFormat format: String) -> String {
+    func toStringInChatList( dateFormat format: String) -> String {
+        
+        let current = Calendar.current
+        let convertFormat = current.isDateInToday(self) ? format : "yy.MM.dd"
+        
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
+        dateFormatter.dateFormat = convertFormat
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        return dateFormatter.string(from: self)
+    }
+    
+    func toString( dateFormat format: String) -> String {
+        
+        let current = Calendar.current
+        let convertFormat = current.isDateInToday(self) ? format : "yy.MM.dd"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = convertFormat
         dateFormatter.timeZone = TimeZone.autoupdatingCurrent
         dateFormatter.locale = Locale.current
         return dateFormatter.string(from: self)
@@ -69,4 +82,5 @@ extension Date {
         dateFormatter.locale = Locale.current
         return dateFormatter.string(from: self)
     }
+    
 }

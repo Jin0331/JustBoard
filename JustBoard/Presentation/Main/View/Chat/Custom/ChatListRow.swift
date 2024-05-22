@@ -39,8 +39,9 @@ struct ChatListRow: View {
             Spacer()
             // 오늘 인 경우 HH:mm, 오닐 아닐 경우 일자만
             VStack (alignment : .center, spacing: 10) {
+                
                 Text(chat.updatedAt.toDate()!
-                    .toString(dateFormat: "HH:mm"))
+                    .toStringInChatList(dateFormat: "HH:mm"))
                     .font(.subheadline)
                     .bold()
                 if isNew {

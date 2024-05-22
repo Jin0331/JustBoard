@@ -17,6 +17,7 @@ final class ChatViewModel : CombineViewModelType {
     private let chat : ChatResponse
     private var socketManager : SocketIOManager
     private let receivedChatData : PassthroughSubject<LastChat, Never>
+    private let realmRepository = RealmRepository()
     @ObservedResults(Chat.self, sortDescriptor: SortDescriptor(keyPath: "createdAt", ascending: true)) var chatTable
     
     init(chat : ChatResponse) {
@@ -78,7 +79,8 @@ extension ChatViewModel {
         input.viewOnAppear
             .map {
                 if let cursurDate = self.chatTable.last?.createdAt.toString() {
-                    return NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: cursurDate), roomId: self.chat.roomID)
+                    print(self.realmRepository.isExistChat(roomID: self.chat.roomID))
+                    return self.realmRepository.isExistChat(roomID: self.chat.roomID) ? NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: cursurDate), roomId: self.chat.roomID) : NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: ""), roomId: self.chat.roomID)
                 } else {
                     return NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: ""), roomId: self.chat.roomID)
                 }

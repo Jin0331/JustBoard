@@ -41,4 +41,12 @@ final class RealmRepository {
             print(error)
         }
     }
+    
+    func isExistChat(roomID : String) -> Bool {
+        let table = realm.objects(Chat.self).where {
+            $0.roomID == roomID
+        }
+        
+        return table.isEmpty ? false : true
+    }
 }

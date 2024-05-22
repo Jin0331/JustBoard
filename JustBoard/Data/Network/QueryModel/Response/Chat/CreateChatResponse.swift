@@ -84,8 +84,8 @@ struct Sender: Decodable {
 extension ChatResponse {
     init(from realmChatResponse: RealmChatResponse) {
         roomID = realmChatResponse.roomID
-        createdAt = realmChatResponse.createdAt
-        updatedAt = realmChatResponse.updatedAt
+        createdAt = realmChatResponse.createdAt.toString()
+        updatedAt = realmChatResponse.updatedAt.toString()
         participants = realmChatResponse.participants.map { Sender(from: $0) }
         lastChat = realmChatResponse.lastChat.map { LastChat(from: $0) }
     }
@@ -101,11 +101,10 @@ extension Sender {
 
 extension LastChat {
     init(from realmLastChat: RealmLastChat) {
-        id = UUID(uuidString: realmLastChat._id.stringValue)!
-        chatID = realmLastChat.chatID
         roomID = realmLastChat.roomID
+        chatID = realmLastChat.chatID
         content = realmLastChat.content
-        createdAt = realmLastChat.createdAt
+        createdAt = realmLastChat.createdAt.toString()
         sender = Sender(from: realmLastChat.sender!)
         files = Array(realmLastChat.files)
     }

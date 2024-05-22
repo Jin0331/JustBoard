@@ -11,9 +11,21 @@ import RxSwift
 import RxCocoa
 import RxViewController
 
-class RxBaseViewController : BaseViewController {
-    let disposeBag = DisposeBag()
+class RxBaseViewController : BaseViewController, KeyboardReactable {
+    var loadBag: RxSwift.DisposeBag = DisposeBag()
+    let myScrollView = UIScrollView()
+    var disposeBag = DisposeBag()
+    
+    lazy var scrollView: UIScrollView! = myScrollView
+    
+    override func viewDidLoad() {
+        self.setTapGesture()
+        self.setKeyboardNotification()
+        super.viewDidLoad()
+    }
 }
+
+
 
 class BaseViewController: UIViewController {
     
@@ -59,3 +71,4 @@ class BaseViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 }
+

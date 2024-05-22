@@ -6,23 +6,12 @@
 //
 
 import UIKit
-import IQKeyboardManagerSwift
 import Kingfisher
 import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        //MARK: - IQKeyboardManager
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.enableAutoToolbar = false
-        IQKeyboardManager.shared.resignOnTouchOutside = true
-        
-        IQKeyboardManager.shared.disabledDistanceHandlingClasses = [BoardDetailViewController.self, ChatListViewController.self]
         
         //MARK: - Realm
         print(Realm.Configuration().fileURL)

@@ -10,23 +10,23 @@ import RealmSwift
 
 final class RealmChatResponse: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var roomID: String
-    @Persisted var createdAt: String
-    @Persisted var updatedAt: String
+    @Persisted var createdAt: Date
+    @Persisted var updatedAt: Date
     @Persisted var participants : List<RealmSender>
     @Persisted var lastChat: RealmLastChat?
+    @Persisted var isNew: Bool = false
 }
 
-final class RealmLastChat: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true) var _id : ObjectId
+final class RealmLastChat: EmbeddedObject, ObjectKeyIdentifiable {
+    @Persisted var roomID : String
     @Persisted var chatID: String
-    @Persisted var roomID: String
     @Persisted var content: String
-    @Persisted var createdAt: String
+    @Persisted var createdAt: Date
     @Persisted var sender: RealmSender?
     @Persisted var files : List<String>
 }
 
-class RealmSender: Object, ObjectKeyIdentifiable{
+class RealmSender: EmbeddedObject, ObjectKeyIdentifiable{
     @Persisted var userID: String
     @Persisted var nick: String
     @Persisted var profileImage: String
@@ -36,8 +36,8 @@ extension RealmChatResponse {
     convenience init(from chatResponse: ChatResponse) {
         self.init()
         roomID = chatResponse.roomID
-        createdAt = chatResponse.createdAt
-        updatedAt = chatResponse.updatedAt
+        createdAt = chatResponse.createdAt.toDate()!
+        updatedAt = chatResponse.updatedAt.toDate()!
         participants.append(objectsIn: chatResponse.participants.map(RealmSender.init))
         lastChat = chatResponse.lastChat.map(RealmLastChat.init)
     }
@@ -49,7 +49,7 @@ extension RealmLastChat {
         chatID = lastChat.chatID
         roomID = lastChat.roomID
         content = lastChat.content
-        createdAt = lastChat.createdAt
+        createdAt = lastChat.createdAt.toDate()!
         sender = RealmSender(from: lastChat.sender)
         files.append(objectsIn: lastChat.files)
     }

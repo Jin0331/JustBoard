@@ -174,7 +174,7 @@ struct PostResponse: Decodable, Hashable {
     }
     
     var createdAtToTimeDate : Date {
-        return createdAt.toDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")!
+        return createdAt.toDate()!
     }
     
     var nickname : String {

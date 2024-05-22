@@ -36,7 +36,7 @@ struct ChatListRow: View {
                 }
             }
             Spacer()
-            Text(chat.updatedAt.toDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")!
+            Text(chat.updatedAt.toDate()!
                 .toString(dateFormat: "yy.MM.dd HH:mm"))
                 .font(.subheadline)
                 .bold()

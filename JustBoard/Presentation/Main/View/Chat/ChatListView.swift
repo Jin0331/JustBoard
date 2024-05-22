@@ -11,7 +11,7 @@ import RealmSwift
 struct ChatListView: View {
     
     @ObservedObject private var viewModel : ChatListViewModel
-    @ObservedResults(RealmChatResponse.self) var chatListTable
+    @ObservedResults(RealmChatResponse.self, sortDescriptor: SortDescriptor(keyPath: "updatedAt", ascending: false)) var chatListTable
     
     var parentCoordinator : ChatListCoordinator?
     init(chatList: MyChatResponse) {
@@ -26,15 +26,21 @@ struct ChatListView: View {
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
             List(chatListTable) { chat in
-
                 let chatResponse = ChatResponse(from: chat)
                 ChatListRow(chat: chatResponse)
                     .onTapGesture {
                         parentCoordinator?.toChat(chat: chatResponse)
-                    }
+                    }                
+                    .listRowSeparator(.hidden)
             }
+            .listStyle(.plain)
+            
         }
-        .task {
+        
+        .onAppear {
+            
+            print("hihi")
+            
             viewModel.action(.viewOnAppear)
         }
     }

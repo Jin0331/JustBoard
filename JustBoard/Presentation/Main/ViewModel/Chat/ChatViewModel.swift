@@ -74,9 +74,10 @@ extension ChatViewModel {
     func transform() {
         
         // 채팅내역 조회 -> Realm Table에서 가장 마지막 날짜 cursor
+        // realm에 해당 데이터가 없다면 다시 새로 업데이트해야됨
         input.viewOnAppear
             .map {
-                if let cursurDate = self.chatTable.last?.createdAt.toString(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") {
+                if let cursurDate = self.chatTable.last?.createdAt.toString() {
                     return NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: cursurDate), roomId: self.chat.roomID)
                 } else {
                     return NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: ""), roomId: self.chat.roomID)
@@ -97,7 +98,7 @@ extension ChatViewModel {
                 if !chatList.data.isEmpty {
                     chatList.data.forEach { [weak self] chat in
                         guard let self = self else { return }
-                        $chatTable.append(Chat(roomID: chat.roomID, chatID: chat.chatID, userID: chat.sender.userID, nick: chat.sender.nick, profile: chat.sender.profileImage, content: chat.content, createAt: chat.createdAt.toDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")!))
+                        $chatTable.append(Chat(roomID: chat.roomID, chatID: chat.chatID, userID: chat.sender.userID, nick: chat.sender.nick, profile: chat.sender.profileImage, content: chat.content, createAt: chat.createdAt.toDate()!))
                     }
                 } else {
                     print("최신 채팅 없음 ✅")
@@ -113,7 +114,7 @@ extension ChatViewModel {
             .sink { [weak self] chat in
                 guard let self = self else { return }
                 
-                $chatTable.append(Chat(roomID: chat.roomID, chatID: chat.chatID, userID: chat.sender.userID, nick: chat.sender.nick, profile: chat.sender.profileImage, content: chat.content, createAt: chat.createdAt.toDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")!))
+                $chatTable.append(Chat(roomID: chat.roomID, chatID: chat.chatID, userID: chat.sender.userID, nick: chat.sender.nick, profile: chat.sender.profileImage, content: chat.content, createAt: chat.createdAt.toDate()!))
                 
                 output.scrollToBottom = true
                 

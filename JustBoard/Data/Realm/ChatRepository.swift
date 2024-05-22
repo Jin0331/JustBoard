@@ -26,44 +26,19 @@ final class RealmRepository {
         }
     }
     
-    func upsertPillAlarm(pk: ObjectId, roomID : String, sender : String, content : String, createdAt : Date) {
+    func upsertChatList(chatResponse : ChatResponse)  {
         
         do {
             try realm.write {
-                realm.create(Chat.self, value: ["_id":pk,
-                                                "roomID":roomID,
-                                                "sender":sender,
-                                                "content":content,
-                                                "createdAt":createdAt], update: .modified) }
+                realm.create(RealmChatResponse.self, value: ["roomID":chatResponse.roomID,
+                                                             "createdAt":chatResponse.createdAt.toDate()!,
+                                                             "updatedAt":chatResponse.updatedAt.toDate()!,
+                                                             "participants": chatResponse.participants.map(RealmSender.init),
+                                                             "lastChat": chatResponse.lastChat.map(RealmLastChat.init) ?? nil
+                                                ],
+                             update: .modified) }
         } catch {
             print(error)
         }
     }
-    
-    
-    //MARK: - READ
-//    func fetchPillSpecific(itemSeq : Int) -> Pill? {
-//        let table : Pill? = realm.objects(Pill.self).where {
-//            $0.itemSeq == itemSeq && $0.isDeleted == false}.first
-//        
-//        return table
-//    }
-//    
-//    func fetchPillExist(itemSeq : Int) -> Bool {
-//        
-//        let table = fetchPillSpecific(itemSeq: itemSeq)
-//        
-//        if table != nil {
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
-//    
-//    func fetchPillExist(alarmName : String) -> Bool {
-//        
-//        guard let table = fetchPillAlarm(alarmName: alarmName) else { return false }
-//        
-//        return table.isEmpty ? false : true
-//    }
 }

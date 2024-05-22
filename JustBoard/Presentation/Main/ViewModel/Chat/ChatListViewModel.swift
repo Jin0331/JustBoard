@@ -14,6 +14,7 @@ final class ChatListViewModel : CombineViewModelType {
     var cancellables = Set<AnyCancellable>()
     
     let chatList : MyChatResponse
+    private let realmRepository = RealmRepository()
     @ObservedResults(RealmChatResponse.self) var chatListTable
     
     init(chatList : MyChatResponse) {
@@ -56,11 +57,13 @@ extension ChatListViewModel {
                 case .failure(let error):
                     print("error ❗️", error)
                 }
-            } receiveValue: { [weak self] chatResponse in
+            } receiveValue: { [weak self] (chatResponse: MyChatResponse) in
                 guard let self = self else { return }
                 
-                chatResponse.data.forEach { chat in
-                    print(chat)
+                chatResponse.data.forEach { [weak self] chat in
+                    guard let self = self else { return }
+
+                    realmRepository.upsertChatList(chatResponse: chat)
                 }
                 
             }

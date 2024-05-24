@@ -79,7 +79,8 @@ extension ChatViewModel {
     func transform() {
         input.viewOnAppear
             .map {
-                if let cursurDate = self.chatTable.last?.createdAt.toString() {
+                if let cursurDate = self.chatTable.last?.createdAt.toStringRaw(){
+                    
                     return self.realmRepository.isExistChat(roomID: self.chat.roomID) ? NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: cursurDate), roomId: self.chat.roomID) : NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: ""), roomId: self.chat.roomID)
                 } else {
                     return NetworkManager.shared.chatList(query: ChatMessageRequest(cursor_date: ""), roomId: self.chat.roomID)

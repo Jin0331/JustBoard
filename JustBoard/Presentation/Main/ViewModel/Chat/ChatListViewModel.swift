@@ -95,8 +95,12 @@ extension ChatListViewModel {
                     } else {
                         realmRepository.upsertChatList(chatResponse: chat)
                     }
+                    
+                    // 채팅방 마지막 메세지 조회 (채팅방-채팅리스트 동기화 안 되는 문제 해결)
+                    if let lastChatID = realmRepository.fetchLastChat(roomID: chat.roomID), let serverLastChatID = chat.lastChat?.chatID, lastChatID == serverLastChatID {
+                        input.isNew.send(chat.roomID)
+                    }
                 }
-                
             }
             .store(in: &cancellables)
         

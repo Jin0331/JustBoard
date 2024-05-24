@@ -67,6 +67,14 @@ final class RealmRepository {
         return table.isEmpty ? false : true
     }
     
+    func fetchLastChat(roomID : String) -> String? {
+        let table = realm.objects(Chat.self).where {
+            $0.roomID == roomID
+        }
+        
+        return table.last?.chatID
+    }
+    
     func fetchIsNewToFalse(roomID : String) {
         guard let table = realm.object(ofType:RealmChatResponse.self, forPrimaryKey: roomID) else { return }
         

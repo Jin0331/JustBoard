@@ -1,7 +1,8 @@
 # 🤯 **자게 - 자유게시판**
 
-![05052321358267](https://github.com/Jin0331/YeogiApa/assets/42958809/2e50659f-b471-4367-8163-3779c28d1315)
+![merge1](https://github.com/Jin0331/JustBoard/assets/42958809/151b8a43-457e-4128-9267-b8ccef7b2fa1)
 
+![merge2](https://github.com/Jin0331/JustBoard/assets/42958809/01855e5f-714d-4396-9c9f-a88c266918a6)
 
 > 출시 기간 : 2024.04.11 - 05.05 (약 3주)
 >

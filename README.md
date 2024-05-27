@@ -4,6 +4,7 @@
 
 ![merge2](https://github.com/Jin0331/JustBoard/assets/42958809/01855e5f-714d-4396-9c9f-a88c266918a6)
 
+
 > 출시 기간 : 2024.04.11 - 05.05 (약 3주)
 >
 > 기획/디자인/개발 1인 개발
@@ -23,52 +24,38 @@
 ## 🔆 **핵심 기능**
 
 * **회원 가입 / 회원탈퇴 / 로그인 / 로그아웃** 
-  * JWT(Json Web Token) 인증 방식 적용
-  * Apple Login 적용
 
-* **게시글/댓글/좋아요 작성 및 조회**
-  * TextView 기반의 작성글 내 이미지 첨부 가능
+* **게시글 / 댓글 / 공감 및 비공감 작성 및 조회**  
 
-* **프로필 조회 / 수정 / 팔로잉 팔로우**
-  * 사용자(본인 또는 타인)의 활동 기반의 게시글, 댓글, 좋아요 개수 조회
+* **프로필 조회 / 팔로잉 팔로우**
 
-  * 팔로우 기능 기반의 팔로워, 팔로잉 추적 (feat. 인스타그램)
+* **실시간 유저 / 게시글 순위 조회**
 
-* **실시간 게시판 / 유저 / 게시글 순위 조회**
-  * 사용자의 활동 기반의 실시간 순위 파악
-
-* **실시간 채팅**
-  * 사용자간 실시간 1:1 채팅
+* **실시간 1:1 채팅**
 
 <br>
 
-## 🔆 **기술 스택**
+## 🔆 **적용 기술**
 
-* **프레임워크**
+* ***프레임워크***
 
-  	***UIKit, SwiftUI***
+    UIKit, SwiftUI
 
-* **디자인패턴**
+* ***아키텍처***
 
-  	***MVVM-C***
+    MVVM-C
 
-* **라이브러리** - ***Cocoapods(Dependency manager)***
+* ***오픈 소스***(Cocoapods)
 
-  ***RxSwift + RxCocoa +  RxDataSources*** - 반응형 UI 구성
+  RxSwift / RxDataSources / Combine / Realm
 
-  ***Combine***
+  SocketIO / Alamofire / Kinfisher
 
-  ***SocketIO***
-
-  ***Realm***
-
-  ***Alamofire, Kinfisher*** - URLRequestConvertible 중심의 Router Pattern 적용 API 통신 및 RequestInterceptor를 통한 JWT 갱신
-
-  ***Snapkit, Then, Tabman, SideMenu*** - View Layout 구성
-
-
+  Snapkit / Then / Tabman / SideMenu
+  
 <br>
 
+## 🔆 **적용 기술 소개**
 ## 🔆 프로젝트 수행 중 심각하게 고민한 부분
 
 ### 1. NSTextAttachment를 활용한 UITextView 내의 UIImage 추가 (feat. Location)

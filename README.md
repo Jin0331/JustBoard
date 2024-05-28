@@ -1,4 +1,5 @@
 # 🤯 **자게 - 자유게시판**
+![Simulator Screen Recording - iPhone 15 Pro - 2024-05-19 at 21 56 05](https://github.com/Jin0331/JustBoard/assets/42958809/aa2a0471-e39b-4ac4-b2a9-06ddf0bcd52c)
 
 ![merge1](https://github.com/Jin0331/JustBoard/assets/42958809/151b8a43-457e-4128-9267-b8ccef7b2fa1)
 

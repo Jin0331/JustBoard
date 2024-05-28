@@ -210,7 +210,7 @@
         ```
         
         <p align="center">
-            <img src="https://github.com/Jin0331/JustBoard/assets/42958809/8ca30896-6bf3-425a-8036-ea154c6fab1a" width="20%" height="20%"/>
+            <img src="https://github.com/Jin0331/JustBoard/assets/42958809/8ca30896-6bf3-425a-8036-ea154c6fab1a" width="30%" height="30%"/>
         </p>
         <br>
 

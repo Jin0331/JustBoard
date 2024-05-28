@@ -15,27 +15,27 @@
 
 <br>
 
-## 🔆 **한줄소개**
+## 🤯 **한줄소개**
 
 ***자게?, 아니 자게! - 자유로운 소통을 위한 자유게시판***
 
 <br>
 
-## 🔆 **핵심 기능**
+## 🤯 **핵심 기능**
 
-* **회원 가입 / 회원탈퇴 / 로그인 / 로그아웃** 
+* **회원가입 / 회원탈퇴 / 로그인 / 로그아웃** 
 
 * **게시글 / 댓글 / 공감 및 비공감 작성 및 조회**  
 
-* **프로필 조회 / 팔로잉 팔로우**
+* **프로필 수정 및 조회 / 팔로잉 팔로우**
 
-* **실시간 유저 / 게시글 순위 조회**
+* **실시간 유저 / 게시판의 게시글 순위 조회**
 
 * **실시간 1:1 채팅**
 
 <br>
 
-## 🔆 **적용 기술**
+## 🤯 **적용 기술**
 
 * ***프레임워크***
 
@@ -49,14 +49,78 @@
 
   RxSwift / RxDataSources / Combine / Realm
 
-  SocketIO / Alamofire / Kinfisher
+  Alamofire / Kinfisher / SocketIO
 
   Snapkit / Then / Tabman / SideMenu
-  
+
 <br>
 
-## 🔆 **적용 기술 소개**
-## 🔆 프로젝트 수행 중 심각하게 고민한 부분
+## 🤯 **적용 기술 소개**
+
+***MVVM-C***
+
+* View 및 Business 로직을 분리하기 위한 `MVVM-C` 아키텍처를 도입
+
+* `Input-Output 패턴`의 Protocol을 채택함으로써 User Interaction과 View Data 핸들링
+
+    ```swift
+    protocol ViewModelType {
+        var disposeBag : DisposeBag { get }
+        associatedtype Input
+        associatedtype Output
+        func transform(input : Input) -> Output
+    }
+
+    protocol CombineViewModelType : AnyObject, ObservableObject {
+        associatedtype Input
+        associatedtype Output
+        
+        var cancellables : Set<AnyCancellable> {get set}
+        
+        var input : Input {get set}
+        var output : Output {get set}
+        
+        func transform()
+    }
+    ```
+
+* Flow Logic을 관리하고, View 간의 Dependency를 줄이기 위해 `Coordinator 패턴` 적용
+
+    ```swift
+    protocol Coordinator : AnyObject {
+        var finishDelegate: CoordinatorFinishDelegate? { get set }
+        var childCoordinators: [Coordinator] { get set }
+        var navigationController: UINavigationController { get set }
+        var type: CoordinatorType { get }
+        
+        func start()
+        func finish()
+    }
+    
+    extension Coordinator {
+
+    func finish() {
+        childCoordinators.removeAll()
+        finishDelegate?.coordinatorDidFinish(childCoordinator: self)
+        }
+    }
+    ```
+
+***Reactive Programming***
+
+* 비동기 Event의 관리를 위한 `RxSwift`와 `Combine`를 이용한 Reactive Programming 구현
+
+
+***Alamofire***
+
+* `URLRequestConvertible`을 활용한 `Router 패턴` 기반의 네트워크 추상화
+
+* `RequestInterceptor Protocol` 채택함으로써, `JWT(Json Web Token)` 갱신 적용
+
+***SocketIO***
+
+
+## 🤯 트러블슈팅
 
 ### 1. NSTextAttachment를 활용한 UITextView 내의 UIImage 추가 (feat. Location)
 

@@ -224,7 +224,7 @@
     <br>
 
     <p align="center">
-        <img src="https://github.com/Jin0331/JustBoard/assets/42958809/aa2a0471-e39b-4ac4-b2a9-06ddf0bcd52c" width="20%" height="20%"/>
+        <img src="https://github.com/Jin0331/JustBoard/assets/42958809/aa2a0471-e39b-4ac4-b2a9-06ddf0bcd52c" width="30%" height="30%"/>
     </p>
 
     <br>
@@ -260,5 +260,5 @@
     2. Coordinator를 통해 SwiftUI의 View를 직접 호출하는 것이 아닌, 해당 SwiftUI View의 UIHostringController를 호출함으로써 UIKit과 SwiftUI의 Navigation Stack 중첩 문제를 해결
 
     <p align="center">
-        <img src="https://github.com/Jin0331/JustBoard/assets/42958809/c1146361-c355-4775-a620-ac8a510717f7" width="20%" height="20%"/>
+        <img src="https://github.com/Jin0331/JustBoard/assets/42958809/c1146361-c355-4775-a620-ac8a510717f7" width="30%" height="30%"/>
     </p>

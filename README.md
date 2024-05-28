@@ -227,9 +227,38 @@
         <img src="https://github.com/Jin0331/JustBoard/assets/42958809/aa2a0471-e39b-4ac4-b2a9-06ddf0bcd52c" width="20%" height="20%"/>
     </p>
 
-<br>
+    <br>
 
 * **해결 방법**
 
+    1. SwiftUI의 Navigation Stack을 이용한 화면의 직접 전환이 아닌, UIKit의 Coordinator에 의존하여 화면 전환을 하도록 구성
+    
+    ```swift
+    final class ChatListCoordinator : Coordinator {
+        weak var finishDelegate: CoordinatorFinishDelegate?
+        var childCoordinators: [Coordinator] = []
+        var navigationController: UINavigationController
+        var parentBoardCoordinator : BoardMainCoordinator?
+        var type: CoordinatorType { .tab }
+        
+        init(navigationController: UINavigationController) {
+            self.navigationController = navigationController
+        }
+        
+        func start() { }
+        
+        func start(chatlist : MyChatResponse) {
+            
+            var childView = ChatListView(chatList: chatlist)
+            childView.parentCoordinator = self
+            let vc = ChatListViewController(contentViewController: UIHostingController(rootView: childView))
+            self.navigationController.pushViewController(vc, animated: true)
+        }
+    }
+    ```
 
+    2. Coordinator를 통해 SwiftUI의 View를 직접 호출하는 것이 아닌, 해당 SwiftUI View의 UIHostringController를 호출함으로써 UIKit과 SwiftUI의 Navigation Stack 중첩 문제를 해결
 
+    <p align="center">
+        <img src="https://github.com/Jin0331/JustBoard/assets/42958809/c1146361-c355-4775-a620-ac8a510717f7" width="20%" height="20%"/>
+    </p>

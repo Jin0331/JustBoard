@@ -174,7 +174,7 @@
         }
         ```
 
-        3. `func _addTextViewImage` 를 통하여 Text가 순서가 보장되며 이미지를 추가함
+    3. `func _addTextViewImage` 를 통하여 Text가 순서가 보장되며 이미지를 추가함
 
         ```swift
         private func _addTextViewImage(url : URL, location: Int) {

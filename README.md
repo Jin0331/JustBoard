@@ -47,11 +47,11 @@
 
 * ***오픈 소스***(Cocoapods)
 
-  RxSwift / Combine / Realm
+  RxSwift / Realm
 
   Alamofire / Kinfisher / SocketIO
 
-  RxDataSource / Diffable DataSource / Snapkit / Tabman / SideMenu
+  RxDataSource / Snapkit / Tabman / SideMenu
 
 <br>
 
@@ -121,8 +121,6 @@
 * `RequestInterceptor Protocol` 채택함으로써, `JWT(Json Web Token)` 갱신 적용
 
 ***SocketIO + Realm***
-
-* Singleton 패턴 기반의 양방향 통신 적용
 
 * 과도한 API 호출을 방지하기 위해, `Realm Table Fetch -> Latest Date를 Server에 요청 -> Realm Table Update -> Connect Socket`의 Logic을 이용하여 사용자간 1:1 채팅 구현
 

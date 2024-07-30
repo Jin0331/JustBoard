@@ -56,9 +56,7 @@
 
 ***MVVM-C***
 
-* View 및 Business 로직을 분리하기 위한 `MVVM-C` 아키텍처를 도입
-
-* `Input-Output 패턴`의 Protocol을 채택함으로써 User Interaction과 View Data 핸들링
+* View와 Business 로직의 분리, 모듈화된 코드 구조, 유연한 네비게이션 관리 위한 Input-Output Pattern 기반의 MVVM-C 아키텍처를 도입
 
     ```swift
     protocol ViewModelType {
